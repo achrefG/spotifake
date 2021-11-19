@@ -6,8 +6,10 @@ def metadata(filepath):
     print("album:", tag.album)
     print("title:", tag.title)
     print("duration(secs):",tag.duration)
+    print()
+    #print(tag) #print all metadata
 
 #test avec des fichiers .mp3 / wav / flac
 metadata("file_mp3.mp3")
-metadata("file_wav.wav")
-metadata("file_flac.flac")
+#metadata("file_wav.wav")
+#metadata("file_flac.flac")
