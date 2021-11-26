@@ -4,7 +4,7 @@ import os
 
 from metadata import metadata
 
-from parcours_directory import parcour_dossier , parcour_directory
+from parcours_directory import parcour_directory
 
 from Creatplaylist import VerifExtension, VerifMime, XspfPlaylist,RecupSong
     
