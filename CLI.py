@@ -4,9 +4,9 @@ import os
 
 from metadata import metadata
 
-from parcours_directory import parcour_dossier
+from parcours_directory import parcour_dossier , parcour_directory
 
-from Creatplaylist import VerifExtension, VerifMime, XspfPlaylist
+from Creatplaylist import VerifExtension, VerifMime, XspfPlaylist,RecupSong
     
 
 def main():
@@ -35,8 +35,9 @@ def main():
         elif(sys.argv[1]==("-d") and sys.argv[2] != 0) : #Si l'argument n a pas de parametre cela indiquera Index 1 out of bounds
             if (os.path.exists(cheminfichier) and os.path.isdir(cheminfichier)):
                 print("Ci-dessous vous avez tous les fichiers et dossiers presents dans le Dossier suiviant : "+ sys.argv[2])
-                fichier_dossier= parcour_dossier(sys.argv[2])
-                for i in fichier_dossier:
+                fichier_dossier= parcour_directory(sys.argv[2])
+                liste_abspath_musique = RecupSong(fichier_dossier)
+                for i in liste_abspath_musique:
                     print(i)
             else:
                 print("Le chemin du dossier donnée n'existe pas ou n'est pas celui d'un dossier")
@@ -49,7 +50,8 @@ def main():
             if (os.path.exists(sys.argv[2]) and os.path.isdir(sys.argv[2])): 
                 TitrePlay=sys.argv[4]
                 AuteurPlay= (input("Entrer le nom de l'auteur de la playlist : "))
-                liste_abspath_musique=parcour_dossier(sys.argv[2])
+                liste_abspath= parcour_directory(sys.argv[2])
+                liste_abspath_musique = RecupSong(liste_abspath)
                 XspfPlaylist(TitrePlay,AuteurPlay,liste_abspath_musique)
             else:
                 print("Le chemin de dossier donné n'existe pas ou n'est pas celui d'un dossier. Pour plus d'aide tapez -h ")

@@ -65,7 +65,7 @@ def VerifMime(chemin):
 
 
 
-def RecupSong(chemin_dossier,liste):
+def RecupSong(liste):
     '''
         Rôle:
             La fonction RecupSong sert a parcourir un dossier donnée en paramêtre et de stocker dans une liste que les fichiers audio plus précisement les fichiers MP3 ou FLAC.
@@ -74,15 +74,15 @@ def RecupSong(chemin_dossier,liste):
         Sortie:
             liste: Contenant les fichiers audio du dossier donné en entrée 
     '''
-    liste_abs_path=parcour_dossier(chemin_dossier)
-    
-    for i in liste_abs_path:
+    #liste_abs_path=parcour_dossier(chemin_dossier)
+    liste_soung =[]
+    for i in liste:
         if (os.path.isfile(i)):
             if(VerifExtension(i)):
                 if(VerifMime(i)):
-                    liste.append(i)
+                    liste_soung.append(i)
 
-    return(liste)
+    return(liste_soung)
 
 
 
@@ -118,7 +118,7 @@ def XspfPlaylist(TitrePlay,AuteurPlay, liste_abspath_son):
             tag = TinyTag.get(i)
 
             file.write("		<track>\n")
-            file.write("			<creator> "+ str(tag.artist) +" </creator>\n")
+            file.write("			<creator> "+str(tag.artist) +" </creator>\n")
             file.write("			<title> "+ str(tag.title) +" </title>\n")
             file.write("			<duration> "+ str(int(tag.duration))+" </duration>\n")
             file.write("			<album> "+ str(tag.album) +" </album>\n")

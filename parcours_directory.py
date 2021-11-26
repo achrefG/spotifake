@@ -56,6 +56,17 @@ def parcour_dossier(chemin_dossier):
     return listefinale
 
 
+def parcour_directory(path):
+    listefichier= []
+    for root, dirs, files in os.walk("C:/Users/kakif/Desktop/python/projet", topdown=False):
+        for name in files:
+            listefichier.append(os.path.join(root, name))
+            #print(os.path.join(root, name))
+        for name in dirs:
+            listefichier.append(os.path.join(root, name))
+            #print(os.path.join(root, name))
+    return(listefichier)
+
 
 def parcour_directory_test(path,file_dir_filedir):
 
@@ -97,12 +108,20 @@ def parcour_directory_test(path,file_dir_filedir):
 
 '''------------------------------------- TEST ---------------------------------------'''
 
-'''
-liste_abs_path=parcour_dossier('C:/Users/charle/Desktop/W_PYTHON/Projet_Python/w_projet_python/metadata_mp3-1/Musique')
+"""
+liste_abs_path=parcour_dossier('c:/Users/kakif/Desktop/python/projet/Picture')
 
 
 for i in liste_abs_path:
     print(i)
 
+for chemin,dossiers,fichiers in os.walk("C:/Users/kakif/Desktop/python/projet"):
+    print(dossiers)
+    print(fichiers)
 
-'''
+    for root, dirs, files in os.walk("C:/Users/kakif/Desktop/python/projet", topdown=False):
+   for name in files:
+      print(os.path.join(root, name))
+   for name in dirs:
+      print(os.path.join(root, name))
+"""
