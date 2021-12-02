@@ -7,9 +7,10 @@ resolution_fenetre = (500,500) # paramêtrage de la taille de la fenêtre
 pygame.display.set_caption("Fenetre Python : JOUER UN SON")# Titre de la fenetre
 surface_fenetre = pygame.display.set_mode(resolution_fenetre)
 path=("Musique/Vanille.mp3")
-son = pygame.mixer.Sound(path) # creation de l'objet son grâce au path du fichier donnee en paramêtre
-son.play() #son.play(boucle=0,temps_max(en ms)=0 ,fondu au debut (en milliseconde)=0)
+son=pygame.mixer.music
+son.load(path) # creation de l'objet son grâce au path du fichier donnee en paramêtre
 
+son.play()
 
      
 
@@ -25,13 +26,13 @@ while lancer: # tant que lancer est vrai
             lancer = False # lancer devient faux et la fenêtre ne tourne plus 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s and pause==False: #pause
-                son.stop()
+                son.pause()
                 pause=True
-            if event.key == pygame.K_p and pause==True: # replay
-                son.play()
+            if event.key == pygame.K_p : # replay
+                son.rewind()
 
             if event.key == pygame.K_r and pause==True: # unpause
-                son.__repr__()
+                son.unpause()
 
             if event.key == pygame.K_UP:
                 son.set_volume(son.get_volume()+0.1)

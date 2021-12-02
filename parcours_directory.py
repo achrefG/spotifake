@@ -58,7 +58,7 @@ def parcour_dossier(chemin_dossier):
 
 def parcour_directory(path):
     listefichier= []
-    for root, dirs, files in os.walk("C:/Users/kakif/Desktop/python/projet", topdown=False):
+    for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
             listefichier.append(os.path.join(root, name))
             #print(os.path.join(root, name))
@@ -68,42 +68,6 @@ def parcour_directory(path):
     return(listefichier)
 
 
-def parcour_directory_test(path,file_dir_filedir):
-
-    dossier_path= path
-    listefichier= []
-    listedossier= []
-    listefinale= []
-    for chemin,dossiers,fichiers in os.walk(dossier_path): #fonction walk('path'), nous retournes un tableau qui en [0] contient les chemins , [1] contenant les sous dossiers , [2] les fichiers et sous fichiers
-        if(file_dir_filedir==0):
-            for nom_file in fichiers:
-                listefichier.append(nom_file)
-            for nom_dir in dossiers:
-                listedossier.append(nom_dir)
-            for i in listedossier:
-                listefinale.append(i)
-            for j in listefichier:
-                listefinale.append(j)
-
-            print( "DOSSIER:" + str(listedossier ))
-            print( "FICHIER:" + str(listefichier))
-            print( "LISTE: " + str(listefinale))
-                            
-            return listefinale
-        elif(file_dir_filedir==1):
-            for nom_dir in dossiers:
-                listedossier.append(nom_dir)
-
-            print( "DOSSIER: " + str(listedossier ))                
-            return listedossier
-                
-        else:
-            for nom_file in fichiers:
-                listefichier.append(nom_file)
-
-            print( "FICHIER: " + str(listefichier ))
-                
-            return listefichier
 
 
 '''------------------------------------- TEST ---------------------------------------'''
@@ -124,4 +88,8 @@ for chemin,dossiers,fichiers in os.walk("C:/Users/kakif/Desktop/python/projet"):
       print(os.path.join(root, name))
    for name in dirs:
       print(os.path.join(root, name))
+
+
+
+print(parcour_directory('C:/Users/charle/Desktop/W_PYTHON/Projet_Python/w_projet_python/metadata_mp3-1/'))
 """

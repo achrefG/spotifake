@@ -44,7 +44,7 @@ def liremusic_affichecover(path_son ,path_cover):
 
 
 
-path_son="Musique/Horizontal.mp3"
+path_son="Musique/file_flac.flac"
 path_cover="Picture/CoverQALF.jpg"
 liremusic_affichecover(path_son,path_cover)
 

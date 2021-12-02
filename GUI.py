@@ -1,5 +1,6 @@
 import pygame
 from PIL import Image
+from pygame.display import get_caption
 
 def GUI(path_son ,path_cover):
 
@@ -19,8 +20,10 @@ def GUI(path_son ,path_cover):
 
     surface_fenetre = pygame.display.set_mode(resolution_fenetre) # parametrage de la surface de la fenetre 
     
-    son = pygame.mixer.Sound(path_son) # creation de l'objet son grâce au path du fichier donnee en paramêtre
-    son.play(0,0,0) #son.play(boucle=0,temps_max(en ms)=0 ,fondu au debut (en milliseconde)=0)
+
+    son=pygame.mixer.music
+    son.load(path_son) # creation de l'objet son grâce au path du fichier donnee en paramêtre
+    son.play(0,0,0)
 
     son_cover = pygame.image.load(path_cover) # creation d'un nouvel objet image a partir d'un fichier donnee en paramêtre
     son_cover = pygame.transform.scale(son_cover , resolution_fenetre) # redimenssion de l'image a la taille de la fenêtre
@@ -31,11 +34,36 @@ def GUI(path_son ,path_cover):
     surface_fenetre.blit(son_cover, [0,0]) # blit[0]: nom du fichier image et blit[1]: position du point en haut a gauche de l'image
     pygame.display.flip() # met a jour la fenêtre afficher
     
+    pause =False
+
     lancer = True # boolean qui permet de garder la fenêtre ouverte tant quelle est vrai
     while lancer: # tant que lancer est vrai 
+        print(son.get_busy())
         for event in pygame.event.get(): # pour event variant en fonction de ce qu'il ce passe dans la fenêtre 
             if event.type == pygame.QUIT: # si l'evenement est : la fenetre est quitter 
                 lancer = False # lancer devient faux et la fenêtre ne tourne plus 
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    if pause==False: #pause avec p
+                        son.pause()
+                        pause=True 
+                    else:# unpause avec p
+                        son.unpause()
+                        pause=False
+                    
+                if event.key == pygame.K_r : # replay avec r
+                    son.rewind()
+                    
+                if event.key == pygame.K_UP: # augmente le volume avec la fleche du haut 
+                    son.set_volume(son.get_volume()+0.1)
+                if event.key == pygame.K_DOWN:
+                    son.set_volume(son.get_volume()-0.1)# baisse le volume avec la fleche du bas 
+                if event.key == pygame.K_q:
+                   lancer=False
+                '''if event.key == pygame.K_RIGHT:
+                    son.set_volume(son.get_pos()-0.1)
+                if event.key == pygame.K_RIGHT:
+                    son.set_volume(son.get_pos()-0.1)'''
 
 
 
@@ -44,6 +72,6 @@ def GUI(path_son ,path_cover):
 
 '''-------------------------- TEST ------------------------------'''
 
-path_son="Musique/Horizontal.mp3"
-path_cover="Picture/CoverQALF.jpg"
+path_son="Musique/Mitsubishi.mp3"
+path_cover="Picture\don_dada _mixtape_cover.jpg"
 GUI(path_son,path_cover)

@@ -14,9 +14,11 @@ def metadata(filepath):
     #print(tag) #print all metadata
 
 
+
 '''--------------------------------------- TEST -------------------------------'''
 
 '''
+metadata("Musique/horizontal.mp3")
 #test avec des fichiers .mp3 / wav / flac
 metadata("Musique/file_mp3.mp3")
 #metadata("Musique/file_wav.wav")
