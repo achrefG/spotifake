@@ -1,11 +1,20 @@
 import pygame
+import io
 from PIL import Image
+from tinytag import TinyTag
 from pygame.display import get_caption
-
+from metadata import metadata
 def GUI(path_son ,path_cover):
-
-    cover= Image.open(path_cover) # ouverture de l'image donnee en parametre
-    w,h=cover.size # stockage des dimensions de l'image 
+    meta = metadata(path_son)
+    cover = meta.get_image()
+    if(cover != None):
+        pi = Image.open(io.BytesIO(cover))
+        print(pi.format)
+        cover = 'Picture/cover.'+str(pi.format)
+        pi.save(cover)
+    else:
+        pi=Image.open(path_cover)    
+    w,h=pi.size # stockage des dimensions de l'image 
     
     pygame.init() # initialisation de l'objet pygame
     pygame.display.set_caption(" AFFICHE COVER & LIS LE SON ")# Titre de la fenetre
@@ -22,10 +31,13 @@ def GUI(path_son ,path_cover):
     
 
     son=pygame.mixer.music
-    son.load(path_son) # creation de l'objet son grâce au path du fichier donnee en paramêtre
-    son.play(0,0,0)
+    #son.load(path_son) # creation de l'objet son grâce au path du fichier donnee en paramêtre
+    #son.play(0,0,0)
+    if(cover != None):    
+        son_cover = pygame.image.load(cover) # creation d'un nouvel objet image a partir de l'image en metadonne
+    else:
+        son_cover = pygame.image.load(path_cover) # creation d'un nouvel objet image a partir d'un fichier donnee en paramêtre
 
-    son_cover = pygame.image.load(path_cover) # creation d'un nouvel objet image a partir d'un fichier donnee en paramêtre
     son_cover = pygame.transform.scale(son_cover , resolution_fenetre) # redimenssion de l'image a la taille de la fenêtre
     son_cover.convert() # conversion du format des pixels en un unique => facilites l'affichage
     #son_cover.set_colorkey((255,255,255)) # sert a rendre transparent(=> PNG ) les pixels de la couleur donnee en parametre 
@@ -60,11 +72,12 @@ def GUI(path_son ,path_cover):
                     son.set_volume(son.get_volume()-0.1)# baisse le volume avec la fleche du bas 
                 if event.key == pygame.K_q:
                    lancer=False
-                '''if event.key == pygame.K_RIGHT:
+                ''' 
+                if event.key == pygame.K_RIGHT:
                     son.set_volume(son.get_pos()-0.1)
                 if event.key == pygame.K_RIGHT:
-                    son.set_volume(son.get_pos()-0.1)'''
-
+                    son.set_volume(son.get_pos()-0.1)
+                '''
 
 
     
@@ -72,6 +85,6 @@ def GUI(path_son ,path_cover):
 
 '''-------------------------- TEST ------------------------------'''
 
-path_son="Musique/Mitsubishi.mp3"
-path_cover="Picture\don_dada _mixtape_cover.jpg"
+path_son="Musique/test.flac"
+path_cover="Picture\lama.png"
 GUI(path_son,path_cover)

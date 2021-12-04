@@ -52,7 +52,7 @@ def afficher_cover(path_cover):
 
 
 afficher_cover("Picture/CoverQALF.jpg")
-#afficher_cover("Picture/QALFimage.jpg")
+afficher_cover("Picture/QALFimage.jpg")
 #afficher_cover("Picture/don_dada _mixtape_cover.jpg")
 #afficher_cover("Picture/lama.png")
 

@@ -6,7 +6,7 @@ pygame.init()
 DISPLAYSURF = pygame.display.set_mode((400, 300))
 pygame.display.set_caption('Memes.')
 
-meme = pygame.mixer.Sound('C:/Users/kakif/Desktop/python/projet/Vanil.mp3')
+meme = pygame.mixer.Sound('C:/Users/kakif/Desktop/python/projet/Musique/Vanille.mp3')
 meme.play()
 #time.sleep(2)
 #meme.stop()
