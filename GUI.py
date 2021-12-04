@@ -31,8 +31,8 @@ def GUI(path_son ,path_cover):
     
 
     son=pygame.mixer.music
-    #son.load(path_son) # creation de l'objet son grâce au path du fichier donnee en paramêtre
-    #son.play(0,0,0)
+    son.load(path_son) # creation de l'objet son grâce au path du fichier donnee en paramêtre
+    son.play(0,0,0)
     if(cover != None):    
         son_cover = pygame.image.load(cover) # creation d'un nouvel objet image a partir de l'image en metadonne
     else:
@@ -70,7 +70,7 @@ def GUI(path_son ,path_cover):
                     son.set_volume(son.get_volume()+0.1)
                 if event.key == pygame.K_DOWN:
                     son.set_volume(son.get_volume()-0.1)# baisse le volume avec la fleche du bas 
-                if event.key == pygame.K_q:
+                if event.key == pygame.K_q:#fermer le programme avec q
                    lancer=False
                 ''' 
                 if event.key == pygame.K_RIGHT:
@@ -85,6 +85,6 @@ def GUI(path_son ,path_cover):
 
 '''-------------------------- TEST ------------------------------'''
 
-path_son="Musique/test.flac"
-path_cover="Picture\lama.png"
+path_son="Musique/damso.mp3"
+path_cover="Picture/CoverQALF.jpg"
 GUI(path_son,path_cover)
