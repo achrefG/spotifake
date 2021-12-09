@@ -1,90 +1,164 @@
-import pygame
-import io
-from PIL import Image
-from tinytag import TinyTag
-from pygame.display import get_caption
+#!/usr/bin/python3.4
+# Setup Python ----------------------------------------------- #
+import pygame, sys
+from playsond import playsond
+import dilog
 from metadata import metadata
-def GUI(path_son ,path_cover):
+from parcours_directory import parcour_directory
+from Creatplaylist import VerifExtension, VerifMime, XspfPlaylist,RecupSong
+import tkinter as tk
+from tkinter import simpledialog
+
+# Setup pygame/window ---------------------------------------- #
+mainClock = pygame.time.Clock()
+from pygame.locals import *
+pygame.init()
+pygame.display.set_caption('game base')
+screen = pygame.display.set_mode((600, 600),0,32)
+
+font = pygame.font.SysFont(None, 25)
+ # defining a font
+smallfont = pygame.font.SysFont('Corbel',35)
+# rendering a text written in
+# this font
+# white color
+color = (255,255,255)
+
+txtPlaySond = smallfont.render('Play sond' , True , color)
+txtMetadata = smallfont.render('Extraction de metadonne' , True , color)
+txtPlayListe = smallfont.render('Playlist par défaut d’un répertoire' , True , color)
+txtPlayListe1 = smallfont.render('Playlist avec les morceaux sélectionne ' , True , color)
+
+
+def draw_text(text, font, color, surface, x, y):
+    textobj = font.render(text, 1, color)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x, y)
+    surface.blit(textobj, textrect)
+ 
+click = False
+ 
+def main_menu():#fenetre principale avec le menu
+    while True:
+        screen.fill((0,0,0))
+        draw_text('main menu', font, (255, 255, 255), screen, 20, 20)
+
+        mx, my = pygame.mouse.get_pos()
+ 
+        button_1 = pygame.Rect(50, 100, 500, 50) # appuis => ouvre la fenetre de l'ancien gui
+
+        button_2 = pygame.Rect(50, 200, 500, 50) # appuis => ouvre une fenetre pour l'affichage des metadonne
+        
+        button_3 = pygame.Rect(50, 300, 500, 50) #  appuis => création d'une playlist depuis un dossier et ses sous fichier
+
+        button_4 = pygame.Rect(50, 400, 500, 50) #  appuis => création d'une playlist a partir des fichier séléctionner
+
+        if button_1.collidepoint((mx, my)):
+            if click:
+                path_son=dilog.getFile()
+                path_cover="Picture/?.png"
+                playsond(path_son,path_cover)
+
+
+        if button_2.collidepoint((mx, my)):
+            if click:
+                metadataScreen()
+        
+        if button_3.collidepoint((mx, my)):
+            if click:
+                path=dilog.getDir()
+                liste_abspath= parcour_directory(path)
+                liste_abspath_musique = RecupSong(liste_abspath)
+                TitrePlay = simpledialog.askstring("Titre", "entrer un Titre pour votre play liste")
+                AuteurPlay = simpledialog.askstring("Auteur", "entrer l'Auteur de cette play liste")
+                XspfPlaylist(TitrePlay,AuteurPlay,liste_abspath_musique)
+
+        if button_4.collidepoint((mx, my)):
+            if click:
+                liste_abspath_musique=dilog.getFiles()
+                TitrePlay = simpledialog.askstring("Titre", "entrer un Titre pour votre play liste")
+                AuteurPlay = simpledialog.askstring("Auteur", "entrer l'Auteur de cette play liste")
+                XspfPlaylist(TitrePlay,AuteurPlay,liste_abspath_musique)
+                
+
+        pygame.draw.rect(screen, (255, 0, 0), button_1)
+        pygame.draw.rect(screen, (255, 0, 0), button_2)
+        pygame.draw.rect(screen, (255, 0, 0), button_3)
+        pygame.draw.rect(screen, (255, 0, 0), button_4)
+        
+        screen.blit(txtPlaySond , (75,110))
+        screen.blit(txtMetadata , (75,210))
+        screen.blit(txtPlayListe , (75,310))
+        screen.blit(txtPlayListe1 , (75,410))
+
+        click = False
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+ 
+        pygame.display.update()
+        mainClock.tick(60)
+
+
+def metadataScreen():#lors de l'appel de cette fonction depuis le menu principale => choix du fichier => une fenetre avec les metadonne
+    running = True
+    path_son=dilog.getFile()
     meta = metadata(path_son)
-    cover = meta.get_image()
-    if(cover != None):
-        pi = Image.open(io.BytesIO(cover))
-        print(pi.format)
-        cover = 'Picture/cover.'+str(pi.format)
-        pi.save(cover)
-    else:
-        pi=Image.open(path_cover)    
-    w,h=pi.size # stockage des dimensions de l'image 
-    
-    pygame.init() # initialisation de l'objet pygame
-    pygame.display.set_caption(" AFFICHE COVER & LIS LE SON ")# Titre de la fenetre
-    
-    # PRENDRE LA BONNE DIMMENSION // A MODIFIER QUAND INTERFACE GRAPHIQUE SERA EFFECTUEE
-    if ((w==h) and (w>800)):
-        resolution_fenetre = (500,500) # taille de la fenêtre 
-    elif((w!=h and (w>1000 or h>800))):
-        resolution_fenetre = (w/2,h/2) # taille de la fenêtre 
-    else:
-        resolution_fenetre= (w,h)
+    while running:
+        screen.fill((0,0,0))
+        '''
+        affichage des texte dans la fenetre dans les metadonne
+        '''
+        draw_text('metadata of the chosing file : ', smallfont, (255, 255, 255), screen, 20, 20)
+        draw_text(path_son, font, (231, 62, 1), screen, 20, 45)
+        
+        draw_text('Artist:', smallfont, (121, 248, 248), screen, 40, 100)
+        draw_text(meta.artist, font, (255, 255, 255), screen, 140, 105)
+        
+        draw_text('Album:', smallfont, (121, 248, 248), screen, 40, 140)
+        draw_text(meta.album, font, (255, 255, 255), screen, 140, 145)
+        
+        draw_text('Title:', smallfont, (121, 248, 248), screen, 40, 180)
+        draw_text(meta.title, font, (255, 255, 255), screen, 140, 185)
+        
+        draw_text('duration(secs):', smallfont, (121, 248, 248), screen, 40, 220)
+        draw_text(str(meta.duration), font, (255, 255, 255), screen, 220, 225)
+        
+        draw_text('Musique N°:', smallfont, (121, 248, 248), screen, 40, 260)
+        draw_text(meta.track, font, (255, 255, 255), screen, 195, 265)
 
-    surface_fenetre = pygame.display.set_mode(resolution_fenetre) # parametrage de la surface de la fenetre 
-    
-
-    son=pygame.mixer.music
-    son.load(path_son) # creation de l'objet son grâce au path du fichier donnee en paramêtre
-    son.play(0,0,0)
-    if(cover != None):    
-        son_cover = pygame.image.load(cover) # creation d'un nouvel objet image a partir de l'image en metadonne
-    else:
-        son_cover = pygame.image.load(path_cover) # creation d'un nouvel objet image a partir d'un fichier donnee en paramêtre
-
-    son_cover = pygame.transform.scale(son_cover , resolution_fenetre) # redimenssion de l'image a la taille de la fenêtre
-    son_cover.convert() # conversion du format des pixels en un unique => facilites l'affichage
-    #son_cover.set_colorkey((255,255,255)) # sert a rendre transparent(=> PNG ) les pixels de la couleur donnee en parametre 
-
-    surface_fenetre.fill((0,0,0)) # fill : choix de la couleur pour le fond de la fenêtre
-    surface_fenetre.blit(son_cover, [0,0]) # blit[0]: nom du fichier image et blit[1]: position du point en haut a gauche de l'image
-    pygame.display.flip() # met a jour la fenêtre afficher
-    
-    pause =False
-
-    lancer = True # boolean qui permet de garder la fenêtre ouverte tant quelle est vrai
-    while lancer: # tant que lancer est vrai 
-        print(son.get_busy())
-        for event in pygame.event.get(): # pour event variant en fonction de ce qu'il ce passe dans la fenêtre 
-            if event.type == pygame.QUIT: # si l'evenement est : la fenetre est quitter 
-                lancer = False # lancer devient faux et la fenêtre ne tourne plus 
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:
-                    if pause==False: #pause avec p
-                        son.pause()
-                        pause=True 
-                    else:# unpause avec p
-                        son.unpause()
-                        pause=False
-                    
-                if event.key == pygame.K_r : # replay avec r
-                    son.rewind()
-                    
-                if event.key == pygame.K_UP: # augmente le volume avec la fleche du haut 
-                    son.set_volume(son.get_volume()+0.1)
-                if event.key == pygame.K_DOWN:
-                    son.set_volume(son.get_volume()-0.1)# baisse le volume avec la fleche du bas 
-                if event.key == pygame.K_q:#fermer le programme avec q
-                   lancer=False
-                ''' 
-                if event.key == pygame.K_RIGHT:
-                    son.set_volume(son.get_pos()-0.1)
-                if event.key == pygame.K_RIGHT:
-                    son.set_volume(son.get_pos()-0.1)
-                '''
-
-
-    
-
-
-'''-------------------------- TEST ------------------------------'''
-
-path_son="Musique/damso.mp3"
-path_cover="Picture/CoverQALF.jpg"
-GUI(path_son,path_cover)
+        draw_text('Compositeur:', smallfont, (121, 248, 248), screen, 40, 300)
+        draw_text(meta.composer, font, (255, 255, 255), screen, 210, 305)
+        
+        draw_text('Genre:', smallfont, (121, 248, 248), screen, 40, 340)
+        draw_text(meta.genre, font, (255, 255, 255), screen, 140, 345)
+        
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    running = False
+                if event.key == K_s:#enregistrer les metadonne dans un fichier txt en appuiant sur s
+                    TitreFichier="METADATA_"+meta.title+'.txt'
+                    file = open(TitreFichier, "x")
+                    file.write("creator  :"+str(meta.artist)+"\n")
+                    file.write("title    :"+str(meta.title)+"\n")
+                    file.write("duration :"+str(int(meta.duration))+"\n")
+                    file.write("album    :"+ str(meta.album) +"\n")  
+                    file.write("genre    :"+ str(meta.genre) +"\n")   
+                    file.write("composer :"+ str(meta.composer) +"\n")  
+                    file.close()
+        pygame.display.update()
+        mainClock.tick(60)
+ 
+main_menu()

@@ -10,7 +10,7 @@ def metadata(filepath):
     print("title: ", tag.title)
     print("duration(secs): ",tag.duration)
     print("Musique N° ",tag.track)
-    print("Compositeur: ",tag.composer)
+    print("Compositeur:",tag.composer)
     print("Genre: "+str(tag.genre)+" \n")
     return tag
     img = tag.get_image()
