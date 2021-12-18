@@ -1,24 +1,26 @@
-#!/usr/bin/python3.4
 # Setup Python ----------------------------------------------- #
 import pygame, sys
 from playsond import playsond
 import dilog
 from metadata import metadata
 from parcours_directory import parcour_directory
-from Creatplaylist import VerifExtension, VerifMime, XspfPlaylist,RecupSong
+from Creatplaylist import  XspfPlaylist,RecupSong
 import tkinter as tk
 from tkinter import simpledialog
 
 # Setup pygame/window ---------------------------------------- #
+
+
 mainClock = pygame.time.Clock()
 from pygame.locals import *
 pygame.init()
-pygame.display.set_caption('game base')
+pygame.display.set_caption('SPOTIFAKE')
+pygame.display.set_icon(pygame.image.load("spotifake.png"))
 screen = pygame.display.set_mode((600, 600),0,32)
 
-font = pygame.font.SysFont(None, 25)
+font = pygame.font.SysFont(None, 50)
  # defining a font
-smallfont = pygame.font.SysFont('Corbel',35)
+smallfont = pygame.font.SysFont(None,35)
 # rendering a text written in
 # this font
 # white color
@@ -28,7 +30,7 @@ txtPlaySond = smallfont.render('Play sond' , True , color)
 txtMetadata = smallfont.render('Extraction de metadonne' , True , color)
 txtPlayListe = smallfont.render('Playlist par défaut d’un répertoire' , True , color)
 txtPlayListe1 = smallfont.render('Playlist avec les morceaux sélectionne ' , True , color)
-
+txtQuit = smallfont.render('Quitter' , True , color)
 
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -36,12 +38,13 @@ def draw_text(text, font, color, surface, x, y):
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
  
-click = False
- 
+
+
 def main_menu():#fenetre principale avec le menu
+    click = False
     while True:
         screen.fill((0,0,0))
-        draw_text('main menu', font, (255, 255, 255), screen, 20, 20)
+        draw_text('MENU', font, (255, 255, 255), screen, 20, 20)
 
         mx, my = pygame.mouse.get_pos()
  
@@ -53,12 +56,11 @@ def main_menu():#fenetre principale avec le menu
 
         button_4 = pygame.Rect(50, 400, 500, 50) #  appuis => création d'une playlist a partir des fichier séléctionner
 
+        button_5 = pygame.Rect(50, 500, 500, 50) #  appuis => quitter l'IHM
         if button_1.collidepoint((mx, my)):
             if click:
                 path_son=dilog.getFile()
-                path_cover="Picture/?.png"
-                playsond(path_son,path_cover)
-
+                playsond(path_son)
 
         if button_2.collidepoint((mx, my)):
             if click:
@@ -69,27 +71,53 @@ def main_menu():#fenetre principale avec le menu
                 path=dilog.getDir()
                 liste_abspath= parcour_directory(path)
                 liste_abspath_musique = RecupSong(liste_abspath)
-                TitrePlay = simpledialog.askstring("Titre", "entrer un Titre pour votre play liste")
-                AuteurPlay = simpledialog.askstring("Auteur", "entrer l'Auteur de cette play liste")
-                XspfPlaylist(TitrePlay,AuteurPlay,liste_abspath_musique)
+                
+                TitrePlay=None
+                while TitrePlay==None:
+                    print("ERREUR VOUS N'AVEZ RIEN ENTRE")
+                    TitrePlay = simpledialog.askstring("Titre", "entrer un Titre pour votre playlist")
+
+                AuteurPlay=None
+                while AuteurPlay==None:
+                    print("ERREUR VOUS N'AVEZ RIEN ENTRE")
+                    AuteurPlay = simpledialog.askstring("Auteur", "entrer l'Auteur de cette playlist")
+                
+                XspfPlaylist(TitrePlay,str(AuteurPlay),liste_abspath_musique)
 
         if button_4.collidepoint((mx, my)):
             if click:
                 liste_abspath_musique=dilog.getFiles()
-                TitrePlay = simpledialog.askstring("Titre", "entrer un Titre pour votre play liste")
-                AuteurPlay = simpledialog.askstring("Auteur", "entrer l'Auteur de cette play liste")
+
+                TitrePlay=None
+                while TitrePlay==None:
+                    print("ERREUR VOUS N'AVEZ RIEN ENTRE")
+                    TitrePlay = simpledialog.askstring("Titre", "entrer un Titre pour votre playlist")
+
+                AuteurPlay=None
+                while AuteurPlay==None:
+                    print("ERREUR VOUS N'AVEZ RIEN ENTRE")
+                    AuteurPlay = simpledialog.askstring("Auteur", "entrer l'Auteur de cette playlist")
                 XspfPlaylist(TitrePlay,AuteurPlay,liste_abspath_musique)
-                
+
+        if button_5.collidepoint((mx, my)):
+            if click:
+                pygame.quit()
+                sys.exit()
+
 
         pygame.draw.rect(screen, (255, 0, 0), button_1)
         pygame.draw.rect(screen, (255, 0, 0), button_2)
         pygame.draw.rect(screen, (255, 0, 0), button_3)
         pygame.draw.rect(screen, (255, 0, 0), button_4)
-        
-        screen.blit(txtPlaySond , (75,110))
-        screen.blit(txtMetadata , (75,210))
-        screen.blit(txtPlayListe , (75,310))
-        screen.blit(txtPlayListe1 , (75,410))
+        pygame.draw.rect(screen, (255, 0, 0), button_5)
+
+
+        screen.blit(txtPlaySond , (70,110))
+        screen.blit(txtMetadata , (70,210))
+        screen.blit(txtPlayListe , (70,310))
+        screen.blit(txtPlayListe1 , (70,410))
+        screen.blit(txtQuit , (70,510))
+
 
         click = False
         for event in pygame.event.get():
@@ -111,7 +139,7 @@ def main_menu():#fenetre principale avec le menu
 def metadataScreen():#lors de l'appel de cette fonction depuis le menu principale => choix du fichier => une fenetre avec les metadonne
     running = True
     path_son=dilog.getFile()
-    meta = metadata(path_son)
+    meta = metadata(path_son,False)
     while running:
         screen.fill((0,0,0))
         '''
@@ -149,8 +177,9 @@ def metadataScreen():#lors de l'appel de cette fonction depuis le menu principal
                 if event.key == K_ESCAPE:
                     running = False
                 if event.key == K_s:#enregistrer les metadonne dans un fichier txt en appuiant sur s
+                    print("Le fichier METADATA_"+meta.title+".TXT avec les metadonnées viens d'etre créé.")
                     TitreFichier="METADATA_"+meta.title+'.txt'
-                    file = open(TitreFichier, "x")
+                    file = open(TitreFichier, "x") 
                     file.write("creator  :"+str(meta.artist)+"\n")
                     file.write("title    :"+str(meta.title)+"\n")
                     file.write("duration :"+str(int(meta.duration))+"\n")
@@ -161,4 +190,4 @@ def metadataScreen():#lors de l'appel de cette fonction depuis le menu principal
         pygame.display.update()
         mainClock.tick(60)
  
-main_menu()
+#main_menu()

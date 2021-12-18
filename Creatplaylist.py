@@ -1,10 +1,9 @@
-from genericpath import exists
 import os
-from tinytag import TinyTag
-
+#from genericpath import exists
 import mimetypes
 
-from parcours_directory import parcour_dossier
+from metadata import metadata
+
 
 def VerifExtension(chemin):
     """
@@ -19,6 +18,7 @@ def VerifExtension(chemin):
                 Faux, si le chemin n'est pas celui d'un fichier, si le fichier n'existe pas ou si son extension n'est pas : '.mp3' ou '.flac'. 
     """
     name_fichier,extension=os.path.splitext(chemin)
+
     if (os.path.exists(chemin)):
         if(os.path.isfile(chemin)==0):
             #print("Le path donnée n'est pas celui d'un fichier.")
@@ -47,14 +47,14 @@ def VerifMime(chemin):
                 Vrai si le fichier est bien de type mime 'audio/mpeg' ou 'audio/x-flac'.
                 Faux, si le chemin n'est pas celui d'un fichier, si le fichier n'existe pas ou si son type mime n'est pas :'audio/mpeg' ou 'audio/x-flac'.
     """
-    if (os.path.exists(chemin)):
-        if(os.path.isfile(chemin)==0):
+    if (os.path.exists(chemin)): # si le chemin existe
+        if(os.path.isfile(chemin)==0): # si le chemin donnée est celui d'un fichier 
             #print("Le path donnée n'est pas celui d'un fichier.")
             return False
         else:
-            type_mime_fichier=(mimetypes.guess_type(chemin))[0] #Stockage du type Mime du fichier dont on a donnée le chemin , renvoie un tuplet [type,encodage]
-            if (type_mime_fichier=='audio/mpeg' or type_mime_fichier=='audio/x-flac'):
-                #print("Le fichier donné est bien de type mime mp3 ou flac.")
+            type_mime_fichier=(mimetypes.guess_type(chemin))[0] #Stockage du type Mime du fichier dont on a donnée le chemin , ( mimetypes.guess_type(chemin) => renvoie un tuplet [type,encodage]
+            if (type_mime_fichier=='audio/mpeg' or type_mime_fichier=='audio/x-flac'): # si le type mimes est celui d'un fichier mp3 ou FLAC
+                #print("Le fichier donné est bien de type mime mp3 ou flac.") 
                 return True
             else:
                 #print("Le fichier donné n'est pas de type mime mp3 ou flac.")
@@ -65,24 +65,25 @@ def VerifMime(chemin):
 
 
 
+
 def RecupSong(liste):
     '''
         Rôle:
-            La fonction RecupSong sert a parcourir un dossier donnée en paramêtre et de stocker dans une liste que les fichiers audio plus précisement les fichiers MP3 ou FLAC.
+            La fonction RecupSong sert a parcourir un dossier donnée en paramêtre et de stocker dans une liste que les chemins des fichiers audio plus précisement les fichiers MP3 ou FLAC.
         Paramêtre : 
-            chemin_dossier: chemin du dossier qu'il faut parcourir
+            liste: liste contenant les chemins à verifier des fichiers à verifiers
         Sortie:
             liste: Contenant les fichiers audio du dossier donné en entrée 
     '''
     #liste_abs_path=parcour_dossier(chemin_dossier)
-    liste_soung =[]
-    for i in liste:
-        if (os.path.isfile(i)):
-            if(VerifExtension(i)):
-                if(VerifMime(i)):
-                    liste_soung.append(i)
+    liste_song =[] # initialisation liste son 
+    for i in liste: # parcours de la liste donnée en entrée
+        if (os.path.isfile(i)): # si le chemine est celui d'un fichier
+            if(VerifExtension(i)): #verification que son extension est bien ('.mp3' || '.flac')
+                if(VerifMime(i)): #verification que son typemime :'audio/mpeg' ou 'audio/x-flac'
+                    liste_song.append(i) # ajout du chemin dans la liste 
 
-    return(liste_soung)
+    return(liste_song)
 
 
 
@@ -98,77 +99,82 @@ def XspfPlaylist(TitrePlay,AuteurPlay, liste_abspath_son):
             Fichier XSPF , crée et rempli avec la playlist 
             + Affichage du contenu de ce fichier 
     '''
-    TitreFichierXspf=TitrePlay+'.xspf'
-    if (os.path.exists(TitreFichierXspf)):
+    TitreFichierXspf=TitrePlay+'.xspf' # Nom du fichier XSPF qui contiendra la playlist 
+    if (os.path.exists(TitreFichierXspf)): # si le fichier existe dejà 
         print("LE FICHIER XSPF EXISTE DEJA. REMISE A ZERO DU FICHIER "+ str(TitreFichierXspf) + " :" )
-        file = open(TitreFichierXspf, "w") 
-        TitreFichierXspf
+        file = open(TitreFichierXspf, "w") # Ouverture du fichier en ecriture pour réecrire par dessus l'ancienne playlist
+        
         print (" SUCCES ")
         
-
-        print("ECRITURE DE LA PLAYLIST "+ str(TitrePlay) +" DE "+ str (AuteurPlay) + " :"  )
+        # ECRITURE DE LA PLAYLIST AU FORMAT XSPF
+        print("ECRITURE DE LA PLAYLIST "+ str(TitrePlay) +" DE "+ str(AuteurPlay) + " :"  )
         file.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n") 
         file.write("<playlist version='1' xmlns='http://xspf.org/ns/0/'>\n")
-        file.write("	<title> "+TitrePlay+" </title>\n") 
-        file.write("	<creator>"+AuteurPlay+"</creator>\n")
-        file.write("	<info> .... </info>  \n")
-        file.write("	<trackList>\n")
+        file.write("\t<title> "+TitrePlay+" </title>\n") 
+        file.write("\t<creator>"+AuteurPlay+"</creator>\n")
+        file.write("\t<info> .... </info>  \n")
+        file.write("\t<trackList>\n")
 
-        for i in liste_abspath_son:
-            tag = TinyTag.get(i)
+        for i in liste_abspath_son: # Après avoir ecrit les information de bases , on ecrit les musiques de la playlist pour ça on parcours les fichier mp3/flac selectionnés
+            tag = metadata(i,False) # pour chaque fichier fait appelle a la methode metadata pour recuperer les metadonnées sous forme de liste 
+            
+            file.write("\t\t<track>\n")
+            file.write("\t\t\t<creator> "+str(tag.artist) +" </creator>\n")
+            file.write("\t\t\t<title> "+ str(tag.title) +" </title>\n")
+            file.write("\t\t\t<duration> "+ str(int(tag.duration))+" </duration>\n")
+            file.write("\t\t\t<album> "+ str(tag.album) +" </album>\n")
+            file.write("\t\t\t<location>file:"+i+"</location>\n")   
+            file.write("\t\t</track>\n")            
 
-            file.write("		<track>\n")
-            file.write("			<creator> "+str(tag.artist) +" </creator>\n")
-            file.write("			<title> "+ str(tag.title) +" </title>\n")
-            file.write("			<duration> "+ str(int(tag.duration))+" </duration>\n")
-            file.write("			<album> "+ str(tag.album) +" </album>\n")
-            file.write("			<location>file:"+i+"</location></track>\n")            
-
-        file.write("	</trackList>\r\n" + "</playlist>")  
+        file.write("\t</trackList>\r\n" + "</playlist>")  
 
         print("ECRITURE TERMINER.")              
         
-        file.close()
+        file.close() # Fermerture du fichier ouvert 
         
     else:
         print("LE FICHIER XSPF DONNE N'EXISTE PAS. CREATION DU FICHIER "+ str(TitreFichierXspf) + " :" )
         file = open(TitreFichierXspf, "x") 
         print("SUCCES")
 
+        # ECRITURE DE LA PLAYLIST AU FORMAT XSPF
         print("ECRITURE DE LA PLAYLIST "+ str(TitrePlay) +" DE "+ str (AuteurPlay) + " :" )
         file.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n") 
         file.write("<playlist version='1' xmlns='http://xspf.org/ns/0/'>\n")
-        file.write("	<title> "+TitrePlay+" </title>\n") 
-        file.write("	<creator>"+AuteurPlay+"</creator>\n")
-        file.write("	<info> .... </info>  \n")
-        file.write("	<trackList>\n")
+        file.write("\t<title> "+TitrePlay+" </title>\n") 
+        file.write("\t<creator>"+AuteurPlay+"</creator>\n")
+        file.write("\t<info> .... </info>  \n")
+        file.write("\t<trackList>\n")
 
-        for i in liste_abspath_son:
-            tag = TinyTag.get(i)
+        for i in liste_abspath_son: # Après avoir ecrit les information de bases , on ecrit les musiques de la playlist pour ça on parcours les fichier mp3/flac selectionnés
+            tag = metadata(i,False) # pour chaque fichier fait appelle a la methode metadata pour recuperer les metadonnées sous forme de liste 
+            
+            file.write("\t\t<track>\n")
+            file.write("\t\t\t<creator> "+str(tag.artist) +" </creator>\n")
+            file.write("\t\t\t<title> "+ str(tag.title) +" </title>\n")
+            file.write("\t\t\t<duration> "+ str(int(tag.duration))+" </duration>\n")
+            file.write("\t\t\t<album> "+ str(tag.album) +" </album>\n")
+            file.write("\t\t\t<location>file:"+i+"</location>\n")   
+            file.write("\t\t</track>\n")            
 
-            file.write("		<track>\n")
-            file.write("			<creator> "+str(tag.artist)+" </creator>\n")
-            file.write("			<title> "+str(tag.title)+" </title>\n")
-            file.write("			<duration> "+str(int(tag.duration))+" </duration>\n")
-            file.write("			<album> "+ str(tag.album) +" </album>\n")
-            file.write("			<location>file:"+i+"</location></track>\n")            
+        file.write("\t</trackList>\r\n" + "</playlist>")  
 
-        file.write("	</trackList>\r\n" + "</playlist>")     
+        print("ECRITURE TERMINER.")              
+        
+        file.close() # Fermerture du fichier ouvert 
 
-        print("ECRITURE TERMINER.")
+    # AFFICHAGE DE LA PLAYLIST EN LIGNE DE COMMANDE : 
 
-        file.close()
+    print("AFFICHAGE DE LA PLAYLIST " +str(TitrePlay)+ " :" ) 
 
-    print("AFFICHAGE DE LA PLAYLIST " +str(TitrePlay)+ " :" )
-
-    file=open(TitreFichierXspf, "r")
+    file=open(TitreFichierXspf, "r") # OUVERTURE EN LECTURE 
     
-    file_read=file.read()
+    file_read=file.read() #LECTURE DU FICHIER
 
-    print(file_read)
+    print(file_read) # AFFFICHE CE QU'IL A LU
 
 
-    file.close()
+    file.close() # Fermerture du fichier ouvert 
 
 
 
@@ -176,9 +182,15 @@ def XspfPlaylist(TitrePlay,AuteurPlay, liste_abspath_son):
 
 
 
-'''
-liste=[]
-listef=RecupSong('C:/Users/charle/Desktop/W_PYTHON/Projet_Python/w_projet_python/metadata_mp3-1/Musique/',liste)
+
+#CREAT PLAYLIST AVEC LISTE
+'''liste=['Musique/Vanille.mp3']
+listef=RecupSong(liste)
 
 XspfPlaylist("RAP_FR",'Mehdi',liste)'''
 
+#print(VerifExtension('Musique/test.flac')) #VERIF EXTENSION
+
+#VERIF MIME
+'''print(VerifMime('Musique/Vanille.mp3'))
+print(mimetypes.guess_type('Musique/Vanille.mp3'))'''
