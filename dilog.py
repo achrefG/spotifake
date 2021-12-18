@@ -22,7 +22,7 @@ def getFile(): # MUSIQUE
     while True :
         file_path  = filedialog.askopenfilename(title = "Sélectionnez le son que vous voulez écouter ..." , filetypes = LST_Types)
         #print(file_path)
-        if file_path=='':
+        if file_path.__len__()<3:
             print("ERREUR VOUS N'AVEZ RIEN SELECTIONNEE")
         else: 
             return file_path
@@ -41,7 +41,7 @@ def getDir():
     while True :
         dir_path  = filedialog.askdirectory()
         #print(path)
-        if dir_path=='': 
+        if dir_path.__len__()<3: 
                 print("ERREUR VOUS N'AVEZ RIEN SELECTIONNEE")
         else:
             return dir_path
@@ -60,7 +60,7 @@ def getFiles(): # PLAYLIST
     while True :
         file_paths  = filedialog.askopenfilenames(title = "Sélectionnez la liste des fichier pour votre playliste" , filetypes = LST_Types)
         #print(file_paths)
-        if file_paths=='': 
+        if str(file_paths).__len__()<3: 
             print("ERREUR VOUS N'AVEZ RIEN SELECTIONNEE")
         else:
             return file_paths

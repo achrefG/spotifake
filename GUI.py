@@ -48,8 +48,9 @@ def main_menu():#fenetre principale avec le menu
 
         mx, my = pygame.mouse.get_pos()
  
+        #button_1 = pygame.Rect(50, 100, 500, 50) # appuis => ouvre la fenetre de l'ancien gui
         button_1 = pygame.Rect(50, 100, 500, 50) # appuis => ouvre la fenetre de l'ancien gui
-
+        
         button_2 = pygame.Rect(50, 200, 500, 50) # appuis => ouvre une fenetre pour l'affichage des metadonne
         
         button_3 = pygame.Rect(50, 300, 500, 50) #  appuis => création d'une playlist depuis un dossier et ses sous fichier
@@ -190,4 +191,4 @@ def metadataScreen():#lors de l'appel de cette fonction depuis le menu principal
         pygame.display.update()
         mainClock.tick(60)
  
-#main_menu()
+

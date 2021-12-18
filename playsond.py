@@ -17,7 +17,7 @@ def playsond(path_son):
 
     #--------------------------------------Recuperation de la cover de notre fichier audio si elle existe----------------------------------------
     
-    path_cover="Picture\defaut.png" # Path de la cover par defaut. Si le fichier audio n'a pas de cover on y met celui ci.
+    path_cover="spotifake.png" # Path de la cover par defaut. Si le fichier audio n'a pas de cover on y met celui ci.
 
     meta = metadata(path_son,False) # Appel de la methode metadata avec le chemin du fichier du fichier audio et AfficheMeta=False car on ne veut pas afficher les metadonnées juste recupérer une liste.
     cover = meta.get_image() # Stockage de la cover sous forme de bytes si elle existe None sinon

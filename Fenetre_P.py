@@ -30,20 +30,21 @@ def draw_text(text, Titlefont, color, surface, x, y):
 click = False
 
 def main():#fenetre principale avec le menu
+    # create a surface object, image is drawn on it.
+    image = pygame.image.load(r"spotifake.png")
     while True:
         screen.fill((0,0,0))
         draw_text('SPOTIFAKE', Titlefont, (255, 255, 255), screen, 150, 20)
-
+        screen.blit(image, (220, 150))
         mx, my = pygame.mouse.get_pos()
 
         button_lancer = pygame.Rect(35, 400, 530, 50) #  appuis => création d'une playlist a partir des fichier séléctionner
-
         button_quit = pygame.Rect(35, 500, 530, 50) #  appuis => quitter l'IHM
+        
         if button_lancer.collidepoint((mx, my)):
             if click:
                 print("fenetre principale lancer")
                 GUI.main_menu()
-                print("TEST")
 
         
         if button_quit.collidepoint((mx, my)):
