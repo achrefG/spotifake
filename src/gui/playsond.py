@@ -192,9 +192,8 @@ def playsond(path_son):
 
                 elif event.key == pygame.K_r : # Si la touche entrer est R
                     son.rewind() # replay
-                    #son.set_pos(0)
+                    son.set_pos(0)
                     print ("Vous avez recommencer la musique en tapant sur R")
-                
                 elif event.key == pygame.K_UP: # Si la touche entrer est FLECHE DU HAUT
                     son.set_volume(son.get_volume()+0.1)# augmente le volume de 0.1
                     print ("Vous avez augmenté le son de la musique en tapant sur FLECHE DU HAUT. Son : "+str(son.get_volume())+"/ 1")

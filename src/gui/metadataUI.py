@@ -47,7 +47,7 @@ def metadataScreen(screen):
 
 
         draw_text('Metadonnée du fichier : ', smallfont, (255, 255, 255), screen, 20, 70)
-        nomfichier=os.path.relpath(path_son) # stockage du chemin relatif du fichier audio selectionné
+        nomfichier=os.path.basename(path_son) # stockage du chemin relatif du fichier audio selectionné
         draw_text(nomfichier, metafont, (231, 70, 1), screen, 175, 95)
 
 

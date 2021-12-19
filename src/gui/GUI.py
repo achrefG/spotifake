@@ -29,6 +29,8 @@ def draw_text(text, Titlefont, color, surface, x, y):
  
 
 
+
+
 def main():
     '''
         crée et initialise une fenetre principale avec le logo de notre application et deux button pour lancer ou quiter notre user interface
