@@ -45,7 +45,7 @@ def playsond(path_son):
     
     # PRENDRE LA BONNE DIMMENSION // A MODIFIER QUAND INTERFACE GRAPHIQUE SERA EFFECTUEE
 
-    resolution_fenetre= (600,600)
+    resolution_fenetre= (500,600)
     surface_fenetre = pygame.display.set_mode(resolution_fenetre) # parametrage de la surface de la fenetre 
     
 
@@ -55,21 +55,98 @@ def playsond(path_son):
  
     son_cover = pygame.image.load(cover) # creation d'un nouvel objet image a partir d'un fichier donnee en paramêtre
 
-    son_cover = pygame.transform.scale(son_cover , resolution_fenetre) # redimenssion de l'image a la taille de la fenêtre
+    son_cover = pygame.transform.scale(son_cover , (400,400)) # redimenssion de l'image a la taille de la fenêtre
     
     son_cover.convert() # conversion du format des pixels en un unique => facilites l'affichage
 
     surface_fenetre.fill((0,0,0)) # fill : choix de la couleur pour le fond de la fenêtre
-    surface_fenetre.blit(son_cover, [0,0]) # blit[0]: nom du fichier image et blit[1]: position du point en haut a gauche de l'image
-    pygame.display.flip() # met a jour la fenêtre afficher
+    surface_fenetre.blit(son_cover, [50,50]) # blit[0]: nom du fichier image et blit[1]: position du point en haut a gauche de l'image
+
     
+    pause_img = pygame.image.load("Picture/pause.png") # creation d'un nouvel objet image a partir d'un fichier donnee en paramêtre
+    unpause_img = pygame.image.load("Picture/unpause.png")
+    up = pygame.image.load("Picture/up.png") 
+    down = pygame.image.load("Picture/down.png")
+    replay = pygame.image.load("Picture/replay.png")
+    out = pygame.image.load("Picture/out.png") 
+
+
+
+    surface_fenetre.blit(pause_img, [210,480])
+    surface_fenetre.blit(out, [30,480])
+    surface_fenetre.blit(replay, [120,480])
+    surface_fenetre.blit(up, [390,480])
+    surface_fenetre.blit(down, [300,480])
+       
+    black = pygame.Rect(0, 460, 500, 140)
+    pause_button = pygame.Rect(210, 480, 80, 80) # appuis => met le son en pause ou relance si déja en pause
+    up_button = pygame.Rect(390, 480, 80, 80) # appuis => volume up
+    down_button = pygame.Rect(300, 480, 80, 80) # appuis => volume down
+    replay_button = pygame.Rect(120, 480, 80, 80) # appuis => replay
+    out_button = pygame.Rect(30, 480, 80, 80)
+
+    #pygame.draw.rect(surface_fenetre,(255,0,255),pause_button)
+    pygame.display.flip() # met a jour la fenêtre afficher
     #COMMANDES CLAVIERS EXISTANTES
     print("\n Commandes clavier de notre interface : \n - Taper sur H pour afficher les commandes existantes \n - Taper sur ESCAPE pour quitter l'interface graphique \n - Taper sur P pour: \n \t - mettre en pause la musique quand elle est lance \n \t - reprendre la musique quand elle est en pause \n - Taper sur R pour recommencer la musique \n - Taper sur FLECHE DU HAUT pour augmenter le son \n - Taper sur FLECHE DU BAS pour baisser le son \n  ")
     
     lancer = True # boolean qui permet de garder la fenêtre ouverte tant quelle est vrai
+    click = False
     while lancer: # tant que lancer est vrai 
         
+        mx, my = pygame.mouse.get_pos()
+        if pause_button.collidepoint((mx, my)):# Si la touche entrer le button pause unpause et clicker
+            if click:
+                if son.get_busy()==True: # si le son tourne , get_busy() est une fonction qui retourne un boolean qui vaut TRUE si le son tourne et FALSE sinon
+                    son.pause() # mise en pause
+                    pygame.draw.rect(surface_fenetre,(0,0,0),black)
+                    surface_fenetre.blit(replay, [120,480])
+                    surface_fenetre.blit(up, [390,480])
+                    surface_fenetre.blit(out, [30,480])
+                    surface_fenetre.blit(down, [300,480])
+                    surface_fenetre.blit(unpause_img, [210,480])
+                    pygame.display.flip() 
+                    print ("Vous avez mis pause")
+
+                else:# si le son ne tourne pas , get_busy() est une fonction qui retourne un boolean qui vaut TRUE si le son tourne et FALSE sinon
+                    son.unpause() # reprise 
+                    print ("Vous avez relancé")
+                    pygame.draw.rect(surface_fenetre,(0,0,0),black)
+                    surface_fenetre.blit(replay, [120,480])
+                    surface_fenetre.blit(out, [30,480])
+                    surface_fenetre.blit(up, [390,480])
+                    surface_fenetre.blit(down, [300,480])
+                    surface_fenetre.blit(pause_img, [210,480])
+                    pygame.display.flip()       
+                click=False
+
+        if replay_button.collidepoint((mx, my)):# Si la touche replay et clicker
+            if click:
+                son.rewind() # replay 
+                print ("Vous avez recommencer la musique")
+                click=False
+        if up_button.collidepoint((mx, my)):# Si la touche entrer le button pause unpause et clicker
+            if click:
+                son.set_volume(son.get_volume()+0.1)# augmente le volume de 0.1
+                print ("Vous avez augmenté le son de la musique. Son : "+str(son.get_volume())+"/ 1")
+                click=False
+
+        if down_button.collidepoint((mx, my)):# Si la touche entrer le button pause unpause et clicker
+            if click:
+                son.set_volume(son.get_volume()-0.1)# baisse le volume de 0.1
+                print ("Vous avez baissé le son de la musique. Son : "+str(son.get_volume())+"/ 1")
+                click=False
+        if out_button.collidepoint((mx, my)):# Si la touche entrer le button pause unpause et clicker
+            if click:
+                son.stop() # Arret de la lecture de la musique
+                son.unload() # dechargement du flux audio
+                lancer = False # lancer devient faux et la fenêtre ne tourne plus => fermeture de la fenetre
+                click=False
+
         for event in pygame.event.get(): # pour event variant en fonction de ce qu'il ce passe dans la fenêtre 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
             if event.type == pygame.QUIT: # si l'evenement est : la fenetre est quitter 
                 son.stop() # Arret de la lecture de la musique
                 son.unload() # dechargement du flux audio
@@ -83,11 +160,26 @@ def playsond(path_son):
                     print("Commandes clavier de notre interface : \n - Taper sur ESCAPE pour quitter l'interface graphique \n - Taper sur P pour: \n \t - mettre en pause la musique quand elle est lance \n \t - reprendre la musique quand elle est en pause \n - Taper sur R pour recommencer la musique \n - Taper sur FLECHE DU HAUT pour augmenter le son \n - Taper sur FLECHE DU BAS pour baisser le son \n  ")
                     print("\n---------------------------------------------------------------------------------\n")
                 
-                elif event.key == pygame.K_p:# Si la touche entrer est P
+                elif event.key == pygame.K_p or pause_button.collidepoint((mx, my)):# Si la touche entrer est P
                     if son.get_busy()==True: # si le son tourne , get_busy() est une fonction qui retourne un boolean qui vaut TRUE si le son tourne et FALSE sinon
+                        
                         son.pause() # mise en pause
+                        pygame.draw.rect(surface_fenetre,(0,0,0),black)
+                        surface_fenetre.blit(replay, [120,480])
+                        surface_fenetre.blit(out, [30,480])
+                        surface_fenetre.blit(up, [390,480])
+                        surface_fenetre.blit(down, [300,480])
+                        surface_fenetre.blit(unpause_img, [220,480])
+                        pygame.display.flip() 
                         print ("Vous avez mis pause en tapant sur P")
                     else:# si le son ne tourne pas , get_busy() est une fonction qui retourne un boolean qui vaut TRUE si le son tourne et FALSE sinon
+                        pygame.draw.rect(surface_fenetre,(0,0,0),black)
+                        surface_fenetre.blit(replay, [120,480])
+                        surface_fenetre.blit(out, [30,480])
+                        surface_fenetre.blit(up, [390,480])
+                        surface_fenetre.blit(down, [300,480])
+                        surface_fenetre.blit(pause_img, [220,480])
+                        pygame.display.flip() 
                         son.unpause() # reprise 
                         print ("Vous avez mis relancé en tapant sur P")
                         
