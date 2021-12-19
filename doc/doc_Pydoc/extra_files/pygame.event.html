@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pygame.event</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pygame.html"><font color="#ffffff">pygame</font></a>.event</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/achref/.local/lib/python3.9/site-packages/pygame/event.cpython-39-x86_64-linux-gnu.so">/home/achref/.local/lib/python3.9/site-packages/pygame/event.cpython-39-x86_64-linux-gnu.so</a></font></td></tr></table>
+    <p><tt>pygame&nbsp;module&nbsp;for&nbsp;interacting&nbsp;with&nbsp;events&nbsp;and&nbsp;queues</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-Event"><strong>Event</strong></a>(...)</dt><dd><tt><a href="#-Event">Event</a>(type,&nbsp;dict)&nbsp;-&gt;&nbsp;EventType&nbsp;instance<br>
+<a href="#-Event">Event</a>(type,&nbsp;**attributes)&nbsp;-&gt;&nbsp;EventType&nbsp;instance<br>
+create&nbsp;a&nbsp;new&nbsp;event&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-__PYGAMEinit__"><strong>__PYGAMEinit__</strong></a>(...)</dt><dd><tt>auto&nbsp;initialize&nbsp;for&nbsp;event&nbsp;module</tt></dd></dl>
+ <dl><dt><a name="-__PYGAMEquit__"><strong>__PYGAMEquit__</strong></a>(...)</dt><dd><tt>auto&nbsp;quit&nbsp;for&nbsp;event&nbsp;module</tt></dd></dl>
+ <dl><dt><a name="-clear"><strong>clear</strong></a>(...)</dt><dd><tt><a href="#-clear">clear</a>(eventtype=None)&nbsp;-&gt;&nbsp;None<br>
+<a href="#-clear">clear</a>(eventtype=None,&nbsp;pump=True)&nbsp;-&gt;&nbsp;None<br>
+remove&nbsp;all&nbsp;events&nbsp;from&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-custom_type"><strong>custom_type</strong></a>(...)</dt><dd><tt><a href="#-custom_type">custom_type</a>()&nbsp;-&gt;&nbsp;int<br>
+make&nbsp;custom&nbsp;user&nbsp;event&nbsp;type</tt></dd></dl>
+ <dl><dt><a name="-event_name"><strong>event_name</strong></a>(...)</dt><dd><tt><a href="#-event_name">event_name</a>(type)&nbsp;-&gt;&nbsp;string<br>
+get&nbsp;the&nbsp;string&nbsp;name&nbsp;from&nbsp;an&nbsp;event&nbsp;id</tt></dd></dl>
+ <dl><dt><a name="-get"><strong>get</strong></a>(...)</dt><dd><tt><a href="#-get">get</a>(eventtype=None)&nbsp;-&gt;&nbsp;Eventlist<br>
+<a href="#-get">get</a>(eventtype=None,&nbsp;pump=True)&nbsp;-&gt;&nbsp;Eventlist<br>
+<a href="#-get">get</a>(eventtype=None,&nbsp;pump=True,&nbsp;exclude=None)&nbsp;-&gt;&nbsp;Eventlist<br>
+get&nbsp;events&nbsp;from&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-get_blocked"><strong>get_blocked</strong></a>(...)</dt><dd><tt><a href="#-get_blocked">get_blocked</a>(type)&nbsp;-&gt;&nbsp;bool<br>
+<a href="#-get_blocked">get_blocked</a>(typelist)&nbsp;-&gt;&nbsp;bool<br>
+test&nbsp;if&nbsp;a&nbsp;type&nbsp;of&nbsp;event&nbsp;is&nbsp;blocked&nbsp;from&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-get_grab"><strong>get_grab</strong></a>(...)</dt><dd><tt><a href="#-get_grab">get_grab</a>()&nbsp;-&gt;&nbsp;bool<br>
+test&nbsp;if&nbsp;the&nbsp;program&nbsp;is&nbsp;sharing&nbsp;input&nbsp;devices</tt></dd></dl>
+ <dl><dt><a name="-peek"><strong>peek</strong></a>(...)</dt><dd><tt><a href="#-peek">peek</a>(eventtype=None)&nbsp;-&gt;&nbsp;bool<br>
+<a href="#-peek">peek</a>(eventtype=None,&nbsp;pump=True)&nbsp;-&gt;&nbsp;bool<br>
+test&nbsp;if&nbsp;event&nbsp;types&nbsp;are&nbsp;waiting&nbsp;on&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-poll"><strong>poll</strong></a>(...)</dt><dd><tt><a href="#-poll">poll</a>()&nbsp;-&gt;&nbsp;EventType&nbsp;instance<br>
+get&nbsp;a&nbsp;single&nbsp;event&nbsp;from&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-post"><strong>post</strong></a>(...)</dt><dd><tt><a href="#-post">post</a>(Event)&nbsp;-&gt;&nbsp;bool<br>
+place&nbsp;a&nbsp;new&nbsp;event&nbsp;on&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-pump"><strong>pump</strong></a>(...)</dt><dd><tt><a href="#-pump">pump</a>()&nbsp;-&gt;&nbsp;None<br>
+internally&nbsp;process&nbsp;pygame&nbsp;event&nbsp;handlers</tt></dd></dl>
+ <dl><dt><a name="-set_allowed"><strong>set_allowed</strong></a>(...)</dt><dd><tt><a href="#-set_allowed">set_allowed</a>(type)&nbsp;-&gt;&nbsp;None<br>
+<a href="#-set_allowed">set_allowed</a>(typelist)&nbsp;-&gt;&nbsp;None<br>
+<a href="#-set_allowed">set_allowed</a>(None)&nbsp;-&gt;&nbsp;None<br>
+control&nbsp;which&nbsp;events&nbsp;are&nbsp;allowed&nbsp;on&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-set_blocked"><strong>set_blocked</strong></a>(...)</dt><dd><tt><a href="#-set_blocked">set_blocked</a>(type)&nbsp;-&gt;&nbsp;None<br>
+<a href="#-set_blocked">set_blocked</a>(typelist)&nbsp;-&gt;&nbsp;None<br>
+<a href="#-set_blocked">set_blocked</a>(None)&nbsp;-&gt;&nbsp;None<br>
+control&nbsp;which&nbsp;events&nbsp;are&nbsp;allowed&nbsp;on&nbsp;the&nbsp;queue</tt></dd></dl>
+ <dl><dt><a name="-set_grab"><strong>set_grab</strong></a>(...)</dt><dd><tt><a href="#-set_grab">set_grab</a>(bool)&nbsp;-&gt;&nbsp;None<br>
+control&nbsp;the&nbsp;sharing&nbsp;of&nbsp;input&nbsp;devices&nbsp;with&nbsp;other&nbsp;applications</tt></dd></dl>
+ <dl><dt><a name="-wait"><strong>wait</strong></a>(...)</dt><dd><tt><a href="#-wait">wait</a>()&nbsp;-&gt;&nbsp;EventType&nbsp;instance<br>
+<a href="#-wait">wait</a>(timeout)&nbsp;-&gt;&nbsp;EventType&nbsp;instance<br>
+wait&nbsp;for&nbsp;a&nbsp;single&nbsp;event&nbsp;from&nbsp;the&nbsp;queue</tt></dd></dl>
+</td></tr></table>
+</body></html>

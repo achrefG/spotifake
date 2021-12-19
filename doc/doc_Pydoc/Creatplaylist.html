@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Creatplaylist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Creatplaylist</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/achref/Bureau/python/metadata_mp3/Creatplaylist.py">/home/achref/Bureau/python/metadata_mp3/Creatplaylist.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="extra_files/mimetypes.html">mimetypes</a><br>
+</td><td width="25%" valign=top><a href="extra_files/os.html">os</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-RecupSong"><strong>RecupSong</strong></a>(liste)</dt><dd><tt>Rôle:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;La&nbsp;fonction&nbsp;RecupSong&nbsp;sert&nbsp;a&nbsp;parcourir&nbsp;un&nbsp;dossier&nbsp;donnée&nbsp;en&nbsp;paramêtre&nbsp;et&nbsp;de&nbsp;stocker&nbsp;dans&nbsp;une&nbsp;liste&nbsp;que&nbsp;les&nbsp;chemins&nbsp;des&nbsp;fichiers&nbsp;audio&nbsp;plus&nbsp;précisement&nbsp;les&nbsp;fichiers&nbsp;MP3&nbsp;ou&nbsp;FLAC.<br>
+Paramêtre&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste:&nbsp;liste&nbsp;contenant&nbsp;les&nbsp;chemins&nbsp;à&nbsp;verifier&nbsp;des&nbsp;fichiers&nbsp;à&nbsp;verifiers<br>
+Sortie:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste:&nbsp;Contenant&nbsp;les&nbsp;fichiers&nbsp;audio&nbsp;du&nbsp;dossier&nbsp;donné&nbsp;en&nbsp;entrée</tt></dd></dl>
+ <dl><dt><a name="-VerifExtension"><strong>VerifExtension</strong></a>(chemin)</dt><dd><tt>Rôle:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;La&nbsp;fonction&nbsp;VerifExtension&nbsp;sert&nbsp;a&nbsp;verifier&nbsp;si&nbsp;l'extension&nbsp;du&nbsp;fichier&nbsp;dont&nbsp;le&nbsp;path&nbsp;est&nbsp;donnée&nbsp;en&nbsp;parametre&nbsp;est&nbsp;bien&nbsp;'.mp3'&nbsp;ou&nbsp;'.flac'.<br>
+Paramêtre&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chemin:&nbsp;chemin&nbsp;pour&nbsp;acceder&nbsp;au&nbsp;fichier&nbsp;,&nbsp;dont&nbsp;il&nbsp;faut&nbsp;verifier&nbsp;l'extension<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Sortie:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Boolean:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vrai&nbsp;si&nbsp;le&nbsp;fichier&nbsp;est&nbsp;bien&nbsp;d'extension&nbsp;'.mp3'&nbsp;ou&nbsp;'.flac'.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faux,&nbsp;si&nbsp;le&nbsp;chemin&nbsp;n'est&nbsp;pas&nbsp;celui&nbsp;d'un&nbsp;fichier,&nbsp;si&nbsp;le&nbsp;fichier&nbsp;n'existe&nbsp;pas&nbsp;ou&nbsp;si&nbsp;son&nbsp;extension&nbsp;n'est&nbsp;pas&nbsp;:&nbsp;'.mp3'&nbsp;ou&nbsp;'.flac'.</tt></dd></dl>
+ <dl><dt><a name="-VerifMime"><strong>VerifMime</strong></a>(chemin)</dt><dd><tt>Rôle:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;La&nbsp;fonction&nbsp;VerifExtension&nbsp;sert&nbsp;a&nbsp;verifier&nbsp;si&nbsp;le&nbsp;type&nbsp;mime&nbsp;du&nbsp;fichier&nbsp;dont&nbsp;le&nbsp;path&nbsp;est&nbsp;donnée&nbsp;en&nbsp;parametre&nbsp;est&nbsp;bien&nbsp;'audio/mpeg'&nbsp;ou&nbsp;'audio/x-flac'.<br>
+Paramêtre&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chemin:&nbsp;chemin&nbsp;pour&nbsp;acceder&nbsp;au&nbsp;fichier&nbsp;,&nbsp;dont&nbsp;il&nbsp;faut&nbsp;verifier&nbsp;l'extension<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Sortie:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Boolean:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vrai&nbsp;si&nbsp;le&nbsp;fichier&nbsp;est&nbsp;bien&nbsp;de&nbsp;type&nbsp;mime&nbsp;'audio/mpeg'&nbsp;ou&nbsp;'audio/x-flac'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Faux,&nbsp;si&nbsp;le&nbsp;chemin&nbsp;n'est&nbsp;pas&nbsp;celui&nbsp;d'un&nbsp;fichier,&nbsp;si&nbsp;le&nbsp;fichier&nbsp;n'existe&nbsp;pas&nbsp;ou&nbsp;si&nbsp;son&nbsp;type&nbsp;mime&nbsp;n'est&nbsp;pas&nbsp;:'audio/mpeg'&nbsp;ou&nbsp;'audio/x-flac'.</tt></dd></dl>
+ <dl><dt><a name="-XspfPlaylist"><strong>XspfPlaylist</strong></a>(TitrePlay, AuteurPlay, liste_abspath_son)</dt><dd><tt>Rôle:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;La&nbsp;fonction&nbsp;XspfPlaylist&nbsp;sert&nbsp;a&nbsp;crée&nbsp;une&nbsp;playlist&nbsp;au&nbsp;format&nbsp;XSPF&nbsp;en&nbsp;parcourant&nbsp;une&nbsp;liste&nbsp;contenant&nbsp;les&nbsp;chemins&nbsp;absolu&nbsp;de&nbsp;fichiers&nbsp;audio<br>
+Paramêtre&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TitrePlay:&nbsp;Titre&nbsp;de&nbsp;la&nbsp;paylist&nbsp;dans&nbsp;le&nbsp;fichier&nbsp;XSPF&nbsp;,&nbsp;mais&nbsp;également&nbsp;le&nbsp;nom&nbsp;du&nbsp;fichier&nbsp;XSPF<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AuteurPlay:&nbsp;Auteur&nbsp;de&nbsp;la&nbsp;paylist&nbsp;dans&nbsp;le&nbsp;fichier&nbsp;XSPF<br>
+&nbsp;&nbsp;&nbsp;&nbsp;liste_abspath_son:&nbsp;liste&nbsp;contenant&nbsp;les&nbsp;chemins&nbsp;absolu&nbsp;qu'il&nbsp;faudra&nbsp;parcourir<br>
+Sortie:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Fichier&nbsp;XSPF&nbsp;,&nbsp;crée&nbsp;et&nbsp;rempli&nbsp;avec&nbsp;la&nbsp;playlist&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;Affichage&nbsp;du&nbsp;contenu&nbsp;de&nbsp;ce&nbsp;fichier</tt></dd></dl>
+</td></tr></table>
+</body></html>

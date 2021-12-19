@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module tkinter.filedialog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="tkinter.html"><font color="#ffffff">tkinter</font></a>.filedialog</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3.9/tkinter/filedialog.py">/usr/lib/python3.9/tkinter/filedialog.py</a><br><a href="https://docs.python.org/3.9/library/tkinter.filedialog">Module Reference</a></font></td></tr></table>
+    <p><tt>File&nbsp;selection&nbsp;dialog&nbsp;classes.<br>
+&nbsp;<br>
+Classes:<br>
+&nbsp;<br>
+-&nbsp;<a href="#FileDialog">FileDialog</a><br>
+-&nbsp;<a href="#LoadFileDialog">LoadFileDialog</a><br>
+-&nbsp;<a href="#SaveFileDialog">SaveFileDialog</a><br>
+&nbsp;<br>
+This&nbsp;module&nbsp;also&nbsp;presents&nbsp;tk&nbsp;common&nbsp;file&nbsp;dialogues,&nbsp;it&nbsp;provides&nbsp;interfaces<br>
+to&nbsp;the&nbsp;native&nbsp;file&nbsp;dialogues&nbsp;available&nbsp;in&nbsp;Tk&nbsp;4.2&nbsp;and&nbsp;newer,&nbsp;and&nbsp;the<br>
+directory&nbsp;dialogue&nbsp;available&nbsp;in&nbsp;Tk&nbsp;8.3&nbsp;and&nbsp;newer.<br>
+These&nbsp;interfaces&nbsp;were&nbsp;written&nbsp;by&nbsp;Fredrik&nbsp;Lundh,&nbsp;May&nbsp;1997.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="tkinter.commondialog.html">tkinter.commondialog</a><br>
+</td><td width="25%" valign=top><a href="fnmatch.html">fnmatch</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="tkinter.filedialog.html#FileDialog">FileDialog</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="tkinter.filedialog.html#LoadFileDialog">LoadFileDialog</a>
+</font></dt><dt><font face="helvetica, arial"><a href="tkinter.filedialog.html#SaveFileDialog">SaveFileDialog</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="tkinter.filedialog.html#Directory">Directory</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="tkinter.filedialog.html#_Dialog">_Dialog</a>(<a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="tkinter.filedialog.html#Open">Open</a>
+</font></dt><dt><font face="helvetica, arial"><a href="tkinter.filedialog.html#SaveAs">SaveAs</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Directory">class <strong>Directory</strong></a>(<a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Directory">Directory</a>(master=None,&nbsp;**options)<br>
+&nbsp;<br>
+Ask&nbsp;for&nbsp;a&nbsp;directory<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="tkinter.filedialog.html#Directory">Directory</a></dd>
+<dd><a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>command</strong> = 'tk_chooseDirectory'</dl>
+
+<hr>
+Methods inherited from <a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>:<br>
+<dl><dt><a name="Directory-__init__"><strong>__init__</strong></a>(self, master=None, **options)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Directory-show"><strong>show</strong></a>(self, **options)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FileDialog">class <strong>FileDialog</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#FileDialog">FileDialog</a>(master,&nbsp;title=None)<br>
+&nbsp;<br>
+Standard&nbsp;file&nbsp;selection&nbsp;dialog&nbsp;--&nbsp;no&nbsp;checks&nbsp;on&nbsp;selected&nbsp;file.<br>
+&nbsp;<br>
+Usage:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;d&nbsp;=&nbsp;<a href="#FileDialog">FileDialog</a>(master)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fname&nbsp;=&nbsp;d.<a href="#FileDialog-go">go</a>(dir_or_file,&nbsp;pattern,&nbsp;default,&nbsp;key)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;fname&nbsp;is&nbsp;None:&nbsp;...canceled...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else:&nbsp;...open&nbsp;file...<br>
+&nbsp;<br>
+All&nbsp;arguments&nbsp;to&nbsp;<a href="#FileDialog-go">go</a>()&nbsp;are&nbsp;optional.<br>
+&nbsp;<br>
+The&nbsp;'key'&nbsp;argument&nbsp;specifies&nbsp;a&nbsp;key&nbsp;in&nbsp;the&nbsp;global&nbsp;dictionary<br>
+'dialogstates',&nbsp;which&nbsp;keeps&nbsp;track&nbsp;of&nbsp;the&nbsp;values&nbsp;for&nbsp;the&nbsp;directory<br>
+and&nbsp;pattern&nbsp;arguments,&nbsp;overriding&nbsp;the&nbsp;values&nbsp;passed&nbsp;in&nbsp;(it&nbsp;does<br>
+not&nbsp;keep&nbsp;track&nbsp;of&nbsp;the&nbsp;default&nbsp;argument!).&nbsp;&nbsp;If&nbsp;no&nbsp;key&nbsp;is&nbsp;specified,<br>
+the&nbsp;dialog&nbsp;keeps&nbsp;no&nbsp;memory&nbsp;of&nbsp;previous&nbsp;state.&nbsp;&nbsp;Note&nbsp;that&nbsp;memory&nbsp;is<br>
+kept&nbsp;even&nbsp;when&nbsp;the&nbsp;dialog&nbsp;is&nbsp;canceled.&nbsp;&nbsp;(All&nbsp;this&nbsp;emulates&nbsp;the<br>
+behavior&nbsp;of&nbsp;the&nbsp;Macintosh&nbsp;file&nbsp;selection&nbsp;dialogs.)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="FileDialog-__init__"><strong>__init__</strong></a>(self, master, title=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="FileDialog-cancel_command"><strong>cancel_command</strong></a>(self, event=None)</dt></dl>
+
+<dl><dt><a name="FileDialog-dirs_double_event"><strong>dirs_double_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="FileDialog-dirs_select_event"><strong>dirs_select_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="FileDialog-files_double_event"><strong>files_double_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="FileDialog-files_select_event"><strong>files_select_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="FileDialog-filter_command"><strong>filter_command</strong></a>(self, event=None)</dt></dl>
+
+<dl><dt><a name="FileDialog-get_filter"><strong>get_filter</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FileDialog-get_selection"><strong>get_selection</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FileDialog-go"><strong>go</strong></a>(self, dir_or_file='.', pattern='*', default='', key=None)</dt></dl>
+
+<dl><dt><a name="FileDialog-ok_command"><strong>ok_command</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FileDialog-ok_event"><strong>ok_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="FileDialog-quit"><strong>quit</strong></a>(self, how=None)</dt></dl>
+
+<dl><dt><a name="FileDialog-set_filter"><strong>set_filter</strong></a>(self, dir, pat)</dt></dl>
+
+<dl><dt><a name="FileDialog-set_selection"><strong>set_selection</strong></a>(self, file)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>title</strong> = 'File Selection Dialog'</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LoadFileDialog">class <strong>LoadFileDialog</strong></a>(<a href="tkinter.filedialog.html#FileDialog">FileDialog</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#LoadFileDialog">LoadFileDialog</a>(master,&nbsp;title=None)<br>
+&nbsp;<br>
+File&nbsp;selection&nbsp;dialog&nbsp;which&nbsp;checks&nbsp;that&nbsp;the&nbsp;file&nbsp;exists.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="tkinter.filedialog.html#LoadFileDialog">LoadFileDialog</a></dd>
+<dd><a href="tkinter.filedialog.html#FileDialog">FileDialog</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="LoadFileDialog-ok_command"><strong>ok_command</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>title</strong> = 'Load File Selection Dialog'</dl>
+
+<hr>
+Methods inherited from <a href="tkinter.filedialog.html#FileDialog">FileDialog</a>:<br>
+<dl><dt><a name="LoadFileDialog-__init__"><strong>__init__</strong></a>(self, master, title=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="LoadFileDialog-cancel_command"><strong>cancel_command</strong></a>(self, event=None)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-dirs_double_event"><strong>dirs_double_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-dirs_select_event"><strong>dirs_select_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-files_double_event"><strong>files_double_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-files_select_event"><strong>files_select_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-filter_command"><strong>filter_command</strong></a>(self, event=None)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-get_filter"><strong>get_filter</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-get_selection"><strong>get_selection</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-go"><strong>go</strong></a>(self, dir_or_file='.', pattern='*', default='', key=None)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-ok_event"><strong>ok_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-quit"><strong>quit</strong></a>(self, how=None)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-set_filter"><strong>set_filter</strong></a>(self, dir, pat)</dt></dl>
+
+<dl><dt><a name="LoadFileDialog-set_selection"><strong>set_selection</strong></a>(self, file)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="tkinter.filedialog.html#FileDialog">FileDialog</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Open">class <strong>Open</strong></a>(<a href="tkinter.filedialog.html#_Dialog">_Dialog</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Open">Open</a>(master=None,&nbsp;**options)<br>
+&nbsp;<br>
+Ask&nbsp;for&nbsp;a&nbsp;filename&nbsp;to&nbsp;open<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="tkinter.filedialog.html#Open">Open</a></dd>
+<dd><a href="tkinter.filedialog.html#_Dialog">_Dialog</a></dd>
+<dd><a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>command</strong> = 'tk_getOpenFile'</dl>
+
+<hr>
+Methods inherited from <a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>:<br>
+<dl><dt><a name="Open-__init__"><strong>__init__</strong></a>(self, master=None, **options)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Open-show"><strong>show</strong></a>(self, **options)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SaveAs">class <strong>SaveAs</strong></a>(<a href="tkinter.filedialog.html#_Dialog">_Dialog</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SaveAs">SaveAs</a>(master=None,&nbsp;**options)<br>
+&nbsp;<br>
+Ask&nbsp;for&nbsp;a&nbsp;filename&nbsp;to&nbsp;save&nbsp;as<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="tkinter.filedialog.html#SaveAs">SaveAs</a></dd>
+<dd><a href="tkinter.filedialog.html#_Dialog">_Dialog</a></dd>
+<dd><a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>command</strong> = 'tk_getSaveFile'</dl>
+
+<hr>
+Methods inherited from <a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>:<br>
+<dl><dt><a name="SaveAs-__init__"><strong>__init__</strong></a>(self, master=None, **options)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="SaveAs-show"><strong>show</strong></a>(self, **options)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="tkinter.commondialog.html#Dialog">tkinter.commondialog.Dialog</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SaveFileDialog">class <strong>SaveFileDialog</strong></a>(<a href="tkinter.filedialog.html#FileDialog">FileDialog</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SaveFileDialog">SaveFileDialog</a>(master,&nbsp;title=None)<br>
+&nbsp;<br>
+File&nbsp;selection&nbsp;dialog&nbsp;which&nbsp;checks&nbsp;that&nbsp;the&nbsp;file&nbsp;may&nbsp;be&nbsp;created.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="tkinter.filedialog.html#SaveFileDialog">SaveFileDialog</a></dd>
+<dd><a href="tkinter.filedialog.html#FileDialog">FileDialog</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SaveFileDialog-ok_command"><strong>ok_command</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>title</strong> = 'Save File Selection Dialog'</dl>
+
+<hr>
+Methods inherited from <a href="tkinter.filedialog.html#FileDialog">FileDialog</a>:<br>
+<dl><dt><a name="SaveFileDialog-__init__"><strong>__init__</strong></a>(self, master, title=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="SaveFileDialog-cancel_command"><strong>cancel_command</strong></a>(self, event=None)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-dirs_double_event"><strong>dirs_double_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-dirs_select_event"><strong>dirs_select_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-files_double_event"><strong>files_double_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-files_select_event"><strong>files_select_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-filter_command"><strong>filter_command</strong></a>(self, event=None)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-get_filter"><strong>get_filter</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-get_selection"><strong>get_selection</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-go"><strong>go</strong></a>(self, dir_or_file='.', pattern='*', default='', key=None)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-ok_event"><strong>ok_event</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-quit"><strong>quit</strong></a>(self, how=None)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-set_filter"><strong>set_filter</strong></a>(self, dir, pat)</dt></dl>
+
+<dl><dt><a name="SaveFileDialog-set_selection"><strong>set_selection</strong></a>(self, file)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="tkinter.filedialog.html#FileDialog">FileDialog</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-askdirectory"><strong>askdirectory</strong></a>(**options)</dt><dd><tt>Ask&nbsp;for&nbsp;a&nbsp;directory,&nbsp;and&nbsp;return&nbsp;the&nbsp;file&nbsp;name</tt></dd></dl>
+ <dl><dt><a name="-askopenfile"><strong>askopenfile</strong></a>(mode='r', **options)</dt><dd><tt>Ask&nbsp;for&nbsp;a&nbsp;filename&nbsp;to&nbsp;open,&nbsp;and&nbsp;returned&nbsp;the&nbsp;opened&nbsp;file</tt></dd></dl>
+ <dl><dt><a name="-askopenfilename"><strong>askopenfilename</strong></a>(**options)</dt><dd><tt>Ask&nbsp;for&nbsp;a&nbsp;filename&nbsp;to&nbsp;open</tt></dd></dl>
+ <dl><dt><a name="-askopenfilenames"><strong>askopenfilenames</strong></a>(**options)</dt><dd><tt>Ask&nbsp;for&nbsp;multiple&nbsp;filenames&nbsp;to&nbsp;open<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;filenames&nbsp;or&nbsp;empty&nbsp;list&nbsp;if<br>
+cancel&nbsp;button&nbsp;selected</tt></dd></dl>
+ <dl><dt><a name="-askopenfiles"><strong>askopenfiles</strong></a>(mode='r', **options)</dt><dd><tt>Ask&nbsp;for&nbsp;multiple&nbsp;filenames&nbsp;and&nbsp;return&nbsp;the&nbsp;open&nbsp;file<br>
+objects<br>
+&nbsp;<br>
+returns&nbsp;a&nbsp;list&nbsp;of&nbsp;open&nbsp;file&nbsp;objects&nbsp;or&nbsp;an&nbsp;empty&nbsp;list&nbsp;if<br>
+cancel&nbsp;selected</tt></dd></dl>
+ <dl><dt><a name="-asksaveasfile"><strong>asksaveasfile</strong></a>(mode='w', **options)</dt><dd><tt>Ask&nbsp;for&nbsp;a&nbsp;filename&nbsp;to&nbsp;save&nbsp;as,&nbsp;and&nbsp;returned&nbsp;the&nbsp;opened&nbsp;file</tt></dd></dl>
+ <dl><dt><a name="-asksaveasfilename"><strong>asksaveasfilename</strong></a>(**options)</dt><dd><tt>Ask&nbsp;for&nbsp;a&nbsp;filename&nbsp;to&nbsp;save&nbsp;as</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['FileDialog', 'LoadFileDialog', 'SaveFileDialog', 'Open', 'SaveAs', 'Directory', 'askopenfilename', 'asksaveasfilename', 'askopenfilenames', 'askopenfile', 'askopenfiles', 'asksaveasfile', 'askdirectory']</td></tr></table>
+</body></html>

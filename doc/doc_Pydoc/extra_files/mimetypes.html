@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module mimetypes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>mimetypes</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3.9/mimetypes.py">/usr/lib/python3.9/mimetypes.py</a><br><a href="https://docs.python.org/3.9/library/mimetypes">Module Reference</a></font></td></tr></table>
+    <p><tt>Guess&nbsp;the&nbsp;MIME&nbsp;type&nbsp;of&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;defines&nbsp;two&nbsp;useful&nbsp;functions:<br>
+&nbsp;<br>
+<a href="#-guess_type">guess_type</a>(url,&nbsp;strict=True)&nbsp;--&nbsp;guess&nbsp;the&nbsp;MIME&nbsp;type&nbsp;and&nbsp;encoding&nbsp;of&nbsp;a&nbsp;URL.<br>
+&nbsp;<br>
+<a href="#-guess_extension">guess_extension</a>(type,&nbsp;strict=True)&nbsp;--&nbsp;guess&nbsp;the&nbsp;extension&nbsp;for&nbsp;a&nbsp;given&nbsp;MIME&nbsp;type.<br>
+&nbsp;<br>
+It&nbsp;also&nbsp;contains&nbsp;the&nbsp;following,&nbsp;for&nbsp;tuning&nbsp;the&nbsp;behavior:<br>
+&nbsp;<br>
+Data:<br>
+&nbsp;<br>
+knownfiles&nbsp;--&nbsp;list&nbsp;of&nbsp;files&nbsp;to&nbsp;parse<br>
+inited&nbsp;--&nbsp;flag&nbsp;set&nbsp;when&nbsp;<a href="#-init">init</a>()&nbsp;has&nbsp;been&nbsp;called<br>
+suffix_map&nbsp;--&nbsp;dictionary&nbsp;mapping&nbsp;suffixes&nbsp;to&nbsp;suffixes<br>
+encodings_map&nbsp;--&nbsp;dictionary&nbsp;mapping&nbsp;suffixes&nbsp;to&nbsp;encodings<br>
+types_map&nbsp;--&nbsp;dictionary&nbsp;mapping&nbsp;suffixes&nbsp;to&nbsp;types<br>
+&nbsp;<br>
+Functions:<br>
+&nbsp;<br>
+<a href="#-init">init</a>([files])&nbsp;--&nbsp;parse&nbsp;a&nbsp;list&nbsp;of&nbsp;files,&nbsp;default&nbsp;knownfiles&nbsp;(on&nbsp;Windows,&nbsp;the<br>
+&nbsp;&nbsp;default&nbsp;values&nbsp;are&nbsp;taken&nbsp;from&nbsp;the&nbsp;registry)<br>
+<a href="#-read_mime_types">read_mime_types</a>(file)&nbsp;--&nbsp;parse&nbsp;one&nbsp;file,&nbsp;return&nbsp;a&nbsp;dictionary&nbsp;or&nbsp;None</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="posixpath.html">posixpath</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="mimetypes.html#MimeTypes">MimeTypes</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MimeTypes">class <strong>MimeTypes</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#MimeTypes">MimeTypes</a>(filenames=(),&nbsp;strict=True)<br>
+&nbsp;<br>
+MIME-types&nbsp;datastore.<br>
+&nbsp;<br>
+This&nbsp;datastore&nbsp;can&nbsp;handle&nbsp;information&nbsp;from&nbsp;mime.types-style&nbsp;files<br>
+and&nbsp;supports&nbsp;basic&nbsp;determination&nbsp;of&nbsp;MIME&nbsp;type&nbsp;from&nbsp;a&nbsp;filename&nbsp;or<br>
+URL,&nbsp;and&nbsp;can&nbsp;guess&nbsp;a&nbsp;reasonable&nbsp;extension&nbsp;given&nbsp;a&nbsp;MIME&nbsp;type.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="MimeTypes-__init__"><strong>__init__</strong></a>(self, filenames=(), strict=True)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="MimeTypes-add_type"><strong>add_type</strong></a>(self, type, ext, strict=True)</dt><dd><tt>Add&nbsp;a&nbsp;mapping&nbsp;between&nbsp;a&nbsp;type&nbsp;and&nbsp;an&nbsp;extension.<br>
+&nbsp;<br>
+When&nbsp;the&nbsp;extension&nbsp;is&nbsp;already&nbsp;known,&nbsp;the&nbsp;new<br>
+type&nbsp;will&nbsp;replace&nbsp;the&nbsp;old&nbsp;one.&nbsp;When&nbsp;the&nbsp;type<br>
+is&nbsp;already&nbsp;known&nbsp;the&nbsp;extension&nbsp;will&nbsp;be&nbsp;added<br>
+to&nbsp;the&nbsp;list&nbsp;of&nbsp;known&nbsp;extensions.<br>
+&nbsp;<br>
+If&nbsp;strict&nbsp;is&nbsp;true,&nbsp;information&nbsp;will&nbsp;be&nbsp;added&nbsp;to<br>
+list&nbsp;of&nbsp;standard&nbsp;types,&nbsp;else&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;non-standard<br>
+types.</tt></dd></dl>
+
+<dl><dt><a name="MimeTypes-guess_all_extensions"><strong>guess_all_extensions</strong></a>(self, type, strict=True)</dt><dd><tt>Guess&nbsp;the&nbsp;extensions&nbsp;for&nbsp;a&nbsp;file&nbsp;based&nbsp;on&nbsp;its&nbsp;MIME&nbsp;type.<br>
+&nbsp;<br>
+Return&nbsp;value&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;giving&nbsp;the&nbsp;possible&nbsp;filename<br>
+extensions,&nbsp;including&nbsp;the&nbsp;leading&nbsp;dot&nbsp;('.').&nbsp;&nbsp;The&nbsp;extension&nbsp;is&nbsp;not<br>
+guaranteed&nbsp;to&nbsp;have&nbsp;been&nbsp;associated&nbsp;with&nbsp;any&nbsp;particular&nbsp;data&nbsp;stream,<br>
+but&nbsp;would&nbsp;be&nbsp;mapped&nbsp;to&nbsp;the&nbsp;MIME&nbsp;type&nbsp;`type'&nbsp;by&nbsp;<a href="#MimeTypes-guess_type">guess_type</a>().<br>
+&nbsp;<br>
+Optional&nbsp;`strict'&nbsp;argument&nbsp;when&nbsp;false&nbsp;adds&nbsp;a&nbsp;bunch&nbsp;of&nbsp;commonly&nbsp;found,<br>
+but&nbsp;non-standard&nbsp;types.</tt></dd></dl>
+
+<dl><dt><a name="MimeTypes-guess_extension"><strong>guess_extension</strong></a>(self, type, strict=True)</dt><dd><tt>Guess&nbsp;the&nbsp;extension&nbsp;for&nbsp;a&nbsp;file&nbsp;based&nbsp;on&nbsp;its&nbsp;MIME&nbsp;type.<br>
+&nbsp;<br>
+Return&nbsp;value&nbsp;is&nbsp;a&nbsp;string&nbsp;giving&nbsp;a&nbsp;filename&nbsp;extension,<br>
+including&nbsp;the&nbsp;leading&nbsp;dot&nbsp;('.').&nbsp;&nbsp;The&nbsp;extension&nbsp;is&nbsp;not<br>
+guaranteed&nbsp;to&nbsp;have&nbsp;been&nbsp;associated&nbsp;with&nbsp;any&nbsp;particular&nbsp;data<br>
+stream,&nbsp;but&nbsp;would&nbsp;be&nbsp;mapped&nbsp;to&nbsp;the&nbsp;MIME&nbsp;type&nbsp;`type'&nbsp;by<br>
+<a href="#MimeTypes-guess_type">guess_type</a>().&nbsp;&nbsp;If&nbsp;no&nbsp;extension&nbsp;can&nbsp;be&nbsp;guessed&nbsp;for&nbsp;`type',&nbsp;None<br>
+is&nbsp;returned.<br>
+&nbsp;<br>
+Optional&nbsp;`strict'&nbsp;argument&nbsp;when&nbsp;false&nbsp;adds&nbsp;a&nbsp;bunch&nbsp;of&nbsp;commonly&nbsp;found,<br>
+but&nbsp;non-standard&nbsp;types.</tt></dd></dl>
+
+<dl><dt><a name="MimeTypes-guess_type"><strong>guess_type</strong></a>(self, url, strict=True)</dt><dd><tt>Guess&nbsp;the&nbsp;type&nbsp;of&nbsp;a&nbsp;file&nbsp;which&nbsp;is&nbsp;either&nbsp;a&nbsp;URL&nbsp;or&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Return&nbsp;value&nbsp;is&nbsp;a&nbsp;tuple&nbsp;(type,&nbsp;encoding)&nbsp;where&nbsp;type&nbsp;is&nbsp;None&nbsp;if<br>
+the&nbsp;type&nbsp;can't&nbsp;be&nbsp;guessed&nbsp;(no&nbsp;or&nbsp;unknown&nbsp;suffix)&nbsp;or&nbsp;a&nbsp;string<br>
+of&nbsp;the&nbsp;form&nbsp;type/subtype,&nbsp;usable&nbsp;for&nbsp;a&nbsp;MIME&nbsp;Content-type<br>
+header;&nbsp;and&nbsp;encoding&nbsp;is&nbsp;None&nbsp;for&nbsp;no&nbsp;encoding&nbsp;or&nbsp;the&nbsp;name&nbsp;of<br>
+the&nbsp;program&nbsp;used&nbsp;to&nbsp;encode&nbsp;(e.g.&nbsp;compress&nbsp;or&nbsp;gzip).&nbsp;&nbsp;The<br>
+mappings&nbsp;are&nbsp;table&nbsp;driven.&nbsp;&nbsp;Encoding&nbsp;suffixes&nbsp;are&nbsp;case<br>
+sensitive;&nbsp;type&nbsp;suffixes&nbsp;are&nbsp;first&nbsp;tried&nbsp;case&nbsp;sensitive,&nbsp;then<br>
+case&nbsp;insensitive.<br>
+&nbsp;<br>
+The&nbsp;suffixes&nbsp;.tgz,&nbsp;.taz&nbsp;and&nbsp;.tz&nbsp;(case&nbsp;sensitive!)&nbsp;are&nbsp;all<br>
+mapped&nbsp;to&nbsp;'.tar.gz'.&nbsp;&nbsp;(This&nbsp;is&nbsp;table-driven&nbsp;too,&nbsp;using&nbsp;the<br>
+dictionary&nbsp;suffix_map.)<br>
+&nbsp;<br>
+Optional&nbsp;`strict'&nbsp;argument&nbsp;when&nbsp;False&nbsp;adds&nbsp;a&nbsp;bunch&nbsp;of&nbsp;commonly&nbsp;found,<br>
+but&nbsp;non-standard&nbsp;types.</tt></dd></dl>
+
+<dl><dt><a name="MimeTypes-read"><strong>read</strong></a>(self, filename, strict=True)</dt><dd><tt>Read&nbsp;a&nbsp;single&nbsp;mime.types-format&nbsp;file,&nbsp;specified&nbsp;by&nbsp;pathname.<br>
+&nbsp;<br>
+If&nbsp;strict&nbsp;is&nbsp;true,&nbsp;information&nbsp;will&nbsp;be&nbsp;added&nbsp;to<br>
+list&nbsp;of&nbsp;standard&nbsp;types,&nbsp;else&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;non-standard<br>
+types.</tt></dd></dl>
+
+<dl><dt><a name="MimeTypes-read_windows_registry"><strong>read_windows_registry</strong></a>(self, strict=True)</dt><dd><tt>Load&nbsp;the&nbsp;MIME&nbsp;types&nbsp;database&nbsp;from&nbsp;Windows&nbsp;registry.<br>
+&nbsp;<br>
+If&nbsp;strict&nbsp;is&nbsp;true,&nbsp;information&nbsp;will&nbsp;be&nbsp;added&nbsp;to<br>
+list&nbsp;of&nbsp;standard&nbsp;types,&nbsp;else&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;non-standard<br>
+types.</tt></dd></dl>
+
+<dl><dt><a name="MimeTypes-readfp"><strong>readfp</strong></a>(self, fp, strict=True)</dt><dd><tt>Read&nbsp;a&nbsp;single&nbsp;mime.types-format&nbsp;file.<br>
+&nbsp;<br>
+If&nbsp;strict&nbsp;is&nbsp;true,&nbsp;information&nbsp;will&nbsp;be&nbsp;added&nbsp;to<br>
+list&nbsp;of&nbsp;standard&nbsp;types,&nbsp;else&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;non-standard<br>
+types.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-add_type"><strong>add_type</strong></a>(type, ext, strict=True)</dt><dd><tt>Add&nbsp;a&nbsp;mapping&nbsp;between&nbsp;a&nbsp;type&nbsp;and&nbsp;an&nbsp;extension.<br>
+&nbsp;<br>
+When&nbsp;the&nbsp;extension&nbsp;is&nbsp;already&nbsp;known,&nbsp;the&nbsp;new<br>
+type&nbsp;will&nbsp;replace&nbsp;the&nbsp;old&nbsp;one.&nbsp;When&nbsp;the&nbsp;type<br>
+is&nbsp;already&nbsp;known&nbsp;the&nbsp;extension&nbsp;will&nbsp;be&nbsp;added<br>
+to&nbsp;the&nbsp;list&nbsp;of&nbsp;known&nbsp;extensions.<br>
+&nbsp;<br>
+If&nbsp;strict&nbsp;is&nbsp;true,&nbsp;information&nbsp;will&nbsp;be&nbsp;added&nbsp;to<br>
+list&nbsp;of&nbsp;standard&nbsp;types,&nbsp;else&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;non-standard<br>
+types.</tt></dd></dl>
+ <dl><dt><a name="-guess_all_extensions"><strong>guess_all_extensions</strong></a>(type, strict=True)</dt><dd><tt>Guess&nbsp;the&nbsp;extensions&nbsp;for&nbsp;a&nbsp;file&nbsp;based&nbsp;on&nbsp;its&nbsp;MIME&nbsp;type.<br>
+&nbsp;<br>
+Return&nbsp;value&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;giving&nbsp;the&nbsp;possible&nbsp;filename<br>
+extensions,&nbsp;including&nbsp;the&nbsp;leading&nbsp;dot&nbsp;('.').&nbsp;&nbsp;The&nbsp;extension&nbsp;is&nbsp;not<br>
+guaranteed&nbsp;to&nbsp;have&nbsp;been&nbsp;associated&nbsp;with&nbsp;any&nbsp;particular&nbsp;data<br>
+stream,&nbsp;but&nbsp;would&nbsp;be&nbsp;mapped&nbsp;to&nbsp;the&nbsp;MIME&nbsp;type&nbsp;`type'&nbsp;by<br>
+<a href="#-guess_type">guess_type</a>().&nbsp;&nbsp;If&nbsp;no&nbsp;extension&nbsp;can&nbsp;be&nbsp;guessed&nbsp;for&nbsp;`type',&nbsp;None<br>
+is&nbsp;returned.<br>
+&nbsp;<br>
+Optional&nbsp;`strict'&nbsp;argument&nbsp;when&nbsp;false&nbsp;adds&nbsp;a&nbsp;bunch&nbsp;of&nbsp;commonly&nbsp;found,<br>
+but&nbsp;non-standard&nbsp;types.</tt></dd></dl>
+ <dl><dt><a name="-guess_extension"><strong>guess_extension</strong></a>(type, strict=True)</dt><dd><tt>Guess&nbsp;the&nbsp;extension&nbsp;for&nbsp;a&nbsp;file&nbsp;based&nbsp;on&nbsp;its&nbsp;MIME&nbsp;type.<br>
+&nbsp;<br>
+Return&nbsp;value&nbsp;is&nbsp;a&nbsp;string&nbsp;giving&nbsp;a&nbsp;filename&nbsp;extension,&nbsp;including&nbsp;the<br>
+leading&nbsp;dot&nbsp;('.').&nbsp;&nbsp;The&nbsp;extension&nbsp;is&nbsp;not&nbsp;guaranteed&nbsp;to&nbsp;have&nbsp;been<br>
+associated&nbsp;with&nbsp;any&nbsp;particular&nbsp;data&nbsp;stream,&nbsp;but&nbsp;would&nbsp;be&nbsp;mapped&nbsp;to&nbsp;the<br>
+MIME&nbsp;type&nbsp;`type'&nbsp;by&nbsp;<a href="#-guess_type">guess_type</a>().&nbsp;&nbsp;If&nbsp;no&nbsp;extension&nbsp;can&nbsp;be&nbsp;guessed&nbsp;for<br>
+`type',&nbsp;None&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Optional&nbsp;`strict'&nbsp;argument&nbsp;when&nbsp;false&nbsp;adds&nbsp;a&nbsp;bunch&nbsp;of&nbsp;commonly&nbsp;found,<br>
+but&nbsp;non-standard&nbsp;types.</tt></dd></dl>
+ <dl><dt><a name="-guess_type"><strong>guess_type</strong></a>(url, strict=True)</dt><dd><tt>Guess&nbsp;the&nbsp;type&nbsp;of&nbsp;a&nbsp;file&nbsp;based&nbsp;on&nbsp;its&nbsp;URL.<br>
+&nbsp;<br>
+Return&nbsp;value&nbsp;is&nbsp;a&nbsp;tuple&nbsp;(type,&nbsp;encoding)&nbsp;where&nbsp;type&nbsp;is&nbsp;None&nbsp;if&nbsp;the<br>
+type&nbsp;can't&nbsp;be&nbsp;guessed&nbsp;(no&nbsp;or&nbsp;unknown&nbsp;suffix)&nbsp;or&nbsp;a&nbsp;string&nbsp;of&nbsp;the<br>
+form&nbsp;type/subtype,&nbsp;usable&nbsp;for&nbsp;a&nbsp;MIME&nbsp;Content-type&nbsp;header;&nbsp;and<br>
+encoding&nbsp;is&nbsp;None&nbsp;for&nbsp;no&nbsp;encoding&nbsp;or&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;program&nbsp;used<br>
+to&nbsp;encode&nbsp;(e.g.&nbsp;compress&nbsp;or&nbsp;gzip).&nbsp;&nbsp;The&nbsp;mappings&nbsp;are&nbsp;table<br>
+driven.&nbsp;&nbsp;Encoding&nbsp;suffixes&nbsp;are&nbsp;case&nbsp;sensitive;&nbsp;type&nbsp;suffixes&nbsp;are<br>
+first&nbsp;tried&nbsp;case&nbsp;sensitive,&nbsp;then&nbsp;case&nbsp;insensitive.<br>
+&nbsp;<br>
+The&nbsp;suffixes&nbsp;.tgz,&nbsp;.taz&nbsp;and&nbsp;.tz&nbsp;(case&nbsp;sensitive!)&nbsp;are&nbsp;all&nbsp;mapped<br>
+to&nbsp;".tar.gz".&nbsp;&nbsp;(This&nbsp;is&nbsp;table-driven&nbsp;too,&nbsp;using&nbsp;the&nbsp;dictionary<br>
+suffix_map).<br>
+&nbsp;<br>
+Optional&nbsp;`strict'&nbsp;argument&nbsp;when&nbsp;false&nbsp;adds&nbsp;a&nbsp;bunch&nbsp;of&nbsp;commonly&nbsp;found,&nbsp;but<br>
+non-standard&nbsp;types.</tt></dd></dl>
+ <dl><dt><a name="-init"><strong>init</strong></a>(files=None)</dt></dl>
+ <dl><dt><a name="-read_mime_types"><strong>read_mime_types</strong></a>(file)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['knownfiles', 'inited', 'MimeTypes', 'guess_type', 'guess_all_extensions', 'guess_extension', 'add_type', 'init', 'read_mime_types', 'suffix_map', 'encodings_map', 'types_map', 'common_types']<br>
+<strong>common_types</strong> = {'.jpg': 'image/jpg', '.mid': 'audio/midi', '.midi': 'audio/midi', '.pct': 'image/pict', '.pic': 'image/pict', '.pict': 'image/pict', '.rtf': 'application/rtf', '.xul': 'text/xul'}<br>
+<strong>encodings_map</strong> = {'.Z': 'compress', '.br': 'br', '.bz2': 'bzip2', '.gz': 'gzip', '.xz': 'xz'}<br>
+<strong>inited</strong> = False<br>
+<strong>knownfiles</strong> = ['/etc/mime.types', '/etc/httpd/mime.types', '/etc/httpd/conf/mime.types', '/etc/apache/mime.types', '/etc/apache2/mime.types', '/usr/local/etc/httpd/conf/mime.types', '/usr/local/lib/netscape/mime.types', '/usr/local/etc/httpd/conf/mime.types', '/usr/local/etc/mime.types']<br>
+<strong>suffix_map</strong> = {'.svgz': '.svg.gz', '.taz': '.tar.gz', '.tbz2': '.tar.bz2', '.tgz': '.tar.gz', '.txz': '.tar.xz', '.tz': '.tar.gz'}<br>
+<strong>types_map</strong> = {'.a': 'application/octet-stream', '.ai': 'application/postscript', '.aif': 'audio/x-aiff', '.aifc': 'audio/x-aiff', '.aiff': 'audio/x-aiff', '.au': 'audio/basic', '.avi': 'video/x-msvideo', '.bat': 'text/plain', '.bcpio': 'application/x-bcpio', '.bin': 'application/octet-stream', ...}</td></tr></table>
+</body></html>

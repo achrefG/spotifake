@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module stat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>stat</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3.9/stat.py">/usr/lib/python3.9/stat.py</a><br><a href="https://docs.python.org/3.9/library/stat">Module Reference</a></font></td></tr></table>
+    <p><tt>Constants/functions&nbsp;for&nbsp;interpreting&nbsp;results&nbsp;of&nbsp;os.stat()&nbsp;and&nbsp;os.lstat().<br>
+&nbsp;<br>
+Suggested&nbsp;usage:&nbsp;from&nbsp;stat&nbsp;import&nbsp;*</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-S_IFMT"><strong>S_IFMT</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;portion&nbsp;of&nbsp;the&nbsp;file's&nbsp;mode&nbsp;that&nbsp;describes&nbsp;the&nbsp;file&nbsp;type.</tt></dd></dl>
+ <dl><dt><a name="-S_IMODE"><strong>S_IMODE</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;portion&nbsp;of&nbsp;the&nbsp;file's&nbsp;mode&nbsp;that&nbsp;can&nbsp;be&nbsp;set&nbsp;by&nbsp;os.chmod().</tt></dd></dl>
+ <dl><dt><a name="-S_ISBLK"><strong>S_ISBLK</strong></a>(...)</dt><dd><tt><a href="#-S_ISBLK">S_ISBLK</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;block&nbsp;special&nbsp;device&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-S_ISCHR"><strong>S_ISCHR</strong></a>(...)</dt><dd><tt><a href="#-S_ISCHR">S_ISCHR</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;character&nbsp;special&nbsp;device&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-S_ISDIR"><strong>S_ISDIR</strong></a>(...)</dt><dd><tt><a href="#-S_ISDIR">S_ISDIR</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;directory.</tt></dd></dl>
+ <dl><dt><a name="-S_ISDOOR"><strong>S_ISDOOR</strong></a>(...)</dt><dd><tt><a href="#-S_ISDOOR">S_ISDOOR</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;door.</tt></dd></dl>
+ <dl><dt><a name="-S_ISFIFO"><strong>S_ISFIFO</strong></a>(...)</dt><dd><tt><a href="#-S_ISFIFO">S_ISFIFO</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;FIFO&nbsp;(named&nbsp;pipe).</tt></dd></dl>
+ <dl><dt><a name="-S_ISLNK"><strong>S_ISLNK</strong></a>(...)</dt><dd><tt><a href="#-S_ISLNK">S_ISLNK</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;symbolic&nbsp;link.</tt></dd></dl>
+ <dl><dt><a name="-S_ISPORT"><strong>S_ISPORT</strong></a>(...)</dt><dd><tt><a href="#-S_ISPORT">S_ISPORT</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;an&nbsp;event&nbsp;port.</tt></dd></dl>
+ <dl><dt><a name="-S_ISREG"><strong>S_ISREG</strong></a>(...)</dt><dd><tt><a href="#-S_ISREG">S_ISREG</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;regular&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-S_ISSOCK"><strong>S_ISSOCK</strong></a>(...)</dt><dd><tt><a href="#-S_ISSOCK">S_ISSOCK</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;socket.</tt></dd></dl>
+ <dl><dt><a name="-S_ISWHT"><strong>S_ISWHT</strong></a>(...)</dt><dd><tt><a href="#-S_ISWHT">S_ISWHT</a>(mode)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;mode&nbsp;is&nbsp;from&nbsp;a&nbsp;whiteout.</tt></dd></dl>
+ <dl><dt><a name="-filemode"><strong>filemode</strong></a>(...)</dt><dd><tt>Convert&nbsp;a&nbsp;file's&nbsp;mode&nbsp;to&nbsp;a&nbsp;string&nbsp;of&nbsp;the&nbsp;form&nbsp;'-rwxrwxrwx'</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>FILE_ATTRIBUTE_ARCHIVE</strong> = 32<br>
+<strong>FILE_ATTRIBUTE_COMPRESSED</strong> = 2048<br>
+<strong>FILE_ATTRIBUTE_DEVICE</strong> = 64<br>
+<strong>FILE_ATTRIBUTE_DIRECTORY</strong> = 16<br>
+<strong>FILE_ATTRIBUTE_ENCRYPTED</strong> = 16384<br>
+<strong>FILE_ATTRIBUTE_HIDDEN</strong> = 2<br>
+<strong>FILE_ATTRIBUTE_INTEGRITY_STREAM</strong> = 32768<br>
+<strong>FILE_ATTRIBUTE_NORMAL</strong> = 128<br>
+<strong>FILE_ATTRIBUTE_NOT_CONTENT_INDEXED</strong> = 8192<br>
+<strong>FILE_ATTRIBUTE_NO_SCRUB_DATA</strong> = 131072<br>
+<strong>FILE_ATTRIBUTE_OFFLINE</strong> = 4096<br>
+<strong>FILE_ATTRIBUTE_READONLY</strong> = 1<br>
+<strong>FILE_ATTRIBUTE_REPARSE_POINT</strong> = 1024<br>
+<strong>FILE_ATTRIBUTE_SPARSE_FILE</strong> = 512<br>
+<strong>FILE_ATTRIBUTE_SYSTEM</strong> = 4<br>
+<strong>FILE_ATTRIBUTE_TEMPORARY</strong> = 256<br>
+<strong>FILE_ATTRIBUTE_VIRTUAL</strong> = 65536<br>
+<strong>SF_APPEND</strong> = 262144<br>
+<strong>SF_ARCHIVED</strong> = 65536<br>
+<strong>SF_IMMUTABLE</strong> = 131072<br>
+<strong>SF_NOUNLINK</strong> = 1048576<br>
+<strong>SF_SNAPSHOT</strong> = 2097152<br>
+<strong>ST_ATIME</strong> = 7<br>
+<strong>ST_CTIME</strong> = 9<br>
+<strong>ST_DEV</strong> = 2<br>
+<strong>ST_GID</strong> = 5<br>
+<strong>ST_INO</strong> = 1<br>
+<strong>ST_MODE</strong> = 0<br>
+<strong>ST_MTIME</strong> = 8<br>
+<strong>ST_NLINK</strong> = 3<br>
+<strong>ST_SIZE</strong> = 6<br>
+<strong>ST_UID</strong> = 4<br>
+<strong>S_ENFMT</strong> = 1024<br>
+<strong>S_IEXEC</strong> = 64<br>
+<strong>S_IFBLK</strong> = 24576<br>
+<strong>S_IFCHR</strong> = 8192<br>
+<strong>S_IFDIR</strong> = 16384<br>
+<strong>S_IFDOOR</strong> = 0<br>
+<strong>S_IFIFO</strong> = 4096<br>
+<strong>S_IFLNK</strong> = 40960<br>
+<strong>S_IFPORT</strong> = 0<br>
+<strong>S_IFREG</strong> = 32768<br>
+<strong>S_IFSOCK</strong> = 49152<br>
+<strong>S_IFWHT</strong> = 0<br>
+<strong>S_IREAD</strong> = 256<br>
+<strong>S_IRGRP</strong> = 32<br>
+<strong>S_IROTH</strong> = 4<br>
+<strong>S_IRUSR</strong> = 256<br>
+<strong>S_IRWXG</strong> = 56<br>
+<strong>S_IRWXO</strong> = 7<br>
+<strong>S_IRWXU</strong> = 448<br>
+<strong>S_ISGID</strong> = 1024<br>
+<strong>S_ISUID</strong> = 2048<br>
+<strong>S_ISVTX</strong> = 512<br>
+<strong>S_IWGRP</strong> = 16<br>
+<strong>S_IWOTH</strong> = 2<br>
+<strong>S_IWRITE</strong> = 128<br>
+<strong>S_IWUSR</strong> = 128<br>
+<strong>S_IXGRP</strong> = 8<br>
+<strong>S_IXOTH</strong> = 1<br>
+<strong>S_IXUSR</strong> = 64<br>
+<strong>UF_APPEND</strong> = 4<br>
+<strong>UF_COMPRESSED</strong> = 32<br>
+<strong>UF_HIDDEN</strong> = 32768<br>
+<strong>UF_IMMUTABLE</strong> = 2<br>
+<strong>UF_NODUMP</strong> = 1<br>
+<strong>UF_NOUNLINK</strong> = 16<br>
+<strong>UF_OPAQUE</strong> = 8</td></tr></table>
+</body></html>

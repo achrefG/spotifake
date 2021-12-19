@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module abc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>abc</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3.9/abc.py">/usr/lib/python3.9/abc.py</a><br><a href="https://docs.python.org/3.9/library/abc">Module Reference</a></font></td></tr></table>
+    <p><tt>Abstract&nbsp;Base&nbsp;Classes&nbsp;(ABCs)&nbsp;according&nbsp;to&nbsp;<a href="http://www.python.org/dev/peps/pep-3119/">PEP&nbsp;3119</a>.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#classmethod">builtins.classmethod</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="abc.html#abstractclassmethod">abstractclassmethod</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="abc.html#ABC">ABC</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#property">builtins.property</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="abc.html#abstractproperty">abstractproperty</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#staticmethod">builtins.staticmethod</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="abc.html#abstractstaticmethod">abstractstaticmethod</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#type">builtins.type</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="abc.html#ABCMeta">ABCMeta</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ABC">class <strong>ABC</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Helper&nbsp;class&nbsp;that&nbsp;provides&nbsp;a&nbsp;standard&nbsp;way&nbsp;to&nbsp;create&nbsp;an&nbsp;<a href="#ABC">ABC</a>&nbsp;using<br>
+inheritance.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ABCMeta">class <strong>ABCMeta</strong></a>(<a href="builtins.html#type">builtins.type</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ABCMeta">ABCMeta</a>(name,&nbsp;bases,&nbsp;namespace,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Metaclass&nbsp;for&nbsp;defining&nbsp;Abstract&nbsp;Base&nbsp;Classes&nbsp;(ABCs).<br>
+&nbsp;<br>
+Use&nbsp;this&nbsp;metaclass&nbsp;to&nbsp;create&nbsp;an&nbsp;<a href="#ABC">ABC</a>.&nbsp;&nbsp;An&nbsp;<a href="#ABC">ABC</a>&nbsp;can&nbsp;be&nbsp;subclassed<br>
+directly,&nbsp;and&nbsp;then&nbsp;acts&nbsp;as&nbsp;a&nbsp;mix-in&nbsp;class.&nbsp;&nbsp;You&nbsp;can&nbsp;also&nbsp;register<br>
+unrelated&nbsp;concrete&nbsp;classes&nbsp;(even&nbsp;built-in&nbsp;classes)&nbsp;and&nbsp;unrelated<br>
+ABCs&nbsp;as&nbsp;'virtual&nbsp;subclasses'&nbsp;--&nbsp;these&nbsp;and&nbsp;their&nbsp;descendants&nbsp;will<br>
+be&nbsp;considered&nbsp;subclasses&nbsp;of&nbsp;the&nbsp;registering&nbsp;<a href="#ABC">ABC</a>&nbsp;by&nbsp;the&nbsp;built-in<br>
+issubclass()&nbsp;function,&nbsp;but&nbsp;the&nbsp;registering&nbsp;<a href="#ABC">ABC</a>&nbsp;won't&nbsp;show&nbsp;up&nbsp;in<br>
+their&nbsp;MRO&nbsp;(Method&nbsp;Resolution&nbsp;Order)&nbsp;nor&nbsp;will&nbsp;method<br>
+implementations&nbsp;defined&nbsp;by&nbsp;the&nbsp;registering&nbsp;<a href="#ABC">ABC</a>&nbsp;be&nbsp;callable&nbsp;(not<br>
+even&nbsp;via&nbsp;super()).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="abc.html#ABCMeta">ABCMeta</a></dd>
+<dd><a href="builtins.html#type">builtins.type</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ABCMeta-__instancecheck__"><strong>__instancecheck__</strong></a>(cls, instance)</dt><dd><tt>Override&nbsp;for&nbsp;isinstance(instance,&nbsp;cls).</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__subclasscheck__"><strong>__subclasscheck__</strong></a>(cls, subclass)</dt><dd><tt>Override&nbsp;for&nbsp;issubclass(subclass,&nbsp;cls).</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-register"><strong>register</strong></a>(cls, subclass)</dt><dd><tt>Register&nbsp;a&nbsp;virtual&nbsp;subclass&nbsp;of&nbsp;an&nbsp;<a href="#ABC">ABC</a>.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;subclass,&nbsp;to&nbsp;allow&nbsp;usage&nbsp;as&nbsp;a&nbsp;class&nbsp;decorator.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="ABCMeta-__new__"><strong>__new__</strong></a>(mcls, name, bases, namespace, **kwargs)</dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#type">builtins.type</a>:<br>
+<dl><dt><a name="ABCMeta-__call__"><strong>__call__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Call&nbsp;self&nbsp;as&nbsp;a&nbsp;function.</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__dir__"><strong>__dir__</strong></a>(self, /)</dt><dd><tt>Specialized&nbsp;__dir__&nbsp;implementation&nbsp;for&nbsp;types.</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__sizeof__"><strong>__sizeof__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;memory&nbsp;consumption&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#type">type</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-__subclasses__"><strong>__subclasses__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;immediate&nbsp;subclasses.</tt></dd></dl>
+
+<dl><dt><a name="ABCMeta-mro"><strong>mro</strong></a>(self, /)</dt><dd><tt>Return&nbsp;a&nbsp;<a href="builtins.html#type">type</a>'s&nbsp;method&nbsp;resolution&nbsp;order.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#type">builtins.type</a>:<br>
+<dl><dt><a name="ABCMeta-__prepare__"><strong>__prepare__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt><a href="#ABCMeta-__prepare__">__prepare__</a>()&nbsp;-&gt;&nbsp;dict<br>
+used&nbsp;to&nbsp;create&nbsp;the&nbsp;namespace&nbsp;for&nbsp;the&nbsp;class&nbsp;statement</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#type">builtins.type</a>:<br>
+<dl><dt><strong>__abstractmethods__</strong></dt>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__text_signature__</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="builtins.html#type">builtins.type</a>:<br>
+<dl><dt><strong>__base__</strong> = &lt;class 'type'&gt;<dd><tt><a href="builtins.html#type">type</a>(object_or_name,&nbsp;bases,&nbsp;dict)<br>
+<a href="builtins.html#type">type</a>(<a href="builtins.html#object">object</a>)&nbsp;-&gt;&nbsp;the&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;<a href="builtins.html#type">type</a><br>
+<a href="builtins.html#type">type</a>(name,&nbsp;bases,&nbsp;dict)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#type">type</a></tt></dl>
+
+<dl><dt><strong>__bases__</strong> = (&lt;class 'type'&gt;,)</dl>
+
+<dl><dt><strong>__basicsize__</strong> = 880</dl>
+
+<dl><dt><strong>__dictoffset__</strong> = 264</dl>
+
+<dl><dt><strong>__flags__</strong> = 2148292096</dl>
+
+<dl><dt><strong>__itemsize__</strong> = 40</dl>
+
+<dl><dt><strong>__mro__</strong> = (&lt;class 'abc.ABCMeta'&gt;, &lt;class 'type'&gt;, &lt;class 'object'&gt;)</dl>
+
+<dl><dt><strong>__weakrefoffset__</strong> = 368</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="abstractclassmethod">class <strong>abstractclassmethod</strong></a>(<a href="builtins.html#classmethod">builtins.classmethod</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#abstractclassmethod">abstractclassmethod</a>(callable)<br>
+&nbsp;<br>
+A&nbsp;decorator&nbsp;indicating&nbsp;abstract&nbsp;classmethods.<br>
+&nbsp;<br>
+Deprecated,&nbsp;use&nbsp;'<a href="builtins.html#classmethod">classmethod</a>'&nbsp;with&nbsp;'abstractmethod'&nbsp;instead.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="abc.html#abstractclassmethod">abstractclassmethod</a></dd>
+<dd><a href="builtins.html#classmethod">builtins.classmethod</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="abstractclassmethod-__init__"><strong>__init__</strong></a>(self, callable)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__isabstractmethod__</strong> = True</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#classmethod">builtins.classmethod</a>:<br>
+<dl><dt><a name="abstractclassmethod-__get__"><strong>__get__</strong></a>(self, instance, owner, /)</dt><dd><tt>Return&nbsp;an&nbsp;attribute&nbsp;of&nbsp;instance,&nbsp;which&nbsp;is&nbsp;of&nbsp;<a href="builtins.html#type">type</a>&nbsp;owner.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="builtins.html#classmethod">builtins.classmethod</a>:<br>
+<dl><dt><a name="abstractclassmethod-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#classmethod">builtins.classmethod</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__func__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="abstractproperty">class <strong>abstractproperty</strong></a>(<a href="builtins.html#property">builtins.property</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#abstractproperty">abstractproperty</a>(fget=None,&nbsp;fset=None,&nbsp;fdel=None,&nbsp;doc=None)<br>
+&nbsp;<br>
+A&nbsp;decorator&nbsp;indicating&nbsp;abstract&nbsp;properties.<br>
+&nbsp;<br>
+Deprecated,&nbsp;use&nbsp;'<a href="builtins.html#property">property</a>'&nbsp;with&nbsp;'abstractmethod'&nbsp;instead.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="abc.html#abstractproperty">abstractproperty</a></dd>
+<dd><a href="builtins.html#property">builtins.property</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__isabstractmethod__</strong> = True</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#property">builtins.property</a>:<br>
+<dl><dt><a name="abstractproperty-__delete__"><strong>__delete__</strong></a>(self, instance, /)</dt><dd><tt>Delete&nbsp;an&nbsp;attribute&nbsp;of&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="abstractproperty-__get__"><strong>__get__</strong></a>(self, instance, owner, /)</dt><dd><tt>Return&nbsp;an&nbsp;attribute&nbsp;of&nbsp;instance,&nbsp;which&nbsp;is&nbsp;of&nbsp;<a href="builtins.html#type">type</a>&nbsp;owner.</tt></dd></dl>
+
+<dl><dt><a name="abstractproperty-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="abstractproperty-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="abstractproperty-__set__"><strong>__set__</strong></a>(self, instance, value, /)</dt><dd><tt>Set&nbsp;an&nbsp;attribute&nbsp;of&nbsp;instance&nbsp;to&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="abstractproperty-deleter"><strong>deleter</strong></a>(...)</dt><dd><tt>Descriptor&nbsp;to&nbsp;change&nbsp;the&nbsp;deleter&nbsp;on&nbsp;a&nbsp;<a href="builtins.html#property">property</a>.</tt></dd></dl>
+
+<dl><dt><a name="abstractproperty-getter"><strong>getter</strong></a>(...)</dt><dd><tt>Descriptor&nbsp;to&nbsp;change&nbsp;the&nbsp;getter&nbsp;on&nbsp;a&nbsp;<a href="builtins.html#property">property</a>.</tt></dd></dl>
+
+<dl><dt><a name="abstractproperty-setter"><strong>setter</strong></a>(...)</dt><dd><tt>Descriptor&nbsp;to&nbsp;change&nbsp;the&nbsp;setter&nbsp;on&nbsp;a&nbsp;<a href="builtins.html#property">property</a>.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="builtins.html#property">builtins.property</a>:<br>
+<dl><dt><a name="abstractproperty-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#property">builtins.property</a>:<br>
+<dl><dt><strong>fdel</strong></dt>
+</dl>
+<dl><dt><strong>fget</strong></dt>
+</dl>
+<dl><dt><strong>fset</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="abstractstaticmethod">class <strong>abstractstaticmethod</strong></a>(<a href="builtins.html#staticmethod">builtins.staticmethod</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#abstractstaticmethod">abstractstaticmethod</a>(callable)<br>
+&nbsp;<br>
+A&nbsp;decorator&nbsp;indicating&nbsp;abstract&nbsp;staticmethods.<br>
+&nbsp;<br>
+Deprecated,&nbsp;use&nbsp;'<a href="builtins.html#staticmethod">staticmethod</a>'&nbsp;with&nbsp;'abstractmethod'&nbsp;instead.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="abc.html#abstractstaticmethod">abstractstaticmethod</a></dd>
+<dd><a href="builtins.html#staticmethod">builtins.staticmethod</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="abstractstaticmethod-__init__"><strong>__init__</strong></a>(self, callable)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__isabstractmethod__</strong> = True</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#staticmethod">builtins.staticmethod</a>:<br>
+<dl><dt><a name="abstractstaticmethod-__get__"><strong>__get__</strong></a>(self, instance, owner, /)</dt><dd><tt>Return&nbsp;an&nbsp;attribute&nbsp;of&nbsp;instance,&nbsp;which&nbsp;is&nbsp;of&nbsp;<a href="builtins.html#type">type</a>&nbsp;owner.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="builtins.html#staticmethod">builtins.staticmethod</a>:<br>
+<dl><dt><a name="abstractstaticmethod-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(<a href="builtins.html#type">type</a>)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#staticmethod">builtins.staticmethod</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__func__</strong></dt>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-abstractmethod"><strong>abstractmethod</strong></a>(funcobj)</dt><dd><tt>A&nbsp;decorator&nbsp;indicating&nbsp;abstract&nbsp;methods.<br>
+&nbsp;<br>
+Requires&nbsp;that&nbsp;the&nbsp;metaclass&nbsp;is&nbsp;<a href="#ABCMeta">ABCMeta</a>&nbsp;or&nbsp;derived&nbsp;from&nbsp;it.&nbsp;&nbsp;A<br>
+class&nbsp;that&nbsp;has&nbsp;a&nbsp;metaclass&nbsp;derived&nbsp;from&nbsp;<a href="#ABCMeta">ABCMeta</a>&nbsp;cannot&nbsp;be<br>
+instantiated&nbsp;unless&nbsp;all&nbsp;of&nbsp;its&nbsp;abstract&nbsp;methods&nbsp;are&nbsp;overridden.<br>
+The&nbsp;abstract&nbsp;methods&nbsp;can&nbsp;be&nbsp;called&nbsp;using&nbsp;any&nbsp;of&nbsp;the&nbsp;normal<br>
+'super'&nbsp;call&nbsp;mechanisms.&nbsp;&nbsp;<a href="#-abstractmethod">abstractmethod</a>()&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;declare<br>
+abstract&nbsp;methods&nbsp;for&nbsp;properties&nbsp;and&nbsp;descriptors.<br>
+&nbsp;<br>
+Usage:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;C(metaclass=<a href="#ABCMeta">ABCMeta</a>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@abstractmethod<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;my_abstract_method(self,&nbsp;...):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</tt></dd></dl>
+ <dl><dt><a name="-get_cache_token"><strong>get_cache_token</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;current&nbsp;<a href="#ABC">ABC</a>&nbsp;cache&nbsp;token.<br>
+&nbsp;<br>
+The&nbsp;token&nbsp;is&nbsp;an&nbsp;opaque&nbsp;<a href="builtins.html#object">object</a>&nbsp;(supporting&nbsp;equality&nbsp;testing)&nbsp;identifying&nbsp;the<br>
+current&nbsp;version&nbsp;of&nbsp;the&nbsp;<a href="#ABC">ABC</a>&nbsp;cache&nbsp;for&nbsp;virtual&nbsp;subclasses.&nbsp;The&nbsp;token&nbsp;changes<br>
+with&nbsp;every&nbsp;call&nbsp;to&nbsp;register()&nbsp;on&nbsp;any&nbsp;<a href="#ABC">ABC</a>.</tt></dd></dl>
+</td></tr></table>
+</body></html>

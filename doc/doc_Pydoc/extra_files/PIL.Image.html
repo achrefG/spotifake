@@ -1,0 +1,1372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module PIL.Image</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="PIL.html"><font color="#ffffff">PIL</font></a>.Image</strong></big></big> (version 8.1.2)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3/dist-packages/PIL/Image.py">/usr/lib/python3/dist-packages/PIL/Image.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;The&nbsp;Python&nbsp;Imaging&nbsp;Library.<br>
+#&nbsp;$Id$<br>
+#<br>
+#&nbsp;the&nbsp;<a href="#Image">Image</a>&nbsp;class&nbsp;wrapper<br>
+#<br>
+#&nbsp;partial&nbsp;release&nbsp;history:<br>
+#&nbsp;1995-09-09&nbsp;fl&nbsp;&nbsp;&nbsp;Created<br>
+#&nbsp;1996-03-11&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;0.0&nbsp;(proof&nbsp;of&nbsp;concept)<br>
+#&nbsp;1996-04-30&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;0.1b1<br>
+#&nbsp;1999-07-28&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.0&nbsp;final<br>
+#&nbsp;2000-06-07&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1<br>
+#&nbsp;2000-10-20&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1.1<br>
+#&nbsp;2001-05-07&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1.2<br>
+#&nbsp;2002-03-15&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1.3<br>
+#&nbsp;2003-05-10&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1.4<br>
+#&nbsp;2005-03-28&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1.5<br>
+#&nbsp;2006-12-02&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1.6<br>
+#&nbsp;2009-11-15&nbsp;fl&nbsp;&nbsp;&nbsp;PIL&nbsp;release&nbsp;1.1.7<br>
+#<br>
+#&nbsp;Copyright&nbsp;(c)&nbsp;1997-2009&nbsp;by&nbsp;Secret&nbsp;Labs&nbsp;AB.&nbsp;&nbsp;All&nbsp;rights&nbsp;reserved.<br>
+#&nbsp;Copyright&nbsp;(c)&nbsp;1995-2009&nbsp;by&nbsp;Fredrik&nbsp;Lundh.<br>
+#<br>
+#&nbsp;See&nbsp;the&nbsp;README&nbsp;file&nbsp;for&nbsp;information&nbsp;on&nbsp;usage&nbsp;and&nbsp;redistribution.<br>
+#</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="PIL.ImageMode.html">PIL.ImageMode</a><br>
+<a href="PIL.TiffTags.html">PIL.TiffTags</a><br>
+<a href="atexit.html">atexit</a><br>
+<a href="builtins.html">builtins</a><br>
+</td><td width="25%" valign=top><a href="PIL._imaging.html">PIL._imaging</a><br>
+<a href="io.html">io</a><br>
+<a href="logging.html">logging</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numbers.html">numbers</a><br>
+<a href="os.html">os</a><br>
+<a href="struct.html">struct</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="tempfile.html">tempfile</a><br>
+<a href="warnings.html">warnings</a><br>
+<a href="xml.html">xml</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#Exception">builtins.Exception</a>(<a href="builtins.html#BaseException">builtins.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="PIL.Image.html#DecompressionBombError">DecompressionBombError</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#RuntimeWarning">builtins.RuntimeWarning</a>(<a href="builtins.html#Warning">builtins.Warning</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="PIL.Image.html#DecompressionBombWarning">DecompressionBombWarning</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="PIL.Image.html#Image">Image</a>
+</font></dt><dt><font face="helvetica, arial"><a href="PIL.Image.html#ImagePointHandler">ImagePointHandler</a>
+</font></dt><dt><font face="helvetica, arial"><a href="PIL.Image.html#ImageTransformHandler">ImageTransformHandler</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="collections.abc.html#MutableMapping">collections.abc.MutableMapping</a>(<a href="collections.abc.html#Mapping">collections.abc.Mapping</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="PIL.Image.html#Exif">Exif</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DecompressionBombError">class <strong>DecompressionBombError</strong></a>(<a href="builtins.html#Exception">builtins.Exception</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="PIL.Image.html#DecompressionBombError">DecompressionBombError</a></dd>
+<dd><a href="builtins.html#Exception">builtins.Exception</a></dd>
+<dd><a href="builtins.html#BaseException">builtins.BaseException</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="builtins.html#Exception">builtins.Exception</a>:<br>
+<dl><dt><a name="DecompressionBombError-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="builtins.html#Exception">builtins.Exception</a>:<br>
+<dl><dt><a name="DecompressionBombError-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><a name="DecompressionBombError-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombError-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombError-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombError-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombError-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="DecompressionBombError-__str__"><strong>__str__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombError-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><tt><a href="builtins.html#Exception">Exception</a>.<a href="#DecompressionBombError-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
+set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><strong>__cause__</strong></dt>
+<dd><tt>exception&nbsp;cause</tt></dd>
+</dl>
+<dl><dt><strong>__context__</strong></dt>
+<dd><tt>exception&nbsp;context</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__suppress_context__</strong></dt>
+</dl>
+<dl><dt><strong>__traceback__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DecompressionBombWarning">class <strong>DecompressionBombWarning</strong></a>(<a href="builtins.html#RuntimeWarning">builtins.RuntimeWarning</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="PIL.Image.html#DecompressionBombWarning">DecompressionBombWarning</a></dd>
+<dd><a href="builtins.html#RuntimeWarning">builtins.RuntimeWarning</a></dd>
+<dd><a href="builtins.html#Warning">builtins.Warning</a></dd>
+<dd><a href="builtins.html#Exception">builtins.Exception</a></dd>
+<dd><a href="builtins.html#BaseException">builtins.BaseException</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="builtins.html#RuntimeWarning">builtins.RuntimeWarning</a>:<br>
+<dl><dt><a name="DecompressionBombWarning-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="builtins.html#RuntimeWarning">builtins.RuntimeWarning</a>:<br>
+<dl><dt><a name="DecompressionBombWarning-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><a name="DecompressionBombWarning-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombWarning-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombWarning-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombWarning-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombWarning-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombWarning-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="DecompressionBombWarning-__str__"><strong>__str__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
+
+<dl><dt><a name="DecompressionBombWarning-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><tt><a href="builtins.html#Exception">Exception</a>.<a href="#DecompressionBombWarning-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
+set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><strong>__cause__</strong></dt>
+<dd><tt>exception&nbsp;cause</tt></dd>
+</dl>
+<dl><dt><strong>__context__</strong></dt>
+<dd><tt>exception&nbsp;context</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__suppress_context__</strong></dt>
+</dl>
+<dl><dt><strong>__traceback__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Exif">class <strong>Exif</strong></a>(<a href="collections.abc.html#MutableMapping">collections.abc.MutableMapping</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="PIL.Image.html#Exif">Exif</a></dd>
+<dd><a href="collections.abc.html#MutableMapping">collections.abc.MutableMapping</a></dd>
+<dd><a href="collections.abc.html#Mapping">collections.abc.Mapping</a></dd>
+<dd><a href="collections.abc.html#Collection">collections.abc.Collection</a></dd>
+<dd><a href="collections.abc.html#Sized">collections.abc.Sized</a></dd>
+<dd><a href="collections.abc.html#Iterable">collections.abc.Iterable</a></dd>
+<dd><a href="collections.abc.html#Container">collections.abc.Container</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Exif-__contains__"><strong>__contains__</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="Exif-__delitem__"><strong>__delitem__</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="Exif-__getitem__"><strong>__getitem__</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="Exif-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Exif-__iter__"><strong>__iter__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Exif-__len__"><strong>__len__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Exif-__setitem__"><strong>__setitem__</strong></a>(self, tag, value)</dt></dl>
+
+<dl><dt><a name="Exif-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
+
+<dl><dt><a name="Exif-get_ifd"><strong>get_ifd</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="Exif-load"><strong>load</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="Exif-tobytes"><strong>tobytes</strong></a>(self, offset=8)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<dl><dt><strong>endian</strong> = '&lt;'</dl>
+
+<hr>
+Methods inherited from <a href="collections.abc.html#MutableMapping">collections.abc.MutableMapping</a>:<br>
+<dl><dt><a name="Exif-clear"><strong>clear</strong></a>(self)</dt><dd><tt>D.<a href="#Exif-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
+
+<dl><dt><a name="Exif-pop"><strong>pop</strong></a>(self, key, default=&lt;object object at 0x7f0c6cfc2160&gt;)</dt><dd><tt>D.<a href="#Exif-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value.<br>
+If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nbsp;given,&nbsp;otherwise&nbsp;KeyError&nbsp;is&nbsp;raised.</tt></dd></dl>
+
+<dl><dt><a name="Exif-popitem"><strong>popitem</strong></a>(self)</dt><dd><tt>D.<a href="#Exif-popitem">popitem</a>()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;remove&nbsp;and&nbsp;return&nbsp;some&nbsp;(key,&nbsp;value)&nbsp;pair<br>
+as&nbsp;a&nbsp;2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty.</tt></dd></dl>
+
+<dl><dt><a name="Exif-setdefault"><strong>setdefault</strong></a>(self, key, default=None)</dt><dd><tt>D.<a href="#Exif-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#Exif-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="Exif-update"><strong>update</strong></a>(self, other=(), /, **kwds)</dt><dd><tt>D.<a href="#Exif-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;mapping/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#Exif-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#Exif-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k,&nbsp;v&nbsp;in&nbsp;F.<a href="#Exif-items">items</a>():&nbsp;D[k]&nbsp;=&nbsp;v</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="collections.abc.html#Mapping">collections.abc.Mapping</a>:<br>
+<dl><dt><a name="Exif-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Exif-get"><strong>get</strong></a>(self, key, default=None)</dt><dd><tt>D.<a href="#Exif-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Exif-items"><strong>items</strong></a>(self)</dt><dd><tt>D.<a href="#Exif-items">items</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;<a href="builtins.html#object">object</a>&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="Exif-keys"><strong>keys</strong></a>(self)</dt><dd><tt>D.<a href="#Exif-keys">keys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;<a href="builtins.html#object">object</a>&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="Exif-values"><strong>values</strong></a>(self)</dt><dd><tt>D.<a href="#Exif-values">values</a>()&nbsp;-&gt;&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="collections.abc.html#Mapping">collections.abc.Mapping</a>:<br>
+<dl><dt><strong>__hash__</strong> = None</dl>
+
+<dl><dt><strong>__reversed__</strong> = None</dl>
+
+<hr>
+Class methods inherited from <a href="collections.abc.html#Collection">collections.abc.Collection</a>:<br>
+<dl><dt><a name="Exif-__subclasshook__"><strong>__subclasshook__</strong></a>(C)<font color="#909090"><font face="helvetica, arial"> from <a href="abc.html#ABCMeta">abc.ABCMeta</a></font></font></dt><dd><tt>Abstract&nbsp;classes&nbsp;can&nbsp;override&nbsp;this&nbsp;to&nbsp;customize&nbsp;issubclass().<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;invoked&nbsp;early&nbsp;on&nbsp;by&nbsp;abc.ABCMeta.__subclasscheck__().<br>
+It&nbsp;should&nbsp;return&nbsp;True,&nbsp;False&nbsp;or&nbsp;NotImplemented.&nbsp;&nbsp;If&nbsp;it&nbsp;returns<br>
+NotImplemented,&nbsp;the&nbsp;normal&nbsp;algorithm&nbsp;is&nbsp;used.&nbsp;&nbsp;Otherwise,&nbsp;it<br>
+overrides&nbsp;the&nbsp;normal&nbsp;algorithm&nbsp;(and&nbsp;the&nbsp;outcome&nbsp;is&nbsp;cached).</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="collections.abc.html#Iterable">collections.abc.Iterable</a>:<br>
+<dl><dt><a name="Exif-__class_getitem__"><strong>__class_getitem__</strong></a> = GenericAlias(...)<font color="#909090"><font face="helvetica, arial"> from <a href="abc.html#ABCMeta">abc.ABCMeta</a></font></font></dt><dd><tt>Represent&nbsp;a&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a>&nbsp;generic&nbsp;type<br>
+&nbsp;<br>
+E.g.&nbsp;for&nbsp;t&nbsp;=&nbsp;list[int],&nbsp;t.__origin__&nbsp;is&nbsp;list&nbsp;and&nbsp;t.__args__&nbsp;is&nbsp;(int,).</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Image">class <strong>Image</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;represents&nbsp;an&nbsp;image&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;To&nbsp;create<br>
+:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;objects,&nbsp;use&nbsp;the&nbsp;appropriate&nbsp;factory<br>
+functions.&nbsp;&nbsp;There's&nbsp;hardly&nbsp;ever&nbsp;any&nbsp;reason&nbsp;to&nbsp;call&nbsp;the&nbsp;<a href="#Image">Image</a>&nbsp;constructor<br>
+directly.<br>
+&nbsp;<br>
+*&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.open`<br>
+*&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.new`<br>
+*&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.frombytes`<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Image-__copy__"><strong>__copy__</strong></a> = <a href="#Image-copy">copy</a>(self)</dt></dl>
+
+<dl><dt><a name="Image-__enter__"><strong>__enter__</strong></a>(self)</dt><dd><tt>#&nbsp;Context&nbsp;manager&nbsp;support</tt></dd></dl>
+
+<dl><dt><a name="Image-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Image-__exit__"><strong>__exit__</strong></a>(self, *args)</dt></dl>
+
+<dl><dt><a name="Image-__getstate__"><strong>__getstate__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Image-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Image-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="Image-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt><a name="Image-alpha_composite"><strong>alpha_composite</strong></a>(self, im, dest=(0, 0), source=(0, 0))</dt><dd><tt>'In-place'&nbsp;analog&nbsp;of&nbsp;<a href="#Image">Image</a>.alpha_composite.&nbsp;Composites&nbsp;an&nbsp;image<br>
+onto&nbsp;this&nbsp;image.<br>
+&nbsp;<br>
+:param&nbsp;im:&nbsp;image&nbsp;to&nbsp;composite&nbsp;over&nbsp;this&nbsp;one<br>
+:param&nbsp;dest:&nbsp;Optional&nbsp;2&nbsp;tuple&nbsp;(left,&nbsp;top)&nbsp;specifying&nbsp;the&nbsp;upper<br>
+&nbsp;&nbsp;left&nbsp;corner&nbsp;in&nbsp;this&nbsp;(destination)&nbsp;image.<br>
+:param&nbsp;source:&nbsp;Optional&nbsp;2&nbsp;(left,&nbsp;top)&nbsp;tuple&nbsp;for&nbsp;the&nbsp;upper&nbsp;left<br>
+&nbsp;&nbsp;corner&nbsp;in&nbsp;the&nbsp;overlay&nbsp;source&nbsp;image,&nbsp;or&nbsp;4&nbsp;tuple&nbsp;(left,&nbsp;top,&nbsp;right,<br>
+&nbsp;&nbsp;bottom)&nbsp;for&nbsp;the&nbsp;bounds&nbsp;of&nbsp;the&nbsp;source&nbsp;rectangle<br>
+&nbsp;<br>
+Performance&nbsp;Note:&nbsp;Not&nbsp;currently&nbsp;implemented&nbsp;in-place&nbsp;in&nbsp;the&nbsp;core&nbsp;layer.</tt></dd></dl>
+
+<dl><dt><a name="Image-close"><strong>close</strong></a>(self)</dt><dd><tt>Closes&nbsp;the&nbsp;file&nbsp;pointer,&nbsp;if&nbsp;possible.<br>
+&nbsp;<br>
+This&nbsp;operation&nbsp;will&nbsp;destroy&nbsp;the&nbsp;image&nbsp;core&nbsp;and&nbsp;release&nbsp;its&nbsp;memory.<br>
+The&nbsp;image&nbsp;data&nbsp;will&nbsp;be&nbsp;unusable&nbsp;afterward.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;is&nbsp;only&nbsp;required&nbsp;to&nbsp;close&nbsp;images&nbsp;that&nbsp;have&nbsp;not<br>
+had&nbsp;their&nbsp;file&nbsp;read&nbsp;and&nbsp;closed&nbsp;by&nbsp;the<br>
+:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.load`&nbsp;method.&nbsp;See<br>
+:ref:`file-handling`&nbsp;for&nbsp;more&nbsp;information.</tt></dd></dl>
+
+<dl><dt><a name="Image-convert"><strong>convert</strong></a>(self, mode=None, matrix=None, dither=None, palette=0, colors=256)</dt><dd><tt>Returns&nbsp;a&nbsp;converted&nbsp;copy&nbsp;of&nbsp;this&nbsp;image.&nbsp;For&nbsp;the&nbsp;"P"&nbsp;mode,&nbsp;this<br>
+method&nbsp;translates&nbsp;pixels&nbsp;through&nbsp;the&nbsp;palette.&nbsp;&nbsp;If&nbsp;mode&nbsp;is<br>
+omitted,&nbsp;a&nbsp;mode&nbsp;is&nbsp;chosen&nbsp;so&nbsp;that&nbsp;all&nbsp;information&nbsp;in&nbsp;the&nbsp;image<br>
+and&nbsp;the&nbsp;palette&nbsp;can&nbsp;be&nbsp;represented&nbsp;without&nbsp;a&nbsp;palette.<br>
+&nbsp;<br>
+The&nbsp;current&nbsp;version&nbsp;supports&nbsp;all&nbsp;possible&nbsp;conversions&nbsp;between<br>
+"L",&nbsp;"RGB"&nbsp;and&nbsp;"CMYK."&nbsp;The&nbsp;``matrix``&nbsp;argument&nbsp;only&nbsp;supports&nbsp;"L"<br>
+and&nbsp;"RGB".<br>
+&nbsp;<br>
+When&nbsp;translating&nbsp;a&nbsp;color&nbsp;image&nbsp;to&nbsp;greyscale&nbsp;(mode&nbsp;"L"),<br>
+the&nbsp;library&nbsp;uses&nbsp;the&nbsp;ITU-R&nbsp;601-2&nbsp;luma&nbsp;transform::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;=&nbsp;R&nbsp;*&nbsp;299/1000&nbsp;+&nbsp;G&nbsp;*&nbsp;587/1000&nbsp;+&nbsp;B&nbsp;*&nbsp;114/1000<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;method&nbsp;of&nbsp;converting&nbsp;a&nbsp;greyscale&nbsp;("L")&nbsp;or&nbsp;"RGB"<br>
+image&nbsp;into&nbsp;a&nbsp;bilevel&nbsp;(mode&nbsp;"1")&nbsp;image&nbsp;uses&nbsp;Floyd-Steinberg<br>
+dither&nbsp;to&nbsp;approximate&nbsp;the&nbsp;original&nbsp;image&nbsp;luminosity&nbsp;levels.&nbsp;If<br>
+dither&nbsp;is&nbsp;:data:`NONE`,&nbsp;all&nbsp;values&nbsp;larger&nbsp;than&nbsp;128&nbsp;are&nbsp;set&nbsp;to&nbsp;255&nbsp;(white),<br>
+all&nbsp;other&nbsp;values&nbsp;to&nbsp;0&nbsp;(black).&nbsp;To&nbsp;use&nbsp;other&nbsp;thresholds,&nbsp;use&nbsp;the<br>
+:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.point`&nbsp;method.<br>
+&nbsp;<br>
+When&nbsp;converting&nbsp;from&nbsp;"RGBA"&nbsp;to&nbsp;"P"&nbsp;without&nbsp;a&nbsp;``matrix``&nbsp;argument,<br>
+this&nbsp;passes&nbsp;the&nbsp;operation&nbsp;to&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.quantize`,<br>
+and&nbsp;``dither``&nbsp;and&nbsp;``palette``&nbsp;are&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;The&nbsp;requested&nbsp;mode.&nbsp;See:&nbsp;:ref:`concept-modes`.<br>
+:param&nbsp;matrix:&nbsp;An&nbsp;optional&nbsp;conversion&nbsp;matrix.&nbsp;&nbsp;If&nbsp;given,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;4-&nbsp;or&nbsp;12-tuple&nbsp;containing&nbsp;floating&nbsp;point&nbsp;values.<br>
+:param&nbsp;dither:&nbsp;Dithering&nbsp;method,&nbsp;used&nbsp;when&nbsp;converting&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;mode&nbsp;"RGB"&nbsp;to&nbsp;"P"&nbsp;or&nbsp;from&nbsp;"RGB"&nbsp;or&nbsp;"L"&nbsp;to&nbsp;"1".<br>
+&nbsp;&nbsp;&nbsp;Available&nbsp;methods&nbsp;are&nbsp;:data:`NONE`&nbsp;or&nbsp;:data:`FLOYDSTEINBERG`&nbsp;(default).<br>
+&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;this&nbsp;is&nbsp;not&nbsp;used&nbsp;when&nbsp;``matrix``&nbsp;is&nbsp;supplied.<br>
+:param&nbsp;palette:&nbsp;Palette&nbsp;to&nbsp;use&nbsp;when&nbsp;converting&nbsp;from&nbsp;mode&nbsp;"RGB"<br>
+&nbsp;&nbsp;&nbsp;to&nbsp;"P".&nbsp;&nbsp;Available&nbsp;palettes&nbsp;are&nbsp;:data:`WEB`&nbsp;or&nbsp;:data:`ADAPTIVE`.<br>
+:param&nbsp;colors:&nbsp;Number&nbsp;of&nbsp;colors&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;:data:`ADAPTIVE`&nbsp;palette.<br>
+&nbsp;&nbsp;&nbsp;Defaults&nbsp;to&nbsp;256.<br>
+:rtype:&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-copy"><strong>copy</strong></a>(self)</dt><dd><tt>Copies&nbsp;this&nbsp;image.&nbsp;Use&nbsp;this&nbsp;method&nbsp;if&nbsp;you&nbsp;wish&nbsp;to&nbsp;paste&nbsp;things<br>
+into&nbsp;an&nbsp;image,&nbsp;but&nbsp;still&nbsp;retain&nbsp;the&nbsp;original.<br>
+&nbsp;<br>
+:rtype:&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-crop"><strong>crop</strong></a>(self, box=None)</dt><dd><tt>Returns&nbsp;a&nbsp;rectangular&nbsp;region&nbsp;from&nbsp;this&nbsp;image.&nbsp;The&nbsp;box&nbsp;is&nbsp;a<br>
+4-tuple&nbsp;defining&nbsp;the&nbsp;left,&nbsp;upper,&nbsp;right,&nbsp;and&nbsp;lower&nbsp;pixel<br>
+coordinate.&nbsp;See&nbsp;:ref:`coordinate-system`.<br>
+&nbsp;<br>
+Note:&nbsp;Prior&nbsp;to&nbsp;Pillow&nbsp;3.4.0,&nbsp;this&nbsp;was&nbsp;a&nbsp;lazy&nbsp;operation.<br>
+&nbsp;<br>
+:param&nbsp;box:&nbsp;The&nbsp;crop&nbsp;rectangle,&nbsp;as&nbsp;a&nbsp;(left,&nbsp;upper,&nbsp;right,&nbsp;lower)-tuple.<br>
+:rtype:&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-draft"><strong>draft</strong></a>(self, mode, size)</dt><dd><tt>Configures&nbsp;the&nbsp;image&nbsp;file&nbsp;loader&nbsp;so&nbsp;it&nbsp;returns&nbsp;a&nbsp;version&nbsp;of&nbsp;the<br>
+image&nbsp;that&nbsp;as&nbsp;closely&nbsp;as&nbsp;possible&nbsp;matches&nbsp;the&nbsp;given&nbsp;mode&nbsp;and<br>
+size.&nbsp;For&nbsp;example,&nbsp;you&nbsp;can&nbsp;use&nbsp;this&nbsp;method&nbsp;to&nbsp;convert&nbsp;a&nbsp;color<br>
+JPEG&nbsp;to&nbsp;greyscale&nbsp;while&nbsp;loading&nbsp;it.<br>
+&nbsp;<br>
+If&nbsp;any&nbsp;changes&nbsp;are&nbsp;made,&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;with&nbsp;the&nbsp;chosen&nbsp;``mode``&nbsp;and<br>
+``box``&nbsp;with&nbsp;coordinates&nbsp;of&nbsp;the&nbsp;original&nbsp;image&nbsp;within&nbsp;the&nbsp;altered&nbsp;one.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;method&nbsp;modifies&nbsp;the&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a><br>
+in&nbsp;place.&nbsp;If&nbsp;the&nbsp;image&nbsp;has&nbsp;already&nbsp;been&nbsp;loaded,&nbsp;this&nbsp;method&nbsp;has&nbsp;no<br>
+effect.<br>
+&nbsp;<br>
+Note:&nbsp;This&nbsp;method&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;most&nbsp;images.&nbsp;It&nbsp;is<br>
+currently&nbsp;implemented&nbsp;only&nbsp;for&nbsp;JPEG&nbsp;and&nbsp;MPO&nbsp;images.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;The&nbsp;requested&nbsp;mode.<br>
+:param&nbsp;size:&nbsp;The&nbsp;requested&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="Image-effect_spread"><strong>effect_spread</strong></a>(self, distance)</dt><dd><tt>Randomly&nbsp;spread&nbsp;pixels&nbsp;in&nbsp;an&nbsp;image.<br>
+&nbsp;<br>
+:param&nbsp;distance:&nbsp;Distance&nbsp;to&nbsp;spread&nbsp;pixels.</tt></dd></dl>
+
+<dl><dt><a name="Image-entropy"><strong>entropy</strong></a>(self, mask=None, extrema=None)</dt><dd><tt>Calculates&nbsp;and&nbsp;returns&nbsp;the&nbsp;entropy&nbsp;for&nbsp;the&nbsp;image.<br>
+&nbsp;<br>
+A&nbsp;bilevel&nbsp;image&nbsp;(mode&nbsp;"1")&nbsp;is&nbsp;treated&nbsp;as&nbsp;a&nbsp;greyscale&nbsp;("L")<br>
+image&nbsp;by&nbsp;this&nbsp;method.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;mask&nbsp;is&nbsp;provided,&nbsp;the&nbsp;method&nbsp;employs&nbsp;the&nbsp;histogram&nbsp;for<br>
+those&nbsp;parts&nbsp;of&nbsp;the&nbsp;image&nbsp;where&nbsp;the&nbsp;mask&nbsp;image&nbsp;is&nbsp;non-zero.<br>
+The&nbsp;mask&nbsp;image&nbsp;must&nbsp;have&nbsp;the&nbsp;same&nbsp;size&nbsp;as&nbsp;the&nbsp;image,&nbsp;and&nbsp;be<br>
+either&nbsp;a&nbsp;bi-level&nbsp;image&nbsp;(mode&nbsp;"1")&nbsp;or&nbsp;a&nbsp;greyscale&nbsp;image&nbsp;("L").<br>
+&nbsp;<br>
+:param&nbsp;mask:&nbsp;An&nbsp;optional&nbsp;mask.<br>
+:param&nbsp;extrema:&nbsp;An&nbsp;optional&nbsp;tuple&nbsp;of&nbsp;manually-specified&nbsp;extrema.<br>
+:returns:&nbsp;A&nbsp;float&nbsp;value&nbsp;representing&nbsp;the&nbsp;image&nbsp;entropy</tt></dd></dl>
+
+<dl><dt><a name="Image-filter"><strong>filter</strong></a>(self, filter)</dt><dd><tt>Filters&nbsp;this&nbsp;image&nbsp;using&nbsp;the&nbsp;given&nbsp;filter.&nbsp;&nbsp;For&nbsp;a&nbsp;list&nbsp;of<br>
+available&nbsp;filters,&nbsp;see&nbsp;the&nbsp;:py:mod:`~PIL.ImageFilter`&nbsp;module.<br>
+&nbsp;<br>
+:param&nbsp;filter:&nbsp;Filter&nbsp;kernel.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-frombytes"><strong>frombytes</strong></a>(self, data, decoder_name='raw', *args)</dt><dd><tt>Loads&nbsp;this&nbsp;image&nbsp;with&nbsp;pixel&nbsp;data&nbsp;from&nbsp;a&nbsp;bytes&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;similar&nbsp;to&nbsp;the&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.frombytes`&nbsp;function,<br>
+but&nbsp;loads&nbsp;data&nbsp;into&nbsp;this&nbsp;image&nbsp;instead&nbsp;of&nbsp;creating&nbsp;a&nbsp;new&nbsp;image&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-getbands"><strong>getbands</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;name&nbsp;of&nbsp;each&nbsp;band&nbsp;in&nbsp;this&nbsp;image.<br>
+For&nbsp;example,&nbsp;``getbands``&nbsp;on&nbsp;an&nbsp;RGB&nbsp;image&nbsp;returns&nbsp;("R",&nbsp;"G",&nbsp;"B").<br>
+&nbsp;<br>
+:returns:&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;band&nbsp;names.<br>
+:rtype:&nbsp;tuple</tt></dd></dl>
+
+<dl><dt><a name="Image-getbbox"><strong>getbbox</strong></a>(self)</dt><dd><tt>Calculates&nbsp;the&nbsp;bounding&nbsp;box&nbsp;of&nbsp;the&nbsp;non-zero&nbsp;regions&nbsp;in&nbsp;the<br>
+image.<br>
+&nbsp;<br>
+:returns:&nbsp;The&nbsp;bounding&nbsp;box&nbsp;is&nbsp;returned&nbsp;as&nbsp;a&nbsp;4-tuple&nbsp;defining&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;left,&nbsp;upper,&nbsp;right,&nbsp;and&nbsp;lower&nbsp;pixel&nbsp;coordinate.&nbsp;See<br>
+&nbsp;&nbsp;&nbsp;:ref:`coordinate-system`.&nbsp;If&nbsp;the&nbsp;image&nbsp;is&nbsp;completely&nbsp;empty,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;method&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Image-getchannel"><strong>getchannel</strong></a>(self, channel)</dt><dd><tt>Returns&nbsp;an&nbsp;image&nbsp;containing&nbsp;a&nbsp;single&nbsp;channel&nbsp;of&nbsp;the&nbsp;source&nbsp;image.<br>
+&nbsp;<br>
+:param&nbsp;channel:&nbsp;What&nbsp;channel&nbsp;to&nbsp;return.&nbsp;Could&nbsp;be&nbsp;index<br>
+&nbsp;&nbsp;(0&nbsp;for&nbsp;"R"&nbsp;channel&nbsp;of&nbsp;"RGB")&nbsp;or&nbsp;channel&nbsp;name<br>
+&nbsp;&nbsp;("A"&nbsp;for&nbsp;alpha&nbsp;channel&nbsp;of&nbsp;"RGBA").<br>
+:returns:&nbsp;An&nbsp;image&nbsp;in&nbsp;"L"&nbsp;mode.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;4.3.0</tt></dd></dl>
+
+<dl><dt><a name="Image-getcolors"><strong>getcolors</strong></a>(self, maxcolors=256)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;colors&nbsp;used&nbsp;in&nbsp;this&nbsp;image.<br>
+&nbsp;<br>
+:param&nbsp;maxcolors:&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;colors.&nbsp;&nbsp;If&nbsp;this&nbsp;number&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;exceeded,&nbsp;this&nbsp;method&nbsp;returns&nbsp;None.&nbsp;&nbsp;The&nbsp;default&nbsp;limit&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;256&nbsp;colors.<br>
+:returns:&nbsp;An&nbsp;unsorted&nbsp;list&nbsp;of&nbsp;(count,&nbsp;pixel)&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Image-getdata"><strong>getdata</strong></a>(self, band=None)</dt><dd><tt>Returns&nbsp;the&nbsp;contents&nbsp;of&nbsp;this&nbsp;image&nbsp;as&nbsp;a&nbsp;sequence&nbsp;<a href="builtins.html#object">object</a><br>
+containing&nbsp;pixel&nbsp;values.&nbsp;&nbsp;The&nbsp;sequence&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;flattened,&nbsp;so<br>
+that&nbsp;values&nbsp;for&nbsp;line&nbsp;one&nbsp;follow&nbsp;directly&nbsp;after&nbsp;the&nbsp;values&nbsp;of<br>
+line&nbsp;zero,&nbsp;and&nbsp;so&nbsp;on.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;the&nbsp;sequence&nbsp;<a href="builtins.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;this&nbsp;method&nbsp;is&nbsp;an<br>
+internal&nbsp;PIL&nbsp;data&nbsp;type,&nbsp;which&nbsp;only&nbsp;supports&nbsp;certain&nbsp;sequence<br>
+operations.&nbsp;&nbsp;To&nbsp;convert&nbsp;it&nbsp;to&nbsp;an&nbsp;ordinary&nbsp;sequence&nbsp;(e.g.&nbsp;for<br>
+printing),&nbsp;use&nbsp;``list(im.<a href="#Image-getdata">getdata</a>())``.<br>
+&nbsp;<br>
+:param&nbsp;band:&nbsp;What&nbsp;band&nbsp;to&nbsp;return.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;all&nbsp;bands.&nbsp;&nbsp;To&nbsp;return&nbsp;a&nbsp;single&nbsp;band,&nbsp;pass&nbsp;in&nbsp;the&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;value&nbsp;(e.g.&nbsp;0&nbsp;to&nbsp;get&nbsp;the&nbsp;"R"&nbsp;band&nbsp;from&nbsp;an&nbsp;"RGB"&nbsp;image).<br>
+:returns:&nbsp;A&nbsp;sequence-like&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-getexif"><strong>getexif</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Image-getextrema"><strong>getextrema</strong></a>(self)</dt><dd><tt>Gets&nbsp;the&nbsp;the&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;pixel&nbsp;values&nbsp;for&nbsp;each&nbsp;band&nbsp;in<br>
+the&nbsp;image.<br>
+&nbsp;<br>
+:returns:&nbsp;For&nbsp;a&nbsp;single-band&nbsp;image,&nbsp;a&nbsp;2-tuple&nbsp;containing&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;pixel&nbsp;value.&nbsp;&nbsp;For&nbsp;a&nbsp;multi-band&nbsp;image,<br>
+&nbsp;&nbsp;&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;one&nbsp;2-tuple&nbsp;for&nbsp;each&nbsp;band.</tt></dd></dl>
+
+<dl><dt><a name="Image-getim"><strong>getim</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;capsule&nbsp;that&nbsp;points&nbsp;to&nbsp;the&nbsp;internal&nbsp;image&nbsp;memory.<br>
+&nbsp;<br>
+:returns:&nbsp;A&nbsp;capsule&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-getpalette"><strong>getpalette</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;image&nbsp;palette&nbsp;as&nbsp;a&nbsp;list.<br>
+&nbsp;<br>
+:returns:&nbsp;A&nbsp;list&nbsp;of&nbsp;color&nbsp;values&nbsp;[r,&nbsp;g,&nbsp;b,&nbsp;...],&nbsp;or&nbsp;None&nbsp;if&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;image&nbsp;has&nbsp;no&nbsp;palette.</tt></dd></dl>
+
+<dl><dt><a name="Image-getpixel"><strong>getpixel</strong></a>(self, xy)</dt><dd><tt>Returns&nbsp;the&nbsp;pixel&nbsp;value&nbsp;at&nbsp;a&nbsp;given&nbsp;position.<br>
+&nbsp;<br>
+:param&nbsp;xy:&nbsp;The&nbsp;coordinate,&nbsp;given&nbsp;as&nbsp;(x,&nbsp;y).&nbsp;See<br>
+&nbsp;&nbsp;&nbsp;:ref:`coordinate-system`.<br>
+:returns:&nbsp;The&nbsp;pixel&nbsp;value.&nbsp;&nbsp;If&nbsp;the&nbsp;image&nbsp;is&nbsp;a&nbsp;multi-layer&nbsp;image,<br>
+&nbsp;&nbsp;&nbsp;this&nbsp;method&nbsp;returns&nbsp;a&nbsp;tuple.</tt></dd></dl>
+
+<dl><dt><a name="Image-getprojection"><strong>getprojection</strong></a>(self)</dt><dd><tt>Get&nbsp;projection&nbsp;to&nbsp;x&nbsp;and&nbsp;y&nbsp;axes<br>
+&nbsp;<br>
+:returns:&nbsp;Two&nbsp;sequences,&nbsp;indicating&nbsp;where&nbsp;there&nbsp;are&nbsp;non-zero<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pixels&nbsp;along&nbsp;the&nbsp;X-axis&nbsp;and&nbsp;the&nbsp;Y-axis,&nbsp;respectively.</tt></dd></dl>
+
+<dl><dt><a name="Image-histogram"><strong>histogram</strong></a>(self, mask=None, extrema=None)</dt><dd><tt>Returns&nbsp;a&nbsp;histogram&nbsp;for&nbsp;the&nbsp;image.&nbsp;The&nbsp;histogram&nbsp;is&nbsp;returned&nbsp;as<br>
+a&nbsp;list&nbsp;of&nbsp;pixel&nbsp;counts,&nbsp;one&nbsp;for&nbsp;each&nbsp;pixel&nbsp;value&nbsp;in&nbsp;the&nbsp;source<br>
+image.&nbsp;If&nbsp;the&nbsp;image&nbsp;has&nbsp;more&nbsp;than&nbsp;one&nbsp;band,&nbsp;the&nbsp;histograms&nbsp;for<br>
+all&nbsp;bands&nbsp;are&nbsp;concatenated&nbsp;(for&nbsp;example,&nbsp;the&nbsp;histogram&nbsp;for&nbsp;an<br>
+"RGB"&nbsp;image&nbsp;contains&nbsp;768&nbsp;values).<br>
+&nbsp;<br>
+A&nbsp;bilevel&nbsp;image&nbsp;(mode&nbsp;"1")&nbsp;is&nbsp;treated&nbsp;as&nbsp;a&nbsp;greyscale&nbsp;("L")&nbsp;image<br>
+by&nbsp;this&nbsp;method.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;mask&nbsp;is&nbsp;provided,&nbsp;the&nbsp;method&nbsp;returns&nbsp;a&nbsp;histogram&nbsp;for&nbsp;those<br>
+parts&nbsp;of&nbsp;the&nbsp;image&nbsp;where&nbsp;the&nbsp;mask&nbsp;image&nbsp;is&nbsp;non-zero.&nbsp;The&nbsp;mask<br>
+image&nbsp;must&nbsp;have&nbsp;the&nbsp;same&nbsp;size&nbsp;as&nbsp;the&nbsp;image,&nbsp;and&nbsp;be&nbsp;either&nbsp;a<br>
+bi-level&nbsp;image&nbsp;(mode&nbsp;"1")&nbsp;or&nbsp;a&nbsp;greyscale&nbsp;image&nbsp;("L").<br>
+&nbsp;<br>
+:param&nbsp;mask:&nbsp;An&nbsp;optional&nbsp;mask.<br>
+:param&nbsp;extrema:&nbsp;An&nbsp;optional&nbsp;tuple&nbsp;of&nbsp;manually-specified&nbsp;extrema.<br>
+:returns:&nbsp;A&nbsp;list&nbsp;containing&nbsp;pixel&nbsp;counts.</tt></dd></dl>
+
+<dl><dt><a name="Image-load"><strong>load</strong></a>(self)</dt><dd><tt>Allocates&nbsp;storage&nbsp;for&nbsp;the&nbsp;image&nbsp;and&nbsp;loads&nbsp;the&nbsp;pixel&nbsp;data.&nbsp;&nbsp;In<br>
+normal&nbsp;cases,&nbsp;you&nbsp;don't&nbsp;need&nbsp;to&nbsp;call&nbsp;this&nbsp;method,&nbsp;since&nbsp;the<br>
+<a href="#Image">Image</a>&nbsp;class&nbsp;automatically&nbsp;loads&nbsp;an&nbsp;opened&nbsp;image&nbsp;when&nbsp;it&nbsp;is<br>
+accessed&nbsp;for&nbsp;the&nbsp;first&nbsp;time.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;file&nbsp;associated&nbsp;with&nbsp;the&nbsp;image&nbsp;was&nbsp;opened&nbsp;by&nbsp;Pillow,&nbsp;then&nbsp;this<br>
+method&nbsp;will&nbsp;close&nbsp;it.&nbsp;The&nbsp;exception&nbsp;to&nbsp;this&nbsp;is&nbsp;if&nbsp;the&nbsp;image&nbsp;has<br>
+multiple&nbsp;frames,&nbsp;in&nbsp;which&nbsp;case&nbsp;the&nbsp;file&nbsp;will&nbsp;be&nbsp;left&nbsp;open&nbsp;for&nbsp;seek<br>
+operations.&nbsp;See&nbsp;:ref:`file-handling`&nbsp;for&nbsp;more&nbsp;information.<br>
+&nbsp;<br>
+:returns:&nbsp;An&nbsp;image&nbsp;access&nbsp;<a href="builtins.html#object">object</a>.<br>
+:rtype:&nbsp;:ref:`PixelAccess`&nbsp;or&nbsp;:py:class:`PIL.PyAccess`</tt></dd></dl>
+
+<dl><dt><a name="Image-paste"><strong>paste</strong></a>(self, im, box=None, mask=None)</dt><dd><tt>Pastes&nbsp;another&nbsp;image&nbsp;into&nbsp;this&nbsp;image.&nbsp;The&nbsp;box&nbsp;argument&nbsp;is&nbsp;either<br>
+a&nbsp;2-tuple&nbsp;giving&nbsp;the&nbsp;upper&nbsp;left&nbsp;corner,&nbsp;a&nbsp;4-tuple&nbsp;defining&nbsp;the<br>
+left,&nbsp;upper,&nbsp;right,&nbsp;and&nbsp;lower&nbsp;pixel&nbsp;coordinate,&nbsp;or&nbsp;None&nbsp;(same&nbsp;as<br>
+(0,&nbsp;0)).&nbsp;See&nbsp;:ref:`coordinate-system`.&nbsp;If&nbsp;a&nbsp;4-tuple&nbsp;is&nbsp;given,&nbsp;the&nbsp;size<br>
+of&nbsp;the&nbsp;pasted&nbsp;image&nbsp;must&nbsp;match&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;region.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;modes&nbsp;don't&nbsp;match,&nbsp;the&nbsp;pasted&nbsp;image&nbsp;is&nbsp;converted&nbsp;to&nbsp;the&nbsp;mode&nbsp;of<br>
+this&nbsp;image&nbsp;(see&nbsp;the&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.convert`&nbsp;method&nbsp;for<br>
+details).<br>
+&nbsp;<br>
+Instead&nbsp;of&nbsp;an&nbsp;image,&nbsp;the&nbsp;source&nbsp;can&nbsp;be&nbsp;a&nbsp;integer&nbsp;or&nbsp;tuple<br>
+containing&nbsp;pixel&nbsp;values.&nbsp;&nbsp;The&nbsp;method&nbsp;then&nbsp;fills&nbsp;the&nbsp;region<br>
+with&nbsp;the&nbsp;given&nbsp;color.&nbsp;&nbsp;When&nbsp;creating&nbsp;RGB&nbsp;images,&nbsp;you&nbsp;can<br>
+also&nbsp;use&nbsp;color&nbsp;strings&nbsp;as&nbsp;supported&nbsp;by&nbsp;the&nbsp;ImageColor&nbsp;module.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;mask&nbsp;is&nbsp;given,&nbsp;this&nbsp;method&nbsp;updates&nbsp;only&nbsp;the&nbsp;regions<br>
+indicated&nbsp;by&nbsp;the&nbsp;mask.&nbsp;&nbsp;You&nbsp;can&nbsp;use&nbsp;either&nbsp;"1",&nbsp;"L"&nbsp;or&nbsp;"RGBA"<br>
+images&nbsp;(in&nbsp;the&nbsp;latter&nbsp;case,&nbsp;the&nbsp;alpha&nbsp;band&nbsp;is&nbsp;used&nbsp;as&nbsp;mask).<br>
+Where&nbsp;the&nbsp;mask&nbsp;is&nbsp;255,&nbsp;the&nbsp;given&nbsp;image&nbsp;is&nbsp;copied&nbsp;as&nbsp;is.&nbsp;&nbsp;Where<br>
+the&nbsp;mask&nbsp;is&nbsp;0,&nbsp;the&nbsp;current&nbsp;value&nbsp;is&nbsp;preserved.&nbsp;&nbsp;Intermediate<br>
+values&nbsp;will&nbsp;mix&nbsp;the&nbsp;two&nbsp;images&nbsp;together,&nbsp;including&nbsp;their&nbsp;alpha<br>
+channels&nbsp;if&nbsp;they&nbsp;have&nbsp;them.<br>
+&nbsp;<br>
+See&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.alpha_composite`&nbsp;if&nbsp;you&nbsp;want&nbsp;to<br>
+combine&nbsp;images&nbsp;with&nbsp;respect&nbsp;to&nbsp;their&nbsp;alpha&nbsp;channels.<br>
+&nbsp;<br>
+:param&nbsp;im:&nbsp;Source&nbsp;image&nbsp;or&nbsp;pixel&nbsp;value&nbsp;(integer&nbsp;or&nbsp;tuple).<br>
+:param&nbsp;box:&nbsp;An&nbsp;optional&nbsp;4-tuple&nbsp;giving&nbsp;the&nbsp;region&nbsp;to&nbsp;paste&nbsp;into.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;a&nbsp;2-tuple&nbsp;is&nbsp;used&nbsp;instead,&nbsp;it's&nbsp;treated&nbsp;as&nbsp;the&nbsp;upper&nbsp;left<br>
+&nbsp;&nbsp;&nbsp;corner.&nbsp;&nbsp;If&nbsp;omitted&nbsp;or&nbsp;None,&nbsp;the&nbsp;source&nbsp;is&nbsp;pasted&nbsp;into&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;upper&nbsp;left&nbsp;corner.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;image&nbsp;is&nbsp;given&nbsp;as&nbsp;the&nbsp;second&nbsp;argument&nbsp;and&nbsp;there&nbsp;is&nbsp;no<br>
+&nbsp;&nbsp;&nbsp;third,&nbsp;the&nbsp;box&nbsp;defaults&nbsp;to&nbsp;(0,&nbsp;0),&nbsp;and&nbsp;the&nbsp;second&nbsp;argument<br>
+&nbsp;&nbsp;&nbsp;is&nbsp;interpreted&nbsp;as&nbsp;a&nbsp;mask&nbsp;image.<br>
+:param&nbsp;mask:&nbsp;An&nbsp;optional&nbsp;mask&nbsp;image.</tt></dd></dl>
+
+<dl><dt><a name="Image-point"><strong>point</strong></a>(self, lut, mode=None)</dt><dd><tt>Maps&nbsp;this&nbsp;image&nbsp;through&nbsp;a&nbsp;lookup&nbsp;table&nbsp;or&nbsp;function.<br>
+&nbsp;<br>
+:param&nbsp;lut:&nbsp;A&nbsp;lookup&nbsp;table,&nbsp;containing&nbsp;256&nbsp;(or&nbsp;65536&nbsp;if<br>
+&nbsp;&nbsp;&nbsp;self.<strong>mode</strong>=="I"&nbsp;and&nbsp;mode&nbsp;==&nbsp;"L")&nbsp;values&nbsp;per&nbsp;band&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;image.&nbsp;&nbsp;A&nbsp;function&nbsp;can&nbsp;be&nbsp;used&nbsp;instead,&nbsp;it&nbsp;should&nbsp;take&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;single&nbsp;argument.&nbsp;The&nbsp;function&nbsp;is&nbsp;called&nbsp;once&nbsp;for&nbsp;each<br>
+&nbsp;&nbsp;&nbsp;possible&nbsp;pixel&nbsp;value,&nbsp;and&nbsp;the&nbsp;resulting&nbsp;table&nbsp;is&nbsp;applied&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;all&nbsp;bands&nbsp;of&nbsp;the&nbsp;image.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;It&nbsp;may&nbsp;also&nbsp;be&nbsp;an&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#ImagePointHandler">ImagePointHandler</a>`<br>
+&nbsp;&nbsp;&nbsp;<a href="builtins.html#object">object</a>::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;Example(<a href="#Image">Image</a>.<a href="#ImagePointHandler">ImagePointHandler</a>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;<a href="#Image-point">point</a>(self,&nbsp;data):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Return&nbsp;result<br>
+:param&nbsp;mode:&nbsp;Output&nbsp;mode&nbsp;(default&nbsp;is&nbsp;same&nbsp;as&nbsp;input).&nbsp;&nbsp;In&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;current&nbsp;version,&nbsp;this&nbsp;can&nbsp;only&nbsp;be&nbsp;used&nbsp;if&nbsp;the&nbsp;source&nbsp;image<br>
+&nbsp;&nbsp;&nbsp;has&nbsp;mode&nbsp;"L"&nbsp;or&nbsp;"P",&nbsp;and&nbsp;the&nbsp;output&nbsp;has&nbsp;mode&nbsp;"1"&nbsp;or&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;source&nbsp;image&nbsp;mode&nbsp;is&nbsp;"I"&nbsp;and&nbsp;the&nbsp;output&nbsp;mode&nbsp;is&nbsp;"L".<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-putalpha"><strong>putalpha</strong></a>(self, alpha)</dt><dd><tt>Adds&nbsp;or&nbsp;replaces&nbsp;the&nbsp;alpha&nbsp;layer&nbsp;in&nbsp;this&nbsp;image.&nbsp;&nbsp;If&nbsp;the&nbsp;image<br>
+does&nbsp;not&nbsp;have&nbsp;an&nbsp;alpha&nbsp;layer,&nbsp;it's&nbsp;converted&nbsp;to&nbsp;"LA"&nbsp;or&nbsp;"RGBA".<br>
+The&nbsp;new&nbsp;layer&nbsp;must&nbsp;be&nbsp;either&nbsp;"L"&nbsp;or&nbsp;"1".<br>
+&nbsp;<br>
+:param&nbsp;alpha:&nbsp;The&nbsp;new&nbsp;alpha&nbsp;layer.&nbsp;&nbsp;This&nbsp;can&nbsp;either&nbsp;be&nbsp;an&nbsp;"L"&nbsp;or&nbsp;"1"<br>
+&nbsp;&nbsp;&nbsp;image&nbsp;having&nbsp;the&nbsp;same&nbsp;size&nbsp;as&nbsp;this&nbsp;image,&nbsp;or&nbsp;an&nbsp;integer&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;other&nbsp;color&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Image-putdata"><strong>putdata</strong></a>(self, data, scale=1.0, offset=0.0)</dt><dd><tt>Copies&nbsp;pixel&nbsp;data&nbsp;to&nbsp;this&nbsp;image.&nbsp;&nbsp;This&nbsp;method&nbsp;copies&nbsp;data&nbsp;from&nbsp;a<br>
+sequence&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;the&nbsp;image,&nbsp;starting&nbsp;at&nbsp;the&nbsp;upper&nbsp;left<br>
+corner&nbsp;(0,&nbsp;0),&nbsp;and&nbsp;continuing&nbsp;until&nbsp;either&nbsp;the&nbsp;image&nbsp;or&nbsp;the<br>
+sequence&nbsp;ends.&nbsp;&nbsp;The&nbsp;scale&nbsp;and&nbsp;offset&nbsp;values&nbsp;are&nbsp;used&nbsp;to&nbsp;adjust<br>
+the&nbsp;sequence&nbsp;values:&nbsp;**pixel&nbsp;=&nbsp;value*scale&nbsp;+&nbsp;offset**.<br>
+&nbsp;<br>
+:param&nbsp;data:&nbsp;A&nbsp;sequence&nbsp;<a href="builtins.html#object">object</a>.<br>
+:param&nbsp;scale:&nbsp;An&nbsp;optional&nbsp;scale&nbsp;value.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;1.0.<br>
+:param&nbsp;offset:&nbsp;An&nbsp;optional&nbsp;offset&nbsp;value.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;0.0.</tt></dd></dl>
+
+<dl><dt><a name="Image-putpalette"><strong>putpalette</strong></a>(self, data, rawmode='RGB')</dt><dd><tt>Attaches&nbsp;a&nbsp;palette&nbsp;to&nbsp;this&nbsp;image.&nbsp;&nbsp;The&nbsp;image&nbsp;must&nbsp;be&nbsp;a&nbsp;"P",&nbsp;"PA",&nbsp;"L"<br>
+or&nbsp;"LA"&nbsp;image.<br>
+&nbsp;<br>
+The&nbsp;palette&nbsp;sequence&nbsp;must&nbsp;contain&nbsp;either&nbsp;768&nbsp;integer&nbsp;values,&nbsp;or&nbsp;1024<br>
+integer&nbsp;values&nbsp;if&nbsp;alpha&nbsp;is&nbsp;included.&nbsp;Each&nbsp;group&nbsp;of&nbsp;values&nbsp;represents<br>
+the&nbsp;red,&nbsp;green,&nbsp;blue&nbsp;(and&nbsp;alpha&nbsp;if&nbsp;included)&nbsp;values&nbsp;for&nbsp;the<br>
+corresponding&nbsp;pixel&nbsp;index.&nbsp;Instead&nbsp;of&nbsp;an&nbsp;integer&nbsp;sequence,&nbsp;you&nbsp;can&nbsp;use<br>
+an&nbsp;8-bit&nbsp;string.<br>
+&nbsp;<br>
+:param&nbsp;data:&nbsp;A&nbsp;palette&nbsp;sequence&nbsp;(either&nbsp;a&nbsp;list&nbsp;or&nbsp;a&nbsp;string).<br>
+:param&nbsp;rawmode:&nbsp;The&nbsp;raw&nbsp;mode&nbsp;of&nbsp;the&nbsp;palette.</tt></dd></dl>
+
+<dl><dt><a name="Image-putpixel"><strong>putpixel</strong></a>(self, xy, value)</dt><dd><tt>Modifies&nbsp;the&nbsp;pixel&nbsp;at&nbsp;the&nbsp;given&nbsp;position.&nbsp;The&nbsp;color&nbsp;is&nbsp;given&nbsp;as<br>
+a&nbsp;single&nbsp;numerical&nbsp;value&nbsp;for&nbsp;single-band&nbsp;images,&nbsp;and&nbsp;a&nbsp;tuple&nbsp;for<br>
+multi-band&nbsp;images.&nbsp;In&nbsp;addition&nbsp;to&nbsp;this,&nbsp;RGB&nbsp;and&nbsp;RGBA&nbsp;tuples&nbsp;are<br>
+accepted&nbsp;for&nbsp;P&nbsp;images.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;method&nbsp;is&nbsp;relatively&nbsp;slow.&nbsp;&nbsp;For&nbsp;more&nbsp;extensive&nbsp;changes,<br>
+use&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.paste`&nbsp;or&nbsp;the&nbsp;:py:mod:`~PIL.ImageDraw`<br>
+module&nbsp;instead.<br>
+&nbsp;<br>
+See:<br>
+&nbsp;<br>
+*&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.paste`<br>
+*&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.putdata`<br>
+*&nbsp;:py:mod:`~PIL.ImageDraw`<br>
+&nbsp;<br>
+:param&nbsp;xy:&nbsp;The&nbsp;pixel&nbsp;coordinate,&nbsp;given&nbsp;as&nbsp;(x,&nbsp;y).&nbsp;See<br>
+&nbsp;&nbsp;&nbsp;:ref:`coordinate-system`.<br>
+:param&nbsp;value:&nbsp;The&nbsp;pixel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Image-quantize"><strong>quantize</strong></a>(self, colors=256, method=None, kmeans=0, palette=None, dither=1)</dt><dd><tt>Convert&nbsp;the&nbsp;image&nbsp;to&nbsp;'P'&nbsp;mode&nbsp;with&nbsp;the&nbsp;specified&nbsp;number<br>
+of&nbsp;colors.<br>
+&nbsp;<br>
+:param&nbsp;colors:&nbsp;The&nbsp;desired&nbsp;number&nbsp;of&nbsp;colors,&nbsp;&lt;=&nbsp;256<br>
+:param&nbsp;method:&nbsp;:data:`MEDIANCUT`&nbsp;(median&nbsp;cut),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:data:`MAXCOVERAGE`&nbsp;(maximum&nbsp;coverage),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:data:`FASTOCTREE`&nbsp;(fast&nbsp;octree),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:data:`LIBIMAGEQUANT`&nbsp;(libimagequant;&nbsp;check&nbsp;support&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:py:func:`PIL.features.check_feature`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;``feature="libimagequant"``).<br>
+:param&nbsp;kmeans:&nbsp;Integer<br>
+:param&nbsp;palette:&nbsp;Quantize&nbsp;to&nbsp;the&nbsp;palette&nbsp;of&nbsp;given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:py:class:`PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`.<br>
+:param&nbsp;dither:&nbsp;Dithering&nbsp;method,&nbsp;used&nbsp;when&nbsp;converting&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;mode&nbsp;"RGB"&nbsp;to&nbsp;"P"&nbsp;or&nbsp;from&nbsp;"RGB"&nbsp;or&nbsp;"L"&nbsp;to&nbsp;"1".<br>
+&nbsp;&nbsp;&nbsp;Available&nbsp;methods&nbsp;are&nbsp;:data:`NONE`&nbsp;or&nbsp;:data:`FLOYDSTEINBERG`&nbsp;(default).<br>
+&nbsp;&nbsp;&nbsp;Default:&nbsp;1&nbsp;(legacy&nbsp;setting)<br>
+:returns:&nbsp;A&nbsp;new&nbsp;image</tt></dd></dl>
+
+<dl><dt><a name="Image-reduce"><strong>reduce</strong></a>(self, factor, box=None)</dt><dd><tt>Returns&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;image&nbsp;reduced&nbsp;``factor``&nbsp;times.<br>
+If&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;image&nbsp;is&nbsp;not&nbsp;dividable&nbsp;by&nbsp;``factor``,<br>
+the&nbsp;resulting&nbsp;size&nbsp;will&nbsp;be&nbsp;rounded&nbsp;up.<br>
+&nbsp;<br>
+:param&nbsp;factor:&nbsp;A&nbsp;greater&nbsp;than&nbsp;0&nbsp;integer&nbsp;or&nbsp;tuple&nbsp;of&nbsp;two&nbsp;integers<br>
+&nbsp;&nbsp;&nbsp;for&nbsp;width&nbsp;and&nbsp;height&nbsp;separately.<br>
+:param&nbsp;box:&nbsp;An&nbsp;optional&nbsp;4-tuple&nbsp;of&nbsp;ints&nbsp;providing<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;source&nbsp;image&nbsp;region&nbsp;to&nbsp;be&nbsp;reduced.<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;values&nbsp;must&nbsp;be&nbsp;within&nbsp;``(0,&nbsp;0,&nbsp;width,&nbsp;height)``&nbsp;rectangle.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;omitted&nbsp;or&nbsp;``None``,&nbsp;the&nbsp;entire&nbsp;source&nbsp;is&nbsp;used.</tt></dd></dl>
+
+<dl><dt><a name="Image-remap_palette"><strong>remap_palette</strong></a>(self, dest_map, source_palette=None)</dt><dd><tt>Rewrites&nbsp;the&nbsp;image&nbsp;to&nbsp;reorder&nbsp;the&nbsp;palette.<br>
+&nbsp;<br>
+:param&nbsp;dest_map:&nbsp;A&nbsp;list&nbsp;of&nbsp;indexes&nbsp;into&nbsp;the&nbsp;original&nbsp;palette.<br>
+&nbsp;&nbsp;&nbsp;e.g.&nbsp;``[1,0]``&nbsp;would&nbsp;swap&nbsp;a&nbsp;two&nbsp;item&nbsp;palette,&nbsp;and&nbsp;``list(range(256))``<br>
+&nbsp;&nbsp;&nbsp;is&nbsp;the&nbsp;identity&nbsp;transform.<br>
+:param&nbsp;source_palette:&nbsp;Bytes&nbsp;or&nbsp;None.<br>
+:returns:&nbsp;&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-resize"><strong>resize</strong></a>(self, size, resample=3, box=None, reducing_gap=None)</dt><dd><tt>Returns&nbsp;a&nbsp;resized&nbsp;copy&nbsp;of&nbsp;this&nbsp;image.<br>
+&nbsp;<br>
+:param&nbsp;size:&nbsp;The&nbsp;requested&nbsp;size&nbsp;in&nbsp;pixels,&nbsp;as&nbsp;a&nbsp;2-tuple:<br>
+&nbsp;&nbsp;&nbsp;(width,&nbsp;height).<br>
+:param&nbsp;resample:&nbsp;An&nbsp;optional&nbsp;resampling&nbsp;filter.&nbsp;&nbsp;This&nbsp;can&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;one&nbsp;of&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`,&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BOX`,<br>
+&nbsp;&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BILINEAR`,&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.HAMMING`,<br>
+&nbsp;&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BICUBIC`&nbsp;or&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.LANCZOS`.<br>
+&nbsp;&nbsp;&nbsp;Default&nbsp;filter&nbsp;is&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BICUBIC`.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;image&nbsp;has&nbsp;mode&nbsp;"1"&nbsp;or&nbsp;"P",&nbsp;it&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;always&nbsp;set&nbsp;to&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`.<br>
+&nbsp;&nbsp;&nbsp;See:&nbsp;:ref:`concept-filters`.<br>
+:param&nbsp;box:&nbsp;An&nbsp;optional&nbsp;4-tuple&nbsp;of&nbsp;floats&nbsp;providing<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;source&nbsp;image&nbsp;region&nbsp;to&nbsp;be&nbsp;scaled.<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;values&nbsp;must&nbsp;be&nbsp;within&nbsp;(0,&nbsp;0,&nbsp;width,&nbsp;height)&nbsp;rectangle.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;omitted&nbsp;or&nbsp;None,&nbsp;the&nbsp;entire&nbsp;source&nbsp;is&nbsp;used.<br>
+:param&nbsp;reducing_gap:&nbsp;Apply&nbsp;optimization&nbsp;by&nbsp;resizing&nbsp;the&nbsp;image<br>
+&nbsp;&nbsp;&nbsp;in&nbsp;two&nbsp;steps.&nbsp;First,&nbsp;reducing&nbsp;the&nbsp;image&nbsp;by&nbsp;integer&nbsp;times<br>
+&nbsp;&nbsp;&nbsp;using&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.reduce`.<br>
+&nbsp;&nbsp;&nbsp;Second,&nbsp;resizing&nbsp;using&nbsp;regular&nbsp;resampling.&nbsp;The&nbsp;last&nbsp;step<br>
+&nbsp;&nbsp;&nbsp;changes&nbsp;size&nbsp;no&nbsp;less&nbsp;than&nbsp;by&nbsp;``reducing_gap``&nbsp;times.<br>
+&nbsp;&nbsp;&nbsp;``reducing_gap``&nbsp;may&nbsp;be&nbsp;None&nbsp;(no&nbsp;first&nbsp;step&nbsp;is&nbsp;performed)<br>
+&nbsp;&nbsp;&nbsp;or&nbsp;should&nbsp;be&nbsp;greater&nbsp;than&nbsp;1.0.&nbsp;The&nbsp;bigger&nbsp;``reducing_gap``,<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;closer&nbsp;the&nbsp;result&nbsp;to&nbsp;the&nbsp;fair&nbsp;resampling.<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;smaller&nbsp;``reducing_gap``,&nbsp;the&nbsp;faster&nbsp;resizing.<br>
+&nbsp;&nbsp;&nbsp;With&nbsp;``reducing_gap``&nbsp;greater&nbsp;or&nbsp;equal&nbsp;to&nbsp;3.0,&nbsp;the&nbsp;result&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;indistinguishable&nbsp;from&nbsp;fair&nbsp;resampling&nbsp;in&nbsp;most&nbsp;cases.<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;None&nbsp;(no&nbsp;optimization).<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-rotate"><strong>rotate</strong></a>(self, angle, resample=0, expand=0, center=None, translate=None, fillcolor=None)</dt><dd><tt>Returns&nbsp;a&nbsp;rotated&nbsp;copy&nbsp;of&nbsp;this&nbsp;image.&nbsp;&nbsp;This&nbsp;method&nbsp;returns&nbsp;a<br>
+copy&nbsp;of&nbsp;this&nbsp;image,&nbsp;rotated&nbsp;the&nbsp;given&nbsp;number&nbsp;of&nbsp;degrees&nbsp;counter<br>
+clockwise&nbsp;around&nbsp;its&nbsp;centre.<br>
+&nbsp;<br>
+:param&nbsp;angle:&nbsp;In&nbsp;degrees&nbsp;counter&nbsp;clockwise.<br>
+:param&nbsp;resample:&nbsp;An&nbsp;optional&nbsp;resampling&nbsp;filter.&nbsp;&nbsp;This&nbsp;can&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;one&nbsp;of&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`&nbsp;(use&nbsp;nearest&nbsp;neighbour),<br>
+&nbsp;&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BILINEAR`&nbsp;(linear&nbsp;interpolation&nbsp;in&nbsp;a&nbsp;2x2<br>
+&nbsp;&nbsp;&nbsp;environment),&nbsp;or&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BICUBIC`<br>
+&nbsp;&nbsp;&nbsp;(cubic&nbsp;spline&nbsp;interpolation&nbsp;in&nbsp;a&nbsp;4x4&nbsp;environment).<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;omitted,&nbsp;or&nbsp;if&nbsp;the&nbsp;image&nbsp;has&nbsp;mode&nbsp;"1"&nbsp;or&nbsp;"P",&nbsp;it&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;set&nbsp;to&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`.&nbsp;See&nbsp;:ref:`concept-filters`.<br>
+:param&nbsp;expand:&nbsp;Optional&nbsp;expansion&nbsp;flag.&nbsp;&nbsp;If&nbsp;true,&nbsp;expands&nbsp;the&nbsp;output<br>
+&nbsp;&nbsp;&nbsp;image&nbsp;to&nbsp;make&nbsp;it&nbsp;large&nbsp;enough&nbsp;to&nbsp;hold&nbsp;the&nbsp;entire&nbsp;rotated&nbsp;image.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;false&nbsp;or&nbsp;omitted,&nbsp;make&nbsp;the&nbsp;output&nbsp;image&nbsp;the&nbsp;same&nbsp;size&nbsp;as&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;input&nbsp;image.&nbsp;&nbsp;Note&nbsp;that&nbsp;the&nbsp;expand&nbsp;flag&nbsp;assumes&nbsp;rotation&nbsp;around<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;center&nbsp;and&nbsp;no&nbsp;translation.<br>
+:param&nbsp;center:&nbsp;Optional&nbsp;center&nbsp;of&nbsp;rotation&nbsp;(a&nbsp;2-tuple).&nbsp;&nbsp;Origin&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;upper&nbsp;left&nbsp;corner.&nbsp;&nbsp;Default&nbsp;is&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;image.<br>
+:param&nbsp;translate:&nbsp;An&nbsp;optional&nbsp;post-rotate&nbsp;translation&nbsp;(a&nbsp;2-tuple).<br>
+:param&nbsp;fillcolor:&nbsp;An&nbsp;optional&nbsp;color&nbsp;for&nbsp;area&nbsp;outside&nbsp;the&nbsp;rotated&nbsp;image.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-save"><strong>save</strong></a>(self, fp, format=None, **params)</dt><dd><tt>Saves&nbsp;this&nbsp;image&nbsp;under&nbsp;the&nbsp;given&nbsp;filename.&nbsp;&nbsp;If&nbsp;no&nbsp;format&nbsp;is<br>
+specified,&nbsp;the&nbsp;format&nbsp;to&nbsp;use&nbsp;is&nbsp;determined&nbsp;from&nbsp;the&nbsp;filename<br>
+extension,&nbsp;if&nbsp;possible.<br>
+&nbsp;<br>
+Keyword&nbsp;options&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;provide&nbsp;additional&nbsp;instructions<br>
+to&nbsp;the&nbsp;writer.&nbsp;If&nbsp;a&nbsp;writer&nbsp;doesn't&nbsp;recognise&nbsp;an&nbsp;option,&nbsp;it&nbsp;is<br>
+silently&nbsp;ignored.&nbsp;The&nbsp;available&nbsp;options&nbsp;are&nbsp;described&nbsp;in&nbsp;the<br>
+:doc:`image&nbsp;format&nbsp;documentation<br>
+&lt;../handbook/image-file-formats&gt;`&nbsp;for&nbsp;each&nbsp;writer.<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;use&nbsp;a&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;instead&nbsp;of&nbsp;a&nbsp;filename.&nbsp;In&nbsp;this&nbsp;case,<br>
+you&nbsp;must&nbsp;always&nbsp;specify&nbsp;the&nbsp;format.&nbsp;The&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;must<br>
+implement&nbsp;the&nbsp;``seek``,&nbsp;``tell``,&nbsp;and&nbsp;``write``<br>
+methods,&nbsp;and&nbsp;be&nbsp;opened&nbsp;in&nbsp;binary&nbsp;mode.<br>
+&nbsp;<br>
+:param&nbsp;fp:&nbsp;A&nbsp;filename&nbsp;(string),&nbsp;pathlib.Path&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;file&nbsp;<a href="builtins.html#object">object</a>.<br>
+:param&nbsp;format:&nbsp;Optional&nbsp;format&nbsp;override.&nbsp;&nbsp;If&nbsp;omitted,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;format&nbsp;to&nbsp;use&nbsp;is&nbsp;determined&nbsp;from&nbsp;the&nbsp;filename&nbsp;extension.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;a&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;was&nbsp;used&nbsp;instead&nbsp;of&nbsp;a&nbsp;filename,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;parameter&nbsp;should&nbsp;always&nbsp;be&nbsp;used.<br>
+:param&nbsp;params:&nbsp;Extra&nbsp;parameters&nbsp;to&nbsp;the&nbsp;image&nbsp;writer.<br>
+:returns:&nbsp;None<br>
+:exception&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;output&nbsp;format&nbsp;could&nbsp;not&nbsp;be&nbsp;determined<br>
+&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;file&nbsp;name.&nbsp;&nbsp;Use&nbsp;the&nbsp;format&nbsp;option&nbsp;to&nbsp;solve&nbsp;this.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;file&nbsp;could&nbsp;not&nbsp;be&nbsp;written.&nbsp;&nbsp;The&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;may&nbsp;have&nbsp;been&nbsp;created,&nbsp;and&nbsp;may&nbsp;contain&nbsp;partial&nbsp;data.</tt></dd></dl>
+
+<dl><dt><a name="Image-seek"><strong>seek</strong></a>(self, frame)</dt><dd><tt>Seeks&nbsp;to&nbsp;the&nbsp;given&nbsp;frame&nbsp;in&nbsp;this&nbsp;sequence&nbsp;file.&nbsp;If&nbsp;you&nbsp;seek<br>
+beyond&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;sequence,&nbsp;the&nbsp;method&nbsp;raises&nbsp;an<br>
+``EOFError``&nbsp;exception.&nbsp;When&nbsp;a&nbsp;sequence&nbsp;file&nbsp;is&nbsp;opened,&nbsp;the<br>
+library&nbsp;automatically&nbsp;seeks&nbsp;to&nbsp;frame&nbsp;0.<br>
+&nbsp;<br>
+See&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.tell`.<br>
+&nbsp;<br>
+If&nbsp;defined,&nbsp;:attr:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.n_frames`&nbsp;refers&nbsp;to&nbsp;the<br>
+number&nbsp;of&nbsp;available&nbsp;frames.<br>
+&nbsp;<br>
+:param&nbsp;frame:&nbsp;Frame&nbsp;number,&nbsp;starting&nbsp;at&nbsp;0.<br>
+:exception&nbsp;EOFError:&nbsp;If&nbsp;the&nbsp;call&nbsp;attempts&nbsp;to&nbsp;seek&nbsp;beyond&nbsp;the&nbsp;end<br>
+&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;sequence.</tt></dd></dl>
+
+<dl><dt><a name="Image-show"><strong>show</strong></a>(self, title=None, command=None)</dt><dd><tt>Displays&nbsp;this&nbsp;image.&nbsp;This&nbsp;method&nbsp;is&nbsp;mainly&nbsp;intended&nbsp;for&nbsp;debugging&nbsp;purposes.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;calls&nbsp;:py:func:`PIL.ImageShow.show`&nbsp;internally.&nbsp;You&nbsp;can&nbsp;use<br>
+:py:func:`PIL.ImageShow.register`&nbsp;to&nbsp;override&nbsp;its&nbsp;default&nbsp;behaviour.<br>
+&nbsp;<br>
+The&nbsp;image&nbsp;is&nbsp;first&nbsp;saved&nbsp;to&nbsp;a&nbsp;temporary&nbsp;file.&nbsp;By&nbsp;default,&nbsp;it&nbsp;will&nbsp;be&nbsp;in<br>
+PNG&nbsp;format.<br>
+&nbsp;<br>
+On&nbsp;Unix,&nbsp;the&nbsp;image&nbsp;is&nbsp;then&nbsp;opened&nbsp;using&nbsp;the&nbsp;**display**,&nbsp;**eog**&nbsp;or<br>
+**xv**&nbsp;utility,&nbsp;depending&nbsp;on&nbsp;which&nbsp;one&nbsp;can&nbsp;be&nbsp;found.<br>
+&nbsp;<br>
+On&nbsp;macOS,&nbsp;the&nbsp;image&nbsp;is&nbsp;opened&nbsp;with&nbsp;the&nbsp;native&nbsp;Preview&nbsp;application.<br>
+&nbsp;<br>
+On&nbsp;Windows,&nbsp;the&nbsp;image&nbsp;is&nbsp;opened&nbsp;with&nbsp;the&nbsp;standard&nbsp;PNG&nbsp;display&nbsp;utility.<br>
+&nbsp;<br>
+:param&nbsp;title:&nbsp;Optional&nbsp;title&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;image&nbsp;window,&nbsp;where&nbsp;possible.</tt></dd></dl>
+
+<dl><dt><a name="Image-split"><strong>split</strong></a>(self)</dt><dd><tt>Split&nbsp;this&nbsp;image&nbsp;into&nbsp;individual&nbsp;bands.&nbsp;This&nbsp;method&nbsp;returns&nbsp;a<br>
+tuple&nbsp;of&nbsp;individual&nbsp;image&nbsp;bands&nbsp;from&nbsp;an&nbsp;image.&nbsp;For&nbsp;example,<br>
+splitting&nbsp;an&nbsp;"RGB"&nbsp;image&nbsp;creates&nbsp;three&nbsp;new&nbsp;images&nbsp;each<br>
+containing&nbsp;a&nbsp;copy&nbsp;of&nbsp;one&nbsp;of&nbsp;the&nbsp;original&nbsp;bands&nbsp;(red,&nbsp;green,<br>
+blue).<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;need&nbsp;only&nbsp;one&nbsp;band,&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.getchannel`<br>
+method&nbsp;can&nbsp;be&nbsp;more&nbsp;convenient&nbsp;and&nbsp;faster.<br>
+&nbsp;<br>
+:returns:&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;bands.</tt></dd></dl>
+
+<dl><dt><a name="Image-tell"><strong>tell</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;current&nbsp;frame&nbsp;number.&nbsp;See&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.seek`.<br>
+&nbsp;<br>
+If&nbsp;defined,&nbsp;:attr:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.n_frames`&nbsp;refers&nbsp;to&nbsp;the<br>
+number&nbsp;of&nbsp;available&nbsp;frames.<br>
+&nbsp;<br>
+:returns:&nbsp;Frame&nbsp;number,&nbsp;starting&nbsp;with&nbsp;0.</tt></dd></dl>
+
+<dl><dt><a name="Image-thumbnail"><strong>thumbnail</strong></a>(self, size, resample=3, reducing_gap=2.0)</dt><dd><tt>Make&nbsp;this&nbsp;image&nbsp;into&nbsp;a&nbsp;thumbnail.&nbsp;&nbsp;This&nbsp;method&nbsp;modifies&nbsp;the<br>
+image&nbsp;to&nbsp;contain&nbsp;a&nbsp;thumbnail&nbsp;version&nbsp;of&nbsp;itself,&nbsp;no&nbsp;larger&nbsp;than<br>
+the&nbsp;given&nbsp;size.&nbsp;&nbsp;This&nbsp;method&nbsp;calculates&nbsp;an&nbsp;appropriate&nbsp;thumbnail<br>
+size&nbsp;to&nbsp;preserve&nbsp;the&nbsp;aspect&nbsp;of&nbsp;the&nbsp;image,&nbsp;calls&nbsp;the<br>
+:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.draft`&nbsp;method&nbsp;to&nbsp;configure&nbsp;the&nbsp;file&nbsp;reader<br>
+(where&nbsp;applicable),&nbsp;and&nbsp;finally&nbsp;resizes&nbsp;the&nbsp;image.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;function&nbsp;modifies&nbsp;the&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`<br>
+<a href="builtins.html#object">object</a>&nbsp;in&nbsp;place.&nbsp;&nbsp;If&nbsp;you&nbsp;need&nbsp;to&nbsp;use&nbsp;the&nbsp;full&nbsp;resolution&nbsp;image&nbsp;as&nbsp;well,<br>
+apply&nbsp;this&nbsp;method&nbsp;to&nbsp;a&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.copy`&nbsp;of&nbsp;the&nbsp;original<br>
+image.<br>
+&nbsp;<br>
+:param&nbsp;size:&nbsp;Requested&nbsp;size.<br>
+:param&nbsp;resample:&nbsp;Optional&nbsp;resampling&nbsp;filter.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;one<br>
+&nbsp;&nbsp;&nbsp;of&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`,&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BOX`,<br>
+&nbsp;&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BILINEAR`,&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.HAMMING`,<br>
+&nbsp;&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BICUBIC`&nbsp;or&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.LANCZOS`.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;omitted,&nbsp;it&nbsp;defaults&nbsp;to&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BICUBIC`.<br>
+&nbsp;&nbsp;&nbsp;(was&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`&nbsp;prior&nbsp;to&nbsp;version&nbsp;2.5.0).<br>
+&nbsp;&nbsp;&nbsp;See:&nbsp;:ref:`concept-filters`.<br>
+:param&nbsp;reducing_gap:&nbsp;Apply&nbsp;optimization&nbsp;by&nbsp;resizing&nbsp;the&nbsp;image<br>
+&nbsp;&nbsp;&nbsp;in&nbsp;two&nbsp;steps.&nbsp;First,&nbsp;reducing&nbsp;the&nbsp;image&nbsp;by&nbsp;integer&nbsp;times<br>
+&nbsp;&nbsp;&nbsp;using&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.reduce`&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.draft`&nbsp;for&nbsp;JPEG&nbsp;images.<br>
+&nbsp;&nbsp;&nbsp;Second,&nbsp;resizing&nbsp;using&nbsp;regular&nbsp;resampling.&nbsp;The&nbsp;last&nbsp;step<br>
+&nbsp;&nbsp;&nbsp;changes&nbsp;size&nbsp;no&nbsp;less&nbsp;than&nbsp;by&nbsp;``reducing_gap``&nbsp;times.<br>
+&nbsp;&nbsp;&nbsp;``reducing_gap``&nbsp;may&nbsp;be&nbsp;None&nbsp;(no&nbsp;first&nbsp;step&nbsp;is&nbsp;performed)<br>
+&nbsp;&nbsp;&nbsp;or&nbsp;should&nbsp;be&nbsp;greater&nbsp;than&nbsp;1.0.&nbsp;The&nbsp;bigger&nbsp;``reducing_gap``,<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;closer&nbsp;the&nbsp;result&nbsp;to&nbsp;the&nbsp;fair&nbsp;resampling.<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;smaller&nbsp;``reducing_gap``,&nbsp;the&nbsp;faster&nbsp;resizing.<br>
+&nbsp;&nbsp;&nbsp;With&nbsp;``reducing_gap``&nbsp;greater&nbsp;or&nbsp;equal&nbsp;to&nbsp;3.0,&nbsp;the&nbsp;result&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;indistinguishable&nbsp;from&nbsp;fair&nbsp;resampling&nbsp;in&nbsp;most&nbsp;cases.<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;2.0&nbsp;(very&nbsp;close&nbsp;to&nbsp;fair&nbsp;resampling<br>
+&nbsp;&nbsp;&nbsp;while&nbsp;still&nbsp;being&nbsp;faster&nbsp;in&nbsp;many&nbsp;cases).<br>
+:returns:&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="Image-tobitmap"><strong>tobitmap</strong></a>(self, name='image')</dt><dd><tt>Returns&nbsp;the&nbsp;image&nbsp;converted&nbsp;to&nbsp;an&nbsp;X11&nbsp;bitmap.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;This&nbsp;method&nbsp;only&nbsp;works&nbsp;for&nbsp;mode&nbsp;"1"&nbsp;images.<br>
+&nbsp;<br>
+:param&nbsp;name:&nbsp;The&nbsp;name&nbsp;prefix&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;bitmap&nbsp;variables.<br>
+:returns:&nbsp;A&nbsp;string&nbsp;containing&nbsp;an&nbsp;X11&nbsp;bitmap.<br>
+:raises&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;mode&nbsp;is&nbsp;not&nbsp;"1"</tt></dd></dl>
+
+<dl><dt><a name="Image-tobytes"><strong>tobytes</strong></a>(self, encoder_name='raw', *args)</dt><dd><tt>Return&nbsp;image&nbsp;as&nbsp;a&nbsp;bytes&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;method&nbsp;returns&nbsp;the&nbsp;raw&nbsp;image&nbsp;data&nbsp;from&nbsp;the&nbsp;internal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;storage.&nbsp;&nbsp;For&nbsp;compressed&nbsp;image&nbsp;data&nbsp;(e.g.&nbsp;PNG,&nbsp;JPEG)&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:meth:`~.save`,&nbsp;with&nbsp;a&nbsp;BytesIO&nbsp;parameter&nbsp;for&nbsp;in-memory<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data.<br>
+&nbsp;<br>
+:param&nbsp;encoder_name:&nbsp;What&nbsp;encoder&nbsp;to&nbsp;use.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use&nbsp;the&nbsp;standard&nbsp;"raw"&nbsp;encoder.<br>
+:param&nbsp;args:&nbsp;Extra&nbsp;arguments&nbsp;to&nbsp;the&nbsp;encoder.<br>
+:returns:&nbsp;A&nbsp;:py:class:`bytes`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-toqimage"><strong>toqimage</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;QImage&nbsp;copy&nbsp;of&nbsp;this&nbsp;image</tt></dd></dl>
+
+<dl><dt><a name="Image-toqpixmap"><strong>toqpixmap</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;QPixmap&nbsp;copy&nbsp;of&nbsp;this&nbsp;image</tt></dd></dl>
+
+<dl><dt><a name="Image-transform"><strong>transform</strong></a>(self, size, method, data=None, resample=0, fill=1, fillcolor=None)</dt><dd><tt>Transforms&nbsp;this&nbsp;image.&nbsp;&nbsp;This&nbsp;method&nbsp;creates&nbsp;a&nbsp;new&nbsp;image&nbsp;with&nbsp;the<br>
+given&nbsp;size,&nbsp;and&nbsp;the&nbsp;same&nbsp;mode&nbsp;as&nbsp;the&nbsp;original,&nbsp;and&nbsp;copies&nbsp;data<br>
+to&nbsp;the&nbsp;new&nbsp;image&nbsp;using&nbsp;the&nbsp;given&nbsp;transform.<br>
+&nbsp;<br>
+:param&nbsp;size:&nbsp;The&nbsp;output&nbsp;size.<br>
+:param&nbsp;method:&nbsp;The&nbsp;transformation&nbsp;method.&nbsp;&nbsp;This&nbsp;is&nbsp;one&nbsp;of<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.EXTENT`&nbsp;(cut&nbsp;out&nbsp;a&nbsp;rectangular&nbsp;subregion),<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.AFFINE`&nbsp;(affine&nbsp;transform),<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.PERSPECTIVE`&nbsp;(perspective&nbsp;transform),<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.QUAD`&nbsp;(map&nbsp;a&nbsp;quadrilateral&nbsp;to&nbsp;a&nbsp;rectangle),&nbsp;or<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.MESH`&nbsp;(map&nbsp;a&nbsp;number&nbsp;of&nbsp;source&nbsp;quadrilaterals<br>
+&nbsp;&nbsp;in&nbsp;one&nbsp;operation).<br>
+&nbsp;<br>
+&nbsp;&nbsp;It&nbsp;may&nbsp;also&nbsp;be&nbsp;an&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#ImageTransformHandler">ImageTransformHandler</a>`<br>
+&nbsp;&nbsp;<a href="builtins.html#object">object</a>::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;Example(<a href="#Image">Image</a>.<a href="#ImageTransformHandler">ImageTransformHandler</a>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;<a href="#Image-transform">transform</a>(self,&nbsp;size,&nbsp;data,&nbsp;resample,&nbsp;fill=1):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Return&nbsp;result<br>
+&nbsp;<br>
+&nbsp;&nbsp;It&nbsp;may&nbsp;also&nbsp;be&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;with&nbsp;a&nbsp;``method.getdata``&nbsp;method<br>
+&nbsp;&nbsp;that&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;supplying&nbsp;new&nbsp;``method``&nbsp;and&nbsp;``data``&nbsp;values::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;<a href="#Image-getdata">getdata</a>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;=&nbsp;<a href="#Image">Image</a>.EXTENT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;(0,&nbsp;0,&nbsp;100,&nbsp;100)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;method,&nbsp;data<br>
+:param&nbsp;data:&nbsp;Extra&nbsp;data&nbsp;to&nbsp;the&nbsp;transformation&nbsp;method.<br>
+:param&nbsp;resample:&nbsp;Optional&nbsp;resampling&nbsp;filter.&nbsp;&nbsp;It&nbsp;can&nbsp;be&nbsp;one&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`&nbsp;(use&nbsp;nearest&nbsp;neighbour),<br>
+&nbsp;&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BILINEAR`&nbsp;(linear&nbsp;interpolation&nbsp;in&nbsp;a&nbsp;2x2<br>
+&nbsp;&nbsp;&nbsp;environment),&nbsp;or&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.BICUBIC`&nbsp;(cubic&nbsp;spline<br>
+&nbsp;&nbsp;&nbsp;interpolation&nbsp;in&nbsp;a&nbsp;4x4&nbsp;environment).&nbsp;If&nbsp;omitted,&nbsp;or&nbsp;if&nbsp;the&nbsp;image<br>
+&nbsp;&nbsp;&nbsp;has&nbsp;mode&nbsp;"1"&nbsp;or&nbsp;"P",&nbsp;it&nbsp;is&nbsp;set&nbsp;to&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.NEAREST`.<br>
+&nbsp;&nbsp;&nbsp;See:&nbsp;:ref:`concept-filters`.<br>
+:param&nbsp;fill:&nbsp;If&nbsp;``method``&nbsp;is&nbsp;an<br>
+&nbsp;&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#ImageTransformHandler">ImageTransformHandler</a>`&nbsp;<a href="builtins.html#object">object</a>,&nbsp;this&nbsp;is&nbsp;one&nbsp;of<br>
+&nbsp;&nbsp;the&nbsp;arguments&nbsp;passed&nbsp;to&nbsp;it.&nbsp;Otherwise,&nbsp;it&nbsp;is&nbsp;unused.<br>
+:param&nbsp;fillcolor:&nbsp;Optional&nbsp;fill&nbsp;color&nbsp;for&nbsp;the&nbsp;area&nbsp;outside&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;transform&nbsp;in&nbsp;the&nbsp;output&nbsp;image.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Image-transpose"><strong>transpose</strong></a>(self, method)</dt><dd><tt>Transpose&nbsp;image&nbsp;(flip&nbsp;or&nbsp;rotate&nbsp;in&nbsp;90&nbsp;degree&nbsp;steps)<br>
+&nbsp;<br>
+:param&nbsp;method:&nbsp;One&nbsp;of&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.FLIP_LEFT_RIGHT`,<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.FLIP_TOP_BOTTOM`,&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.ROTATE_90`,<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.ROTATE_180`,&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.ROTATE_270`,<br>
+&nbsp;&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.TRANSPOSE`&nbsp;or&nbsp;:py:data:`PIL.<a href="#Image">Image</a>.TRANSVERSE`.<br>
+:returns:&nbsp;Returns&nbsp;a&nbsp;flipped&nbsp;or&nbsp;rotated&nbsp;copy&nbsp;of&nbsp;this&nbsp;image.</tt></dd></dl>
+
+<dl><dt><a name="Image-verify"><strong>verify</strong></a>(self)</dt><dd><tt>Verifies&nbsp;the&nbsp;contents&nbsp;of&nbsp;a&nbsp;file.&nbsp;For&nbsp;data&nbsp;read&nbsp;from&nbsp;a&nbsp;file,&nbsp;this<br>
+method&nbsp;attempts&nbsp;to&nbsp;determine&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;broken,&nbsp;without<br>
+actually&nbsp;decoding&nbsp;the&nbsp;image&nbsp;data.&nbsp;&nbsp;If&nbsp;this&nbsp;method&nbsp;finds&nbsp;any<br>
+problems,&nbsp;it&nbsp;raises&nbsp;suitable&nbsp;exceptions.&nbsp;&nbsp;If&nbsp;you&nbsp;need&nbsp;to&nbsp;load<br>
+the&nbsp;image&nbsp;after&nbsp;using&nbsp;this&nbsp;method,&nbsp;you&nbsp;must&nbsp;reopen&nbsp;the&nbsp;image<br>
+file.</tt></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>__array_interface__</strong></dt>
+</dl>
+<dl><dt><strong>height</strong></dt>
+</dl>
+<dl><dt><strong>size</strong></dt>
+</dl>
+<dl><dt><strong>width</strong></dt>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__hash__</strong> = None</dl>
+
+<dl><dt><strong>format</strong> = None</dl>
+
+<dl><dt><strong>format_description</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ImagePointHandler">class <strong>ImagePointHandler</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Used&nbsp;as&nbsp;a&nbsp;mixin&nbsp;by&nbsp;point&nbsp;transforms<br>
+(for&nbsp;use&nbsp;with&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.point`)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ImageTransformHandler">class <strong>ImageTransformHandler</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Used&nbsp;as&nbsp;a&nbsp;mixin&nbsp;by&nbsp;geometry&nbsp;transforms<br>
+(for&nbsp;use&nbsp;with&nbsp;:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.transform`)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-__getattr__"><strong>__getattr__</strong></a>(name)</dt></dl>
+ <dl><dt><a name="-alpha_composite"><strong>alpha_composite</strong></a>(im1, im2)</dt><dd><tt>Alpha&nbsp;composite&nbsp;im2&nbsp;over&nbsp;im1.<br>
+&nbsp;<br>
+:param&nbsp;im1:&nbsp;The&nbsp;first&nbsp;image.&nbsp;Must&nbsp;have&nbsp;mode&nbsp;RGBA.<br>
+:param&nbsp;im2:&nbsp;The&nbsp;second&nbsp;image.&nbsp;&nbsp;Must&nbsp;have&nbsp;mode&nbsp;RGBA,&nbsp;and&nbsp;the&nbsp;same&nbsp;size&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;first&nbsp;image.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-blend"><strong>blend</strong></a>(im1, im2, alpha)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;image&nbsp;by&nbsp;interpolating&nbsp;between&nbsp;two&nbsp;input&nbsp;images,&nbsp;using<br>
+a&nbsp;constant&nbsp;alpha.::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;out&nbsp;=&nbsp;image1&nbsp;*&nbsp;(1.0&nbsp;-&nbsp;alpha)&nbsp;+&nbsp;image2&nbsp;*&nbsp;alpha<br>
+&nbsp;<br>
+:param&nbsp;im1:&nbsp;The&nbsp;first&nbsp;image.<br>
+:param&nbsp;im2:&nbsp;The&nbsp;second&nbsp;image.&nbsp;&nbsp;Must&nbsp;have&nbsp;the&nbsp;same&nbsp;mode&nbsp;and&nbsp;size&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;first&nbsp;image.<br>
+:param&nbsp;alpha:&nbsp;The&nbsp;interpolation&nbsp;alpha&nbsp;factor.&nbsp;&nbsp;If&nbsp;alpha&nbsp;is&nbsp;0.0,&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;copy&nbsp;of&nbsp;the&nbsp;first&nbsp;image&nbsp;is&nbsp;returned.&nbsp;If&nbsp;alpha&nbsp;is&nbsp;1.0,&nbsp;a&nbsp;copy&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;second&nbsp;image&nbsp;is&nbsp;returned.&nbsp;There&nbsp;are&nbsp;no&nbsp;restrictions&nbsp;on&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;alpha&nbsp;value.&nbsp;If&nbsp;necessary,&nbsp;the&nbsp;result&nbsp;is&nbsp;clipped&nbsp;to&nbsp;fit&nbsp;into<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;allowed&nbsp;output&nbsp;range.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-coerce_e"><strong>coerce_e</strong></a>(value)</dt></dl>
+ <dl><dt><a name="-composite"><strong>composite</strong></a>(image1, image2, mask)</dt><dd><tt>Create&nbsp;composite&nbsp;image&nbsp;by&nbsp;blending&nbsp;images&nbsp;using&nbsp;a&nbsp;transparency&nbsp;mask.<br>
+&nbsp;<br>
+:param&nbsp;image1:&nbsp;The&nbsp;first&nbsp;image.<br>
+:param&nbsp;image2:&nbsp;The&nbsp;second&nbsp;image.&nbsp;&nbsp;Must&nbsp;have&nbsp;the&nbsp;same&nbsp;mode&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;size&nbsp;as&nbsp;the&nbsp;first&nbsp;image.<br>
+:param&nbsp;mask:&nbsp;A&nbsp;mask&nbsp;image.&nbsp;&nbsp;This&nbsp;image&nbsp;can&nbsp;have&nbsp;mode<br>
+&nbsp;&nbsp;&nbsp;"1",&nbsp;"L",&nbsp;or&nbsp;"RGBA",&nbsp;and&nbsp;must&nbsp;have&nbsp;the&nbsp;same&nbsp;size&nbsp;as&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;other&nbsp;two&nbsp;images.</tt></dd></dl>
+ <dl><dt><a name="-effect_mandelbrot"><strong>effect_mandelbrot</strong></a>(size, extent, quality)</dt><dd><tt>Generate&nbsp;a&nbsp;Mandelbrot&nbsp;set&nbsp;covering&nbsp;the&nbsp;given&nbsp;extent.<br>
+&nbsp;<br>
+:param&nbsp;size:&nbsp;The&nbsp;requested&nbsp;size&nbsp;in&nbsp;pixels,&nbsp;as&nbsp;a&nbsp;2-tuple:<br>
+&nbsp;&nbsp;&nbsp;(width,&nbsp;height).<br>
+:param&nbsp;extent:&nbsp;The&nbsp;extent&nbsp;to&nbsp;cover,&nbsp;as&nbsp;a&nbsp;4-tuple:<br>
+&nbsp;&nbsp;&nbsp;(x0,&nbsp;y0,&nbsp;x1,&nbsp;y2).<br>
+:param&nbsp;quality:&nbsp;Quality.</tt></dd></dl>
+ <dl><dt><a name="-effect_noise"><strong>effect_noise</strong></a>(size, sigma)</dt><dd><tt>Generate&nbsp;Gaussian&nbsp;noise&nbsp;centered&nbsp;around&nbsp;128.<br>
+&nbsp;<br>
+:param&nbsp;size:&nbsp;The&nbsp;requested&nbsp;size&nbsp;in&nbsp;pixels,&nbsp;as&nbsp;a&nbsp;2-tuple:<br>
+&nbsp;&nbsp;&nbsp;(width,&nbsp;height).<br>
+:param&nbsp;sigma:&nbsp;Standard&nbsp;deviation&nbsp;of&nbsp;noise.</tt></dd></dl>
+ <dl><dt><a name="-eval"><strong>eval</strong></a>(image, *args)</dt><dd><tt>Applies&nbsp;the&nbsp;function&nbsp;(which&nbsp;should&nbsp;take&nbsp;one&nbsp;argument)&nbsp;to&nbsp;each&nbsp;pixel<br>
+in&nbsp;the&nbsp;given&nbsp;image.&nbsp;If&nbsp;the&nbsp;image&nbsp;has&nbsp;more&nbsp;than&nbsp;one&nbsp;band,&nbsp;the&nbsp;same<br>
+function&nbsp;is&nbsp;applied&nbsp;to&nbsp;each&nbsp;band.&nbsp;Note&nbsp;that&nbsp;the&nbsp;function&nbsp;is<br>
+evaluated&nbsp;once&nbsp;for&nbsp;each&nbsp;possible&nbsp;pixel&nbsp;value,&nbsp;so&nbsp;you&nbsp;cannot&nbsp;use<br>
+random&nbsp;components&nbsp;or&nbsp;other&nbsp;generators.<br>
+&nbsp;<br>
+:param&nbsp;image:&nbsp;The&nbsp;input&nbsp;image.<br>
+:param&nbsp;function:&nbsp;A&nbsp;function&nbsp;<a href="builtins.html#object">object</a>,&nbsp;taking&nbsp;one&nbsp;integer&nbsp;argument.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-fromarray"><strong>fromarray</strong></a>(obj, mode=None)</dt><dd><tt>Creates&nbsp;an&nbsp;image&nbsp;memory&nbsp;from&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;exporting&nbsp;the&nbsp;array&nbsp;interface<br>
+(using&nbsp;the&nbsp;buffer&nbsp;protocol).<br>
+&nbsp;<br>
+If&nbsp;``obj``&nbsp;is&nbsp;not&nbsp;contiguous,&nbsp;then&nbsp;the&nbsp;``tobytes``&nbsp;method&nbsp;is&nbsp;called<br>
+and&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.frombuffer`&nbsp;is&nbsp;used.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;have&nbsp;an&nbsp;image&nbsp;in&nbsp;NumPy::<br>
+&nbsp;<br>
+&nbsp;&nbsp;from&nbsp;PIL&nbsp;import&nbsp;<a href="#Image">Image</a><br>
+&nbsp;&nbsp;import&nbsp;numpy&nbsp;as&nbsp;np<br>
+&nbsp;&nbsp;im&nbsp;=&nbsp;<a href="#Image">Image</a>.<a href="#-open">open</a>('hopper.jpg')<br>
+&nbsp;&nbsp;a&nbsp;=&nbsp;np.asarray(im)<br>
+&nbsp;<br>
+Then&nbsp;this&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;convert&nbsp;it&nbsp;to&nbsp;a&nbsp;Pillow&nbsp;image::<br>
+&nbsp;<br>
+&nbsp;&nbsp;im&nbsp;=&nbsp;<a href="#Image">Image</a>.<a href="#-fromarray">fromarray</a>(a)<br>
+&nbsp;<br>
+:param&nbsp;obj:&nbsp;Object&nbsp;with&nbsp;array&nbsp;interface<br>
+:param&nbsp;mode:&nbsp;Mode&nbsp;to&nbsp;use&nbsp;(will&nbsp;be&nbsp;determined&nbsp;from&nbsp;type&nbsp;if&nbsp;None)<br>
+&nbsp;&nbsp;See:&nbsp;:ref:`concept-modes`.<br>
+:returns:&nbsp;An&nbsp;image&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;1.1.6</tt></dd></dl>
+ <dl><dt><a name="-frombuffer"><strong>frombuffer</strong></a>(mode, size, data, decoder_name='raw', *args)</dt><dd><tt>Creates&nbsp;an&nbsp;image&nbsp;memory&nbsp;referencing&nbsp;pixel&nbsp;data&nbsp;in&nbsp;a&nbsp;byte&nbsp;buffer.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;is&nbsp;similar&nbsp;to&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.frombytes`,&nbsp;but&nbsp;uses&nbsp;data<br>
+in&nbsp;the&nbsp;byte&nbsp;buffer,&nbsp;where&nbsp;possible.&nbsp;&nbsp;This&nbsp;means&nbsp;that&nbsp;changes&nbsp;to&nbsp;the<br>
+original&nbsp;buffer&nbsp;<a href="builtins.html#object">object</a>&nbsp;are&nbsp;reflected&nbsp;in&nbsp;this&nbsp;image).&nbsp;&nbsp;Not&nbsp;all&nbsp;modes&nbsp;can<br>
+share&nbsp;memory;&nbsp;supported&nbsp;modes&nbsp;include&nbsp;"L",&nbsp;"RGBX",&nbsp;"RGBA",&nbsp;and&nbsp;"CMYK".<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;function&nbsp;decodes&nbsp;pixel&nbsp;data&nbsp;only,&nbsp;not&nbsp;entire&nbsp;images.<br>
+If&nbsp;you&nbsp;have&nbsp;an&nbsp;entire&nbsp;image&nbsp;file&nbsp;in&nbsp;a&nbsp;string,&nbsp;wrap&nbsp;it&nbsp;in&nbsp;a<br>
+:py:class:`~io.BytesIO`&nbsp;<a href="builtins.html#object">object</a>,&nbsp;and&nbsp;use&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.open`&nbsp;to&nbsp;load&nbsp;it.<br>
+&nbsp;<br>
+In&nbsp;the&nbsp;current&nbsp;version,&nbsp;the&nbsp;default&nbsp;parameters&nbsp;used&nbsp;for&nbsp;the&nbsp;"raw"&nbsp;decoder<br>
+differs&nbsp;from&nbsp;that&nbsp;used&nbsp;for&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.frombytes`.&nbsp;&nbsp;This&nbsp;is&nbsp;a<br>
+bug,&nbsp;and&nbsp;will&nbsp;probably&nbsp;be&nbsp;fixed&nbsp;in&nbsp;a&nbsp;future&nbsp;release.&nbsp;&nbsp;The&nbsp;current&nbsp;release<br>
+issues&nbsp;a&nbsp;warning&nbsp;if&nbsp;you&nbsp;do&nbsp;this;&nbsp;to&nbsp;disable&nbsp;the&nbsp;warning,&nbsp;you&nbsp;should&nbsp;provide<br>
+the&nbsp;full&nbsp;set&nbsp;of&nbsp;parameters.&nbsp;&nbsp;See&nbsp;below&nbsp;for&nbsp;details.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;The&nbsp;image&nbsp;mode.&nbsp;See:&nbsp;:ref:`concept-modes`.<br>
+:param&nbsp;size:&nbsp;The&nbsp;image&nbsp;size.<br>
+:param&nbsp;data:&nbsp;A&nbsp;bytes&nbsp;or&nbsp;other&nbsp;buffer&nbsp;<a href="builtins.html#object">object</a>&nbsp;containing&nbsp;raw<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;for&nbsp;the&nbsp;given&nbsp;mode.<br>
+:param&nbsp;decoder_name:&nbsp;What&nbsp;decoder&nbsp;to&nbsp;use.<br>
+:param&nbsp;args:&nbsp;Additional&nbsp;parameters&nbsp;for&nbsp;the&nbsp;given&nbsp;decoder.&nbsp;&nbsp;For&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;encoder&nbsp;("raw"),&nbsp;it's&nbsp;recommended&nbsp;that&nbsp;you&nbsp;provide&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;full&nbsp;set&nbsp;of&nbsp;parameters::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-frombuffer">frombuffer</a>(mode,&nbsp;size,&nbsp;data,&nbsp;"raw",&nbsp;mode,&nbsp;0,&nbsp;1)<br>
+&nbsp;<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;1.1.4</tt></dd></dl>
+ <dl><dt><a name="-frombytes"><strong>frombytes</strong></a>(mode, size, data, decoder_name='raw', *args)</dt><dd><tt>Creates&nbsp;a&nbsp;copy&nbsp;of&nbsp;an&nbsp;image&nbsp;memory&nbsp;from&nbsp;pixel&nbsp;data&nbsp;in&nbsp;a&nbsp;buffer.<br>
+&nbsp;<br>
+In&nbsp;its&nbsp;simplest&nbsp;form,&nbsp;this&nbsp;function&nbsp;takes&nbsp;three&nbsp;arguments<br>
+(mode,&nbsp;size,&nbsp;and&nbsp;unpacked&nbsp;pixel&nbsp;data).<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;also&nbsp;use&nbsp;any&nbsp;pixel&nbsp;decoder&nbsp;supported&nbsp;by&nbsp;PIL.&nbsp;&nbsp;For&nbsp;more<br>
+information&nbsp;on&nbsp;available&nbsp;decoders,&nbsp;see&nbsp;the&nbsp;section<br>
+:ref:`Writing&nbsp;Your&nbsp;Own&nbsp;File&nbsp;Decoder&nbsp;&lt;file-decoders&gt;`.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;function&nbsp;decodes&nbsp;pixel&nbsp;data&nbsp;only,&nbsp;not&nbsp;entire&nbsp;images.<br>
+If&nbsp;you&nbsp;have&nbsp;an&nbsp;entire&nbsp;image&nbsp;in&nbsp;a&nbsp;string,&nbsp;wrap&nbsp;it&nbsp;in&nbsp;a<br>
+:py:class:`~io.BytesIO`&nbsp;<a href="builtins.html#object">object</a>,&nbsp;and&nbsp;use&nbsp;:py:func:`~PIL.<a href="#Image">Image</a>.open`&nbsp;to&nbsp;load<br>
+it.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;The&nbsp;image&nbsp;mode.&nbsp;See:&nbsp;:ref:`concept-modes`.<br>
+:param&nbsp;size:&nbsp;The&nbsp;image&nbsp;size.<br>
+:param&nbsp;data:&nbsp;A&nbsp;byte&nbsp;buffer&nbsp;containing&nbsp;raw&nbsp;data&nbsp;for&nbsp;the&nbsp;given&nbsp;mode.<br>
+:param&nbsp;decoder_name:&nbsp;What&nbsp;decoder&nbsp;to&nbsp;use.<br>
+:param&nbsp;args:&nbsp;Additional&nbsp;parameters&nbsp;for&nbsp;the&nbsp;given&nbsp;decoder.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-fromqimage"><strong>fromqimage</strong></a>(im)</dt><dd><tt>Creates&nbsp;an&nbsp;image&nbsp;instance&nbsp;from&nbsp;a&nbsp;QImage&nbsp;image</tt></dd></dl>
+ <dl><dt><a name="-fromqpixmap"><strong>fromqpixmap</strong></a>(im)</dt><dd><tt>Creates&nbsp;an&nbsp;image&nbsp;instance&nbsp;from&nbsp;a&nbsp;QPixmap&nbsp;image</tt></dd></dl>
+ <dl><dt><a name="-getmodebandnames"><strong>getmodebandnames</strong></a>(mode)</dt><dd><tt>Gets&nbsp;a&nbsp;list&nbsp;of&nbsp;individual&nbsp;band&nbsp;names.&nbsp;&nbsp;Given&nbsp;a&nbsp;mode,&nbsp;this&nbsp;function&nbsp;returns<br>
+a&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;names&nbsp;of&nbsp;individual&nbsp;bands&nbsp;(use<br>
+:py:method:`~PIL.<a href="#Image">Image</a>.getmodetype`&nbsp;to&nbsp;get&nbsp;the&nbsp;mode&nbsp;used&nbsp;to&nbsp;store&nbsp;each<br>
+individual&nbsp;band.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;Input&nbsp;mode.<br>
+:returns:&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;band&nbsp;names.&nbsp;&nbsp;The&nbsp;length&nbsp;of&nbsp;the&nbsp;tuple<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gives&nbsp;the&nbsp;number&nbsp;of&nbsp;bands&nbsp;in&nbsp;an&nbsp;image&nbsp;of&nbsp;the&nbsp;given&nbsp;mode.<br>
+:exception&nbsp;KeyError:&nbsp;If&nbsp;the&nbsp;input&nbsp;mode&nbsp;was&nbsp;not&nbsp;a&nbsp;standard&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-getmodebands"><strong>getmodebands</strong></a>(mode)</dt><dd><tt>Gets&nbsp;the&nbsp;number&nbsp;of&nbsp;individual&nbsp;bands&nbsp;for&nbsp;this&nbsp;mode.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;Input&nbsp;mode.<br>
+:returns:&nbsp;The&nbsp;number&nbsp;of&nbsp;bands&nbsp;in&nbsp;this&nbsp;mode.<br>
+:exception&nbsp;KeyError:&nbsp;If&nbsp;the&nbsp;input&nbsp;mode&nbsp;was&nbsp;not&nbsp;a&nbsp;standard&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-getmodebase"><strong>getmodebase</strong></a>(mode)</dt><dd><tt>Gets&nbsp;the&nbsp;"base"&nbsp;mode&nbsp;for&nbsp;given&nbsp;mode.&nbsp;&nbsp;This&nbsp;function&nbsp;returns&nbsp;"L"&nbsp;for<br>
+images&nbsp;that&nbsp;contain&nbsp;grayscale&nbsp;data,&nbsp;and&nbsp;"RGB"&nbsp;for&nbsp;images&nbsp;that<br>
+contain&nbsp;color&nbsp;data.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;Input&nbsp;mode.<br>
+:returns:&nbsp;"L"&nbsp;or&nbsp;"RGB".<br>
+:exception&nbsp;KeyError:&nbsp;If&nbsp;the&nbsp;input&nbsp;mode&nbsp;was&nbsp;not&nbsp;a&nbsp;standard&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-getmodetype"><strong>getmodetype</strong></a>(mode)</dt><dd><tt>Gets&nbsp;the&nbsp;storage&nbsp;type&nbsp;mode.&nbsp;&nbsp;Given&nbsp;a&nbsp;mode,&nbsp;this&nbsp;function&nbsp;returns&nbsp;a<br>
+single-layer&nbsp;mode&nbsp;suitable&nbsp;for&nbsp;storing&nbsp;individual&nbsp;bands.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;Input&nbsp;mode.<br>
+:returns:&nbsp;"L",&nbsp;"I",&nbsp;or&nbsp;"F".<br>
+:exception&nbsp;KeyError:&nbsp;If&nbsp;the&nbsp;input&nbsp;mode&nbsp;was&nbsp;not&nbsp;a&nbsp;standard&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-init"><strong>init</strong></a>()</dt><dd><tt>Explicitly&nbsp;initializes&nbsp;the&nbsp;Python&nbsp;Imaging&nbsp;Library.&nbsp;This&nbsp;function<br>
+loads&nbsp;all&nbsp;available&nbsp;file&nbsp;format&nbsp;drivers.</tt></dd></dl>
+ <dl><dt><a name="-isImageType"><strong>isImageType</strong></a>(t)</dt><dd><tt>Checks&nbsp;if&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;an&nbsp;image&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;This&nbsp;function&nbsp;is&nbsp;for&nbsp;internal&nbsp;use&nbsp;only.<br>
+&nbsp;<br>
+:param&nbsp;t:&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;check&nbsp;if&nbsp;it's&nbsp;an&nbsp;image<br>
+:returns:&nbsp;True&nbsp;if&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;an&nbsp;image</tt></dd></dl>
+ <dl><dt><a name="-linear_gradient"><strong>linear_gradient</strong></a>(mode)</dt><dd><tt>Generate&nbsp;256x256&nbsp;linear&nbsp;gradient&nbsp;from&nbsp;black&nbsp;to&nbsp;white,&nbsp;top&nbsp;to&nbsp;bottom.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;Input&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-merge"><strong>merge</strong></a>(mode, bands)</dt><dd><tt>Merge&nbsp;a&nbsp;set&nbsp;of&nbsp;single&nbsp;band&nbsp;images&nbsp;into&nbsp;a&nbsp;new&nbsp;multiband&nbsp;image.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;The&nbsp;mode&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;output&nbsp;image.&nbsp;See:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:ref:`concept-modes`.<br>
+:param&nbsp;bands:&nbsp;A&nbsp;sequence&nbsp;containing&nbsp;one&nbsp;single-band&nbsp;image&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;each&nbsp;band&nbsp;in&nbsp;the&nbsp;output&nbsp;image.&nbsp;&nbsp;All&nbsp;bands&nbsp;must&nbsp;have&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;same&nbsp;size.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-new"><strong>new</strong></a>(mode, size, color=0)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;image&nbsp;with&nbsp;the&nbsp;given&nbsp;mode&nbsp;and&nbsp;size.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;The&nbsp;mode&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;new&nbsp;image.&nbsp;See:<br>
+&nbsp;&nbsp;&nbsp;:ref:`concept-modes`.<br>
+:param&nbsp;size:&nbsp;A&nbsp;2-tuple,&nbsp;containing&nbsp;(width,&nbsp;height)&nbsp;in&nbsp;pixels.<br>
+:param&nbsp;color:&nbsp;What&nbsp;color&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;image.&nbsp;&nbsp;Default&nbsp;is&nbsp;black.<br>
+&nbsp;&nbsp;&nbsp;If&nbsp;given,&nbsp;this&nbsp;should&nbsp;be&nbsp;a&nbsp;single&nbsp;integer&nbsp;or&nbsp;floating&nbsp;point&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;for&nbsp;single-band&nbsp;modes,&nbsp;and&nbsp;a&nbsp;tuple&nbsp;for&nbsp;multi-band&nbsp;modes&nbsp;(one&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;per&nbsp;band).&nbsp;&nbsp;When&nbsp;creating&nbsp;RGB&nbsp;images,&nbsp;you&nbsp;can&nbsp;also&nbsp;use&nbsp;color<br>
+&nbsp;&nbsp;&nbsp;strings&nbsp;as&nbsp;supported&nbsp;by&nbsp;the&nbsp;ImageColor&nbsp;module.&nbsp;&nbsp;If&nbsp;the&nbsp;color&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;None,&nbsp;the&nbsp;image&nbsp;is&nbsp;not&nbsp;initialised.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-open"><strong>open</strong></a>(fp, mode='r', formats=None)</dt><dd><tt>Opens&nbsp;and&nbsp;identifies&nbsp;the&nbsp;given&nbsp;image&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;lazy&nbsp;operation;&nbsp;this&nbsp;function&nbsp;identifies&nbsp;the&nbsp;file,&nbsp;but<br>
+the&nbsp;file&nbsp;remains&nbsp;open&nbsp;and&nbsp;the&nbsp;actual&nbsp;image&nbsp;data&nbsp;is&nbsp;not&nbsp;read&nbsp;from<br>
+the&nbsp;file&nbsp;until&nbsp;you&nbsp;try&nbsp;to&nbsp;process&nbsp;the&nbsp;data&nbsp;(or&nbsp;call&nbsp;the<br>
+:py:meth:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>.load`&nbsp;method).&nbsp;&nbsp;See<br>
+:py:func:`~PIL.<a href="#Image">Image</a>.new`.&nbsp;See&nbsp;:ref:`file-handling`.<br>
+&nbsp;<br>
+:param&nbsp;fp:&nbsp;A&nbsp;filename&nbsp;(string),&nbsp;pathlib.Path&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;a&nbsp;file&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;must&nbsp;implement&nbsp;``file.read``,<br>
+&nbsp;&nbsp;&nbsp;``file.seek``,&nbsp;and&nbsp;``file.tell``&nbsp;methods,<br>
+&nbsp;&nbsp;&nbsp;and&nbsp;be&nbsp;opened&nbsp;in&nbsp;binary&nbsp;mode.<br>
+:param&nbsp;mode:&nbsp;The&nbsp;mode.&nbsp;&nbsp;If&nbsp;given,&nbsp;this&nbsp;argument&nbsp;must&nbsp;be&nbsp;"r".<br>
+:param&nbsp;formats:&nbsp;A&nbsp;list&nbsp;or&nbsp;tuple&nbsp;of&nbsp;formats&nbsp;to&nbsp;attempt&nbsp;to&nbsp;load&nbsp;the&nbsp;file&nbsp;in.<br>
+&nbsp;&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;restrict&nbsp;the&nbsp;set&nbsp;of&nbsp;formats&nbsp;checked.<br>
+&nbsp;&nbsp;&nbsp;Pass&nbsp;``None``&nbsp;to&nbsp;try&nbsp;all&nbsp;supported&nbsp;formats.&nbsp;You&nbsp;can&nbsp;print&nbsp;the&nbsp;set&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;available&nbsp;formats&nbsp;by&nbsp;running&nbsp;``python&nbsp;-m&nbsp;PIL``&nbsp;or&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;:py:func:`PIL.features.pilinfo`&nbsp;function.<br>
+:returns:&nbsp;An&nbsp;:py:class:`~PIL.<a href="#Image">Image</a>.<a href="#Image">Image</a>`&nbsp;<a href="builtins.html#object">object</a>.<br>
+:exception&nbsp;FileNotFoundError:&nbsp;If&nbsp;the&nbsp;file&nbsp;cannot&nbsp;be&nbsp;found.<br>
+:exception&nbsp;PIL.UnidentifiedImageError:&nbsp;If&nbsp;the&nbsp;image&nbsp;cannot&nbsp;be&nbsp;opened&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;identified.<br>
+:exception&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;``mode``&nbsp;is&nbsp;not&nbsp;"r",&nbsp;or&nbsp;if&nbsp;a&nbsp;``StringIO``<br>
+&nbsp;&nbsp;&nbsp;instance&nbsp;is&nbsp;used&nbsp;for&nbsp;``fp``.<br>
+:exception&nbsp;TypeError:&nbsp;If&nbsp;``formats``&nbsp;is&nbsp;not&nbsp;``None``,&nbsp;a&nbsp;list&nbsp;or&nbsp;a&nbsp;tuple.</tt></dd></dl>
+ <dl><dt><a name="-preinit"><strong>preinit</strong></a>()</dt><dd><tt>Explicitly&nbsp;load&nbsp;standard&nbsp;file&nbsp;format&nbsp;drivers.</tt></dd></dl>
+ <dl><dt><a name="-radial_gradient"><strong>radial_gradient</strong></a>(mode)</dt><dd><tt>Generate&nbsp;256x256&nbsp;radial&nbsp;gradient&nbsp;from&nbsp;black&nbsp;to&nbsp;white,&nbsp;centre&nbsp;to&nbsp;edge.<br>
+&nbsp;<br>
+:param&nbsp;mode:&nbsp;Input&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-register_decoder"><strong>register_decoder</strong></a>(name, decoder)</dt><dd><tt>Registers&nbsp;an&nbsp;image&nbsp;decoder.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be<br>
+used&nbsp;in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;name:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;decoder<br>
+:param&nbsp;decoder:&nbsp;A&nbsp;callable(mode,&nbsp;args)&nbsp;that&nbsp;returns&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImageFile.PyDecoder&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;4.1.0</tt></dd></dl>
+ <dl><dt><a name="-register_encoder"><strong>register_encoder</strong></a>(name, encoder)</dt><dd><tt>Registers&nbsp;an&nbsp;image&nbsp;encoder.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be<br>
+used&nbsp;in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;name:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;encoder<br>
+:param&nbsp;encoder:&nbsp;A&nbsp;callable(mode,&nbsp;args)&nbsp;that&nbsp;returns&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImageFile.PyEncoder&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;4.1.0</tt></dd></dl>
+ <dl><dt><a name="-register_extension"><strong>register_extension</strong></a>(id, extension)</dt><dd><tt>Registers&nbsp;an&nbsp;image&nbsp;extension.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be<br>
+used&nbsp;in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;An&nbsp;image&nbsp;format&nbsp;identifier.<br>
+:param&nbsp;extension:&nbsp;An&nbsp;extension&nbsp;used&nbsp;for&nbsp;this&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-register_extensions"><strong>register_extensions</strong></a>(id, extensions)</dt><dd><tt>Registers&nbsp;image&nbsp;extensions.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be<br>
+used&nbsp;in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;An&nbsp;image&nbsp;format&nbsp;identifier.<br>
+:param&nbsp;extensions:&nbsp;A&nbsp;list&nbsp;of&nbsp;extensions&nbsp;used&nbsp;for&nbsp;this&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-register_mime"><strong>register_mime</strong></a>(id, mimetype)</dt><dd><tt>Registers&nbsp;an&nbsp;image&nbsp;MIME&nbsp;type.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be&nbsp;used<br>
+in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;An&nbsp;image&nbsp;format&nbsp;identifier.<br>
+:param&nbsp;mimetype:&nbsp;The&nbsp;image&nbsp;MIME&nbsp;type&nbsp;for&nbsp;this&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-register_open"><strong>register_open</strong></a>(id, factory, accept=None)</dt><dd><tt>Register&nbsp;an&nbsp;image&nbsp;file&nbsp;plugin.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be&nbsp;used<br>
+in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;An&nbsp;image&nbsp;format&nbsp;identifier.<br>
+:param&nbsp;factory:&nbsp;An&nbsp;image&nbsp;file&nbsp;factory&nbsp;method.<br>
+:param&nbsp;accept:&nbsp;An&nbsp;optional&nbsp;function&nbsp;that&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;quickly<br>
+&nbsp;&nbsp;&nbsp;reject&nbsp;images&nbsp;having&nbsp;another&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-register_save"><strong>register_save</strong></a>(id, driver)</dt><dd><tt>Registers&nbsp;an&nbsp;image&nbsp;save&nbsp;function.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be<br>
+used&nbsp;in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;An&nbsp;image&nbsp;format&nbsp;identifier.<br>
+:param&nbsp;driver:&nbsp;A&nbsp;function&nbsp;to&nbsp;save&nbsp;images&nbsp;in&nbsp;this&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-register_save_all"><strong>register_save_all</strong></a>(id, driver)</dt><dd><tt>Registers&nbsp;an&nbsp;image&nbsp;function&nbsp;to&nbsp;save&nbsp;all&nbsp;the&nbsp;frames<br>
+of&nbsp;a&nbsp;multiframe&nbsp;format.&nbsp;&nbsp;This&nbsp;function&nbsp;should&nbsp;not&nbsp;be<br>
+used&nbsp;in&nbsp;application&nbsp;code.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;An&nbsp;image&nbsp;format&nbsp;identifier.<br>
+:param&nbsp;driver:&nbsp;A&nbsp;function&nbsp;to&nbsp;save&nbsp;images&nbsp;in&nbsp;this&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-registered_extensions"><strong>registered_extensions</strong></a>()</dt><dd><tt>Returns&nbsp;a&nbsp;dictionary&nbsp;containing&nbsp;all&nbsp;file&nbsp;extensions&nbsp;belonging<br>
+to&nbsp;registered&nbsp;plugins</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ADAPTIVE</strong> = 1<br>
+<strong>AFFINE</strong> = 0<br>
+<strong>ANTIALIAS</strong> = 1<br>
+<strong>BICUBIC</strong> = 3<br>
+<strong>BILINEAR</strong> = 2<br>
+<strong>BOX</strong> = 4<br>
+<strong>CONTAINER</strong> = 2<br>
+<strong>CUBIC</strong> = 3<br>
+<strong>DECODERS</strong> = {}<br>
+<strong>DEFAULT_STRATEGY</strong> = 0<br>
+<strong>ENCODERS</strong> = {}<br>
+<strong>EXTENSION</strong> = {}<br>
+<strong>EXTENT</strong> = 1<br>
+<strong>FASTOCTREE</strong> = 2<br>
+<strong>FILTERED</strong> = 1<br>
+<strong>FIXED</strong> = 4<br>
+<strong>FLIP_LEFT_RIGHT</strong> = 0<br>
+<strong>FLIP_TOP_BOTTOM</strong> = 1<br>
+<strong>FLOYDSTEINBERG</strong> = 3<br>
+<strong>HAMMING</strong> = 5<br>
+<strong>HUFFMAN_ONLY</strong> = 2<br>
+<strong>ID</strong> = []<br>
+<strong>LANCZOS</strong> = 1<br>
+<strong>LIBIMAGEQUANT</strong> = 3<br>
+<strong>LINEAR</strong> = 2<br>
+<strong>MAXCOVERAGE</strong> = 1<br>
+<strong>MAX_IMAGE_PIXELS</strong> = 89478485<br>
+<strong>MEDIANCUT</strong> = 0<br>
+<strong>MESH</strong> = 4<br>
+<strong>MIME</strong> = {}<br>
+<strong>MODES</strong> = ['1', 'CMYK', 'F', 'HSV', 'I', 'L', 'LAB', 'P', 'RGB', 'RGBA', 'RGBX', 'YCbCr']<br>
+<strong>NEAREST</strong> = 0<br>
+<strong>NONE</strong> = 0<br>
+<strong>NORMAL</strong> = 0<br>
+<strong>OPEN</strong> = {}<br>
+<strong>ORDERED</strong> = 1<br>
+<strong>PERSPECTIVE</strong> = 2<br>
+<strong>QUAD</strong> = 3<br>
+<strong>RASTERIZE</strong> = 2<br>
+<strong>RLE</strong> = 3<br>
+<strong>ROTATE_180</strong> = 3<br>
+<strong>ROTATE_270</strong> = 4<br>
+<strong>ROTATE_90</strong> = 2<br>
+<strong>SAVE</strong> = {}<br>
+<strong>SAVE_ALL</strong> = {}<br>
+<strong>SEQUENCE</strong> = 1<br>
+<strong>TRANSPOSE</strong> = 5<br>
+<strong>TRANSVERSE</strong> = 6<br>
+<strong>USE_CFFI_ACCESS</strong> = False<br>
+<strong>WEB</strong> = 0<br>
+<strong>cffi</strong> = None<br>
+<strong>logger</strong> = &lt;Logger PIL.Image (WARNING)&gt;</td></tr></table>
+</body></html>

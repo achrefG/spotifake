@@ -1,0 +1,2253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module io</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>io</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3.9/io.py">/usr/lib/python3.9/io.py</a><br><a href="https://docs.python.org/3.9/library/io">Module Reference</a></font></td></tr></table>
+    <p><tt>The&nbsp;io&nbsp;module&nbsp;provides&nbsp;the&nbsp;Python&nbsp;interfaces&nbsp;to&nbsp;stream&nbsp;handling.&nbsp;The<br>
+builtin&nbsp;open&nbsp;function&nbsp;is&nbsp;defined&nbsp;in&nbsp;this&nbsp;module.<br>
+&nbsp;<br>
+At&nbsp;the&nbsp;top&nbsp;of&nbsp;the&nbsp;I/O&nbsp;hierarchy&nbsp;is&nbsp;the&nbsp;abstract&nbsp;base&nbsp;class&nbsp;<a href="#IOBase">IOBase</a>.&nbsp;It<br>
+defines&nbsp;the&nbsp;basic&nbsp;interface&nbsp;to&nbsp;a&nbsp;stream.&nbsp;Note,&nbsp;however,&nbsp;that&nbsp;there&nbsp;is&nbsp;no<br>
+separation&nbsp;between&nbsp;reading&nbsp;and&nbsp;writing&nbsp;to&nbsp;streams;&nbsp;implementations&nbsp;are<br>
+allowed&nbsp;to&nbsp;raise&nbsp;an&nbsp;<a href="builtins.html#OSError">OSError</a>&nbsp;if&nbsp;they&nbsp;do&nbsp;not&nbsp;support&nbsp;a&nbsp;given&nbsp;operation.<br>
+&nbsp;<br>
+Extending&nbsp;<a href="#IOBase">IOBase</a>&nbsp;is&nbsp;<a href="#RawIOBase">RawIOBase</a>&nbsp;which&nbsp;deals&nbsp;simply&nbsp;with&nbsp;the&nbsp;reading&nbsp;and<br>
+writing&nbsp;of&nbsp;raw&nbsp;bytes&nbsp;to&nbsp;a&nbsp;stream.&nbsp;<a href="#FileIO">FileIO</a>&nbsp;subclasses&nbsp;<a href="#RawIOBase">RawIOBase</a>&nbsp;to&nbsp;provide<br>
+an&nbsp;interface&nbsp;to&nbsp;OS&nbsp;files.<br>
+&nbsp;<br>
+<a href="#BufferedIOBase">BufferedIOBase</a>&nbsp;deals&nbsp;with&nbsp;buffering&nbsp;on&nbsp;a&nbsp;raw&nbsp;byte&nbsp;stream&nbsp;(<a href="#RawIOBase">RawIOBase</a>).&nbsp;Its<br>
+subclasses,&nbsp;<a href="#BufferedWriter">BufferedWriter</a>,&nbsp;<a href="#BufferedReader">BufferedReader</a>,&nbsp;and&nbsp;<a href="#BufferedRWPair">BufferedRWPair</a>&nbsp;buffer<br>
+streams&nbsp;that&nbsp;are&nbsp;readable,&nbsp;writable,&nbsp;and&nbsp;both&nbsp;respectively.<br>
+<a href="#BufferedRandom">BufferedRandom</a>&nbsp;provides&nbsp;a&nbsp;buffered&nbsp;interface&nbsp;to&nbsp;random&nbsp;access<br>
+streams.&nbsp;<a href="#BytesIO">BytesIO</a>&nbsp;is&nbsp;a&nbsp;simple&nbsp;stream&nbsp;of&nbsp;in-memory&nbsp;bytes.<br>
+&nbsp;<br>
+Another&nbsp;<a href="#IOBase">IOBase</a>&nbsp;subclass,&nbsp;<a href="#TextIOBase">TextIOBase</a>,&nbsp;deals&nbsp;with&nbsp;the&nbsp;encoding&nbsp;and&nbsp;decoding<br>
+of&nbsp;streams&nbsp;into&nbsp;text.&nbsp;<a href="#TextIOWrapper">TextIOWrapper</a>,&nbsp;which&nbsp;extends&nbsp;it,&nbsp;is&nbsp;a&nbsp;buffered&nbsp;text<br>
+interface&nbsp;to&nbsp;a&nbsp;buffered&nbsp;raw&nbsp;stream&nbsp;(`<a href="#BufferedIOBase">BufferedIOBase</a>`).&nbsp;Finally,&nbsp;<a href="#StringIO">StringIO</a><br>
+is&nbsp;an&nbsp;in-memory&nbsp;stream&nbsp;for&nbsp;text.<br>
+&nbsp;<br>
+Argument&nbsp;names&nbsp;are&nbsp;not&nbsp;part&nbsp;of&nbsp;the&nbsp;specification,&nbsp;and&nbsp;only&nbsp;the&nbsp;arguments<br>
+of&nbsp;<a href="#-open">open</a>()&nbsp;are&nbsp;intended&nbsp;to&nbsp;be&nbsp;used&nbsp;as&nbsp;keyword&nbsp;arguments.<br>
+&nbsp;<br>
+data:<br>
+&nbsp;<br>
+DEFAULT_BUFFER_SIZE<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;int&nbsp;containing&nbsp;the&nbsp;default&nbsp;buffer&nbsp;size&nbsp;used&nbsp;by&nbsp;the&nbsp;module's&nbsp;buffered<br>
+&nbsp;&nbsp;&nbsp;I/O&nbsp;classes.&nbsp;<a href="#-open">open</a>()&nbsp;uses&nbsp;the&nbsp;file's&nbsp;blksize&nbsp;(as&nbsp;obtained&nbsp;by&nbsp;os.stat)&nbsp;if<br>
+&nbsp;&nbsp;&nbsp;possible.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="io.html">io</a><br>
+</td><td width="25%" valign=top><a href="abc.html">abc</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="io.html#_BufferedIOBase">_io._BufferedIOBase</a>(<a href="io.html#_IOBase">_io._IOBase</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="io.html#BufferedRWPair">_io.BufferedRWPair</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#BufferedRandom">_io.BufferedRandom</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#BufferedReader">_io.BufferedReader</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#BufferedWriter">_io.BufferedWriter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#BytesIO">_io.BytesIO</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#BufferedIOBase">BufferedIOBase</a>(<a href="io.html#_BufferedIOBase">_io._BufferedIOBase</a>, <a href="io.html#IOBase">IOBase</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="io.html#_IOBase">_io._IOBase</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="io.html#IOBase">IOBase</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="io.html#BufferedIOBase">BufferedIOBase</a>(<a href="io.html#_BufferedIOBase">_io._BufferedIOBase</a>, <a href="io.html#IOBase">IOBase</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#RawIOBase">RawIOBase</a>(<a href="io.html#_RawIOBase">_io._RawIOBase</a>, <a href="io.html#IOBase">IOBase</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#TextIOBase">TextIOBase</a>(<a href="io.html#_TextIOBase">_io._TextIOBase</a>, <a href="io.html#IOBase">IOBase</a>)
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="io.html#_RawIOBase">_io._RawIOBase</a>(<a href="io.html#_IOBase">_io._IOBase</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="io.html#FileIO">_io.FileIO</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#RawIOBase">RawIOBase</a>(<a href="io.html#_RawIOBase">_io._RawIOBase</a>, <a href="io.html#IOBase">IOBase</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="io.html#_TextIOBase">_io._TextIOBase</a>(<a href="io.html#_IOBase">_io._IOBase</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="io.html#StringIO">_io.StringIO</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#TextIOWrapper">_io.TextIOWrapper</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#TextIOBase">TextIOBase</a>(<a href="io.html#_TextIOBase">_io._TextIOBase</a>, <a href="io.html#IOBase">IOBase</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#OSError">builtins.OSError</a>(<a href="builtins.html#Exception">builtins.Exception</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#BlockingIOError">builtins.BlockingIOError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="io.html#UnsupportedOperation">UnsupportedOperation</a>(<a href="builtins.html#OSError">builtins.OSError</a>, <a href="builtins.html#ValueError">builtins.ValueError</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#ValueError">builtins.ValueError</a>(<a href="builtins.html#Exception">builtins.Exception</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="io.html#UnsupportedOperation">UnsupportedOperation</a>(<a href="builtins.html#OSError">builtins.OSError</a>, <a href="builtins.html#ValueError">builtins.ValueError</a>)
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BlockingIOError">class <strong>BlockingIOError</strong></a>(<a href="builtins.html#OSError">OSError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>I/O&nbsp;operation&nbsp;would&nbsp;block.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="builtins.html#BlockingIOError">BlockingIOError</a></dd>
+<dd><a href="builtins.html#OSError">OSError</a></dd>
+<dd><a href="builtins.html#Exception">Exception</a></dd>
+<dd><a href="builtins.html#BaseException">BaseException</a></dd>
+<dd><a href="builtins.html#object">object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BlockingIOError-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#OSError">OSError</a>:<br>
+<dl><dt><a name="BlockingIOError-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="BlockingIOError-__str__"><strong>__str__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="builtins.html#OSError">OSError</a>:<br>
+<dl><dt><a name="BlockingIOError-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#OSError">OSError</a>:<br>
+<dl><dt><strong>characters_written</strong></dt>
+</dl>
+<dl><dt><strong>errno</strong></dt>
+<dd><tt>POSIX&nbsp;exception&nbsp;code</tt></dd>
+</dl>
+<dl><dt><strong>filename</strong></dt>
+<dd><tt>exception&nbsp;filename</tt></dd>
+</dl>
+<dl><dt><strong>filename2</strong></dt>
+<dd><tt>second&nbsp;exception&nbsp;filename</tt></dd>
+</dl>
+<dl><dt><strong>strerror</strong></dt>
+<dd><tt>exception&nbsp;strerror</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="builtins.html#BaseException">BaseException</a>:<br>
+<dl><dt><a name="BlockingIOError-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="BlockingIOError-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="BlockingIOError-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="BlockingIOError-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
+
+<dl><dt><a name="BlockingIOError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BlockingIOError-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><tt>Exception.<a href="#BlockingIOError-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
+set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#BaseException">BaseException</a>:<br>
+<dl><dt><strong>__cause__</strong></dt>
+<dd><tt>exception&nbsp;cause</tt></dd>
+</dl>
+<dl><dt><strong>__context__</strong></dt>
+<dd><tt>exception&nbsp;context</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__suppress_context__</strong></dt>
+</dl>
+<dl><dt><strong>__traceback__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BufferedIOBase">class <strong>BufferedIOBase</strong></a>(<a href="io.html#_BufferedIOBase">_io._BufferedIOBase</a>, <a href="io.html#IOBase">IOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;buffered&nbsp;IO&nbsp;objects.<br>
+&nbsp;<br>
+The&nbsp;main&nbsp;difference&nbsp;with&nbsp;<a href="#RawIOBase">RawIOBase</a>&nbsp;is&nbsp;that&nbsp;the&nbsp;<a href="#BufferedIOBase-read">read</a>()&nbsp;method<br>
+supports&nbsp;omitting&nbsp;the&nbsp;size&nbsp;argument,&nbsp;and&nbsp;does&nbsp;not&nbsp;have&nbsp;a&nbsp;default<br>
+implementation&nbsp;that&nbsp;defers&nbsp;to&nbsp;<a href="#BufferedIOBase-readinto">readinto</a>().<br>
+&nbsp;<br>
+In&nbsp;addition,&nbsp;<a href="#BufferedIOBase-read">read</a>(),&nbsp;<a href="#BufferedIOBase-readinto">readinto</a>()&nbsp;and&nbsp;<a href="#BufferedIOBase-write">write</a>()&nbsp;may&nbsp;raise<br>
+<a href="#BlockingIOError">BlockingIOError</a>&nbsp;if&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;is&nbsp;in&nbsp;non-blocking<br>
+mode&nbsp;and&nbsp;not&nbsp;ready;&nbsp;unlike&nbsp;their&nbsp;raw&nbsp;counterparts,&nbsp;they&nbsp;will&nbsp;never<br>
+return&nbsp;None.<br>
+&nbsp;<br>
+A&nbsp;typical&nbsp;implementation&nbsp;should&nbsp;not&nbsp;inherit&nbsp;from&nbsp;a&nbsp;<a href="#RawIOBase">RawIOBase</a><br>
+implementation,&nbsp;but&nbsp;wrap&nbsp;one.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#BufferedIOBase">BufferedIOBase</a></dd>
+<dd><a href="io.html#_BufferedIOBase">_io._BufferedIOBase</a></dd>
+<dd><a href="io.html#IOBase">IOBase</a></dd>
+<dd><a href="io.html#_IOBase">_io._IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<hr>
+Methods inherited from <a href="io.html#_BufferedIOBase">_io._BufferedIOBase</a>:<br>
+<dl><dt><a name="BufferedIOBase-detach"><strong>detach</strong></a>(self, /)</dt><dd><tt>Disconnect&nbsp;this&nbsp;buffer&nbsp;from&nbsp;its&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;raw&nbsp;stream&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;buffer&nbsp;is&nbsp;in&nbsp;an&nbsp;unusable<br>
+state.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-read"><strong>read</strong></a>(...)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;omitted,&nbsp;None,&nbsp;or&nbsp;negative,&nbsp;reads&nbsp;and<br>
+returns&nbsp;all&nbsp;data&nbsp;until&nbsp;EOF.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;positive,&nbsp;and&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;is<br>
+not&nbsp;'interactive',&nbsp;multiple&nbsp;raw&nbsp;reads&nbsp;may&nbsp;be&nbsp;issued&nbsp;to&nbsp;satisfy<br>
+the&nbsp;byte&nbsp;count&nbsp;(unless&nbsp;EOF&nbsp;is&nbsp;reached&nbsp;first).&nbsp;&nbsp;But&nbsp;for<br>
+interactive&nbsp;raw&nbsp;streams&nbsp;(as&nbsp;well&nbsp;as&nbsp;sockets&nbsp;and&nbsp;pipes),&nbsp;at&nbsp;most<br>
+one&nbsp;raw&nbsp;read&nbsp;will&nbsp;be&nbsp;issued,&nbsp;and&nbsp;a&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;None&nbsp;if&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;was&nbsp;open&nbsp;in&nbsp;non-blocking<br>
+mode&nbsp;and&nbsp;no&nbsp;data&nbsp;is&nbsp;available&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-read1"><strong>read1</strong></a>(...)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes,&nbsp;with&nbsp;at&nbsp;most&nbsp;one&nbsp;<a href="#BufferedIOBase-read">read</a>()&nbsp;call<br>
+to&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream.&nbsp;A&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-readinto"><strong>readinto</strong></a>(self, buffer, /)</dt></dl>
+
+<dl><dt><a name="BufferedIOBase-readinto1"><strong>readinto1</strong></a>(self, buffer, /)</dt></dl>
+
+<dl><dt><a name="BufferedIOBase-write"><strong>write</strong></a>(...)</dt><dd><tt>Write&nbsp;the&nbsp;given&nbsp;buffer&nbsp;to&nbsp;the&nbsp;IO&nbsp;stream.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written,&nbsp;which&nbsp;is&nbsp;always&nbsp;the&nbsp;length&nbsp;of&nbsp;b<br>
+in&nbsp;bytes.<br>
+&nbsp;<br>
+Raises&nbsp;<a href="#BlockingIOError">BlockingIOError</a>&nbsp;if&nbsp;the&nbsp;buffer&nbsp;is&nbsp;full&nbsp;and&nbsp;the<br>
+underlying&nbsp;raw&nbsp;stream&nbsp;cannot&nbsp;accept&nbsp;more&nbsp;data&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="BufferedIOBase-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedIOBase-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedIOBase-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedIOBase-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedIOBase-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-seek"><strong>seek</strong></a>(...)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedIOBase-seek">seek</a>(),&nbsp;<a href="#BufferedIOBase-tell">tell</a>()&nbsp;and&nbsp;<a href="#BufferedIOBase-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#BufferedIOBase-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-truncate"><strong>truncate</strong></a>(...)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#BufferedIOBase-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedIOBase-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedIOBase-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="BufferedIOBase-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BufferedRWPair">class <strong>BufferedRWPair</strong></a>(<a href="io.html#_BufferedIOBase">_BufferedIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#BufferedRWPair">BufferedRWPair</a>(reader,&nbsp;writer,&nbsp;buffer_size=8192,&nbsp;/)<br>
+&nbsp;<br>
+A&nbsp;buffered&nbsp;reader&nbsp;and&nbsp;writer&nbsp;object&nbsp;together.<br>
+&nbsp;<br>
+A&nbsp;buffered&nbsp;reader&nbsp;object&nbsp;and&nbsp;buffered&nbsp;writer&nbsp;object&nbsp;put&nbsp;together&nbsp;to<br>
+form&nbsp;a&nbsp;sequential&nbsp;IO&nbsp;object&nbsp;that&nbsp;can&nbsp;read&nbsp;and&nbsp;write.&nbsp;This&nbsp;is&nbsp;typically<br>
+used&nbsp;with&nbsp;a&nbsp;socket&nbsp;or&nbsp;two-way&nbsp;pipe.<br>
+&nbsp;<br>
+reader&nbsp;and&nbsp;writer&nbsp;are&nbsp;<a href="#RawIOBase">RawIOBase</a>&nbsp;objects&nbsp;that&nbsp;are&nbsp;readable&nbsp;and<br>
+writeable&nbsp;respectively.&nbsp;If&nbsp;the&nbsp;buffer_size&nbsp;is&nbsp;omitted&nbsp;it&nbsp;defaults&nbsp;to<br>
+DEFAULT_BUFFER_SIZE.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#BufferedRWPair">BufferedRWPair</a></dd>
+<dd><a href="io.html#_BufferedIOBase">_BufferedIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BufferedRWPair-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-close"><strong>close</strong></a>(...)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-flush"><strong>flush</strong></a>(...)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-isatty"><strong>isatty</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-peek"><strong>peek</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRWPair-read"><strong>read</strong></a>(...)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;omitted,&nbsp;None,&nbsp;or&nbsp;negative,&nbsp;reads&nbsp;and<br>
+returns&nbsp;all&nbsp;data&nbsp;until&nbsp;EOF.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;positive,&nbsp;and&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;is<br>
+not&nbsp;'interactive',&nbsp;multiple&nbsp;raw&nbsp;reads&nbsp;may&nbsp;be&nbsp;issued&nbsp;to&nbsp;satisfy<br>
+the&nbsp;byte&nbsp;count&nbsp;(unless&nbsp;EOF&nbsp;is&nbsp;reached&nbsp;first).&nbsp;&nbsp;But&nbsp;for<br>
+interactive&nbsp;raw&nbsp;streams&nbsp;(as&nbsp;well&nbsp;as&nbsp;sockets&nbsp;and&nbsp;pipes),&nbsp;at&nbsp;most<br>
+one&nbsp;raw&nbsp;read&nbsp;will&nbsp;be&nbsp;issued,&nbsp;and&nbsp;a&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;None&nbsp;if&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;was&nbsp;open&nbsp;in&nbsp;non-blocking<br>
+mode&nbsp;and&nbsp;no&nbsp;data&nbsp;is&nbsp;available&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-read1"><strong>read1</strong></a>(...)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes,&nbsp;with&nbsp;at&nbsp;most&nbsp;one&nbsp;<a href="#BufferedRWPair-read">read</a>()&nbsp;call<br>
+to&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream.&nbsp;A&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-readable"><strong>readable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedRWPair-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-readinto"><strong>readinto</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRWPair-readinto1"><strong>readinto1</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRWPair-writable"><strong>writable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedRWPair-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-write"><strong>write</strong></a>(...)</dt><dd><tt>Write&nbsp;the&nbsp;given&nbsp;buffer&nbsp;to&nbsp;the&nbsp;IO&nbsp;stream.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written,&nbsp;which&nbsp;is&nbsp;always&nbsp;the&nbsp;length&nbsp;of&nbsp;b<br>
+in&nbsp;bytes.<br>
+&nbsp;<br>
+Raises&nbsp;<a href="#BlockingIOError">BlockingIOError</a>&nbsp;if&nbsp;the&nbsp;buffer&nbsp;is&nbsp;full&nbsp;and&nbsp;the<br>
+underlying&nbsp;raw&nbsp;stream&nbsp;cannot&nbsp;accept&nbsp;more&nbsp;data&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="BufferedRWPair-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_BufferedIOBase">_BufferedIOBase</a>:<br>
+<dl><dt><a name="BufferedRWPair-detach"><strong>detach</strong></a>(self, /)</dt><dd><tt>Disconnect&nbsp;this&nbsp;buffer&nbsp;from&nbsp;its&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;raw&nbsp;stream&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;buffer&nbsp;is&nbsp;in&nbsp;an&nbsp;unusable<br>
+state.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="BufferedRWPair-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRWPair-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRWPair-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRWPair-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-seek"><strong>seek</strong></a>(...)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedRWPair-seek">seek</a>(),&nbsp;<a href="#BufferedRWPair-tell">tell</a>()&nbsp;and&nbsp;<a href="#BufferedRWPair-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#BufferedRWPair-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-truncate"><strong>truncate</strong></a>(...)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#BufferedRWPair-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRWPair-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BufferedRandom">class <strong>BufferedRandom</strong></a>(<a href="io.html#_BufferedIOBase">_BufferedIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#BufferedRandom">BufferedRandom</a>(raw,&nbsp;buffer_size=8192)<br>
+&nbsp;<br>
+A&nbsp;buffered&nbsp;interface&nbsp;to&nbsp;random&nbsp;access&nbsp;streams.<br>
+&nbsp;<br>
+The&nbsp;constructor&nbsp;creates&nbsp;a&nbsp;reader&nbsp;and&nbsp;writer&nbsp;for&nbsp;a&nbsp;seekable&nbsp;stream,<br>
+raw,&nbsp;given&nbsp;in&nbsp;the&nbsp;first&nbsp;argument.&nbsp;If&nbsp;the&nbsp;buffer_size&nbsp;is&nbsp;omitted&nbsp;it<br>
+defaults&nbsp;to&nbsp;DEFAULT_BUFFER_SIZE.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#BufferedRandom">BufferedRandom</a></dd>
+<dd><a href="io.html#_BufferedIOBase">_BufferedIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BufferedRandom-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>Size&nbsp;of&nbsp;object&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-close"><strong>close</strong></a>(...)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-detach"><strong>detach</strong></a>(...)</dt><dd><tt>Disconnect&nbsp;this&nbsp;buffer&nbsp;from&nbsp;its&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;raw&nbsp;stream&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;buffer&nbsp;is&nbsp;in&nbsp;an&nbsp;unusable<br>
+state.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-fileno"><strong>fileno</strong></a>(...)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-flush"><strong>flush</strong></a>(...)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-isatty"><strong>isatty</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-peek"><strong>peek</strong></a>(self, size=0, /)</dt></dl>
+
+<dl><dt><a name="BufferedRandom-read"><strong>read</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;omitted,&nbsp;None,&nbsp;or&nbsp;negative,&nbsp;reads&nbsp;and<br>
+returns&nbsp;all&nbsp;data&nbsp;until&nbsp;EOF.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;positive,&nbsp;and&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;is<br>
+not&nbsp;'interactive',&nbsp;multiple&nbsp;raw&nbsp;reads&nbsp;may&nbsp;be&nbsp;issued&nbsp;to&nbsp;satisfy<br>
+the&nbsp;byte&nbsp;count&nbsp;(unless&nbsp;EOF&nbsp;is&nbsp;reached&nbsp;first).&nbsp;&nbsp;But&nbsp;for<br>
+interactive&nbsp;raw&nbsp;streams&nbsp;(as&nbsp;well&nbsp;as&nbsp;sockets&nbsp;and&nbsp;pipes),&nbsp;at&nbsp;most<br>
+one&nbsp;raw&nbsp;read&nbsp;will&nbsp;be&nbsp;issued,&nbsp;and&nbsp;a&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;None&nbsp;if&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;was&nbsp;open&nbsp;in&nbsp;non-blocking<br>
+mode&nbsp;and&nbsp;no&nbsp;data&nbsp;is&nbsp;available&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-read1"><strong>read1</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes,&nbsp;with&nbsp;at&nbsp;most&nbsp;one&nbsp;<a href="#BufferedRandom-read">read</a>()&nbsp;call<br>
+to&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream.&nbsp;A&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-readable"><strong>readable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedRandom-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-readinto"><strong>readinto</strong></a>(self, buffer, /)</dt></dl>
+
+<dl><dt><a name="BufferedRandom-readinto1"><strong>readinto1</strong></a>(self, buffer, /)</dt></dl>
+
+<dl><dt><a name="BufferedRandom-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-seek"><strong>seek</strong></a>(self, target, whence=0, /)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-seekable"><strong>seekable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedRandom-seek">seek</a>(),&nbsp;<a href="#BufferedRandom-tell">tell</a>()&nbsp;and&nbsp;<a href="#BufferedRandom-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#BufferedRandom-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-tell"><strong>tell</strong></a>(...)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-truncate"><strong>truncate</strong></a>(self, pos=None, /)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#BufferedRandom-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-writable"><strong>writable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedRandom-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-write"><strong>write</strong></a>(self, buffer, /)</dt><dd><tt>Write&nbsp;the&nbsp;given&nbsp;buffer&nbsp;to&nbsp;the&nbsp;IO&nbsp;stream.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written,&nbsp;which&nbsp;is&nbsp;always&nbsp;the&nbsp;length&nbsp;of&nbsp;b<br>
+in&nbsp;bytes.<br>
+&nbsp;<br>
+Raises&nbsp;<a href="#BlockingIOError">BlockingIOError</a>&nbsp;if&nbsp;the&nbsp;buffer&nbsp;is&nbsp;full&nbsp;and&nbsp;the<br>
+underlying&nbsp;raw&nbsp;stream&nbsp;cannot&nbsp;accept&nbsp;more&nbsp;data&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="BufferedRandom-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+<dl><dt><strong>mode</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>raw</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="BufferedRandom-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRandom-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRandom-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedRandom-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="BufferedRandom-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BufferedReader">class <strong>BufferedReader</strong></a>(<a href="io.html#_BufferedIOBase">_BufferedIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#BufferedReader">BufferedReader</a>(raw,&nbsp;buffer_size=8192)<br>
+&nbsp;<br>
+Create&nbsp;a&nbsp;new&nbsp;buffered&nbsp;reader&nbsp;using&nbsp;the&nbsp;given&nbsp;readable&nbsp;raw&nbsp;IO&nbsp;object.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#BufferedReader">BufferedReader</a></dd>
+<dd><a href="io.html#_BufferedIOBase">_BufferedIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BufferedReader-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>Size&nbsp;of&nbsp;object&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-close"><strong>close</strong></a>(...)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-detach"><strong>detach</strong></a>(...)</dt><dd><tt>Disconnect&nbsp;this&nbsp;buffer&nbsp;from&nbsp;its&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;raw&nbsp;stream&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;buffer&nbsp;is&nbsp;in&nbsp;an&nbsp;unusable<br>
+state.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-fileno"><strong>fileno</strong></a>(...)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-flush"><strong>flush</strong></a>(...)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-isatty"><strong>isatty</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-peek"><strong>peek</strong></a>(self, size=0, /)</dt></dl>
+
+<dl><dt><a name="BufferedReader-read"><strong>read</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;omitted,&nbsp;None,&nbsp;or&nbsp;negative,&nbsp;reads&nbsp;and<br>
+returns&nbsp;all&nbsp;data&nbsp;until&nbsp;EOF.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;positive,&nbsp;and&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;is<br>
+not&nbsp;'interactive',&nbsp;multiple&nbsp;raw&nbsp;reads&nbsp;may&nbsp;be&nbsp;issued&nbsp;to&nbsp;satisfy<br>
+the&nbsp;byte&nbsp;count&nbsp;(unless&nbsp;EOF&nbsp;is&nbsp;reached&nbsp;first).&nbsp;&nbsp;But&nbsp;for<br>
+interactive&nbsp;raw&nbsp;streams&nbsp;(as&nbsp;well&nbsp;as&nbsp;sockets&nbsp;and&nbsp;pipes),&nbsp;at&nbsp;most<br>
+one&nbsp;raw&nbsp;read&nbsp;will&nbsp;be&nbsp;issued,&nbsp;and&nbsp;a&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;None&nbsp;if&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;was&nbsp;open&nbsp;in&nbsp;non-blocking<br>
+mode&nbsp;and&nbsp;no&nbsp;data&nbsp;is&nbsp;available&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-read1"><strong>read1</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes,&nbsp;with&nbsp;at&nbsp;most&nbsp;one&nbsp;<a href="#BufferedReader-read">read</a>()&nbsp;call<br>
+to&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream.&nbsp;A&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-readable"><strong>readable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedReader-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-readinto"><strong>readinto</strong></a>(self, buffer, /)</dt></dl>
+
+<dl><dt><a name="BufferedReader-readinto1"><strong>readinto1</strong></a>(self, buffer, /)</dt></dl>
+
+<dl><dt><a name="BufferedReader-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-seek"><strong>seek</strong></a>(self, target, whence=0, /)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-seekable"><strong>seekable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedReader-seek">seek</a>(),&nbsp;<a href="#BufferedReader-tell">tell</a>()&nbsp;and&nbsp;<a href="#BufferedReader-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#BufferedReader-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-tell"><strong>tell</strong></a>(...)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-truncate"><strong>truncate</strong></a>(self, pos=None, /)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#BufferedReader-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="BufferedReader-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+<dl><dt><strong>mode</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>raw</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_BufferedIOBase">_BufferedIOBase</a>:<br>
+<dl><dt><a name="BufferedReader-write"><strong>write</strong></a>(...)</dt><dd><tt>Write&nbsp;the&nbsp;given&nbsp;buffer&nbsp;to&nbsp;the&nbsp;IO&nbsp;stream.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written,&nbsp;which&nbsp;is&nbsp;always&nbsp;the&nbsp;length&nbsp;of&nbsp;b<br>
+in&nbsp;bytes.<br>
+&nbsp;<br>
+Raises&nbsp;<a href="#BlockingIOError">BlockingIOError</a>&nbsp;if&nbsp;the&nbsp;buffer&nbsp;is&nbsp;full&nbsp;and&nbsp;the<br>
+underlying&nbsp;raw&nbsp;stream&nbsp;cannot&nbsp;accept&nbsp;more&nbsp;data&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="BufferedReader-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedReader-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedReader-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedReader-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedReader-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedReader-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BufferedWriter">class <strong>BufferedWriter</strong></a>(<a href="io.html#_BufferedIOBase">_BufferedIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#BufferedWriter">BufferedWriter</a>(raw,&nbsp;buffer_size=8192)<br>
+&nbsp;<br>
+A&nbsp;buffer&nbsp;for&nbsp;a&nbsp;writeable&nbsp;sequential&nbsp;RawIO&nbsp;object.<br>
+&nbsp;<br>
+The&nbsp;constructor&nbsp;creates&nbsp;a&nbsp;<a href="#BufferedWriter">BufferedWriter</a>&nbsp;for&nbsp;the&nbsp;given&nbsp;writeable&nbsp;raw<br>
+stream.&nbsp;If&nbsp;the&nbsp;buffer_size&nbsp;is&nbsp;not&nbsp;given,&nbsp;it&nbsp;defaults&nbsp;to<br>
+DEFAULT_BUFFER_SIZE.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#BufferedWriter">BufferedWriter</a></dd>
+<dd><a href="io.html#_BufferedIOBase">_BufferedIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BufferedWriter-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>Size&nbsp;of&nbsp;object&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-close"><strong>close</strong></a>(...)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-detach"><strong>detach</strong></a>(...)</dt><dd><tt>Disconnect&nbsp;this&nbsp;buffer&nbsp;from&nbsp;its&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;raw&nbsp;stream&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;buffer&nbsp;is&nbsp;in&nbsp;an&nbsp;unusable<br>
+state.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-fileno"><strong>fileno</strong></a>(...)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-flush"><strong>flush</strong></a>(...)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-isatty"><strong>isatty</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-seek"><strong>seek</strong></a>(self, target, whence=0, /)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-seekable"><strong>seekable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedWriter-seek">seek</a>(),&nbsp;<a href="#BufferedWriter-tell">tell</a>()&nbsp;and&nbsp;<a href="#BufferedWriter-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#BufferedWriter-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-tell"><strong>tell</strong></a>(...)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-truncate"><strong>truncate</strong></a>(self, pos=None, /)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#BufferedWriter-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-writable"><strong>writable</strong></a>(...)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedWriter-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-write"><strong>write</strong></a>(self, buffer, /)</dt><dd><tt>Write&nbsp;the&nbsp;given&nbsp;buffer&nbsp;to&nbsp;the&nbsp;IO&nbsp;stream.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written,&nbsp;which&nbsp;is&nbsp;always&nbsp;the&nbsp;length&nbsp;of&nbsp;b<br>
+in&nbsp;bytes.<br>
+&nbsp;<br>
+Raises&nbsp;<a href="#BlockingIOError">BlockingIOError</a>&nbsp;if&nbsp;the&nbsp;buffer&nbsp;is&nbsp;full&nbsp;and&nbsp;the<br>
+underlying&nbsp;raw&nbsp;stream&nbsp;cannot&nbsp;accept&nbsp;more&nbsp;data&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="BufferedWriter-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+<dl><dt><strong>mode</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>raw</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_BufferedIOBase">_BufferedIOBase</a>:<br>
+<dl><dt><a name="BufferedWriter-read"><strong>read</strong></a>(...)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;omitted,&nbsp;None,&nbsp;or&nbsp;negative,&nbsp;reads&nbsp;and<br>
+returns&nbsp;all&nbsp;data&nbsp;until&nbsp;EOF.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;positive,&nbsp;and&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;is<br>
+not&nbsp;'interactive',&nbsp;multiple&nbsp;raw&nbsp;reads&nbsp;may&nbsp;be&nbsp;issued&nbsp;to&nbsp;satisfy<br>
+the&nbsp;byte&nbsp;count&nbsp;(unless&nbsp;EOF&nbsp;is&nbsp;reached&nbsp;first).&nbsp;&nbsp;But&nbsp;for<br>
+interactive&nbsp;raw&nbsp;streams&nbsp;(as&nbsp;well&nbsp;as&nbsp;sockets&nbsp;and&nbsp;pipes),&nbsp;at&nbsp;most<br>
+one&nbsp;raw&nbsp;read&nbsp;will&nbsp;be&nbsp;issued,&nbsp;and&nbsp;a&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;None&nbsp;if&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;was&nbsp;open&nbsp;in&nbsp;non-blocking<br>
+mode&nbsp;and&nbsp;no&nbsp;data&nbsp;is&nbsp;available&nbsp;at&nbsp;the&nbsp;moment.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-read1"><strong>read1</strong></a>(...)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;up&nbsp;to&nbsp;n&nbsp;bytes,&nbsp;with&nbsp;at&nbsp;most&nbsp;one&nbsp;<a href="#BufferedWriter-read">read</a>()&nbsp;call<br>
+to&nbsp;the&nbsp;underlying&nbsp;raw&nbsp;stream.&nbsp;A&nbsp;short&nbsp;result&nbsp;does&nbsp;not&nbsp;imply<br>
+that&nbsp;EOF&nbsp;is&nbsp;imminent.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;on&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-readinto"><strong>readinto</strong></a>(self, buffer, /)</dt></dl>
+
+<dl><dt><a name="BufferedWriter-readinto1"><strong>readinto1</strong></a>(self, buffer, /)</dt></dl>
+
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="BufferedWriter-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedWriter-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedWriter-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BufferedWriter-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#BufferedWriter-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="BufferedWriter-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BytesIO">class <strong>BytesIO</strong></a>(<a href="io.html#_BufferedIOBase">_BufferedIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#BytesIO">BytesIO</a>(initial_bytes=b'')<br>
+&nbsp;<br>
+Buffered&nbsp;I/O&nbsp;implementation&nbsp;using&nbsp;an&nbsp;in-memory&nbsp;bytes&nbsp;buffer.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#BytesIO">BytesIO</a></dd>
+<dd><a href="io.html#_BufferedIOBase">_BufferedIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BytesIO-__getstate__"><strong>__getstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BytesIO-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BytesIO-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>Size&nbsp;of&nbsp;object&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Disable&nbsp;all&nbsp;I/O&nbsp;operations.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Does&nbsp;nothing.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-getbuffer"><strong>getbuffer</strong></a>(self, /)</dt><dd><tt>Get&nbsp;a&nbsp;read-write&nbsp;view&nbsp;over&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;<a href="#BytesIO">BytesIO</a>&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-getvalue"><strong>getvalue</strong></a>(self, /)</dt><dd><tt>Retrieve&nbsp;the&nbsp;entire&nbsp;contents&nbsp;of&nbsp;the&nbsp;<a href="#BytesIO">BytesIO</a>&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>Always&nbsp;returns&nbsp;False.<br>
+&nbsp;<br>
+<a href="#BytesIO">BytesIO</a>&nbsp;objects&nbsp;are&nbsp;not&nbsp;connected&nbsp;to&nbsp;a&nbsp;TTY-like&nbsp;device.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-read"><strong>read</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes,&nbsp;returned&nbsp;as&nbsp;a&nbsp;bytes&nbsp;object.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;size&nbsp;argument&nbsp;is&nbsp;negative,&nbsp;read&nbsp;until&nbsp;EOF&nbsp;is&nbsp;reached.<br>
+Return&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;at&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-read1"><strong>read1</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes,&nbsp;returned&nbsp;as&nbsp;a&nbsp;bytes&nbsp;object.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;size&nbsp;argument&nbsp;is&nbsp;negative&nbsp;or&nbsp;omitted,&nbsp;read&nbsp;until&nbsp;EOF&nbsp;is&nbsp;reached.<br>
+Return&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;at&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;can&nbsp;be&nbsp;read.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-readinto"><strong>readinto</strong></a>(self, buffer, /)</dt><dd><tt>Read&nbsp;bytes&nbsp;into&nbsp;buffer.<br>
+&nbsp;<br>
+Returns&nbsp;number&nbsp;of&nbsp;bytes&nbsp;read&nbsp;(0&nbsp;for&nbsp;EOF),&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;object<br>
+is&nbsp;set&nbsp;not&nbsp;to&nbsp;block&nbsp;and&nbsp;has&nbsp;no&nbsp;data&nbsp;to&nbsp;read.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Next&nbsp;line&nbsp;from&nbsp;the&nbsp;file,&nbsp;as&nbsp;a&nbsp;bytes&nbsp;object.<br>
+&nbsp;<br>
+Retain&nbsp;newline.&nbsp;&nbsp;A&nbsp;non-negative&nbsp;size&nbsp;argument&nbsp;limits&nbsp;the&nbsp;maximum<br>
+number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;return&nbsp;(an&nbsp;incomplete&nbsp;line&nbsp;may&nbsp;be&nbsp;returned&nbsp;then).<br>
+Return&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;at&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-readlines"><strong>readlines</strong></a>(self, size=None, /)</dt><dd><tt>List&nbsp;of&nbsp;bytes&nbsp;objects,&nbsp;each&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;file.<br>
+&nbsp;<br>
+Call&nbsp;<a href="#BytesIO-readline">readline</a>()&nbsp;repeatedly&nbsp;and&nbsp;return&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;lines&nbsp;so&nbsp;read.<br>
+The&nbsp;optional&nbsp;size&nbsp;argument,&nbsp;if&nbsp;given,&nbsp;is&nbsp;an&nbsp;approximate&nbsp;bound&nbsp;on&nbsp;the<br>
+total&nbsp;number&nbsp;of&nbsp;bytes&nbsp;in&nbsp;the&nbsp;lines&nbsp;returned.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-seek"><strong>seek</strong></a>(self, pos, whence=0, /)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Seek&nbsp;to&nbsp;byte&nbsp;offset&nbsp;pos&nbsp;relative&nbsp;to&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;Start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default).&nbsp;&nbsp;pos&nbsp;should&nbsp;be&nbsp;&gt;=&nbsp;0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;Current&nbsp;position&nbsp;-&nbsp;pos&nbsp;may&nbsp;be&nbsp;negative;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;End&nbsp;of&nbsp;stream&nbsp;-&nbsp;pos&nbsp;usually&nbsp;negative.<br>
+Returns&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;can&nbsp;be&nbsp;seeked.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Current&nbsp;file&nbsp;position,&nbsp;an&nbsp;integer.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-truncate"><strong>truncate</strong></a>(self, size=None, /)</dt><dd><tt>Truncate&nbsp;the&nbsp;file&nbsp;to&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;file&nbsp;position,&nbsp;as&nbsp;returned&nbsp;by&nbsp;<a href="#BytesIO-tell">tell</a>().<br>
+The&nbsp;current&nbsp;file&nbsp;position&nbsp;is&nbsp;unchanged.&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;can&nbsp;be&nbsp;written.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-write"><strong>write</strong></a>(self, b, /)</dt><dd><tt>Write&nbsp;bytes&nbsp;to&nbsp;file.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;lines&nbsp;to&nbsp;the&nbsp;file.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;newlines&nbsp;are&nbsp;not&nbsp;added.&nbsp;&nbsp;lines&nbsp;can&nbsp;be&nbsp;any&nbsp;iterable&nbsp;object<br>
+producing&nbsp;bytes-like&nbsp;objects.&nbsp;This&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;calling&nbsp;<a href="#BytesIO-write">write</a>()&nbsp;for<br>
+each&nbsp;element.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="BytesIO-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+<dd><tt>True&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;closed.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_BufferedIOBase">_BufferedIOBase</a>:<br>
+<dl><dt><a name="BytesIO-detach"><strong>detach</strong></a>(self, /)</dt><dd><tt>Disconnect&nbsp;this&nbsp;buffer&nbsp;from&nbsp;its&nbsp;underlying&nbsp;raw&nbsp;stream&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;raw&nbsp;stream&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;buffer&nbsp;is&nbsp;in&nbsp;an&nbsp;unusable<br>
+state.</tt></dd></dl>
+
+<dl><dt><a name="BytesIO-readinto1"><strong>readinto1</strong></a>(self, buffer, /)</dt></dl>
+
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="BytesIO-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BytesIO-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BytesIO-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BytesIO-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FileIO">class <strong>FileIO</strong></a>(<a href="io.html#_RawIOBase">_RawIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#FileIO">FileIO</a>(file,&nbsp;mode='r',&nbsp;closefd=True,&nbsp;opener=None)<br>
+&nbsp;<br>
+Open&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+The&nbsp;mode&nbsp;can&nbsp;be&nbsp;'r'&nbsp;(default),&nbsp;'w',&nbsp;'x'&nbsp;or&nbsp;'a'&nbsp;for&nbsp;reading,<br>
+writing,&nbsp;exclusive&nbsp;creation&nbsp;or&nbsp;appending.&nbsp;&nbsp;The&nbsp;file&nbsp;will&nbsp;be&nbsp;created&nbsp;if&nbsp;it<br>
+doesn't&nbsp;exist&nbsp;when&nbsp;opened&nbsp;for&nbsp;writing&nbsp;or&nbsp;appending;&nbsp;it&nbsp;will&nbsp;be&nbsp;truncated<br>
+when&nbsp;opened&nbsp;for&nbsp;writing.&nbsp;&nbsp;A&nbsp;FileExistsError&nbsp;will&nbsp;be&nbsp;raised&nbsp;if&nbsp;it&nbsp;already<br>
+exists&nbsp;when&nbsp;opened&nbsp;for&nbsp;creating.&nbsp;Opening&nbsp;a&nbsp;file&nbsp;for&nbsp;creating&nbsp;implies<br>
+writing&nbsp;so&nbsp;this&nbsp;mode&nbsp;behaves&nbsp;in&nbsp;a&nbsp;similar&nbsp;way&nbsp;to&nbsp;'w'.Add&nbsp;a&nbsp;'+'&nbsp;to&nbsp;the&nbsp;mode<br>
+to&nbsp;allow&nbsp;simultaneous&nbsp;reading&nbsp;and&nbsp;writing.&nbsp;A&nbsp;custom&nbsp;opener&nbsp;can&nbsp;be&nbsp;used&nbsp;by<br>
+passing&nbsp;a&nbsp;callable&nbsp;as&nbsp;*opener*.&nbsp;The&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;the&nbsp;file<br>
+object&nbsp;is&nbsp;then&nbsp;obtained&nbsp;by&nbsp;calling&nbsp;opener&nbsp;with&nbsp;(*name*,&nbsp;*flags*).<br>
+*opener*&nbsp;must&nbsp;return&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor&nbsp;(passing&nbsp;os.open&nbsp;as&nbsp;*opener*<br>
+results&nbsp;in&nbsp;functionality&nbsp;similar&nbsp;to&nbsp;passing&nbsp;None).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#FileIO">FileIO</a></dd>
+<dd><a href="io.html#_RawIOBase">_RawIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FileIO-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="FileIO-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="FileIO-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Close&nbsp;the&nbsp;file.<br>
+&nbsp;<br>
+A&nbsp;closed&nbsp;file&nbsp;cannot&nbsp;be&nbsp;used&nbsp;for&nbsp;further&nbsp;I/O&nbsp;operations.&nbsp;&nbsp;<a href="#FileIO-close">close</a>()&nbsp;may&nbsp;be<br>
+called&nbsp;more&nbsp;than&nbsp;once&nbsp;without&nbsp;error.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Return&nbsp;the&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;(an&nbsp;integer).</tt></dd></dl>
+
+<dl><dt><a name="FileIO-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>True&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;connected&nbsp;to&nbsp;a&nbsp;TTY&nbsp;device.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-read"><strong>read</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes,&nbsp;returned&nbsp;as&nbsp;bytes.<br>
+&nbsp;<br>
+Only&nbsp;makes&nbsp;one&nbsp;system&nbsp;call,&nbsp;so&nbsp;less&nbsp;data&nbsp;may&nbsp;be&nbsp;returned&nbsp;than&nbsp;requested.<br>
+In&nbsp;non-blocking&nbsp;mode,&nbsp;returns&nbsp;None&nbsp;if&nbsp;no&nbsp;data&nbsp;is&nbsp;available.<br>
+Return&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;at&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>True&nbsp;if&nbsp;file&nbsp;was&nbsp;opened&nbsp;in&nbsp;a&nbsp;read&nbsp;mode.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-readall"><strong>readall</strong></a>(self, /)</dt><dd><tt>Read&nbsp;all&nbsp;data&nbsp;from&nbsp;the&nbsp;file,&nbsp;returned&nbsp;as&nbsp;bytes.<br>
+&nbsp;<br>
+In&nbsp;non-blocking&nbsp;mode,&nbsp;returns&nbsp;as&nbsp;much&nbsp;as&nbsp;is&nbsp;immediately&nbsp;available,<br>
+or&nbsp;None&nbsp;if&nbsp;no&nbsp;data&nbsp;is&nbsp;available.&nbsp;&nbsp;Return&nbsp;an&nbsp;empty&nbsp;bytes&nbsp;object&nbsp;at&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-readinto"><strong>readinto</strong></a>(self, buffer, /)</dt><dd><tt>Same&nbsp;as&nbsp;<a href="#RawIOBase">RawIOBase</a>.<a href="#FileIO-readinto">readinto</a>().</tt></dd></dl>
+
+<dl><dt><a name="FileIO-seek"><strong>seek</strong></a>(self, pos, whence=0, /)</dt><dd><tt>Move&nbsp;to&nbsp;new&nbsp;file&nbsp;position&nbsp;and&nbsp;return&nbsp;the&nbsp;file&nbsp;position.<br>
+&nbsp;<br>
+Argument&nbsp;offset&nbsp;is&nbsp;a&nbsp;byte&nbsp;count.&nbsp;&nbsp;Optional&nbsp;argument&nbsp;whence&nbsp;defaults&nbsp;to<br>
+SEEK_SET&nbsp;or&nbsp;0&nbsp;(offset&nbsp;from&nbsp;start&nbsp;of&nbsp;file,&nbsp;offset&nbsp;should&nbsp;be&nbsp;&gt;=&nbsp;0);&nbsp;other&nbsp;values<br>
+are&nbsp;SEEK_CUR&nbsp;or&nbsp;1&nbsp;(move&nbsp;relative&nbsp;to&nbsp;current&nbsp;position,&nbsp;positive&nbsp;or&nbsp;negative),<br>
+and&nbsp;SEEK_END&nbsp;or&nbsp;2&nbsp;(move&nbsp;relative&nbsp;to&nbsp;end&nbsp;of&nbsp;file,&nbsp;usually&nbsp;negative,&nbsp;although<br>
+many&nbsp;platforms&nbsp;allow&nbsp;seeking&nbsp;beyond&nbsp;the&nbsp;end&nbsp;of&nbsp;a&nbsp;file).<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;not&nbsp;all&nbsp;file&nbsp;objects&nbsp;are&nbsp;seekable.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>True&nbsp;if&nbsp;file&nbsp;supports&nbsp;random-access.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Current&nbsp;file&nbsp;position.<br>
+&nbsp;<br>
+Can&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>&nbsp;for&nbsp;non&nbsp;seekable&nbsp;files.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-truncate"><strong>truncate</strong></a>(self, size=None, /)</dt><dd><tt>Truncate&nbsp;the&nbsp;file&nbsp;to&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;and&nbsp;return&nbsp;the&nbsp;truncated&nbsp;size.<br>
+&nbsp;<br>
+Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;file&nbsp;position,&nbsp;as&nbsp;returned&nbsp;by&nbsp;<a href="#FileIO-tell">tell</a>().<br>
+The&nbsp;current&nbsp;file&nbsp;position&nbsp;is&nbsp;changed&nbsp;to&nbsp;the&nbsp;value&nbsp;of&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>True&nbsp;if&nbsp;file&nbsp;was&nbsp;opened&nbsp;in&nbsp;a&nbsp;write&nbsp;mode.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-write"><strong>write</strong></a>(self, b, /)</dt><dd><tt>Write&nbsp;buffer&nbsp;b&nbsp;to&nbsp;file,&nbsp;return&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written.<br>
+&nbsp;<br>
+Only&nbsp;makes&nbsp;one&nbsp;system&nbsp;call,&nbsp;so&nbsp;not&nbsp;all&nbsp;of&nbsp;the&nbsp;data&nbsp;may&nbsp;be&nbsp;written.<br>
+The&nbsp;number&nbsp;of&nbsp;bytes&nbsp;actually&nbsp;written&nbsp;is&nbsp;returned.&nbsp;&nbsp;In&nbsp;non-blocking&nbsp;mode,<br>
+returns&nbsp;None&nbsp;if&nbsp;the&nbsp;write&nbsp;would&nbsp;block.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="FileIO-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+<dd><tt>True&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;closed</tt></dd>
+</dl>
+<dl><dt><strong>closefd</strong></dt>
+<dd><tt>True&nbsp;if&nbsp;the&nbsp;file&nbsp;descriptor&nbsp;will&nbsp;be&nbsp;closed&nbsp;by&nbsp;close().</tt></dd>
+</dl>
+<dl><dt><strong>mode</strong></dt>
+<dd><tt>String&nbsp;giving&nbsp;the&nbsp;file&nbsp;mode</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="FileIO-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="FileIO-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="FileIO-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="FileIO-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="FileIO-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="FileIO-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="FileIO-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IOBase">class <strong>IOBase</strong></a>(<a href="io.html#_IOBase">_io._IOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;abstract&nbsp;base&nbsp;class&nbsp;for&nbsp;all&nbsp;I/O&nbsp;classes,&nbsp;acting&nbsp;on&nbsp;streams&nbsp;of<br>
+bytes.&nbsp;There&nbsp;is&nbsp;no&nbsp;public&nbsp;constructor.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;provides&nbsp;dummy&nbsp;implementations&nbsp;for&nbsp;many&nbsp;methods&nbsp;that<br>
+derived&nbsp;classes&nbsp;can&nbsp;override&nbsp;selectively;&nbsp;the&nbsp;default&nbsp;implementations<br>
+represent&nbsp;a&nbsp;file&nbsp;that&nbsp;cannot&nbsp;be&nbsp;read,&nbsp;written&nbsp;or&nbsp;seeked.<br>
+&nbsp;<br>
+Even&nbsp;though&nbsp;<a href="#IOBase">IOBase</a>&nbsp;does&nbsp;not&nbsp;declare&nbsp;read,&nbsp;readinto,&nbsp;or&nbsp;write&nbsp;because<br>
+their&nbsp;signatures&nbsp;will&nbsp;vary,&nbsp;implementations&nbsp;and&nbsp;clients&nbsp;should<br>
+consider&nbsp;those&nbsp;methods&nbsp;part&nbsp;of&nbsp;the&nbsp;interface.&nbsp;Also,&nbsp;implementations<br>
+may&nbsp;raise&nbsp;<a href="#UnsupportedOperation">UnsupportedOperation</a>&nbsp;when&nbsp;operations&nbsp;they&nbsp;do&nbsp;not&nbsp;support&nbsp;are<br>
+called.<br>
+&nbsp;<br>
+The&nbsp;basic&nbsp;type&nbsp;used&nbsp;for&nbsp;binary&nbsp;data&nbsp;read&nbsp;from&nbsp;or&nbsp;written&nbsp;to&nbsp;a&nbsp;file&nbsp;is<br>
+bytes.&nbsp;Other&nbsp;bytes-like&nbsp;objects&nbsp;are&nbsp;accepted&nbsp;as&nbsp;method&nbsp;arguments&nbsp;too.<br>
+In&nbsp;some&nbsp;cases&nbsp;(such&nbsp;as&nbsp;readinto),&nbsp;a&nbsp;writable&nbsp;object&nbsp;is&nbsp;required.&nbsp;Text<br>
+I/O&nbsp;classes&nbsp;work&nbsp;with&nbsp;str&nbsp;data.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;calling&nbsp;any&nbsp;method&nbsp;(except&nbsp;additional&nbsp;calls&nbsp;to&nbsp;<a href="#IOBase-close">close</a>(),<br>
+which&nbsp;are&nbsp;ignored)&nbsp;on&nbsp;a&nbsp;closed&nbsp;stream&nbsp;should&nbsp;raise&nbsp;a&nbsp;<a href="builtins.html#ValueError">ValueError</a>.<br>
+&nbsp;<br>
+<a href="#IOBase">IOBase</a>&nbsp;(and&nbsp;its&nbsp;subclasses)&nbsp;support&nbsp;the&nbsp;iterator&nbsp;protocol,&nbsp;meaning<br>
+that&nbsp;an&nbsp;<a href="#IOBase">IOBase</a>&nbsp;object&nbsp;can&nbsp;be&nbsp;iterated&nbsp;over&nbsp;yielding&nbsp;the&nbsp;lines&nbsp;in&nbsp;a<br>
+stream.<br>
+&nbsp;<br>
+<a href="#IOBase">IOBase</a>&nbsp;also&nbsp;supports&nbsp;the&nbsp;:keyword:`with`&nbsp;statement.&nbsp;In&nbsp;this&nbsp;example,<br>
+fp&nbsp;is&nbsp;closed&nbsp;after&nbsp;the&nbsp;suite&nbsp;of&nbsp;the&nbsp;with&nbsp;statement&nbsp;is&nbsp;complete:<br>
+&nbsp;<br>
+with&nbsp;<a href="#-open">open</a>('spam.txt',&nbsp;'r')&nbsp;as&nbsp;fp:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fp.write('Spam&nbsp;and&nbsp;eggs!')<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#IOBase">IOBase</a></dd>
+<dd><a href="io.html#_IOBase">_io._IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="IOBase-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="IOBase-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="IOBase-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="IOBase-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="IOBase-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="IOBase-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;read()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-seek"><strong>seek</strong></a>(...)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#IOBase-seek">seek</a>(),&nbsp;<a href="#IOBase-tell">tell</a>()&nbsp;and&nbsp;<a href="#IOBase-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#IOBase-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="IOBase-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-truncate"><strong>truncate</strong></a>(...)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#IOBase-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;write()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="IOBase-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="IOBase-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RawIOBase">class <strong>RawIOBase</strong></a>(<a href="io.html#_RawIOBase">_io._RawIOBase</a>, <a href="io.html#IOBase">IOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;raw&nbsp;binary&nbsp;I/O.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#RawIOBase">RawIOBase</a></dd>
+<dd><a href="io.html#_RawIOBase">_io._RawIOBase</a></dd>
+<dd><a href="io.html#IOBase">IOBase</a></dd>
+<dd><a href="io.html#_IOBase">_io._IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<hr>
+Methods inherited from <a href="io.html#_RawIOBase">_io._RawIOBase</a>:<br>
+<dl><dt><a name="RawIOBase-read"><strong>read</strong></a>(self, size=-1, /)</dt></dl>
+
+<dl><dt><a name="RawIOBase-readall"><strong>readall</strong></a>(self, /)</dt><dd><tt>Read&nbsp;until&nbsp;EOF,&nbsp;using&nbsp;multiple&nbsp;<a href="#RawIOBase-read">read</a>()&nbsp;call.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-readinto"><strong>readinto</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="RawIOBase-write"><strong>write</strong></a>(...)</dt></dl>
+
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="RawIOBase-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="RawIOBase-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="RawIOBase-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="RawIOBase-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#RawIOBase-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;a&nbsp;line&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+If&nbsp;size&nbsp;is&nbsp;specified,&nbsp;at&nbsp;most&nbsp;size&nbsp;bytes&nbsp;will&nbsp;be&nbsp;read.<br>
+&nbsp;<br>
+The&nbsp;line&nbsp;terminator&nbsp;is&nbsp;always&nbsp;b'\n'&nbsp;for&nbsp;binary&nbsp;files;&nbsp;for&nbsp;text<br>
+files,&nbsp;the&nbsp;newlines&nbsp;argument&nbsp;to&nbsp;open&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;select&nbsp;the&nbsp;line<br>
+terminator(s)&nbsp;recognized.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-seek"><strong>seek</strong></a>(...)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#RawIOBase-seek">seek</a>(),&nbsp;<a href="#RawIOBase-tell">tell</a>()&nbsp;and&nbsp;<a href="#RawIOBase-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#RawIOBase-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-truncate"><strong>truncate</strong></a>(...)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#RawIOBase-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#RawIOBase-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="RawIOBase-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="RawIOBase-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="StringIO">class <strong>StringIO</strong></a>(<a href="io.html#_TextIOBase">_TextIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#StringIO">StringIO</a>(initial_value='',&nbsp;newline='\n')<br>
+&nbsp;<br>
+Text&nbsp;I/O&nbsp;implementation&nbsp;using&nbsp;an&nbsp;in-memory&nbsp;buffer.<br>
+&nbsp;<br>
+The&nbsp;initial_value&nbsp;argument&nbsp;sets&nbsp;the&nbsp;value&nbsp;of&nbsp;object.&nbsp;&nbsp;The&nbsp;newline<br>
+argument&nbsp;is&nbsp;like&nbsp;the&nbsp;one&nbsp;of&nbsp;<a href="#TextIOWrapper">TextIOWrapper</a>'s&nbsp;constructor.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#StringIO">StringIO</a></dd>
+<dd><a href="io.html#_TextIOBase">_TextIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="StringIO-__getstate__"><strong>__getstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="StringIO-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="StringIO-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="StringIO-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+Attempting&nbsp;any&nbsp;further&nbsp;operation&nbsp;after&nbsp;the&nbsp;object&nbsp;is&nbsp;closed<br>
+will&nbsp;raise&nbsp;a&nbsp;<a href="builtins.html#ValueError">ValueError</a>.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-getvalue"><strong>getvalue</strong></a>(self, /)</dt><dd><tt>Retrieve&nbsp;the&nbsp;entire&nbsp;contents&nbsp;of&nbsp;the&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-read"><strong>read</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;at&nbsp;most&nbsp;size&nbsp;characters,&nbsp;returned&nbsp;as&nbsp;a&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;negative&nbsp;or&nbsp;omitted,&nbsp;read&nbsp;until&nbsp;EOF<br>
+is&nbsp;reached.&nbsp;Return&nbsp;an&nbsp;empty&nbsp;string&nbsp;at&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;can&nbsp;be&nbsp;read.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;until&nbsp;newline&nbsp;or&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;EOF&nbsp;is&nbsp;hit&nbsp;immediately.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-seek"><strong>seek</strong></a>(self, pos, whence=0, /)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Seek&nbsp;to&nbsp;character&nbsp;offset&nbsp;pos&nbsp;relative&nbsp;to&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;Start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default).&nbsp;&nbsp;pos&nbsp;should&nbsp;be&nbsp;&gt;=&nbsp;0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;Current&nbsp;position&nbsp;-&nbsp;pos&nbsp;must&nbsp;be&nbsp;0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;End&nbsp;of&nbsp;stream&nbsp;-&nbsp;pos&nbsp;must&nbsp;be&nbsp;0.<br>
+Returns&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;can&nbsp;be&nbsp;seeked.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Tell&nbsp;the&nbsp;current&nbsp;file&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-truncate"><strong>truncate</strong></a>(self, pos=None, /)</dt><dd><tt>Truncate&nbsp;size&nbsp;to&nbsp;pos.<br>
+&nbsp;<br>
+The&nbsp;pos&nbsp;argument&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;file&nbsp;position,&nbsp;as<br>
+returned&nbsp;by&nbsp;<a href="#StringIO-tell">tell</a>().&nbsp;&nbsp;The&nbsp;current&nbsp;file&nbsp;position&nbsp;is&nbsp;unchanged.<br>
+Returns&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;can&nbsp;be&nbsp;written.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-write"><strong>write</strong></a>(self, s, /)</dt><dd><tt>Write&nbsp;string&nbsp;to&nbsp;file.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;characters&nbsp;written,&nbsp;which&nbsp;is&nbsp;always&nbsp;equal&nbsp;to<br>
+the&nbsp;length&nbsp;of&nbsp;the&nbsp;string.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="StringIO-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+<dl><dt><strong>line_buffering</strong></dt>
+</dl>
+<dl><dt><strong>newlines</strong></dt>
+<dd><tt>Line&nbsp;endings&nbsp;translated&nbsp;so&nbsp;far.<br>
+&nbsp;<br>
+Only&nbsp;line&nbsp;endings&nbsp;translated&nbsp;during&nbsp;reading&nbsp;are&nbsp;considered.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_TextIOBase">_TextIOBase</a>:<br>
+<dl><dt><a name="StringIO-detach"><strong>detach</strong></a>(...)</dt><dd><tt>Separate&nbsp;the&nbsp;underlying&nbsp;buffer&nbsp;from&nbsp;the&nbsp;<a href="#TextIOBase">TextIOBase</a>&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;underlying&nbsp;buffer&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;TextIO&nbsp;is&nbsp;in&nbsp;an<br>
+unusable&nbsp;state.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_TextIOBase">_TextIOBase</a>:<br>
+<dl><dt><strong>encoding</strong></dt>
+<dd><tt>Encoding&nbsp;of&nbsp;the&nbsp;text&nbsp;stream.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<dl><dt><strong>errors</strong></dt>
+<dd><tt>The&nbsp;error&nbsp;setting&nbsp;of&nbsp;the&nbsp;decoder&nbsp;or&nbsp;encoder.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="StringIO-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="StringIO-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="StringIO-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="StringIO-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="StringIO-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="StringIO-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TextIOBase">class <strong>TextIOBase</strong></a>(<a href="io.html#_TextIOBase">_io._TextIOBase</a>, <a href="io.html#IOBase">IOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;text&nbsp;I/O.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;provides&nbsp;a&nbsp;character&nbsp;and&nbsp;line&nbsp;based&nbsp;interface&nbsp;to&nbsp;stream<br>
+I/O.&nbsp;There&nbsp;is&nbsp;no&nbsp;readinto&nbsp;method&nbsp;because&nbsp;Python's&nbsp;character&nbsp;strings<br>
+are&nbsp;immutable.&nbsp;There&nbsp;is&nbsp;no&nbsp;public&nbsp;constructor.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#TextIOBase">TextIOBase</a></dd>
+<dd><a href="io.html#_TextIOBase">_io._TextIOBase</a></dd>
+<dd><a href="io.html#IOBase">IOBase</a></dd>
+<dd><a href="io.html#_IOBase">_io._IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<hr>
+Methods inherited from <a href="io.html#_TextIOBase">_io._TextIOBase</a>:<br>
+<dl><dt><a name="TextIOBase-detach"><strong>detach</strong></a>(...)</dt><dd><tt>Separate&nbsp;the&nbsp;underlying&nbsp;buffer&nbsp;from&nbsp;the&nbsp;<a href="#TextIOBase">TextIOBase</a>&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;underlying&nbsp;buffer&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;TextIO&nbsp;is&nbsp;in&nbsp;an<br>
+unusable&nbsp;state.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-read"><strong>read</strong></a>(...)</dt><dd><tt>Read&nbsp;at&nbsp;most&nbsp;n&nbsp;characters&nbsp;from&nbsp;stream.<br>
+&nbsp;<br>
+Read&nbsp;from&nbsp;underlying&nbsp;buffer&nbsp;until&nbsp;we&nbsp;have&nbsp;n&nbsp;characters&nbsp;or&nbsp;we&nbsp;hit&nbsp;EOF.<br>
+If&nbsp;n&nbsp;is&nbsp;negative&nbsp;or&nbsp;omitted,&nbsp;read&nbsp;until&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-readline"><strong>readline</strong></a>(...)</dt><dd><tt>Read&nbsp;until&nbsp;newline&nbsp;or&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;EOF&nbsp;is&nbsp;hit&nbsp;immediately.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-write"><strong>write</strong></a>(...)</dt><dd><tt>Write&nbsp;string&nbsp;to&nbsp;stream.<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;characters&nbsp;written&nbsp;(which&nbsp;is&nbsp;always&nbsp;equal&nbsp;to<br>
+the&nbsp;length&nbsp;of&nbsp;the&nbsp;string).</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_TextIOBase">_io._TextIOBase</a>:<br>
+<dl><dt><strong>encoding</strong></dt>
+<dd><tt>Encoding&nbsp;of&nbsp;the&nbsp;text&nbsp;stream.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<dl><dt><strong>errors</strong></dt>
+<dd><tt>The&nbsp;error&nbsp;setting&nbsp;of&nbsp;the&nbsp;decoder&nbsp;or&nbsp;encoder.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<dl><dt><strong>newlines</strong></dt>
+<dd><tt>Line&nbsp;endings&nbsp;translated&nbsp;so&nbsp;far.<br>
+&nbsp;<br>
+Only&nbsp;line&nbsp;endings&nbsp;translated&nbsp;during&nbsp;reading&nbsp;are&nbsp;considered.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="TextIOBase-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TextIOBase-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TextIOBase-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TextIOBase-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#TextIOBase-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-seek"><strong>seek</strong></a>(...)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#TextIOBase-seek">seek</a>(),&nbsp;<a href="#TextIOBase-tell">tell</a>()&nbsp;and&nbsp;<a href="#TextIOBase-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#TextIOBase-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-truncate"><strong>truncate</strong></a>(...)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#TextIOBase-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#TextIOBase-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="TextIOBase-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><a name="TextIOBase-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_io._IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TextIOWrapper">class <strong>TextIOWrapper</strong></a>(<a href="io.html#_TextIOBase">_TextIOBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#TextIOWrapper">TextIOWrapper</a>(buffer,&nbsp;encoding=None,&nbsp;errors=None,&nbsp;newline=None,&nbsp;line_buffering=False,&nbsp;write_through=False)<br>
+&nbsp;<br>
+Character&nbsp;and&nbsp;line&nbsp;based&nbsp;layer&nbsp;over&nbsp;a&nbsp;<a href="#BufferedIOBase">BufferedIOBase</a>&nbsp;object,&nbsp;buffer.<br>
+&nbsp;<br>
+encoding&nbsp;gives&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;encoding&nbsp;that&nbsp;the&nbsp;stream&nbsp;will&nbsp;be<br>
+decoded&nbsp;or&nbsp;encoded&nbsp;with.&nbsp;It&nbsp;defaults&nbsp;to&nbsp;locale.getpreferredencoding(False).<br>
+&nbsp;<br>
+errors&nbsp;determines&nbsp;the&nbsp;strictness&nbsp;of&nbsp;encoding&nbsp;and&nbsp;decoding&nbsp;(see<br>
+help(codecs.Codec)&nbsp;or&nbsp;the&nbsp;documentation&nbsp;for&nbsp;codecs.register)&nbsp;and<br>
+defaults&nbsp;to&nbsp;"strict".<br>
+&nbsp;<br>
+newline&nbsp;controls&nbsp;how&nbsp;line&nbsp;endings&nbsp;are&nbsp;handled.&nbsp;It&nbsp;can&nbsp;be&nbsp;None,&nbsp;'',<br>
+'\n',&nbsp;'\r',&nbsp;and&nbsp;'\r\n'.&nbsp;&nbsp;It&nbsp;works&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;input,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;universal&nbsp;newlines&nbsp;mode&nbsp;is<br>
+&nbsp;&nbsp;enabled.&nbsp;Lines&nbsp;in&nbsp;the&nbsp;input&nbsp;can&nbsp;end&nbsp;in&nbsp;'\n',&nbsp;'\r',&nbsp;or&nbsp;'\r\n',&nbsp;and<br>
+&nbsp;&nbsp;these&nbsp;are&nbsp;translated&nbsp;into&nbsp;'\n'&nbsp;before&nbsp;being&nbsp;returned&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;caller.&nbsp;If&nbsp;it&nbsp;is&nbsp;'',&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;is&nbsp;enabled,&nbsp;but&nbsp;line<br>
+&nbsp;&nbsp;endings&nbsp;are&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.&nbsp;If&nbsp;it&nbsp;has&nbsp;any&nbsp;of<br>
+&nbsp;&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;input&nbsp;lines&nbsp;are&nbsp;only&nbsp;terminated&nbsp;by&nbsp;the&nbsp;given<br>
+&nbsp;&nbsp;string,&nbsp;and&nbsp;the&nbsp;line&nbsp;ending&nbsp;is&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;output,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are<br>
+&nbsp;&nbsp;translated&nbsp;to&nbsp;the&nbsp;system&nbsp;default&nbsp;line&nbsp;separator,&nbsp;os.linesep.&nbsp;If<br>
+&nbsp;&nbsp;newline&nbsp;is&nbsp;''&nbsp;or&nbsp;'\n',&nbsp;no&nbsp;translation&nbsp;takes&nbsp;place.&nbsp;If&nbsp;newline&nbsp;is&nbsp;any<br>
+&nbsp;&nbsp;of&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are&nbsp;translated<br>
+&nbsp;&nbsp;to&nbsp;the&nbsp;given&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;line_buffering&nbsp;is&nbsp;True,&nbsp;a&nbsp;call&nbsp;to&nbsp;flush&nbsp;is&nbsp;implied&nbsp;when&nbsp;a&nbsp;call&nbsp;to<br>
+write&nbsp;contains&nbsp;a&nbsp;newline&nbsp;character.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#TextIOWrapper">TextIOWrapper</a></dd>
+<dd><a href="io.html#_TextIOBase">_TextIOBase</a></dd>
+<dd><a href="io.html#_IOBase">_IOBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TextIOWrapper-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-close"><strong>close</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;and&nbsp;close&nbsp;the&nbsp;IO&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;no&nbsp;effect&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;closed.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-detach"><strong>detach</strong></a>(self, /)</dt><dd><tt>Separate&nbsp;the&nbsp;underlying&nbsp;buffer&nbsp;from&nbsp;the&nbsp;<a href="#TextIOBase">TextIOBase</a>&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;underlying&nbsp;buffer&nbsp;has&nbsp;been&nbsp;detached,&nbsp;the&nbsp;TextIO&nbsp;is&nbsp;in&nbsp;an<br>
+unusable&nbsp;state.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-fileno"><strong>fileno</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;if&nbsp;one&nbsp;exists.<br>
+&nbsp;<br>
+<a href="builtins.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;the&nbsp;IO&nbsp;object&nbsp;does&nbsp;not&nbsp;use&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-flush"><strong>flush</strong></a>(self, /)</dt><dd><tt>Flush&nbsp;write&nbsp;buffers,&nbsp;if&nbsp;applicable.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;not&nbsp;implemented&nbsp;for&nbsp;read-only&nbsp;and&nbsp;non-blocking&nbsp;streams.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-isatty"><strong>isatty</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;this&nbsp;is&nbsp;an&nbsp;'interactive'&nbsp;stream.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;it&nbsp;can't&nbsp;be&nbsp;determined.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-read"><strong>read</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;at&nbsp;most&nbsp;n&nbsp;characters&nbsp;from&nbsp;stream.<br>
+&nbsp;<br>
+Read&nbsp;from&nbsp;underlying&nbsp;buffer&nbsp;until&nbsp;we&nbsp;have&nbsp;n&nbsp;characters&nbsp;or&nbsp;we&nbsp;hit&nbsp;EOF.<br>
+If&nbsp;n&nbsp;is&nbsp;negative&nbsp;or&nbsp;omitted,&nbsp;read&nbsp;until&nbsp;EOF.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-readable"><strong>readable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;reading.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#TextIOWrapper-read">read</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-readline"><strong>readline</strong></a>(self, size=-1, /)</dt><dd><tt>Read&nbsp;until&nbsp;newline&nbsp;or&nbsp;EOF.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;EOF&nbsp;is&nbsp;hit&nbsp;immediately.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-reconfigure"><strong>reconfigure</strong></a>(self, /, *, encoding=None, errors=None, newline=None, line_buffering=None, write_through=None)</dt><dd><tt>Reconfigure&nbsp;the&nbsp;text&nbsp;stream&nbsp;with&nbsp;new&nbsp;parameters.<br>
+&nbsp;<br>
+This&nbsp;also&nbsp;does&nbsp;an&nbsp;implicit&nbsp;stream&nbsp;flush.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-seek"><strong>seek</strong></a>(self, cookie, whence=0, /)</dt><dd><tt>Change&nbsp;stream&nbsp;position.<br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;stream&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;byte&nbsp;offset.&nbsp;The&nbsp;offset&nbsp;is<br>
+interpreted&nbsp;relative&nbsp;to&nbsp;the&nbsp;position&nbsp;indicated&nbsp;by&nbsp;whence.&nbsp;&nbsp;Values<br>
+for&nbsp;whence&nbsp;are:<br>
+&nbsp;<br>
+*&nbsp;0&nbsp;--&nbsp;start&nbsp;of&nbsp;stream&nbsp;(the&nbsp;default);&nbsp;offset&nbsp;should&nbsp;be&nbsp;zero&nbsp;or&nbsp;positive<br>
+*&nbsp;1&nbsp;--&nbsp;current&nbsp;stream&nbsp;position;&nbsp;offset&nbsp;may&nbsp;be&nbsp;negative<br>
+*&nbsp;2&nbsp;--&nbsp;end&nbsp;of&nbsp;stream;&nbsp;offset&nbsp;is&nbsp;usually&nbsp;negative<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;absolute&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-seekable"><strong>seekable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;supports&nbsp;random&nbsp;access.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#TextIOWrapper-seek">seek</a>(),&nbsp;<a href="#TextIOWrapper-tell">tell</a>()&nbsp;and&nbsp;<a href="#TextIOWrapper-truncate">truncate</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.<br>
+This&nbsp;method&nbsp;may&nbsp;need&nbsp;to&nbsp;do&nbsp;a&nbsp;test&nbsp;<a href="#TextIOWrapper-seek">seek</a>().</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-tell"><strong>tell</strong></a>(self, /)</dt><dd><tt>Return&nbsp;current&nbsp;stream&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-truncate"><strong>truncate</strong></a>(self, pos=None, /)</dt><dd><tt>Truncate&nbsp;file&nbsp;to&nbsp;size&nbsp;bytes.<br>
+&nbsp;<br>
+File&nbsp;pointer&nbsp;is&nbsp;left&nbsp;unchanged.&nbsp;&nbsp;Size&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;IO<br>
+position&nbsp;as&nbsp;reported&nbsp;by&nbsp;<a href="#TextIOWrapper-tell">tell</a>().&nbsp;&nbsp;Returns&nbsp;the&nbsp;new&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-writable"><strong>writable</strong></a>(self, /)</dt><dd><tt>Return&nbsp;whether&nbsp;object&nbsp;was&nbsp;opened&nbsp;for&nbsp;writing.<br>
+&nbsp;<br>
+If&nbsp;False,&nbsp;<a href="#TextIOWrapper-write">write</a>()&nbsp;will&nbsp;raise&nbsp;<a href="builtins.html#OSError">OSError</a>.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-write"><strong>write</strong></a>(self, text, /)</dt><dd><tt>Write&nbsp;string&nbsp;to&nbsp;stream.<br>
+Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;characters&nbsp;written&nbsp;(which&nbsp;is&nbsp;always&nbsp;equal&nbsp;to<br>
+the&nbsp;length&nbsp;of&nbsp;the&nbsp;string).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="TextIOWrapper-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>buffer</strong></dt>
+</dl>
+<dl><dt><strong>closed</strong></dt>
+</dl>
+<dl><dt><strong>encoding</strong></dt>
+<dd><tt>Encoding&nbsp;of&nbsp;the&nbsp;text&nbsp;stream.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<dl><dt><strong>errors</strong></dt>
+<dd><tt>The&nbsp;error&nbsp;setting&nbsp;of&nbsp;the&nbsp;decoder&nbsp;or&nbsp;encoder.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<dl><dt><strong>line_buffering</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>newlines</strong></dt>
+<dd><tt>Line&nbsp;endings&nbsp;translated&nbsp;so&nbsp;far.<br>
+&nbsp;<br>
+Only&nbsp;line&nbsp;endings&nbsp;translated&nbsp;during&nbsp;reading&nbsp;are&nbsp;considered.<br>
+&nbsp;<br>
+Subclasses&nbsp;should&nbsp;override.</tt></dd>
+</dl>
+<dl><dt><strong>write_through</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><a name="TextIOWrapper-__del__"><strong>__del__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TextIOWrapper-__enter__"><strong>__enter__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TextIOWrapper-__exit__"><strong>__exit__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TextIOWrapper-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-readlines"><strong>readlines</strong></a>(self, hint=-1, /)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;from&nbsp;the&nbsp;stream.<br>
+&nbsp;<br>
+hint&nbsp;can&nbsp;be&nbsp;specified&nbsp;to&nbsp;control&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;read:&nbsp;no&nbsp;more<br>
+lines&nbsp;will&nbsp;be&nbsp;read&nbsp;if&nbsp;the&nbsp;total&nbsp;size&nbsp;(in&nbsp;bytes/characters)&nbsp;of&nbsp;all<br>
+lines&nbsp;so&nbsp;far&nbsp;exceeds&nbsp;hint.</tt></dd></dl>
+
+<dl><dt><a name="TextIOWrapper-writelines"><strong>writelines</strong></a>(self, lines, /)</dt><dd><tt>Write&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;to&nbsp;stream.<br>
+&nbsp;<br>
+Line&nbsp;separators&nbsp;are&nbsp;not&nbsp;added,&nbsp;so&nbsp;it&nbsp;is&nbsp;usual&nbsp;for&nbsp;each&nbsp;of&nbsp;the<br>
+lines&nbsp;provided&nbsp;to&nbsp;have&nbsp;a&nbsp;line&nbsp;separator&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="io.html#_IOBase">_IOBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="UnsupportedOperation">class <strong>UnsupportedOperation</strong></a>(<a href="builtins.html#OSError">builtins.OSError</a>, <a href="builtins.html#ValueError">builtins.ValueError</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="io.html#UnsupportedOperation">UnsupportedOperation</a></dd>
+<dd><a href="builtins.html#OSError">builtins.OSError</a></dd>
+<dd><a href="builtins.html#ValueError">builtins.ValueError</a></dd>
+<dd><a href="builtins.html#Exception">builtins.Exception</a></dd>
+<dd><a href="builtins.html#BaseException">builtins.BaseException</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="builtins.html#OSError">builtins.OSError</a>:<br>
+<dl><dt><a name="UnsupportedOperation-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="UnsupportedOperation-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="UnsupportedOperation-__str__"><strong>__str__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="builtins.html#OSError">builtins.OSError</a>:<br>
+<dl><dt><a name="UnsupportedOperation-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#OSError">builtins.OSError</a>:<br>
+<dl><dt><strong>characters_written</strong></dt>
+</dl>
+<dl><dt><strong>errno</strong></dt>
+<dd><tt>POSIX&nbsp;exception&nbsp;code</tt></dd>
+</dl>
+<dl><dt><strong>filename</strong></dt>
+<dd><tt>exception&nbsp;filename</tt></dd>
+</dl>
+<dl><dt><strong>filename2</strong></dt>
+<dd><tt>second&nbsp;exception&nbsp;filename</tt></dd>
+</dl>
+<dl><dt><strong>strerror</strong></dt>
+<dd><tt>exception&nbsp;strerror</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><a name="UnsupportedOperation-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="UnsupportedOperation-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="UnsupportedOperation-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="UnsupportedOperation-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
+
+<dl><dt><a name="UnsupportedOperation-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="UnsupportedOperation-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><tt>Exception.<a href="#UnsupportedOperation-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
+set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><strong>__cause__</strong></dt>
+<dd><tt>exception&nbsp;cause</tt></dd>
+</dl>
+<dl><dt><strong>__context__</strong></dt>
+<dd><tt>exception&nbsp;context</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__suppress_context__</strong></dt>
+</dl>
+<dl><dt><strong>__traceback__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-open"><strong>open</strong></a>(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;<a href="builtins.html#OSError">OSError</a>&nbsp;upon&nbsp;failure.<br>
+&nbsp;<br>
+file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
+if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
+be&nbsp;opened&nbsp;or&nbsp;an&nbsp;integer&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;be<br>
+wrapped.&nbsp;(If&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;given,&nbsp;it&nbsp;is&nbsp;closed&nbsp;when&nbsp;the<br>
+returned&nbsp;I/O&nbsp;object&nbsp;is&nbsp;closed,&nbsp;unless&nbsp;closefd&nbsp;is&nbsp;set&nbsp;to&nbsp;False.)<br>
+&nbsp;<br>
+mode&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;the&nbsp;mode&nbsp;in&nbsp;which&nbsp;the&nbsp;file<br>
+is&nbsp;opened.&nbsp;It&nbsp;defaults&nbsp;to&nbsp;'r'&nbsp;which&nbsp;means&nbsp;open&nbsp;for&nbsp;reading&nbsp;in&nbsp;text<br>
+mode.&nbsp;&nbsp;Other&nbsp;common&nbsp;values&nbsp;are&nbsp;'w'&nbsp;for&nbsp;writing&nbsp;(truncating&nbsp;the&nbsp;file&nbsp;if<br>
+it&nbsp;already&nbsp;exists),&nbsp;'x'&nbsp;for&nbsp;creating&nbsp;and&nbsp;writing&nbsp;to&nbsp;a&nbsp;new&nbsp;file,&nbsp;and<br>
+'a'&nbsp;for&nbsp;appending&nbsp;(which&nbsp;on&nbsp;some&nbsp;Unix&nbsp;systems,&nbsp;means&nbsp;that&nbsp;all&nbsp;writes<br>
+append&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;regardless&nbsp;of&nbsp;the&nbsp;current&nbsp;seek&nbsp;position).<br>
+In&nbsp;text&nbsp;mode,&nbsp;if&nbsp;encoding&nbsp;is&nbsp;not&nbsp;specified&nbsp;the&nbsp;encoding&nbsp;used&nbsp;is&nbsp;platform<br>
+dependent:&nbsp;locale.getpreferredencoding(False)&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the<br>
+current&nbsp;locale&nbsp;encoding.&nbsp;(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary<br>
+mode&nbsp;and&nbsp;leave&nbsp;encoding&nbsp;unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
+&nbsp;<br>
+=========&nbsp;===============================================================<br>
+Character&nbsp;Meaning<br>
+---------&nbsp;---------------------------------------------------------------<br>
+'r'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;reading&nbsp;(default)<br>
+'w'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;truncating&nbsp;the&nbsp;file&nbsp;first<br>
+'x'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;a&nbsp;new&nbsp;file&nbsp;and&nbsp;open&nbsp;it&nbsp;for&nbsp;writing<br>
+'a'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;appending&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;if&nbsp;it&nbsp;exists<br>
+'b'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary&nbsp;mode<br>
+'t'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;mode&nbsp;(default)<br>
+'+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;a&nbsp;disk&nbsp;file&nbsp;for&nbsp;updating&nbsp;(reading&nbsp;and&nbsp;writing)<br>
+'U'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;(deprecated)<br>
+=========&nbsp;===============================================================<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;mode&nbsp;is&nbsp;'rt'&nbsp;(open&nbsp;for&nbsp;reading&nbsp;text).&nbsp;For&nbsp;binary&nbsp;random<br>
+access,&nbsp;the&nbsp;mode&nbsp;'w+b'&nbsp;opens&nbsp;and&nbsp;truncates&nbsp;the&nbsp;file&nbsp;to&nbsp;0&nbsp;bytes,&nbsp;while<br>
+'r+b'&nbsp;opens&nbsp;the&nbsp;file&nbsp;without&nbsp;truncation.&nbsp;The&nbsp;'x'&nbsp;mode&nbsp;implies&nbsp;'w'&nbsp;and<br>
+raises&nbsp;an&nbsp;`FileExistsError`&nbsp;if&nbsp;the&nbsp;file&nbsp;already&nbsp;exists.<br>
+&nbsp;<br>
+Python&nbsp;distinguishes&nbsp;between&nbsp;files&nbsp;opened&nbsp;in&nbsp;binary&nbsp;and&nbsp;text&nbsp;modes,<br>
+even&nbsp;when&nbsp;the&nbsp;underlying&nbsp;operating&nbsp;system&nbsp;doesn't.&nbsp;Files&nbsp;opened&nbsp;in<br>
+binary&nbsp;mode&nbsp;(appending&nbsp;'b'&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument)&nbsp;return&nbsp;contents&nbsp;as<br>
+bytes&nbsp;objects&nbsp;without&nbsp;any&nbsp;decoding.&nbsp;In&nbsp;text&nbsp;mode&nbsp;(the&nbsp;default,&nbsp;or&nbsp;when<br>
+'t'&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument),&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;are<br>
+returned&nbsp;as&nbsp;strings,&nbsp;the&nbsp;bytes&nbsp;having&nbsp;been&nbsp;first&nbsp;decoded&nbsp;using&nbsp;a<br>
+platform-dependent&nbsp;encoding&nbsp;or&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding&nbsp;if&nbsp;given.<br>
+&nbsp;<br>
+'U'&nbsp;mode&nbsp;is&nbsp;deprecated&nbsp;and&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception&nbsp;in&nbsp;future&nbsp;versions<br>
+of&nbsp;Python.&nbsp;&nbsp;It&nbsp;has&nbsp;no&nbsp;effect&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;Use&nbsp;newline&nbsp;to&nbsp;control<br>
+universal&nbsp;newlines&nbsp;mode.<br>
+&nbsp;<br>
+buffering&nbsp;is&nbsp;an&nbsp;optional&nbsp;integer&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;buffering&nbsp;policy.<br>
+Pass&nbsp;0&nbsp;to&nbsp;switch&nbsp;buffering&nbsp;off&nbsp;(only&nbsp;allowed&nbsp;in&nbsp;binary&nbsp;mode),&nbsp;1&nbsp;to&nbsp;select<br>
+line&nbsp;buffering&nbsp;(only&nbsp;usable&nbsp;in&nbsp;text&nbsp;mode),&nbsp;and&nbsp;an&nbsp;integer&nbsp;&gt;&nbsp;1&nbsp;to&nbsp;indicate<br>
+the&nbsp;size&nbsp;of&nbsp;a&nbsp;fixed-size&nbsp;chunk&nbsp;buffer.&nbsp;&nbsp;When&nbsp;no&nbsp;buffering&nbsp;argument&nbsp;is<br>
+given,&nbsp;the&nbsp;default&nbsp;buffering&nbsp;policy&nbsp;works&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+*&nbsp;Binary&nbsp;files&nbsp;are&nbsp;buffered&nbsp;in&nbsp;fixed-size&nbsp;chunks;&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;buffer<br>
+&nbsp;&nbsp;is&nbsp;chosen&nbsp;using&nbsp;a&nbsp;heuristic&nbsp;trying&nbsp;to&nbsp;determine&nbsp;the&nbsp;underlying&nbsp;device's<br>
+&nbsp;&nbsp;"block&nbsp;size"&nbsp;and&nbsp;falling&nbsp;back&nbsp;on&nbsp;`io.DEFAULT_BUFFER_SIZE`.<br>
+&nbsp;&nbsp;On&nbsp;many&nbsp;systems,&nbsp;the&nbsp;buffer&nbsp;will&nbsp;typically&nbsp;be&nbsp;4096&nbsp;or&nbsp;8192&nbsp;bytes&nbsp;long.<br>
+&nbsp;<br>
+*&nbsp;"Interactive"&nbsp;text&nbsp;files&nbsp;(files&nbsp;for&nbsp;which&nbsp;isatty()&nbsp;returns&nbsp;True)<br>
+&nbsp;&nbsp;use&nbsp;line&nbsp;buffering.&nbsp;&nbsp;Other&nbsp;text&nbsp;files&nbsp;use&nbsp;the&nbsp;policy&nbsp;described&nbsp;above<br>
+&nbsp;&nbsp;for&nbsp;binary&nbsp;files.<br>
+&nbsp;<br>
+encoding&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;encoding&nbsp;used&nbsp;to&nbsp;decode&nbsp;or&nbsp;encode&nbsp;the<br>
+file.&nbsp;This&nbsp;should&nbsp;only&nbsp;be&nbsp;used&nbsp;in&nbsp;text&nbsp;mode.&nbsp;The&nbsp;default&nbsp;encoding&nbsp;is<br>
+platform&nbsp;dependent,&nbsp;but&nbsp;any&nbsp;encoding&nbsp;supported&nbsp;by&nbsp;Python&nbsp;can&nbsp;be<br>
+passed.&nbsp;&nbsp;See&nbsp;the&nbsp;codecs&nbsp;module&nbsp;for&nbsp;the&nbsp;list&nbsp;of&nbsp;supported&nbsp;encodings.<br>
+&nbsp;<br>
+errors&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;how&nbsp;encoding&nbsp;errors&nbsp;are&nbsp;to<br>
+be&nbsp;handled---this&nbsp;argument&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;in&nbsp;binary&nbsp;mode.&nbsp;Pass<br>
+'strict'&nbsp;to&nbsp;raise&nbsp;a&nbsp;<a href="builtins.html#ValueError">ValueError</a>&nbsp;exception&nbsp;if&nbsp;there&nbsp;is&nbsp;an&nbsp;encoding&nbsp;error<br>
+(the&nbsp;default&nbsp;of&nbsp;None&nbsp;has&nbsp;the&nbsp;same&nbsp;effect),&nbsp;or&nbsp;pass&nbsp;'ignore'&nbsp;to&nbsp;ignore<br>
+errors.&nbsp;(Note&nbsp;that&nbsp;ignoring&nbsp;encoding&nbsp;errors&nbsp;can&nbsp;lead&nbsp;to&nbsp;data&nbsp;loss.)<br>
+See&nbsp;the&nbsp;documentation&nbsp;for&nbsp;codecs.register&nbsp;or&nbsp;run&nbsp;'help(codecs.Codec)'<br>
+for&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;permitted&nbsp;encoding&nbsp;error&nbsp;strings.<br>
+&nbsp;<br>
+newline&nbsp;controls&nbsp;how&nbsp;universal&nbsp;newlines&nbsp;works&nbsp;(it&nbsp;only&nbsp;applies&nbsp;to&nbsp;text<br>
+mode).&nbsp;It&nbsp;can&nbsp;be&nbsp;None,&nbsp;'',&nbsp;'\n',&nbsp;'\r',&nbsp;and&nbsp;'\r\n'.&nbsp;&nbsp;It&nbsp;works&nbsp;as<br>
+follows:<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;input,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;universal&nbsp;newlines&nbsp;mode&nbsp;is<br>
+&nbsp;&nbsp;enabled.&nbsp;Lines&nbsp;in&nbsp;the&nbsp;input&nbsp;can&nbsp;end&nbsp;in&nbsp;'\n',&nbsp;'\r',&nbsp;or&nbsp;'\r\n',&nbsp;and<br>
+&nbsp;&nbsp;these&nbsp;are&nbsp;translated&nbsp;into&nbsp;'\n'&nbsp;before&nbsp;being&nbsp;returned&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;caller.&nbsp;If&nbsp;it&nbsp;is&nbsp;'',&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;is&nbsp;enabled,&nbsp;but&nbsp;line<br>
+&nbsp;&nbsp;endings&nbsp;are&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.&nbsp;If&nbsp;it&nbsp;has&nbsp;any&nbsp;of<br>
+&nbsp;&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;input&nbsp;lines&nbsp;are&nbsp;only&nbsp;terminated&nbsp;by&nbsp;the&nbsp;given<br>
+&nbsp;&nbsp;string,&nbsp;and&nbsp;the&nbsp;line&nbsp;ending&nbsp;is&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;output,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are<br>
+&nbsp;&nbsp;translated&nbsp;to&nbsp;the&nbsp;system&nbsp;default&nbsp;line&nbsp;separator,&nbsp;os.linesep.&nbsp;If<br>
+&nbsp;&nbsp;newline&nbsp;is&nbsp;''&nbsp;or&nbsp;'\n',&nbsp;no&nbsp;translation&nbsp;takes&nbsp;place.&nbsp;If&nbsp;newline&nbsp;is&nbsp;any<br>
+&nbsp;&nbsp;of&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are&nbsp;translated<br>
+&nbsp;&nbsp;to&nbsp;the&nbsp;given&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;closefd&nbsp;is&nbsp;False,&nbsp;the&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;will&nbsp;be&nbsp;kept&nbsp;open<br>
+when&nbsp;the&nbsp;file&nbsp;is&nbsp;closed.&nbsp;This&nbsp;does&nbsp;not&nbsp;work&nbsp;when&nbsp;a&nbsp;file&nbsp;name&nbsp;is&nbsp;given<br>
+and&nbsp;must&nbsp;be&nbsp;True&nbsp;in&nbsp;that&nbsp;case.<br>
+&nbsp;<br>
+A&nbsp;custom&nbsp;opener&nbsp;can&nbsp;be&nbsp;used&nbsp;by&nbsp;passing&nbsp;a&nbsp;callable&nbsp;as&nbsp;*opener*.&nbsp;The<br>
+underlying&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;the&nbsp;file&nbsp;object&nbsp;is&nbsp;then&nbsp;obtained&nbsp;by<br>
+calling&nbsp;*opener*&nbsp;with&nbsp;(*file*,&nbsp;*flags*).&nbsp;*opener*&nbsp;must&nbsp;return&nbsp;an&nbsp;open<br>
+file&nbsp;descriptor&nbsp;(passing&nbsp;os.open&nbsp;as&nbsp;*opener*&nbsp;results&nbsp;in&nbsp;functionality<br>
+similar&nbsp;to&nbsp;passing&nbsp;None).<br>
+&nbsp;<br>
+<a href="#-open">open</a>()&nbsp;returns&nbsp;a&nbsp;file&nbsp;object&nbsp;whose&nbsp;type&nbsp;depends&nbsp;on&nbsp;the&nbsp;mode,&nbsp;and<br>
+through&nbsp;which&nbsp;the&nbsp;standard&nbsp;file&nbsp;operations&nbsp;such&nbsp;as&nbsp;reading&nbsp;and&nbsp;writing<br>
+are&nbsp;performed.&nbsp;When&nbsp;<a href="#-open">open</a>()&nbsp;is&nbsp;used&nbsp;to&nbsp;open&nbsp;a&nbsp;file&nbsp;in&nbsp;a&nbsp;text&nbsp;mode&nbsp;('w',<br>
+'r',&nbsp;'wt',&nbsp;'rt',&nbsp;etc.),&nbsp;it&nbsp;returns&nbsp;a&nbsp;<a href="#TextIOWrapper">TextIOWrapper</a>.&nbsp;When&nbsp;used&nbsp;to&nbsp;open<br>
+a&nbsp;file&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode,&nbsp;the&nbsp;returned&nbsp;class&nbsp;varies:&nbsp;in&nbsp;read&nbsp;binary<br>
+mode,&nbsp;it&nbsp;returns&nbsp;a&nbsp;<a href="#BufferedReader">BufferedReader</a>;&nbsp;in&nbsp;write&nbsp;binary&nbsp;and&nbsp;append&nbsp;binary<br>
+modes,&nbsp;it&nbsp;returns&nbsp;a&nbsp;<a href="#BufferedWriter">BufferedWriter</a>,&nbsp;and&nbsp;in&nbsp;read/write&nbsp;mode,&nbsp;it&nbsp;returns<br>
+a&nbsp;<a href="#BufferedRandom">BufferedRandom</a>.<br>
+&nbsp;<br>
+It&nbsp;is&nbsp;also&nbsp;possible&nbsp;to&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;bytearray&nbsp;as&nbsp;a&nbsp;file&nbsp;for&nbsp;both<br>
+reading&nbsp;and&nbsp;writing.&nbsp;For&nbsp;strings&nbsp;<a href="#StringIO">StringIO</a>&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;text&nbsp;mode,&nbsp;and&nbsp;for&nbsp;bytes&nbsp;a&nbsp;<a href="#BytesIO">BytesIO</a>&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-open_code"><strong>open_code</strong></a>(path)</dt><dd><tt>Opens&nbsp;the&nbsp;provided&nbsp;file&nbsp;with&nbsp;the&nbsp;intent&nbsp;to&nbsp;import&nbsp;the&nbsp;contents.<br>
+&nbsp;<br>
+This&nbsp;may&nbsp;perform&nbsp;extra&nbsp;validation&nbsp;beyond&nbsp;<a href="#-open">open</a>(),&nbsp;but&nbsp;is&nbsp;otherwise&nbsp;interchangeable<br>
+with&nbsp;calling&nbsp;<a href="#-open">open</a>(path,&nbsp;'rb').</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>SEEK_CUR</strong> = 1<br>
+<strong>SEEK_END</strong> = 2<br>
+<strong>SEEK_SET</strong> = 0<br>
+<strong>__all__</strong> = ['BlockingIOError', 'open', 'open_code', 'IOBase', 'RawIOBase', 'FileIO', 'BytesIO', 'StringIO', 'BufferedIOBase', 'BufferedReader', 'BufferedWriter', 'BufferedRWPair', 'BufferedRandom', 'TextIOBase', 'TextIOWrapper', 'UnsupportedOperation', 'SEEK_SET', 'SEEK_CUR', 'SEEK_END']</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Guido&nbsp;van&nbsp;Rossum&nbsp;&lt;guido@python.org&gt;,&nbsp;Mike&nbsp;Verdone&nbsp;&lt;mike.verdone@gmail.com&gt;,&nbsp;Mark&nbsp;Russell&nbsp;&lt;mark.russell@zen.co.uk&gt;,&nbsp;Antoine&nbsp;Pitrou&nbsp;&lt;solipsis@pitrou.net&gt;,&nbsp;Amaury&nbsp;Forgeot&nbsp;d'Arc&nbsp;&lt;amauryfa@gmail.com&gt;,&nbsp;Benjamin&nbsp;Peterson&nbsp;&lt;benjamin@python.org&gt;</td></tr></table>
+</body></html>

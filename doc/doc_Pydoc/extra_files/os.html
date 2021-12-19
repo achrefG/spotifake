@@ -1,0 +1,1995 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module os</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>os</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3.9/os.py">/usr/lib/python3.9/os.py</a><br><a href="https://docs.python.org/3.9/library/os">Module Reference</a></font></td></tr></table>
+    <p><tt>OS&nbsp;routines&nbsp;for&nbsp;NT&nbsp;or&nbsp;Posix&nbsp;depending&nbsp;on&nbsp;what&nbsp;system&nbsp;we're&nbsp;on.<br>
+&nbsp;<br>
+This&nbsp;exports:<br>
+&nbsp;&nbsp;-&nbsp;all&nbsp;functions&nbsp;from&nbsp;posix&nbsp;or&nbsp;nt,&nbsp;e.g.&nbsp;unlink,&nbsp;stat,&nbsp;etc.<br>
+&nbsp;&nbsp;-&nbsp;os.path&nbsp;is&nbsp;either&nbsp;posixpath&nbsp;or&nbsp;ntpath<br>
+&nbsp;&nbsp;-&nbsp;os.name&nbsp;is&nbsp;either&nbsp;'posix'&nbsp;or&nbsp;'nt'<br>
+&nbsp;&nbsp;-&nbsp;os.curdir&nbsp;is&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;current&nbsp;directory&nbsp;(always&nbsp;'.')<br>
+&nbsp;&nbsp;-&nbsp;os.pardir&nbsp;is&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;parent&nbsp;directory&nbsp;(always&nbsp;'..')<br>
+&nbsp;&nbsp;-&nbsp;os.sep&nbsp;is&nbsp;the&nbsp;(or&nbsp;a&nbsp;most&nbsp;common)&nbsp;pathname&nbsp;separator&nbsp;('/'&nbsp;or&nbsp;'\\')<br>
+&nbsp;&nbsp;-&nbsp;os.extsep&nbsp;is&nbsp;the&nbsp;extension&nbsp;separator&nbsp;(always&nbsp;'.')<br>
+&nbsp;&nbsp;-&nbsp;os.altsep&nbsp;is&nbsp;the&nbsp;alternate&nbsp;pathname&nbsp;separator&nbsp;(None&nbsp;or&nbsp;'/')<br>
+&nbsp;&nbsp;-&nbsp;os.pathsep&nbsp;is&nbsp;the&nbsp;component&nbsp;separator&nbsp;used&nbsp;in&nbsp;$PATH&nbsp;etc<br>
+&nbsp;&nbsp;-&nbsp;os.linesep&nbsp;is&nbsp;the&nbsp;line&nbsp;separator&nbsp;in&nbsp;text&nbsp;files&nbsp;('\r'&nbsp;or&nbsp;'\n'&nbsp;or&nbsp;'\r\n')<br>
+&nbsp;&nbsp;-&nbsp;os.defpath&nbsp;is&nbsp;the&nbsp;default&nbsp;search&nbsp;path&nbsp;for&nbsp;executables<br>
+&nbsp;&nbsp;-&nbsp;os.devnull&nbsp;is&nbsp;the&nbsp;file&nbsp;path&nbsp;of&nbsp;the&nbsp;null&nbsp;device&nbsp;('/dev/null',&nbsp;etc.)<br>
+&nbsp;<br>
+Programs&nbsp;that&nbsp;import&nbsp;and&nbsp;use&nbsp;'os'&nbsp;stand&nbsp;a&nbsp;better&nbsp;chance&nbsp;of&nbsp;being<br>
+portable&nbsp;between&nbsp;different&nbsp;platforms.&nbsp;&nbsp;Of&nbsp;course,&nbsp;they&nbsp;must&nbsp;then<br>
+only&nbsp;use&nbsp;functions&nbsp;that&nbsp;are&nbsp;defined&nbsp;by&nbsp;all&nbsp;platforms&nbsp;(e.g.,&nbsp;unlink<br>
+and&nbsp;opendir),&nbsp;and&nbsp;leave&nbsp;all&nbsp;pathname&nbsp;manipulation&nbsp;to&nbsp;os.path<br>
+(e.g.,&nbsp;split&nbsp;and&nbsp;join).</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="abc.html">abc</a><br>
+</td><td width="25%" valign=top><a href="posixpath.html">posixpath</a><br>
+</td><td width="25%" valign=top><a href="stat.html">stat</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#Exception">builtins.Exception</a>(<a href="builtins.html#BaseException">builtins.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#OSError">builtins.OSError</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="posix.html#DirEntry">posix.DirEntry</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#tuple">builtins.tuple</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="os.html#stat_result">stat_result</a>
+</font></dt><dt><font face="helvetica, arial"><a href="os.html#statvfs_result">statvfs_result</a>
+</font></dt><dt><font face="helvetica, arial"><a href="os.html#terminal_size">terminal_size</a>
+</font></dt><dt><font face="helvetica, arial"><a href="posix.html#sched_param">posix.sched_param</a>
+</font></dt><dt><font face="helvetica, arial"><a href="posix.html#times_result">posix.times_result</a>
+</font></dt><dt><font face="helvetica, arial"><a href="posix.html#uname_result">posix.uname_result</a>
+</font></dt><dt><font face="helvetica, arial"><a href="posix.html#waitid_result">posix.waitid_result</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DirEntry">class <strong>DirEntry</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DirEntry-__fspath__"><strong>__fspath__</strong></a>(self, /)</dt><dd><tt>Returns&nbsp;the&nbsp;path&nbsp;for&nbsp;the&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DirEntry-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="DirEntry-inode"><strong>inode</strong></a>(self, /)</dt><dd><tt>Return&nbsp;inode&nbsp;of&nbsp;the&nbsp;entry;&nbsp;cached&nbsp;per&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DirEntry-is_dir"><strong>is_dir</strong></a>(self, /, *, follow_symlinks=True)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;directory;&nbsp;cached&nbsp;per&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DirEntry-is_file"><strong>is_file</strong></a>(self, /, *, follow_symlinks=True)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;file;&nbsp;cached&nbsp;per&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DirEntry-is_symlink"><strong>is_symlink</strong></a>(self, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;symbolic&nbsp;link;&nbsp;cached&nbsp;per&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DirEntry-stat"><strong>stat</strong></a>(self, /, *, follow_symlinks=True)</dt><dd><tt>Return&nbsp;<a href="#stat_result">stat_result</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;for&nbsp;the&nbsp;entry;&nbsp;cached&nbsp;per&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="DirEntry-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="DirEntry-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>the&nbsp;entry's&nbsp;base&nbsp;filename,&nbsp;relative&nbsp;to&nbsp;scandir()&nbsp;"path"&nbsp;argument</tt></dd>
+</dl>
+<dl><dt><strong>path</strong></dt>
+<dd><tt>the&nbsp;entry's&nbsp;full&nbsp;path&nbsp;name;&nbsp;equivalent&nbsp;to&nbsp;os.path.join(scandir_path,&nbsp;entry.name)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>error</strong> = <a name="error">class OSError</a>(<a href="builtins.html#Exception">Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;I/O&nbsp;related&nbsp;errors.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="builtins.html#OSError">OSError</a></dd>
+<dd><a href="builtins.html#Exception">Exception</a></dd>
+<dd><a href="builtins.html#BaseException">BaseException</a></dd>
+<dd><a href="builtins.html#object">object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="OSError-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="OSError-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="OSError-__str__"><strong>__str__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="OSError-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>characters_written</strong></dt>
+</dl>
+<dl><dt><strong>errno</strong></dt>
+<dd><tt>POSIX&nbsp;exception&nbsp;code</tt></dd>
+</dl>
+<dl><dt><strong>filename</strong></dt>
+<dd><tt>exception&nbsp;filename</tt></dd>
+</dl>
+<dl><dt><strong>filename2</strong></dt>
+<dd><tt>second&nbsp;exception&nbsp;filename</tt></dd>
+</dl>
+<dl><dt><strong>strerror</strong></dt>
+<dd><tt>exception&nbsp;strerror</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="builtins.html#BaseException">BaseException</a>:<br>
+<dl><dt><a name="OSError-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="OSError-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="OSError-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="OSError-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
+
+<dl><dt><a name="OSError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="OSError-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><tt><a href="builtins.html#Exception">Exception</a>.<a href="#error-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
+set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#BaseException">BaseException</a>:<br>
+<dl><dt><strong>__cause__</strong></dt>
+<dd><tt>exception&nbsp;cause</tt></dd>
+</dl>
+<dl><dt><strong>__context__</strong></dt>
+<dd><tt>exception&nbsp;context</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__suppress_context__</strong></dt>
+</dl>
+<dl><dt><strong>__traceback__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="sched_param">class <strong>sched_param</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#sched_param">sched_param</a>(iterable=(),&nbsp;/)<br>
+&nbsp;<br>
+Currently&nbsp;has&nbsp;only&nbsp;one&nbsp;field:&nbsp;sched_priority<br>
+&nbsp;<br>
+sched_priority<br>
+&nbsp;&nbsp;A&nbsp;scheduling&nbsp;parameter.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="posix.html#sched_param">sched_param</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="sched_param-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="sched_param-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>sched_priority</strong></dt>
+<dd><tt>the&nbsp;scheduling&nbsp;priority</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>n_fields</strong> = 1</dl>
+
+<dl><dt><strong>n_sequence_fields</strong> = 1</dl>
+
+<dl><dt><strong>n_unnamed_fields</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="sched_param-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__getnewargs__"><strong>__getnewargs__</strong></a>(self, /)</dt></dl>
+
+<dl><dt><a name="sched_param-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="sched_param-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="sched_param-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="stat_result">class <strong>stat_result</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#stat_result">stat_result</a>(iterable=(),&nbsp;/)<br>
+&nbsp;<br>
+<a href="#stat_result">stat_result</a>:&nbsp;Result&nbsp;from&nbsp;stat,&nbsp;fstat,&nbsp;or&nbsp;lstat.<br>
+&nbsp;<br>
+This&nbsp;<a href="builtins.html#object">object</a>&nbsp;may&nbsp;be&nbsp;accessed&nbsp;either&nbsp;as&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of<br>
+&nbsp;&nbsp;(mode,&nbsp;ino,&nbsp;dev,&nbsp;nlink,&nbsp;uid,&nbsp;gid,&nbsp;size,&nbsp;atime,&nbsp;mtime,&nbsp;ctime)<br>
+or&nbsp;via&nbsp;the&nbsp;attributes&nbsp;st_mode,&nbsp;st_ino,&nbsp;st_dev,&nbsp;st_nlink,&nbsp;st_uid,&nbsp;and&nbsp;so&nbsp;on.<br>
+&nbsp;<br>
+Posix/windows:&nbsp;If&nbsp;your&nbsp;platform&nbsp;supports&nbsp;st_blksize,&nbsp;st_blocks,&nbsp;st_rdev,<br>
+or&nbsp;st_flags,&nbsp;they&nbsp;are&nbsp;available&nbsp;as&nbsp;attributes&nbsp;only.<br>
+&nbsp;<br>
+See&nbsp;os.stat&nbsp;for&nbsp;more&nbsp;information.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="os.html#stat_result">stat_result</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="stat_result-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="stat_result-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>st_atime</strong></dt>
+<dd><tt>time&nbsp;of&nbsp;last&nbsp;access</tt></dd>
+</dl>
+<dl><dt><strong>st_atime_ns</strong></dt>
+<dd><tt>time&nbsp;of&nbsp;last&nbsp;access&nbsp;in&nbsp;nanoseconds</tt></dd>
+</dl>
+<dl><dt><strong>st_blksize</strong></dt>
+<dd><tt>blocksize&nbsp;for&nbsp;filesystem&nbsp;I/O</tt></dd>
+</dl>
+<dl><dt><strong>st_blocks</strong></dt>
+<dd><tt>number&nbsp;of&nbsp;blocks&nbsp;allocated</tt></dd>
+</dl>
+<dl><dt><strong>st_ctime</strong></dt>
+<dd><tt>time&nbsp;of&nbsp;last&nbsp;change</tt></dd>
+</dl>
+<dl><dt><strong>st_ctime_ns</strong></dt>
+<dd><tt>time&nbsp;of&nbsp;last&nbsp;change&nbsp;in&nbsp;nanoseconds</tt></dd>
+</dl>
+<dl><dt><strong>st_dev</strong></dt>
+<dd><tt>device</tt></dd>
+</dl>
+<dl><dt><strong>st_gid</strong></dt>
+<dd><tt>group&nbsp;ID&nbsp;of&nbsp;owner</tt></dd>
+</dl>
+<dl><dt><strong>st_ino</strong></dt>
+<dd><tt>inode</tt></dd>
+</dl>
+<dl><dt><strong>st_mode</strong></dt>
+<dd><tt>protection&nbsp;bits</tt></dd>
+</dl>
+<dl><dt><strong>st_mtime</strong></dt>
+<dd><tt>time&nbsp;of&nbsp;last&nbsp;modification</tt></dd>
+</dl>
+<dl><dt><strong>st_mtime_ns</strong></dt>
+<dd><tt>time&nbsp;of&nbsp;last&nbsp;modification&nbsp;in&nbsp;nanoseconds</tt></dd>
+</dl>
+<dl><dt><strong>st_nlink</strong></dt>
+<dd><tt>number&nbsp;of&nbsp;hard&nbsp;links</tt></dd>
+</dl>
+<dl><dt><strong>st_rdev</strong></dt>
+<dd><tt>device&nbsp;type&nbsp;(if&nbsp;inode&nbsp;device)</tt></dd>
+</dl>
+<dl><dt><strong>st_size</strong></dt>
+<dd><tt>total&nbsp;size,&nbsp;in&nbsp;bytes</tt></dd>
+</dl>
+<dl><dt><strong>st_uid</strong></dt>
+<dd><tt>user&nbsp;ID&nbsp;of&nbsp;owner</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>n_fields</strong> = 19</dl>
+
+<dl><dt><strong>n_sequence_fields</strong> = 10</dl>
+
+<dl><dt><strong>n_unnamed_fields</strong> = 3</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="stat_result-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__getnewargs__"><strong>__getnewargs__</strong></a>(self, /)</dt></dl>
+
+<dl><dt><a name="stat_result-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="stat_result-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="stat_result-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="statvfs_result">class <strong>statvfs_result</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#statvfs_result">statvfs_result</a>(iterable=(),&nbsp;/)<br>
+&nbsp;<br>
+<a href="#statvfs_result">statvfs_result</a>:&nbsp;Result&nbsp;from&nbsp;statvfs&nbsp;or&nbsp;fstatvfs.<br>
+&nbsp;<br>
+This&nbsp;<a href="builtins.html#object">object</a>&nbsp;may&nbsp;be&nbsp;accessed&nbsp;either&nbsp;as&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of<br>
+&nbsp;&nbsp;(bsize,&nbsp;frsize,&nbsp;blocks,&nbsp;bfree,&nbsp;bavail,&nbsp;files,&nbsp;ffree,&nbsp;favail,&nbsp;flag,&nbsp;namemax),<br>
+or&nbsp;via&nbsp;the&nbsp;attributes&nbsp;f_bsize,&nbsp;f_frsize,&nbsp;f_blocks,&nbsp;f_bfree,&nbsp;and&nbsp;so&nbsp;on.<br>
+&nbsp;<br>
+See&nbsp;os.statvfs&nbsp;for&nbsp;more&nbsp;information.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="os.html#statvfs_result">statvfs_result</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="statvfs_result-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="statvfs_result-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>f_bavail</strong></dt>
+</dl>
+<dl><dt><strong>f_bfree</strong></dt>
+</dl>
+<dl><dt><strong>f_blocks</strong></dt>
+</dl>
+<dl><dt><strong>f_bsize</strong></dt>
+</dl>
+<dl><dt><strong>f_favail</strong></dt>
+</dl>
+<dl><dt><strong>f_ffree</strong></dt>
+</dl>
+<dl><dt><strong>f_files</strong></dt>
+</dl>
+<dl><dt><strong>f_flag</strong></dt>
+</dl>
+<dl><dt><strong>f_frsize</strong></dt>
+</dl>
+<dl><dt><strong>f_fsid</strong></dt>
+</dl>
+<dl><dt><strong>f_namemax</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>n_fields</strong> = 11</dl>
+
+<dl><dt><strong>n_sequence_fields</strong> = 10</dl>
+
+<dl><dt><strong>n_unnamed_fields</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="statvfs_result-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__getnewargs__"><strong>__getnewargs__</strong></a>(self, /)</dt></dl>
+
+<dl><dt><a name="statvfs_result-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="statvfs_result-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="statvfs_result-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="terminal_size">class <strong>terminal_size</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#terminal_size">terminal_size</a>(iterable=(),&nbsp;/)<br>
+&nbsp;<br>
+A&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;(columns,&nbsp;lines)&nbsp;for&nbsp;holding&nbsp;terminal&nbsp;window&nbsp;size<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="os.html#terminal_size">terminal_size</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="terminal_size-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="terminal_size-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>columns</strong></dt>
+<dd><tt>width&nbsp;of&nbsp;the&nbsp;terminal&nbsp;window&nbsp;in&nbsp;characters</tt></dd>
+</dl>
+<dl><dt><strong>lines</strong></dt>
+<dd><tt>height&nbsp;of&nbsp;the&nbsp;terminal&nbsp;window&nbsp;in&nbsp;characters</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>n_fields</strong> = 2</dl>
+
+<dl><dt><strong>n_sequence_fields</strong> = 2</dl>
+
+<dl><dt><strong>n_unnamed_fields</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="terminal_size-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__getnewargs__"><strong>__getnewargs__</strong></a>(self, /)</dt></dl>
+
+<dl><dt><a name="terminal_size-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="terminal_size-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="terminal_size-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="times_result">class <strong>times_result</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#times_result">times_result</a>(iterable=(),&nbsp;/)<br>
+&nbsp;<br>
+<a href="#times_result">times_result</a>:&nbsp;Result&nbsp;from&nbsp;os.<a href="#-times">times</a>().<br>
+&nbsp;<br>
+This&nbsp;<a href="builtins.html#object">object</a>&nbsp;may&nbsp;be&nbsp;accessed&nbsp;either&nbsp;as&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of<br>
+&nbsp;&nbsp;(user,&nbsp;system,&nbsp;children_user,&nbsp;children_system,&nbsp;elapsed),<br>
+or&nbsp;via&nbsp;the&nbsp;attributes&nbsp;user,&nbsp;system,&nbsp;children_user,&nbsp;children_system,<br>
+and&nbsp;elapsed.<br>
+&nbsp;<br>
+See&nbsp;os.times&nbsp;for&nbsp;more&nbsp;information.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="posix.html#times_result">times_result</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="times_result-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="times_result-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>children_system</strong></dt>
+<dd><tt>system&nbsp;time&nbsp;of&nbsp;children</tt></dd>
+</dl>
+<dl><dt><strong>children_user</strong></dt>
+<dd><tt>user&nbsp;time&nbsp;of&nbsp;children</tt></dd>
+</dl>
+<dl><dt><strong>elapsed</strong></dt>
+<dd><tt>elapsed&nbsp;time&nbsp;since&nbsp;an&nbsp;arbitrary&nbsp;point&nbsp;in&nbsp;the&nbsp;past</tt></dd>
+</dl>
+<dl><dt><strong>system</strong></dt>
+<dd><tt>system&nbsp;time</tt></dd>
+</dl>
+<dl><dt><strong>user</strong></dt>
+<dd><tt>user&nbsp;time</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>n_fields</strong> = 5</dl>
+
+<dl><dt><strong>n_sequence_fields</strong> = 5</dl>
+
+<dl><dt><strong>n_unnamed_fields</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="times_result-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="times_result-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="times_result-__getnewargs__"><strong>__getnewargs__</strong></a>(self, /)</dt></dl>
+
+<dl><dt><a name="times_result-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="times_result-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="times_result-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="times_result-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="times_result-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="times_result-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="times_result-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="uname_result">class <strong>uname_result</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#uname_result">uname_result</a>(iterable=(),&nbsp;/)<br>
+&nbsp;<br>
+<a href="#uname_result">uname_result</a>:&nbsp;Result&nbsp;from&nbsp;os.<a href="#-uname">uname</a>().<br>
+&nbsp;<br>
+This&nbsp;<a href="builtins.html#object">object</a>&nbsp;may&nbsp;be&nbsp;accessed&nbsp;either&nbsp;as&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of<br>
+&nbsp;&nbsp;(sysname,&nbsp;nodename,&nbsp;release,&nbsp;version,&nbsp;machine),<br>
+or&nbsp;via&nbsp;the&nbsp;attributes&nbsp;sysname,&nbsp;nodename,&nbsp;release,&nbsp;version,&nbsp;and&nbsp;machine.<br>
+&nbsp;<br>
+See&nbsp;os.uname&nbsp;for&nbsp;more&nbsp;information.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="posix.html#uname_result">uname_result</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="uname_result-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="uname_result-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>machine</strong></dt>
+<dd><tt>hardware&nbsp;identifier</tt></dd>
+</dl>
+<dl><dt><strong>nodename</strong></dt>
+<dd><tt>name&nbsp;of&nbsp;machine&nbsp;on&nbsp;network&nbsp;(implementation-defined)</tt></dd>
+</dl>
+<dl><dt><strong>release</strong></dt>
+<dd><tt>operating&nbsp;system&nbsp;release</tt></dd>
+</dl>
+<dl><dt><strong>sysname</strong></dt>
+<dd><tt>operating&nbsp;system&nbsp;name</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+<dd><tt>operating&nbsp;system&nbsp;version</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>n_fields</strong> = 5</dl>
+
+<dl><dt><strong>n_sequence_fields</strong> = 5</dl>
+
+<dl><dt><strong>n_unnamed_fields</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="uname_result-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__getnewargs__"><strong>__getnewargs__</strong></a>(self, /)</dt></dl>
+
+<dl><dt><a name="uname_result-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="uname_result-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="uname_result-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="waitid_result">class <strong>waitid_result</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#waitid_result">waitid_result</a>(iterable=(),&nbsp;/)<br>
+&nbsp;<br>
+<a href="#waitid_result">waitid_result</a>:&nbsp;Result&nbsp;from&nbsp;waitid.<br>
+&nbsp;<br>
+This&nbsp;<a href="builtins.html#object">object</a>&nbsp;may&nbsp;be&nbsp;accessed&nbsp;either&nbsp;as&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of<br>
+&nbsp;&nbsp;(si_pid,&nbsp;si_uid,&nbsp;si_signo,&nbsp;si_status,&nbsp;si_code),<br>
+or&nbsp;via&nbsp;the&nbsp;attributes&nbsp;si_pid,&nbsp;si_uid,&nbsp;and&nbsp;so&nbsp;on.<br>
+&nbsp;<br>
+See&nbsp;os.waitid&nbsp;for&nbsp;more&nbsp;information.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="posix.html#waitid_result">waitid_result</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="waitid_result-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="waitid_result-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>si_code</strong></dt>
+</dl>
+<dl><dt><strong>si_pid</strong></dt>
+</dl>
+<dl><dt><strong>si_signo</strong></dt>
+</dl>
+<dl><dt><strong>si_status</strong></dt>
+</dl>
+<dl><dt><strong>si_uid</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>n_fields</strong> = 5</dl>
+
+<dl><dt><strong>n_sequence_fields</strong> = 5</dl>
+
+<dl><dt><strong>n_unnamed_fields</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="waitid_result-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__getnewargs__"><strong>__getnewargs__</strong></a>(self, /)</dt></dl>
+
+<dl><dt><a name="waitid_result-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="waitid_result-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="waitid_result-__class_getitem__"><strong>__class_getitem__</strong></a>(...)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>See&nbsp;<a href="http://www.python.org/dev/peps/pep-0585/">PEP&nbsp;585</a></tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-WCOREDUMP"><strong>WCOREDUMP</strong></a>(status, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;process&nbsp;returning&nbsp;status&nbsp;was&nbsp;dumped&nbsp;to&nbsp;a&nbsp;core&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-WEXITSTATUS"><strong>WEXITSTATUS</strong></a>(status)</dt><dd><tt>Return&nbsp;the&nbsp;process&nbsp;return&nbsp;code&nbsp;from&nbsp;status.</tt></dd></dl>
+ <dl><dt><a name="-WIFCONTINUED"><strong>WIFCONTINUED</strong></a>(status)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;a&nbsp;particular&nbsp;process&nbsp;was&nbsp;continued&nbsp;from&nbsp;a&nbsp;job&nbsp;control&nbsp;stop.<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;the&nbsp;process&nbsp;returning&nbsp;status&nbsp;was&nbsp;continued&nbsp;from&nbsp;a<br>
+job&nbsp;control&nbsp;stop.</tt></dd></dl>
+ <dl><dt><a name="-WIFEXITED"><strong>WIFEXITED</strong></a>(status)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;process&nbsp;returning&nbsp;status&nbsp;exited&nbsp;via&nbsp;the&nbsp;exit()&nbsp;system&nbsp;call.</tt></dd></dl>
+ <dl><dt><a name="-WIFSIGNALED"><strong>WIFSIGNALED</strong></a>(status)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;process&nbsp;returning&nbsp;status&nbsp;was&nbsp;terminated&nbsp;by&nbsp;a&nbsp;signal.</tt></dd></dl>
+ <dl><dt><a name="-WIFSTOPPED"><strong>WIFSTOPPED</strong></a>(status)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;process&nbsp;returning&nbsp;status&nbsp;was&nbsp;stopped.</tt></dd></dl>
+ <dl><dt><a name="-WSTOPSIG"><strong>WSTOPSIG</strong></a>(status)</dt><dd><tt>Return&nbsp;the&nbsp;signal&nbsp;that&nbsp;stopped&nbsp;the&nbsp;process&nbsp;that&nbsp;provided&nbsp;the&nbsp;status&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-WTERMSIG"><strong>WTERMSIG</strong></a>(status)</dt><dd><tt>Return&nbsp;the&nbsp;signal&nbsp;that&nbsp;terminated&nbsp;the&nbsp;process&nbsp;that&nbsp;provided&nbsp;the&nbsp;status&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-_exit"><strong>_exit</strong></a>(status)</dt><dd><tt>Exit&nbsp;to&nbsp;the&nbsp;system&nbsp;with&nbsp;specified&nbsp;status,&nbsp;without&nbsp;normal&nbsp;exit&nbsp;processing.</tt></dd></dl>
+ <dl><dt><a name="-abort"><strong>abort</strong></a>()</dt><dd><tt>Abort&nbsp;the&nbsp;interpreter&nbsp;immediately.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;'dumps&nbsp;core'&nbsp;or&nbsp;otherwise&nbsp;fails&nbsp;in&nbsp;the&nbsp;hardest&nbsp;way&nbsp;possible<br>
+on&nbsp;the&nbsp;hosting&nbsp;operating&nbsp;system.&nbsp;&nbsp;This&nbsp;function&nbsp;never&nbsp;returns.</tt></dd></dl>
+ <dl><dt><a name="-access"><strong>access</strong></a>(path, mode, *, dir_fd=None, effective_ids=False, follow_symlinks=True)</dt><dd><tt>Use&nbsp;the&nbsp;real&nbsp;uid/gid&nbsp;to&nbsp;test&nbsp;for&nbsp;access&nbsp;to&nbsp;a&nbsp;path.<br>
+&nbsp;<br>
+&nbsp;&nbsp;path<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Path&nbsp;to&nbsp;be&nbsp;tested;&nbsp;can&nbsp;be&nbsp;string,&nbsp;bytes,&nbsp;or&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;mode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Operating-system&nbsp;mode&nbsp;bitfield.&nbsp;&nbsp;Can&nbsp;be&nbsp;F_OK&nbsp;to&nbsp;test&nbsp;existence,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;the&nbsp;inclusive-OR&nbsp;of&nbsp;R_OK,&nbsp;W_OK,&nbsp;and&nbsp;X_OK.<br>
+&nbsp;&nbsp;dir_fd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;directory.<br>
+&nbsp;&nbsp;effective_ids<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;True,&nbsp;access&nbsp;will&nbsp;use&nbsp;the&nbsp;effective&nbsp;uid/gid&nbsp;instead&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;real&nbsp;uid/gid.<br>
+&nbsp;&nbsp;follow_symlinks<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic&nbsp;link,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;access&nbsp;will&nbsp;examine&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.<br>
+&nbsp;<br>
+dir_fd,&nbsp;effective_ids,&nbsp;and&nbsp;follow_symlinks&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented<br>
+&nbsp;&nbsp;on&nbsp;your&nbsp;platform.&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a<br>
+&nbsp;&nbsp;NotImplementedError.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;most&nbsp;operations&nbsp;will&nbsp;use&nbsp;the&nbsp;effective&nbsp;uid/gid,&nbsp;therefore&nbsp;this<br>
+&nbsp;&nbsp;routine&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;a&nbsp;suid/sgid&nbsp;environment&nbsp;to&nbsp;test&nbsp;if&nbsp;the&nbsp;invoking&nbsp;user<br>
+&nbsp;&nbsp;has&nbsp;the&nbsp;specified&nbsp;access&nbsp;to&nbsp;the&nbsp;path.</tt></dd></dl>
+ <dl><dt><a name="-chdir"><strong>chdir</strong></a>(path)</dt><dd><tt>Change&nbsp;the&nbsp;current&nbsp;working&nbsp;directory&nbsp;to&nbsp;the&nbsp;specified&nbsp;path.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;always&nbsp;be&nbsp;specified&nbsp;as&nbsp;a&nbsp;string.<br>
+On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+ <dl><dt><a name="-chmod"><strong>chmod</strong></a>(path, mode, *, dir_fd=None, follow_symlinks=True)</dt><dd><tt>Change&nbsp;the&nbsp;access&nbsp;permissions&nbsp;of&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+&nbsp;&nbsp;path<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Path&nbsp;to&nbsp;be&nbsp;modified.&nbsp;&nbsp;May&nbsp;always&nbsp;be&nbsp;specified&nbsp;as&nbsp;a&nbsp;str,&nbsp;bytes,&nbsp;or&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;an&nbsp;exception.<br>
+&nbsp;&nbsp;mode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Operating-system&nbsp;mode&nbsp;bitfield.<br>
+&nbsp;&nbsp;dir_fd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;directory.<br>
+&nbsp;&nbsp;follow_symlinks<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic&nbsp;link,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chmod&nbsp;will&nbsp;modify&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.<br>
+&nbsp;<br>
+It&nbsp;is&nbsp;an&nbsp;<a href="#error">error</a>&nbsp;to&nbsp;use&nbsp;dir_fd&nbsp;or&nbsp;follow_symlinks&nbsp;when&nbsp;specifying&nbsp;path&nbsp;as<br>
+&nbsp;&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+dir_fd&nbsp;and&nbsp;follow_symlinks&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-chown"><strong>chown</strong></a>(path, uid, gid, *, dir_fd=None, follow_symlinks=True)</dt><dd><tt>Change&nbsp;the&nbsp;owner&nbsp;and&nbsp;group&nbsp;id&nbsp;of&nbsp;path&nbsp;to&nbsp;the&nbsp;numeric&nbsp;uid&nbsp;and&nbsp;gid.\<br>
+&nbsp;<br>
+&nbsp;&nbsp;path<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Path&nbsp;to&nbsp;be&nbsp;examined;&nbsp;can&nbsp;be&nbsp;string,&nbsp;bytes,&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>,&nbsp;or&nbsp;open-file-descriptor&nbsp;int.<br>
+&nbsp;&nbsp;dir_fd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;directory.<br>
+&nbsp;&nbsp;follow_symlinks<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic&nbsp;link,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stat&nbsp;will&nbsp;examine&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;always&nbsp;be&nbsp;specified&nbsp;as&nbsp;a&nbsp;string.<br>
+On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;an&nbsp;exception.<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+If&nbsp;follow_symlinks&nbsp;is&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic<br>
+&nbsp;&nbsp;link,&nbsp;chown&nbsp;will&nbsp;modify&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file&nbsp;the<br>
+&nbsp;&nbsp;link&nbsp;points&nbsp;to.<br>
+It&nbsp;is&nbsp;an&nbsp;<a href="#error">error</a>&nbsp;to&nbsp;use&nbsp;dir_fd&nbsp;or&nbsp;follow_symlinks&nbsp;when&nbsp;specifying&nbsp;path&nbsp;as<br>
+&nbsp;&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+dir_fd&nbsp;and&nbsp;follow_symlinks&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-chroot"><strong>chroot</strong></a>(path)</dt><dd><tt>Change&nbsp;root&nbsp;directory&nbsp;to&nbsp;path.</tt></dd></dl>
+ <dl><dt><a name="-close"><strong>close</strong></a>(fd)</dt><dd><tt>Close&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+ <dl><dt><a name="-closerange"><strong>closerange</strong></a>(fd_low, fd_high, /)</dt><dd><tt>Closes&nbsp;all&nbsp;file&nbsp;descriptors&nbsp;in&nbsp;[fd_low,&nbsp;fd_high),&nbsp;ignoring&nbsp;errors.</tt></dd></dl>
+ <dl><dt><a name="-confstr"><strong>confstr</strong></a>(name, /)</dt><dd><tt>Return&nbsp;a&nbsp;string-valued&nbsp;system&nbsp;configuration&nbsp;variable.</tt></dd></dl>
+ <dl><dt><a name="-copy_file_range"><strong>copy_file_range</strong></a>(src, dst, count, offset_src=None, offset_dst=None)</dt><dd><tt>Copy&nbsp;count&nbsp;bytes&nbsp;from&nbsp;one&nbsp;file&nbsp;descriptor&nbsp;to&nbsp;another.<br>
+&nbsp;<br>
+&nbsp;&nbsp;src<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;dst<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Destination&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;count<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;copy.<br>
+&nbsp;&nbsp;offset_src<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Starting&nbsp;offset&nbsp;in&nbsp;src.<br>
+&nbsp;&nbsp;offset_dst<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Starting&nbsp;offset&nbsp;in&nbsp;dst.<br>
+&nbsp;<br>
+If&nbsp;offset_src&nbsp;is&nbsp;None,&nbsp;then&nbsp;src&nbsp;is&nbsp;read&nbsp;from&nbsp;the&nbsp;current&nbsp;position;<br>
+respectively&nbsp;for&nbsp;offset_dst.</tt></dd></dl>
+ <dl><dt><a name="-cpu_count"><strong>cpu_count</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;number&nbsp;of&nbsp;CPUs&nbsp;in&nbsp;the&nbsp;system;&nbsp;return&nbsp;None&nbsp;if&nbsp;indeterminable.<br>
+&nbsp;<br>
+This&nbsp;number&nbsp;is&nbsp;not&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;number&nbsp;of&nbsp;CPUs&nbsp;the&nbsp;current&nbsp;process&nbsp;can<br>
+use.&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;usable&nbsp;CPUs&nbsp;can&nbsp;be&nbsp;obtained&nbsp;with<br>
+``len(os.<a href="#-sched_getaffinity">sched_getaffinity</a>(0))``</tt></dd></dl>
+ <dl><dt><a name="-ctermid"><strong>ctermid</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;controlling&nbsp;terminal&nbsp;for&nbsp;this&nbsp;process.</tt></dd></dl>
+ <dl><dt><a name="-device_encoding"><strong>device_encoding</strong></a>(fd)</dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;describing&nbsp;the&nbsp;encoding&nbsp;of&nbsp;a&nbsp;terminal's&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+The&nbsp;file&nbsp;descriptor&nbsp;must&nbsp;be&nbsp;attached&nbsp;to&nbsp;a&nbsp;terminal.<br>
+If&nbsp;the&nbsp;device&nbsp;is&nbsp;not&nbsp;a&nbsp;terminal,&nbsp;return&nbsp;None.</tt></dd></dl>
+ <dl><dt><a name="-dup"><strong>dup</strong></a>(fd, /)</dt><dd><tt>Return&nbsp;a&nbsp;duplicate&nbsp;of&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+ <dl><dt><a name="-dup2"><strong>dup2</strong></a>(fd, fd2, inheritable=True)</dt><dd><tt>Duplicate&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+ <dl><dt><a name="-execl"><strong>execl</strong></a>(file, *args)</dt><dd><tt><a href="#-execl">execl</a>(file,&nbsp;*args)<br>
+&nbsp;<br>
+Execute&nbsp;the&nbsp;executable&nbsp;file&nbsp;with&nbsp;argument&nbsp;list&nbsp;args,&nbsp;replacing&nbsp;the<br>
+current&nbsp;process.</tt></dd></dl>
+ <dl><dt><a name="-execle"><strong>execle</strong></a>(file, *args)</dt><dd><tt><a href="#-execle">execle</a>(file,&nbsp;*args,&nbsp;env)<br>
+&nbsp;<br>
+Execute&nbsp;the&nbsp;executable&nbsp;file&nbsp;with&nbsp;argument&nbsp;list&nbsp;args&nbsp;and<br>
+environment&nbsp;env,&nbsp;replacing&nbsp;the&nbsp;current&nbsp;process.</tt></dd></dl>
+ <dl><dt><a name="-execlp"><strong>execlp</strong></a>(file, *args)</dt><dd><tt><a href="#-execlp">execlp</a>(file,&nbsp;*args)<br>
+&nbsp;<br>
+Execute&nbsp;the&nbsp;executable&nbsp;file&nbsp;(which&nbsp;is&nbsp;searched&nbsp;for&nbsp;along&nbsp;$PATH)<br>
+with&nbsp;argument&nbsp;list&nbsp;args,&nbsp;replacing&nbsp;the&nbsp;current&nbsp;process.</tt></dd></dl>
+ <dl><dt><a name="-execlpe"><strong>execlpe</strong></a>(file, *args)</dt><dd><tt><a href="#-execlpe">execlpe</a>(file,&nbsp;*args,&nbsp;env)<br>
+&nbsp;<br>
+Execute&nbsp;the&nbsp;executable&nbsp;file&nbsp;(which&nbsp;is&nbsp;searched&nbsp;for&nbsp;along&nbsp;$PATH)<br>
+with&nbsp;argument&nbsp;list&nbsp;args&nbsp;and&nbsp;environment&nbsp;env,&nbsp;replacing&nbsp;the&nbsp;current<br>
+process.</tt></dd></dl>
+ <dl><dt><a name="-execv"><strong>execv</strong></a>(path, argv, /)</dt><dd><tt>Execute&nbsp;an&nbsp;executable&nbsp;path&nbsp;with&nbsp;arguments,&nbsp;replacing&nbsp;current&nbsp;process.<br>
+&nbsp;<br>
+path<br>
+&nbsp;&nbsp;Path&nbsp;of&nbsp;executable&nbsp;file.<br>
+argv<br>
+&nbsp;&nbsp;Tuple&nbsp;or&nbsp;list&nbsp;of&nbsp;strings.</tt></dd></dl>
+ <dl><dt><a name="-execve"><strong>execve</strong></a>(path, argv, env)</dt><dd><tt>Execute&nbsp;an&nbsp;executable&nbsp;path&nbsp;with&nbsp;arguments,&nbsp;replacing&nbsp;current&nbsp;process.<br>
+&nbsp;<br>
+path<br>
+&nbsp;&nbsp;Path&nbsp;of&nbsp;executable&nbsp;file.<br>
+argv<br>
+&nbsp;&nbsp;Tuple&nbsp;or&nbsp;list&nbsp;of&nbsp;strings.<br>
+env<br>
+&nbsp;&nbsp;Dictionary&nbsp;of&nbsp;strings&nbsp;mapping&nbsp;to&nbsp;strings.</tt></dd></dl>
+ <dl><dt><a name="-execvp"><strong>execvp</strong></a>(file, args)</dt><dd><tt><a href="#-execvp">execvp</a>(file,&nbsp;args)<br>
+&nbsp;<br>
+Execute&nbsp;the&nbsp;executable&nbsp;file&nbsp;(which&nbsp;is&nbsp;searched&nbsp;for&nbsp;along&nbsp;$PATH)<br>
+with&nbsp;argument&nbsp;list&nbsp;args,&nbsp;replacing&nbsp;the&nbsp;current&nbsp;process.<br>
+args&nbsp;may&nbsp;be&nbsp;a&nbsp;list&nbsp;or&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;strings.</tt></dd></dl>
+ <dl><dt><a name="-execvpe"><strong>execvpe</strong></a>(file, args, env)</dt><dd><tt><a href="#-execvpe">execvpe</a>(file,&nbsp;args,&nbsp;env)<br>
+&nbsp;<br>
+Execute&nbsp;the&nbsp;executable&nbsp;file&nbsp;(which&nbsp;is&nbsp;searched&nbsp;for&nbsp;along&nbsp;$PATH)<br>
+with&nbsp;argument&nbsp;list&nbsp;args&nbsp;and&nbsp;environment&nbsp;env,&nbsp;replacing&nbsp;the<br>
+current&nbsp;process.<br>
+args&nbsp;may&nbsp;be&nbsp;a&nbsp;list&nbsp;or&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;strings.</tt></dd></dl>
+ <dl><dt><a name="-fchdir"><strong>fchdir</strong></a>(fd)</dt><dd><tt>Change&nbsp;to&nbsp;the&nbsp;directory&nbsp;of&nbsp;the&nbsp;given&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+fd&nbsp;must&nbsp;be&nbsp;opened&nbsp;on&nbsp;a&nbsp;directory,&nbsp;not&nbsp;a&nbsp;file.<br>
+Equivalent&nbsp;to&nbsp;os.<a href="#-chdir">chdir</a>(fd).</tt></dd></dl>
+ <dl><dt><a name="-fchmod"><strong>fchmod</strong></a>(fd, mode)</dt><dd><tt>Change&nbsp;the&nbsp;access&nbsp;permissions&nbsp;of&nbsp;the&nbsp;file&nbsp;given&nbsp;by&nbsp;file&nbsp;descriptor&nbsp;fd.<br>
+&nbsp;<br>
+Equivalent&nbsp;to&nbsp;os.<a href="#-chmod">chmod</a>(fd,&nbsp;mode).</tt></dd></dl>
+ <dl><dt><a name="-fchown"><strong>fchown</strong></a>(fd, uid, gid)</dt><dd><tt>Change&nbsp;the&nbsp;owner&nbsp;and&nbsp;group&nbsp;id&nbsp;of&nbsp;the&nbsp;file&nbsp;specified&nbsp;by&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+Equivalent&nbsp;to&nbsp;os.<a href="#-chown">chown</a>(fd,&nbsp;uid,&nbsp;gid).</tt></dd></dl>
+ <dl><dt><a name="-fdatasync"><strong>fdatasync</strong></a>(fd)</dt><dd><tt>Force&nbsp;write&nbsp;of&nbsp;fd&nbsp;to&nbsp;disk&nbsp;without&nbsp;forcing&nbsp;update&nbsp;of&nbsp;metadata.</tt></dd></dl>
+ <dl><dt><a name="-fdopen"><strong>fdopen</strong></a>(fd, *args, **kwargs)</dt><dd><tt>#&nbsp;Supply&nbsp;os.<a href="#-fdopen">fdopen</a>()</tt></dd></dl>
+ <dl><dt><a name="-fork"><strong>fork</strong></a>()</dt><dd><tt>Fork&nbsp;a&nbsp;child&nbsp;process.<br>
+&nbsp;<br>
+Return&nbsp;0&nbsp;to&nbsp;child&nbsp;process&nbsp;and&nbsp;PID&nbsp;of&nbsp;child&nbsp;to&nbsp;parent&nbsp;process.</tt></dd></dl>
+ <dl><dt><a name="-forkpty"><strong>forkpty</strong></a>()</dt><dd><tt>Fork&nbsp;a&nbsp;new&nbsp;process&nbsp;with&nbsp;a&nbsp;new&nbsp;pseudo-terminal&nbsp;as&nbsp;controlling&nbsp;tty.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;(pid,&nbsp;master_fd).<br>
+Like&nbsp;<a href="#-fork">fork</a>(),&nbsp;return&nbsp;pid&nbsp;of&nbsp;0&nbsp;to&nbsp;the&nbsp;child&nbsp;process,<br>
+and&nbsp;pid&nbsp;of&nbsp;child&nbsp;to&nbsp;the&nbsp;parent&nbsp;process.<br>
+To&nbsp;both,&nbsp;return&nbsp;fd&nbsp;of&nbsp;newly&nbsp;opened&nbsp;pseudo-terminal.</tt></dd></dl>
+ <dl><dt><a name="-fpathconf"><strong>fpathconf</strong></a>(fd, name, /)</dt><dd><tt>Return&nbsp;the&nbsp;configuration&nbsp;limit&nbsp;name&nbsp;for&nbsp;the&nbsp;file&nbsp;descriptor&nbsp;fd.<br>
+&nbsp;<br>
+If&nbsp;there&nbsp;is&nbsp;no&nbsp;limit,&nbsp;return&nbsp;-1.</tt></dd></dl>
+ <dl><dt><a name="-fsdecode"><strong>fsdecode</strong></a>(filename)</dt><dd><tt>Decode&nbsp;filename&nbsp;(an&nbsp;os.PathLike,&nbsp;bytes,&nbsp;or&nbsp;str)&nbsp;from&nbsp;the&nbsp;filesystem<br>
+encoding&nbsp;with&nbsp;'surrogateescape'&nbsp;<a href="#error">error</a>&nbsp;handler,&nbsp;return&nbsp;str&nbsp;unchanged.&nbsp;On<br>
+Windows,&nbsp;use&nbsp;'strict'&nbsp;<a href="#error">error</a>&nbsp;handler&nbsp;if&nbsp;the&nbsp;file&nbsp;system&nbsp;encoding&nbsp;is<br>
+'mbcs'&nbsp;(which&nbsp;is&nbsp;the&nbsp;default&nbsp;encoding).</tt></dd></dl>
+ <dl><dt><a name="-fsencode"><strong>fsencode</strong></a>(filename)</dt><dd><tt>Encode&nbsp;filename&nbsp;(an&nbsp;os.PathLike,&nbsp;bytes,&nbsp;or&nbsp;str)&nbsp;to&nbsp;the&nbsp;filesystem<br>
+encoding&nbsp;with&nbsp;'surrogateescape'&nbsp;<a href="#error">error</a>&nbsp;handler,&nbsp;return&nbsp;bytes&nbsp;unchanged.<br>
+On&nbsp;Windows,&nbsp;use&nbsp;'strict'&nbsp;<a href="#error">error</a>&nbsp;handler&nbsp;if&nbsp;the&nbsp;file&nbsp;system&nbsp;encoding&nbsp;is<br>
+'mbcs'&nbsp;(which&nbsp;is&nbsp;the&nbsp;default&nbsp;encoding).</tt></dd></dl>
+ <dl><dt><a name="-fspath"><strong>fspath</strong></a>(path)</dt><dd><tt>Return&nbsp;the&nbsp;file&nbsp;system&nbsp;path&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;str&nbsp;or&nbsp;bytes,&nbsp;then&nbsp;allow&nbsp;it&nbsp;to&nbsp;pass&nbsp;through&nbsp;as-is.&nbsp;If&nbsp;the<br>
+<a href="builtins.html#object">object</a>&nbsp;defines&nbsp;__fspath__(),&nbsp;then&nbsp;return&nbsp;the&nbsp;result&nbsp;of&nbsp;that&nbsp;method.&nbsp;All&nbsp;other<br>
+types&nbsp;raise&nbsp;a&nbsp;TypeError.</tt></dd></dl>
+ <dl><dt><a name="-fstat"><strong>fstat</strong></a>(fd)</dt><dd><tt>Perform&nbsp;a&nbsp;stat&nbsp;system&nbsp;call&nbsp;on&nbsp;the&nbsp;given&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+Like&nbsp;<a href="#-stat">stat</a>(),&nbsp;but&nbsp;for&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+Equivalent&nbsp;to&nbsp;os.<a href="#-stat">stat</a>(fd).</tt></dd></dl>
+ <dl><dt><a name="-fstatvfs"><strong>fstatvfs</strong></a>(fd, /)</dt><dd><tt>Perform&nbsp;an&nbsp;fstatvfs&nbsp;system&nbsp;call&nbsp;on&nbsp;the&nbsp;given&nbsp;fd.<br>
+&nbsp;<br>
+Equivalent&nbsp;to&nbsp;<a href="#-statvfs">statvfs</a>(fd).</tt></dd></dl>
+ <dl><dt><a name="-fsync"><strong>fsync</strong></a>(fd)</dt><dd><tt>Force&nbsp;write&nbsp;of&nbsp;fd&nbsp;to&nbsp;disk.</tt></dd></dl>
+ <dl><dt><a name="-ftruncate"><strong>ftruncate</strong></a>(fd, length, /)</dt><dd><tt>Truncate&nbsp;a&nbsp;file,&nbsp;specified&nbsp;by&nbsp;file&nbsp;descriptor,&nbsp;to&nbsp;a&nbsp;specific&nbsp;length.</tt></dd></dl>
+ <dl><dt><a name="-fwalk"><strong>fwalk</strong></a>(top='.', topdown=True, onerror=None, *, follow_symlinks=False, dir_fd=None)</dt><dd><tt>Directory&nbsp;tree&nbsp;generator.<br>
+&nbsp;<br>
+This&nbsp;behaves&nbsp;exactly&nbsp;like&nbsp;<a href="#-walk">walk</a>(),&nbsp;except&nbsp;that&nbsp;it&nbsp;yields&nbsp;a&nbsp;4-<a href="builtins.html#tuple">tuple</a><br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dirpath,&nbsp;dirnames,&nbsp;filenames,&nbsp;dirfd<br>
+&nbsp;<br>
+`dirpath`,&nbsp;`dirnames`&nbsp;and&nbsp;`filenames`&nbsp;are&nbsp;identical&nbsp;to&nbsp;<a href="#-walk">walk</a>()&nbsp;output,<br>
+and&nbsp;`dirfd`&nbsp;is&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;referring&nbsp;to&nbsp;the&nbsp;directory&nbsp;`dirpath`.<br>
+&nbsp;<br>
+The&nbsp;advantage&nbsp;of&nbsp;<a href="#-fwalk">fwalk</a>()&nbsp;over&nbsp;<a href="#-walk">walk</a>()&nbsp;is&nbsp;that&nbsp;it's&nbsp;safe&nbsp;against&nbsp;symlink<br>
+races&nbsp;(when&nbsp;follow_symlinks&nbsp;is&nbsp;False).<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;top&nbsp;should&nbsp;be&nbsp;relative;&nbsp;top&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+&nbsp;&nbsp;(dir_fd&nbsp;is&nbsp;always&nbsp;supported&nbsp;for&nbsp;fwalk.)<br>
+&nbsp;<br>
+Caution:<br>
+Since&nbsp;<a href="#-fwalk">fwalk</a>()&nbsp;yields&nbsp;file&nbsp;descriptors,&nbsp;those&nbsp;are&nbsp;only&nbsp;valid&nbsp;until&nbsp;the<br>
+next&nbsp;iteration&nbsp;step,&nbsp;so&nbsp;you&nbsp;should&nbsp;<a href="#-dup">dup</a>()&nbsp;them&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;keep&nbsp;them<br>
+for&nbsp;a&nbsp;longer&nbsp;period.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+import&nbsp;os<br>
+for&nbsp;root,&nbsp;dirs,&nbsp;files,&nbsp;rootfd&nbsp;in&nbsp;os.<a href="#-fwalk">fwalk</a>('python/Lib/email'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(root,&nbsp;"consumes",&nbsp;end="")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(sum(os.<a href="#-stat">stat</a>(name,&nbsp;dir_fd=rootfd).st_size&nbsp;for&nbsp;name&nbsp;in&nbsp;files),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end="")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print("bytes&nbsp;in",&nbsp;len(files),&nbsp;"non-directory&nbsp;files")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;'CVS'&nbsp;in&nbsp;dirs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dirs.<a href="#-remove">remove</a>('CVS')&nbsp;&nbsp;#&nbsp;don't&nbsp;visit&nbsp;CVS&nbsp;directories</tt></dd></dl>
+ <dl><dt><a name="-get_blocking"><strong>get_blocking</strong></a>(fd, /)</dt><dd><tt>Get&nbsp;the&nbsp;blocking&nbsp;mode&nbsp;of&nbsp;the&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+Return&nbsp;False&nbsp;if&nbsp;the&nbsp;O_NONBLOCK&nbsp;flag&nbsp;is&nbsp;set,&nbsp;True&nbsp;if&nbsp;the&nbsp;flag&nbsp;is&nbsp;cleared.</tt></dd></dl>
+ <dl><dt><a name="-get_exec_path"><strong>get_exec_path</strong></a>(env=None)</dt><dd><tt>Returns&nbsp;the&nbsp;sequence&nbsp;of&nbsp;directories&nbsp;that&nbsp;will&nbsp;be&nbsp;searched&nbsp;for&nbsp;the<br>
+named&nbsp;executable&nbsp;(similar&nbsp;to&nbsp;a&nbsp;shell)&nbsp;when&nbsp;launching&nbsp;a&nbsp;process.<br>
+&nbsp;<br>
+*env*&nbsp;must&nbsp;be&nbsp;an&nbsp;environment&nbsp;variable&nbsp;dict&nbsp;or&nbsp;None.&nbsp;&nbsp;If&nbsp;*env*&nbsp;is&nbsp;None,<br>
+os.environ&nbsp;will&nbsp;be&nbsp;used.</tt></dd></dl>
+ <dl><dt><a name="-get_inheritable"><strong>get_inheritable</strong></a>(fd, /)</dt><dd><tt>Get&nbsp;the&nbsp;close-on-exe&nbsp;flag&nbsp;of&nbsp;the&nbsp;specified&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+ <dl><dt><a name="-get_terminal_size"><strong>get_terminal_size</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;terminal&nbsp;window&nbsp;as&nbsp;(columns,&nbsp;lines).<br>
+&nbsp;<br>
+The&nbsp;optional&nbsp;argument&nbsp;fd&nbsp;(default&nbsp;standard&nbsp;output)&nbsp;specifies<br>
+which&nbsp;file&nbsp;descriptor&nbsp;should&nbsp;be&nbsp;queried.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;not&nbsp;connected&nbsp;to&nbsp;a&nbsp;terminal,&nbsp;an&nbsp;OSError<br>
+is&nbsp;thrown.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;will&nbsp;only&nbsp;be&nbsp;defined&nbsp;if&nbsp;an&nbsp;implementation&nbsp;is<br>
+available&nbsp;for&nbsp;this&nbsp;system.<br>
+&nbsp;<br>
+shutil.get_terminal_size&nbsp;is&nbsp;the&nbsp;high-level&nbsp;function&nbsp;which&nbsp;should<br>
+normally&nbsp;be&nbsp;used,&nbsp;os.get_terminal_size&nbsp;is&nbsp;the&nbsp;low-level&nbsp;implementation.</tt></dd></dl>
+ <dl><dt><a name="-getcwd"><strong>getcwd</strong></a>()</dt><dd><tt>Return&nbsp;a&nbsp;unicode&nbsp;string&nbsp;representing&nbsp;the&nbsp;current&nbsp;working&nbsp;directory.</tt></dd></dl>
+ <dl><dt><a name="-getcwdb"><strong>getcwdb</strong></a>()</dt><dd><tt>Return&nbsp;a&nbsp;bytes&nbsp;string&nbsp;representing&nbsp;the&nbsp;current&nbsp;working&nbsp;directory.</tt></dd></dl>
+ <dl><dt><a name="-getegid"><strong>getegid</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;process's&nbsp;effective&nbsp;group&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-getenv"><strong>getenv</strong></a>(key, default=None)</dt><dd><tt>Get&nbsp;an&nbsp;environment&nbsp;variable,&nbsp;return&nbsp;None&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;exist.<br>
+The&nbsp;optional&nbsp;second&nbsp;argument&nbsp;can&nbsp;specify&nbsp;an&nbsp;alternate&nbsp;default.<br>
+key,&nbsp;default&nbsp;and&nbsp;the&nbsp;result&nbsp;are&nbsp;str.</tt></dd></dl>
+ <dl><dt><a name="-getenvb"><strong>getenvb</strong></a>(key, default=None)</dt><dd><tt>Get&nbsp;an&nbsp;environment&nbsp;variable,&nbsp;return&nbsp;None&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;exist.<br>
+The&nbsp;optional&nbsp;second&nbsp;argument&nbsp;can&nbsp;specify&nbsp;an&nbsp;alternate&nbsp;default.<br>
+key,&nbsp;default&nbsp;and&nbsp;the&nbsp;result&nbsp;are&nbsp;bytes.</tt></dd></dl>
+ <dl><dt><a name="-geteuid"><strong>geteuid</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;process's&nbsp;effective&nbsp;user&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-getgid"><strong>getgid</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;process's&nbsp;group&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-getgrouplist"><strong>getgrouplist</strong></a>(user, group, /)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;groups&nbsp;to&nbsp;which&nbsp;a&nbsp;user&nbsp;belongs.<br>
+&nbsp;<br>
+user<br>
+&nbsp;&nbsp;username&nbsp;to&nbsp;lookup<br>
+group<br>
+&nbsp;&nbsp;base&nbsp;group&nbsp;id&nbsp;of&nbsp;the&nbsp;user</tt></dd></dl>
+ <dl><dt><a name="-getgroups"><strong>getgroups</strong></a>()</dt><dd><tt>Return&nbsp;list&nbsp;of&nbsp;supplemental&nbsp;group&nbsp;IDs&nbsp;for&nbsp;the&nbsp;process.</tt></dd></dl>
+ <dl><dt><a name="-getloadavg"><strong>getloadavg</strong></a>()</dt><dd><tt>Return&nbsp;average&nbsp;recent&nbsp;system&nbsp;load&nbsp;information.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;number&nbsp;of&nbsp;processes&nbsp;in&nbsp;the&nbsp;system&nbsp;run&nbsp;queue&nbsp;averaged&nbsp;over<br>
+the&nbsp;last&nbsp;1,&nbsp;5,&nbsp;and&nbsp;15&nbsp;minutes&nbsp;as&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;three&nbsp;floats.<br>
+Raises&nbsp;OSError&nbsp;if&nbsp;the&nbsp;load&nbsp;average&nbsp;was&nbsp;unobtainable.</tt></dd></dl>
+ <dl><dt><a name="-getlogin"><strong>getlogin</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;actual&nbsp;login&nbsp;name.</tt></dd></dl>
+ <dl><dt><a name="-getpgid"><strong>getpgid</strong></a>(pid)</dt><dd><tt>Call&nbsp;the&nbsp;system&nbsp;call&nbsp;<a href="#-getpgid">getpgid</a>(),&nbsp;and&nbsp;return&nbsp;the&nbsp;result.</tt></dd></dl>
+ <dl><dt><a name="-getpgrp"><strong>getpgrp</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;process&nbsp;group&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-getpid"><strong>getpid</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;process&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-getppid"><strong>getppid</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;parent's&nbsp;process&nbsp;id.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;parent&nbsp;process&nbsp;has&nbsp;already&nbsp;exited,&nbsp;Windows&nbsp;machines&nbsp;will&nbsp;still<br>
+return&nbsp;its&nbsp;id;&nbsp;others&nbsp;systems&nbsp;will&nbsp;return&nbsp;the&nbsp;id&nbsp;of&nbsp;the&nbsp;'init'&nbsp;process&nbsp;(1).</tt></dd></dl>
+ <dl><dt><a name="-getpriority"><strong>getpriority</strong></a>(which, who)</dt><dd><tt>Return&nbsp;program&nbsp;scheduling&nbsp;priority.</tt></dd></dl>
+ <dl><dt><a name="-getrandom"><strong>getrandom</strong></a>(size, flags=0)</dt><dd><tt>Obtain&nbsp;a&nbsp;series&nbsp;of&nbsp;random&nbsp;bytes.</tt></dd></dl>
+ <dl><dt><a name="-getresgid"><strong>getresgid</strong></a>()</dt><dd><tt>Return&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;the&nbsp;current&nbsp;process's&nbsp;real,&nbsp;effective,&nbsp;and&nbsp;saved&nbsp;group&nbsp;ids.</tt></dd></dl>
+ <dl><dt><a name="-getresuid"><strong>getresuid</strong></a>()</dt><dd><tt>Return&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;the&nbsp;current&nbsp;process's&nbsp;real,&nbsp;effective,&nbsp;and&nbsp;saved&nbsp;user&nbsp;ids.</tt></dd></dl>
+ <dl><dt><a name="-getsid"><strong>getsid</strong></a>(pid, /)</dt><dd><tt>Call&nbsp;the&nbsp;system&nbsp;call&nbsp;<a href="#-getsid">getsid</a>(pid)&nbsp;and&nbsp;return&nbsp;the&nbsp;result.</tt></dd></dl>
+ <dl><dt><a name="-getuid"><strong>getuid</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;process's&nbsp;user&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-getxattr"><strong>getxattr</strong></a>(path, attribute, *, follow_symlinks=True)</dt><dd><tt>Return&nbsp;the&nbsp;value&nbsp;of&nbsp;extended&nbsp;attribute&nbsp;attribute&nbsp;on&nbsp;path.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;be&nbsp;either&nbsp;a&nbsp;string,&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>,&nbsp;or&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+If&nbsp;follow_symlinks&nbsp;is&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic<br>
+&nbsp;&nbsp;link,&nbsp;getxattr&nbsp;will&nbsp;examine&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.</tt></dd></dl>
+ <dl><dt><a name="-initgroups"><strong>initgroups</strong></a>(username, gid, /)</dt><dd><tt>Initialize&nbsp;the&nbsp;group&nbsp;access&nbsp;list.<br>
+&nbsp;<br>
+Call&nbsp;the&nbsp;system&nbsp;<a href="#-initgroups">initgroups</a>()&nbsp;to&nbsp;initialize&nbsp;the&nbsp;group&nbsp;access&nbsp;list&nbsp;with&nbsp;all&nbsp;of<br>
+the&nbsp;groups&nbsp;of&nbsp;which&nbsp;the&nbsp;specified&nbsp;username&nbsp;is&nbsp;a&nbsp;member,&nbsp;plus&nbsp;the&nbsp;specified<br>
+group&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-isatty"><strong>isatty</strong></a>(fd, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;fd&nbsp;is&nbsp;connected&nbsp;to&nbsp;a&nbsp;terminal.<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;the&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor<br>
+connected&nbsp;to&nbsp;the&nbsp;slave&nbsp;end&nbsp;of&nbsp;a&nbsp;terminal.</tt></dd></dl>
+ <dl><dt><a name="-kill"><strong>kill</strong></a>(pid, signal, /)</dt><dd><tt>Kill&nbsp;a&nbsp;process&nbsp;with&nbsp;a&nbsp;signal.</tt></dd></dl>
+ <dl><dt><a name="-killpg"><strong>killpg</strong></a>(pgid, signal, /)</dt><dd><tt>Kill&nbsp;a&nbsp;process&nbsp;group&nbsp;with&nbsp;a&nbsp;signal.</tt></dd></dl>
+ <dl><dt><a name="-lchown"><strong>lchown</strong></a>(path, uid, gid)</dt><dd><tt>Change&nbsp;the&nbsp;owner&nbsp;and&nbsp;group&nbsp;id&nbsp;of&nbsp;path&nbsp;to&nbsp;the&nbsp;numeric&nbsp;uid&nbsp;and&nbsp;gid.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;will&nbsp;not&nbsp;follow&nbsp;symbolic&nbsp;links.<br>
+Equivalent&nbsp;to&nbsp;os.<a href="#-chown">chown</a>(path,&nbsp;uid,&nbsp;gid,&nbsp;follow_symlinks=False).</tt></dd></dl>
+ <dl><dt><a name="-link"><strong>link</strong></a>(src, dst, *, src_dir_fd=None, dst_dir_fd=None, follow_symlinks=True)</dt><dd><tt>Create&nbsp;a&nbsp;hard&nbsp;link&nbsp;to&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+If&nbsp;either&nbsp;src_dir_fd&nbsp;or&nbsp;dst_dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file<br>
+&nbsp;&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,&nbsp;and&nbsp;the&nbsp;respective&nbsp;path&nbsp;string&nbsp;(src&nbsp;or&nbsp;dst)<br>
+&nbsp;&nbsp;should&nbsp;be&nbsp;relative;&nbsp;the&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+If&nbsp;follow_symlinks&nbsp;is&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;src&nbsp;is&nbsp;a&nbsp;symbolic<br>
+&nbsp;&nbsp;link,&nbsp;link&nbsp;will&nbsp;create&nbsp;a&nbsp;link&nbsp;to&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;file&nbsp;the&nbsp;link&nbsp;points&nbsp;to.<br>
+src_dir_fd,&nbsp;dst_dir_fd,&nbsp;and&nbsp;follow_symlinks&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your<br>
+&nbsp;&nbsp;platform.&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a<br>
+&nbsp;&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-listdir"><strong>listdir</strong></a>(path=None)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;containing&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;files&nbsp;in&nbsp;the&nbsp;directory.<br>
+&nbsp;<br>
+path&nbsp;can&nbsp;be&nbsp;specified&nbsp;as&nbsp;either&nbsp;str,&nbsp;bytes,&nbsp;or&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;If&nbsp;path&nbsp;is&nbsp;bytes,<br>
+&nbsp;&nbsp;the&nbsp;filenames&nbsp;returned&nbsp;will&nbsp;also&nbsp;be&nbsp;bytes;&nbsp;in&nbsp;all&nbsp;other&nbsp;circumstances<br>
+&nbsp;&nbsp;the&nbsp;filenames&nbsp;returned&nbsp;will&nbsp;be&nbsp;str.<br>
+If&nbsp;path&nbsp;is&nbsp;None,&nbsp;uses&nbsp;the&nbsp;path='.'.<br>
+On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor;\<br>
+&nbsp;&nbsp;the&nbsp;file&nbsp;descriptor&nbsp;must&nbsp;refer&nbsp;to&nbsp;a&nbsp;directory.<br>
+&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;NotImplementedError.<br>
+&nbsp;<br>
+The&nbsp;list&nbsp;is&nbsp;in&nbsp;arbitrary&nbsp;order.&nbsp;&nbsp;It&nbsp;does&nbsp;not&nbsp;include&nbsp;the&nbsp;special<br>
+entries&nbsp;'.'&nbsp;and&nbsp;'..'&nbsp;even&nbsp;if&nbsp;they&nbsp;are&nbsp;present&nbsp;in&nbsp;the&nbsp;directory.</tt></dd></dl>
+ <dl><dt><a name="-listxattr"><strong>listxattr</strong></a>(path=None, *, follow_symlinks=True)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;extended&nbsp;attributes&nbsp;on&nbsp;path.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;be&nbsp;either&nbsp;None,&nbsp;a&nbsp;string,&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>,&nbsp;or&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+if&nbsp;path&nbsp;is&nbsp;None,&nbsp;listxattr&nbsp;will&nbsp;examine&nbsp;the&nbsp;current&nbsp;directory.<br>
+If&nbsp;follow_symlinks&nbsp;is&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic<br>
+&nbsp;&nbsp;link,&nbsp;listxattr&nbsp;will&nbsp;examine&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.</tt></dd></dl>
+ <dl><dt><a name="-lockf"><strong>lockf</strong></a>(fd, command, length, /)</dt><dd><tt>Apply,&nbsp;test&nbsp;or&nbsp;remove&nbsp;a&nbsp;POSIX&nbsp;lock&nbsp;on&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+fd<br>
+&nbsp;&nbsp;An&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+command<br>
+&nbsp;&nbsp;One&nbsp;of&nbsp;F_LOCK,&nbsp;F_TLOCK,&nbsp;F_ULOCK&nbsp;or&nbsp;F_TEST.<br>
+length<br>
+&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;lock,&nbsp;starting&nbsp;at&nbsp;the&nbsp;current&nbsp;position.</tt></dd></dl>
+ <dl><dt><a name="-lseek"><strong>lseek</strong></a>(fd, position, how, /)</dt><dd><tt>Set&nbsp;the&nbsp;position&nbsp;of&nbsp;a&nbsp;file&nbsp;descriptor.&nbsp;&nbsp;Return&nbsp;the&nbsp;new&nbsp;position.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;new&nbsp;cursor&nbsp;position&nbsp;in&nbsp;number&nbsp;of&nbsp;bytes<br>
+relative&nbsp;to&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-lstat"><strong>lstat</strong></a>(path, *, dir_fd=None)</dt><dd><tt>Perform&nbsp;a&nbsp;stat&nbsp;system&nbsp;call&nbsp;on&nbsp;the&nbsp;given&nbsp;path,&nbsp;without&nbsp;following&nbsp;symbolic&nbsp;links.<br>
+&nbsp;<br>
+Like&nbsp;<a href="#-stat">stat</a>(),&nbsp;but&nbsp;do&nbsp;not&nbsp;follow&nbsp;symbolic&nbsp;links.<br>
+Equivalent&nbsp;to&nbsp;<a href="#-stat">stat</a>(path,&nbsp;follow_symlinks=False).</tt></dd></dl>
+ <dl><dt><a name="-major"><strong>major</strong></a>(device, /)</dt><dd><tt>Extracts&nbsp;a&nbsp;device&nbsp;major&nbsp;number&nbsp;from&nbsp;a&nbsp;raw&nbsp;device&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-makedev"><strong>makedev</strong></a>(major, minor, /)</dt><dd><tt>Composes&nbsp;a&nbsp;raw&nbsp;device&nbsp;number&nbsp;from&nbsp;the&nbsp;major&nbsp;and&nbsp;minor&nbsp;device&nbsp;numbers.</tt></dd></dl>
+ <dl><dt><a name="-makedirs"><strong>makedirs</strong></a>(name, mode=511, exist_ok=False)</dt><dd><tt><a href="#-makedirs">makedirs</a>(name&nbsp;[,&nbsp;mode=0o777][,&nbsp;exist_ok=False])<br>
+&nbsp;<br>
+Super-mkdir;&nbsp;create&nbsp;a&nbsp;leaf&nbsp;directory&nbsp;and&nbsp;all&nbsp;intermediate&nbsp;ones.&nbsp;&nbsp;Works&nbsp;like<br>
+mkdir,&nbsp;except&nbsp;that&nbsp;any&nbsp;intermediate&nbsp;path&nbsp;segment&nbsp;(not&nbsp;just&nbsp;the&nbsp;rightmost)<br>
+will&nbsp;be&nbsp;created&nbsp;if&nbsp;it&nbsp;does&nbsp;not&nbsp;exist.&nbsp;If&nbsp;the&nbsp;target&nbsp;directory&nbsp;already<br>
+exists,&nbsp;raise&nbsp;an&nbsp;OSError&nbsp;if&nbsp;exist_ok&nbsp;is&nbsp;False.&nbsp;Otherwise&nbsp;no&nbsp;exception&nbsp;is<br>
+raised.&nbsp;&nbsp;This&nbsp;is&nbsp;recursive.</tt></dd></dl>
+ <dl><dt><a name="-memfd_create"><strong>memfd_create</strong></a>(name, flags=1)</dt></dl>
+ <dl><dt><a name="-minor"><strong>minor</strong></a>(device, /)</dt><dd><tt>Extracts&nbsp;a&nbsp;device&nbsp;minor&nbsp;number&nbsp;from&nbsp;a&nbsp;raw&nbsp;device&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-mkdir"><strong>mkdir</strong></a>(path, mode=511, *, dir_fd=None)</dt><dd><tt>Create&nbsp;a&nbsp;directory.<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.<br>
+&nbsp;<br>
+The&nbsp;mode&nbsp;argument&nbsp;is&nbsp;ignored&nbsp;on&nbsp;Windows.</tt></dd></dl>
+ <dl><dt><a name="-mkfifo"><strong>mkfifo</strong></a>(path, mode=438, *, dir_fd=None)</dt><dd><tt>Create&nbsp;a&nbsp;"fifo"&nbsp;(a&nbsp;POSIX&nbsp;named&nbsp;pipe).<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-mknod"><strong>mknod</strong></a>(path, mode=384, device=0, *, dir_fd=None)</dt><dd><tt>Create&nbsp;a&nbsp;node&nbsp;in&nbsp;the&nbsp;file&nbsp;system.<br>
+&nbsp;<br>
+Create&nbsp;a&nbsp;node&nbsp;in&nbsp;the&nbsp;file&nbsp;system&nbsp;(file,&nbsp;device&nbsp;special&nbsp;file&nbsp;or&nbsp;named&nbsp;pipe)<br>
+at&nbsp;path.&nbsp;&nbsp;mode&nbsp;specifies&nbsp;both&nbsp;the&nbsp;permissions&nbsp;to&nbsp;use&nbsp;and&nbsp;the<br>
+type&nbsp;of&nbsp;node&nbsp;to&nbsp;be&nbsp;created,&nbsp;being&nbsp;combined&nbsp;(bitwise&nbsp;OR)&nbsp;with&nbsp;one&nbsp;of<br>
+S_IFREG,&nbsp;S_IFCHR,&nbsp;S_IFBLK,&nbsp;and&nbsp;S_IFIFO.&nbsp;&nbsp;If&nbsp;S_IFCHR&nbsp;or&nbsp;S_IFBLK&nbsp;is&nbsp;set&nbsp;on&nbsp;mode,<br>
+device&nbsp;defines&nbsp;the&nbsp;newly&nbsp;created&nbsp;device&nbsp;special&nbsp;file&nbsp;(probably&nbsp;using<br>
+os.<a href="#-makedev">makedev</a>()).&nbsp;&nbsp;Otherwise&nbsp;device&nbsp;is&nbsp;ignored.<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-nice"><strong>nice</strong></a>(increment, /)</dt><dd><tt>Add&nbsp;increment&nbsp;to&nbsp;the&nbsp;priority&nbsp;of&nbsp;process&nbsp;and&nbsp;return&nbsp;the&nbsp;new&nbsp;priority.</tt></dd></dl>
+ <dl><dt><a name="-open"><strong>open</strong></a>(path, flags, mode=511, *, dir_fd=None)</dt><dd><tt>Open&nbsp;a&nbsp;file&nbsp;for&nbsp;low&nbsp;level&nbsp;IO.&nbsp;&nbsp;Returns&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;(integer).<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-openpty"><strong>openpty</strong></a>()</dt><dd><tt>Open&nbsp;a&nbsp;pseudo-terminal.<br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;(master_fd,&nbsp;slave_fd)&nbsp;containing&nbsp;open&nbsp;file&nbsp;descriptors<br>
+for&nbsp;both&nbsp;the&nbsp;master&nbsp;and&nbsp;slave&nbsp;ends.</tt></dd></dl>
+ <dl><dt><a name="-pathconf"><strong>pathconf</strong></a>(path, name)</dt><dd><tt>Return&nbsp;the&nbsp;configuration&nbsp;limit&nbsp;name&nbsp;for&nbsp;the&nbsp;file&nbsp;or&nbsp;directory&nbsp;path.<br>
+&nbsp;<br>
+If&nbsp;there&nbsp;is&nbsp;no&nbsp;limit,&nbsp;return&nbsp;-1.<br>
+On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+ <dl><dt><a name="-pidfd_open"><strong>pidfd_open</strong></a>(pid, flags=0)</dt><dd><tt>Return&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;referring&nbsp;to&nbsp;the&nbsp;process&nbsp;*pid*.<br>
+&nbsp;<br>
+The&nbsp;descriptor&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;perform&nbsp;process&nbsp;management&nbsp;without&nbsp;races&nbsp;and<br>
+signals.</tt></dd></dl>
+ <dl><dt><a name="-pipe"><strong>pipe</strong></a>()</dt><dd><tt>Create&nbsp;a&nbsp;pipe.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;two&nbsp;file&nbsp;descriptors:<br>
+&nbsp;&nbsp;(read_fd,&nbsp;write_fd)</tt></dd></dl>
+ <dl><dt><a name="-pipe2"><strong>pipe2</strong></a>(flags, /)</dt><dd><tt>Create&nbsp;a&nbsp;pipe&nbsp;with&nbsp;flags&nbsp;set&nbsp;atomically.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;two&nbsp;file&nbsp;descriptors:<br>
+&nbsp;&nbsp;(read_fd,&nbsp;write_fd)<br>
+&nbsp;<br>
+flags&nbsp;can&nbsp;be&nbsp;constructed&nbsp;by&nbsp;ORing&nbsp;together&nbsp;one&nbsp;or&nbsp;more&nbsp;of&nbsp;these&nbsp;values:<br>
+O_NONBLOCK,&nbsp;O_CLOEXEC.</tt></dd></dl>
+ <dl><dt><a name="-popen"><strong>popen</strong></a>(cmd, mode='r', buffering=-1)</dt><dd><tt>#&nbsp;Supply&nbsp;os.<a href="#-popen">popen</a>()</tt></dd></dl>
+ <dl><dt><a name="-posix_fadvise"><strong>posix_fadvise</strong></a>(fd, offset, length, advice, /)</dt><dd><tt>Announce&nbsp;an&nbsp;intention&nbsp;to&nbsp;access&nbsp;data&nbsp;in&nbsp;a&nbsp;specific&nbsp;pattern.<br>
+&nbsp;<br>
+Announce&nbsp;an&nbsp;intention&nbsp;to&nbsp;access&nbsp;data&nbsp;in&nbsp;a&nbsp;specific&nbsp;pattern,&nbsp;thus&nbsp;allowing<br>
+the&nbsp;kernel&nbsp;to&nbsp;make&nbsp;optimizations.<br>
+The&nbsp;advice&nbsp;applies&nbsp;to&nbsp;the&nbsp;region&nbsp;of&nbsp;the&nbsp;file&nbsp;specified&nbsp;by&nbsp;fd&nbsp;starting&nbsp;at<br>
+offset&nbsp;and&nbsp;continuing&nbsp;for&nbsp;length&nbsp;bytes.<br>
+advice&nbsp;is&nbsp;one&nbsp;of&nbsp;POSIX_FADV_NORMAL,&nbsp;POSIX_FADV_SEQUENTIAL,<br>
+POSIX_FADV_RANDOM,&nbsp;POSIX_FADV_NOREUSE,&nbsp;POSIX_FADV_WILLNEED,&nbsp;or<br>
+POSIX_FADV_DONTNEED.</tt></dd></dl>
+ <dl><dt><a name="-posix_fallocate"><strong>posix_fallocate</strong></a>(fd, offset, length, /)</dt><dd><tt>Ensure&nbsp;a&nbsp;file&nbsp;has&nbsp;allocated&nbsp;at&nbsp;least&nbsp;a&nbsp;particular&nbsp;number&nbsp;of&nbsp;bytes&nbsp;on&nbsp;disk.<br>
+&nbsp;<br>
+Ensure&nbsp;that&nbsp;the&nbsp;file&nbsp;specified&nbsp;by&nbsp;fd&nbsp;encompasses&nbsp;a&nbsp;range&nbsp;of&nbsp;bytes<br>
+starting&nbsp;at&nbsp;offset&nbsp;bytes&nbsp;from&nbsp;the&nbsp;beginning&nbsp;and&nbsp;continuing&nbsp;for&nbsp;length&nbsp;bytes.</tt></dd></dl>
+ <dl><dt><a name="-posix_spawn"><strong>posix_spawn</strong></a>(...)</dt><dd><tt>Execute&nbsp;the&nbsp;program&nbsp;specified&nbsp;by&nbsp;path&nbsp;in&nbsp;a&nbsp;new&nbsp;process.<br>
+&nbsp;<br>
+path<br>
+&nbsp;&nbsp;Path&nbsp;of&nbsp;executable&nbsp;file.<br>
+argv<br>
+&nbsp;&nbsp;Tuple&nbsp;or&nbsp;list&nbsp;of&nbsp;strings.<br>
+env<br>
+&nbsp;&nbsp;Dictionary&nbsp;of&nbsp;strings&nbsp;mapping&nbsp;to&nbsp;strings.<br>
+file_actions<br>
+&nbsp;&nbsp;A&nbsp;sequence&nbsp;of&nbsp;file&nbsp;action&nbsp;tuples.<br>
+setpgroup<br>
+&nbsp;&nbsp;The&nbsp;pgroup&nbsp;to&nbsp;use&nbsp;with&nbsp;the&nbsp;POSIX_SPAWN_SETPGROUP&nbsp;flag.<br>
+resetids<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;value&nbsp;is&nbsp;`true`&nbsp;the&nbsp;POSIX_SPAWN_RESETIDS&nbsp;will&nbsp;be&nbsp;activated.<br>
+setsid<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;value&nbsp;is&nbsp;`true`&nbsp;the&nbsp;POSIX_SPAWN_SETSID&nbsp;or&nbsp;POSIX_SPAWN_SETSID_NP&nbsp;will&nbsp;be&nbsp;activated.<br>
+setsigmask<br>
+&nbsp;&nbsp;The&nbsp;sigmask&nbsp;to&nbsp;use&nbsp;with&nbsp;the&nbsp;POSIX_SPAWN_SETSIGMASK&nbsp;flag.<br>
+setsigdef<br>
+&nbsp;&nbsp;The&nbsp;sigmask&nbsp;to&nbsp;use&nbsp;with&nbsp;the&nbsp;POSIX_SPAWN_SETSIGDEF&nbsp;flag.<br>
+scheduler<br>
+&nbsp;&nbsp;A&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;with&nbsp;the&nbsp;scheduler&nbsp;policy&nbsp;(optional)&nbsp;and&nbsp;parameters.</tt></dd></dl>
+ <dl><dt><a name="-posix_spawnp"><strong>posix_spawnp</strong></a>(...)</dt><dd><tt>Execute&nbsp;the&nbsp;program&nbsp;specified&nbsp;by&nbsp;path&nbsp;in&nbsp;a&nbsp;new&nbsp;process.<br>
+&nbsp;<br>
+path<br>
+&nbsp;&nbsp;Path&nbsp;of&nbsp;executable&nbsp;file.<br>
+argv<br>
+&nbsp;&nbsp;Tuple&nbsp;or&nbsp;list&nbsp;of&nbsp;strings.<br>
+env<br>
+&nbsp;&nbsp;Dictionary&nbsp;of&nbsp;strings&nbsp;mapping&nbsp;to&nbsp;strings.<br>
+file_actions<br>
+&nbsp;&nbsp;A&nbsp;sequence&nbsp;of&nbsp;file&nbsp;action&nbsp;tuples.<br>
+setpgroup<br>
+&nbsp;&nbsp;The&nbsp;pgroup&nbsp;to&nbsp;use&nbsp;with&nbsp;the&nbsp;POSIX_SPAWN_SETPGROUP&nbsp;flag.<br>
+resetids<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;value&nbsp;is&nbsp;`True`&nbsp;the&nbsp;POSIX_SPAWN_RESETIDS&nbsp;will&nbsp;be&nbsp;activated.<br>
+setsid<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;value&nbsp;is&nbsp;`True`&nbsp;the&nbsp;POSIX_SPAWN_SETSID&nbsp;or&nbsp;POSIX_SPAWN_SETSID_NP&nbsp;will&nbsp;be&nbsp;activated.<br>
+setsigmask<br>
+&nbsp;&nbsp;The&nbsp;sigmask&nbsp;to&nbsp;use&nbsp;with&nbsp;the&nbsp;POSIX_SPAWN_SETSIGMASK&nbsp;flag.<br>
+setsigdef<br>
+&nbsp;&nbsp;The&nbsp;sigmask&nbsp;to&nbsp;use&nbsp;with&nbsp;the&nbsp;POSIX_SPAWN_SETSIGDEF&nbsp;flag.<br>
+scheduler<br>
+&nbsp;&nbsp;A&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;with&nbsp;the&nbsp;scheduler&nbsp;policy&nbsp;(optional)&nbsp;and&nbsp;parameters.</tt></dd></dl>
+ <dl><dt><a name="-pread"><strong>pread</strong></a>(fd, length, offset, /)</dt><dd><tt>Read&nbsp;a&nbsp;number&nbsp;of&nbsp;bytes&nbsp;from&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;starting&nbsp;at&nbsp;a&nbsp;particular&nbsp;offset.<br>
+&nbsp;<br>
+Read&nbsp;length&nbsp;bytes&nbsp;from&nbsp;file&nbsp;descriptor&nbsp;fd,&nbsp;starting&nbsp;at&nbsp;offset&nbsp;bytes&nbsp;from<br>
+the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;file.&nbsp;&nbsp;The&nbsp;file&nbsp;offset&nbsp;remains&nbsp;unchanged.</tt></dd></dl>
+ <dl><dt><a name="-preadv"><strong>preadv</strong></a>(fd, buffers, offset, flags=0, /)</dt><dd><tt>Reads&nbsp;from&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;into&nbsp;a&nbsp;number&nbsp;of&nbsp;mutable&nbsp;bytes-like&nbsp;objects.<br>
+&nbsp;<br>
+Combines&nbsp;the&nbsp;functionality&nbsp;of&nbsp;<a href="#-readv">readv</a>()&nbsp;and&nbsp;<a href="#-pread">pread</a>().&nbsp;As&nbsp;<a href="#-readv">readv</a>(),&nbsp;it&nbsp;will<br>
+transfer&nbsp;data&nbsp;into&nbsp;each&nbsp;buffer&nbsp;until&nbsp;it&nbsp;is&nbsp;full&nbsp;and&nbsp;then&nbsp;move&nbsp;on&nbsp;to&nbsp;the&nbsp;next<br>
+buffer&nbsp;in&nbsp;the&nbsp;sequence&nbsp;to&nbsp;hold&nbsp;the&nbsp;rest&nbsp;of&nbsp;the&nbsp;data.&nbsp;Its&nbsp;fourth&nbsp;argument,<br>
+specifies&nbsp;the&nbsp;file&nbsp;offset&nbsp;at&nbsp;which&nbsp;the&nbsp;input&nbsp;operation&nbsp;is&nbsp;to&nbsp;be&nbsp;performed.&nbsp;It<br>
+will&nbsp;return&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;bytes&nbsp;read&nbsp;(which&nbsp;can&nbsp;be&nbsp;less&nbsp;than&nbsp;the&nbsp;total<br>
+capacity&nbsp;of&nbsp;all&nbsp;the&nbsp;objects).<br>
+&nbsp;<br>
+The&nbsp;flags&nbsp;argument&nbsp;contains&nbsp;a&nbsp;bitwise&nbsp;OR&nbsp;of&nbsp;zero&nbsp;or&nbsp;more&nbsp;of&nbsp;the&nbsp;following&nbsp;flags:<br>
+&nbsp;<br>
+-&nbsp;RWF_HIPRI<br>
+-&nbsp;RWF_NOWAIT<br>
+&nbsp;<br>
+Using&nbsp;non-zero&nbsp;flags&nbsp;requires&nbsp;Linux&nbsp;4.6&nbsp;or&nbsp;newer.</tt></dd></dl>
+ <dl><dt><a name="-putenv"><strong>putenv</strong></a>(name, value, /)</dt><dd><tt>Change&nbsp;or&nbsp;add&nbsp;an&nbsp;environment&nbsp;variable.</tt></dd></dl>
+ <dl><dt><a name="-pwrite"><strong>pwrite</strong></a>(fd, buffer, offset, /)</dt><dd><tt>Write&nbsp;bytes&nbsp;to&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;starting&nbsp;at&nbsp;a&nbsp;particular&nbsp;offset.<br>
+&nbsp;<br>
+Write&nbsp;buffer&nbsp;to&nbsp;fd,&nbsp;starting&nbsp;at&nbsp;offset&nbsp;bytes&nbsp;from&nbsp;the&nbsp;beginning&nbsp;of<br>
+the&nbsp;file.&nbsp;&nbsp;Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;writte.&nbsp;&nbsp;Does&nbsp;not&nbsp;change&nbsp;the<br>
+current&nbsp;file&nbsp;offset.</tt></dd></dl>
+ <dl><dt><a name="-pwritev"><strong>pwritev</strong></a>(fd, buffers, offset, flags=0, /)</dt><dd><tt>Writes&nbsp;the&nbsp;contents&nbsp;of&nbsp;bytes-like&nbsp;objects&nbsp;to&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;at&nbsp;a&nbsp;given&nbsp;offset.<br>
+&nbsp;<br>
+Combines&nbsp;the&nbsp;functionality&nbsp;of&nbsp;<a href="#-writev">writev</a>()&nbsp;and&nbsp;<a href="#-pwrite">pwrite</a>().&nbsp;All&nbsp;buffers&nbsp;must&nbsp;be&nbsp;a&nbsp;sequence<br>
+of&nbsp;bytes-like&nbsp;objects.&nbsp;Buffers&nbsp;are&nbsp;processed&nbsp;in&nbsp;array&nbsp;order.&nbsp;Entire&nbsp;contents&nbsp;of&nbsp;first<br>
+buffer&nbsp;is&nbsp;written&nbsp;before&nbsp;proceeding&nbsp;to&nbsp;second,&nbsp;and&nbsp;so&nbsp;on.&nbsp;The&nbsp;operating&nbsp;system&nbsp;may<br>
+set&nbsp;a&nbsp;limit&nbsp;(<a href="#-sysconf">sysconf</a>()&nbsp;value&nbsp;SC_IOV_MAX)&nbsp;on&nbsp;the&nbsp;number&nbsp;of&nbsp;buffers&nbsp;that&nbsp;can&nbsp;be&nbsp;used.<br>
+This&nbsp;function&nbsp;writes&nbsp;the&nbsp;contents&nbsp;of&nbsp;each&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;the&nbsp;file&nbsp;descriptor&nbsp;and&nbsp;returns<br>
+the&nbsp;total&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written.<br>
+&nbsp;<br>
+The&nbsp;flags&nbsp;argument&nbsp;contains&nbsp;a&nbsp;bitwise&nbsp;OR&nbsp;of&nbsp;zero&nbsp;or&nbsp;more&nbsp;of&nbsp;the&nbsp;following&nbsp;flags:<br>
+&nbsp;<br>
+-&nbsp;RWF_DSYNC<br>
+-&nbsp;RWF_SYNC<br>
+&nbsp;<br>
+Using&nbsp;non-zero&nbsp;flags&nbsp;requires&nbsp;Linux&nbsp;4.7&nbsp;or&nbsp;newer.</tt></dd></dl>
+ <dl><dt><a name="-read"><strong>read</strong></a>(fd, length, /)</dt><dd><tt>Read&nbsp;from&nbsp;a&nbsp;file&nbsp;descriptor.&nbsp;&nbsp;Returns&nbsp;a&nbsp;bytes&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-readlink"><strong>readlink</strong></a>(path, *, dir_fd=None)</dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;path&nbsp;to&nbsp;which&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;points.<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+&nbsp;<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,<br>
+using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-readv"><strong>readv</strong></a>(fd, buffers, /)</dt><dd><tt>Read&nbsp;from&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;fd&nbsp;into&nbsp;an&nbsp;iterable&nbsp;of&nbsp;buffers.<br>
+&nbsp;<br>
+The&nbsp;buffers&nbsp;should&nbsp;be&nbsp;mutable&nbsp;buffers&nbsp;accepting&nbsp;bytes.<br>
+readv&nbsp;will&nbsp;transfer&nbsp;data&nbsp;into&nbsp;each&nbsp;buffer&nbsp;until&nbsp;it&nbsp;is&nbsp;full<br>
+and&nbsp;then&nbsp;move&nbsp;on&nbsp;to&nbsp;the&nbsp;next&nbsp;buffer&nbsp;in&nbsp;the&nbsp;sequence&nbsp;to&nbsp;hold<br>
+the&nbsp;rest&nbsp;of&nbsp;the&nbsp;data.<br>
+&nbsp;<br>
+readv&nbsp;returns&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;bytes&nbsp;read,<br>
+which&nbsp;may&nbsp;be&nbsp;less&nbsp;than&nbsp;the&nbsp;total&nbsp;capacity&nbsp;of&nbsp;all&nbsp;the&nbsp;buffers.</tt></dd></dl>
+ <dl><dt><a name="-register_at_fork"><strong>register_at_fork</strong></a>(...)</dt><dd><tt>Register&nbsp;callables&nbsp;to&nbsp;be&nbsp;called&nbsp;when&nbsp;forking&nbsp;a&nbsp;new&nbsp;process.<br>
+&nbsp;<br>
+&nbsp;&nbsp;before<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;callable&nbsp;to&nbsp;be&nbsp;called&nbsp;in&nbsp;the&nbsp;parent&nbsp;before&nbsp;the&nbsp;<a href="#-fork">fork</a>()&nbsp;syscall.<br>
+&nbsp;&nbsp;after_in_child<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;callable&nbsp;to&nbsp;be&nbsp;called&nbsp;in&nbsp;the&nbsp;child&nbsp;after&nbsp;<a href="#-fork">fork</a>().<br>
+&nbsp;&nbsp;after_in_parent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;callable&nbsp;to&nbsp;be&nbsp;called&nbsp;in&nbsp;the&nbsp;parent&nbsp;after&nbsp;<a href="#-fork">fork</a>().<br>
+&nbsp;<br>
+'before'&nbsp;callbacks&nbsp;are&nbsp;called&nbsp;in&nbsp;reverse&nbsp;order.<br>
+'after_in_child'&nbsp;and&nbsp;'after_in_parent'&nbsp;callbacks&nbsp;are&nbsp;called&nbsp;in&nbsp;order.</tt></dd></dl>
+ <dl><dt><a name="-remove"><strong>remove</strong></a>(path, *, dir_fd=None)</dt><dd><tt>Remove&nbsp;a&nbsp;file&nbsp;(same&nbsp;as&nbsp;<a href="#-unlink">unlink</a>()).<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-removedirs"><strong>removedirs</strong></a>(name)</dt><dd><tt><a href="#-removedirs">removedirs</a>(name)<br>
+&nbsp;<br>
+Super-rmdir;&nbsp;remove&nbsp;a&nbsp;leaf&nbsp;directory&nbsp;and&nbsp;all&nbsp;empty&nbsp;intermediate<br>
+ones.&nbsp;&nbsp;Works&nbsp;like&nbsp;rmdir&nbsp;except&nbsp;that,&nbsp;if&nbsp;the&nbsp;leaf&nbsp;directory&nbsp;is<br>
+successfully&nbsp;removed,&nbsp;directories&nbsp;corresponding&nbsp;to&nbsp;rightmost&nbsp;path<br>
+segments&nbsp;will&nbsp;be&nbsp;pruned&nbsp;away&nbsp;until&nbsp;either&nbsp;the&nbsp;whole&nbsp;path&nbsp;is<br>
+consumed&nbsp;or&nbsp;an&nbsp;<a href="#error">error</a>&nbsp;occurs.&nbsp;&nbsp;Errors&nbsp;during&nbsp;this&nbsp;latter&nbsp;phase&nbsp;are<br>
+ignored&nbsp;--&nbsp;they&nbsp;generally&nbsp;mean&nbsp;that&nbsp;a&nbsp;directory&nbsp;was&nbsp;not&nbsp;empty.</tt></dd></dl>
+ <dl><dt><a name="-removexattr"><strong>removexattr</strong></a>(path, attribute, *, follow_symlinks=True)</dt><dd><tt>Remove&nbsp;extended&nbsp;attribute&nbsp;attribute&nbsp;on&nbsp;path.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;be&nbsp;either&nbsp;a&nbsp;string,&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>,&nbsp;or&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+If&nbsp;follow_symlinks&nbsp;is&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic<br>
+&nbsp;&nbsp;link,&nbsp;removexattr&nbsp;will&nbsp;modify&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.</tt></dd></dl>
+ <dl><dt><a name="-rename"><strong>rename</strong></a>(src, dst, *, src_dir_fd=None, dst_dir_fd=None)</dt><dd><tt>Rename&nbsp;a&nbsp;file&nbsp;or&nbsp;directory.<br>
+&nbsp;<br>
+If&nbsp;either&nbsp;src_dir_fd&nbsp;or&nbsp;dst_dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file<br>
+&nbsp;&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,&nbsp;and&nbsp;the&nbsp;respective&nbsp;path&nbsp;string&nbsp;(src&nbsp;or&nbsp;dst)<br>
+&nbsp;&nbsp;should&nbsp;be&nbsp;relative;&nbsp;the&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+src_dir_fd&nbsp;and&nbsp;dst_dir_fd,&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-renames"><strong>renames</strong></a>(old, new)</dt><dd><tt><a href="#-renames">renames</a>(old,&nbsp;new)<br>
+&nbsp;<br>
+Super-rename;&nbsp;create&nbsp;directories&nbsp;as&nbsp;necessary&nbsp;and&nbsp;delete&nbsp;any&nbsp;left<br>
+empty.&nbsp;&nbsp;Works&nbsp;like&nbsp;rename,&nbsp;except&nbsp;creation&nbsp;of&nbsp;any&nbsp;intermediate<br>
+directories&nbsp;needed&nbsp;to&nbsp;make&nbsp;the&nbsp;new&nbsp;pathname&nbsp;good&nbsp;is&nbsp;attempted<br>
+first.&nbsp;&nbsp;After&nbsp;the&nbsp;rename,&nbsp;directories&nbsp;corresponding&nbsp;to&nbsp;rightmost<br>
+path&nbsp;segments&nbsp;of&nbsp;the&nbsp;old&nbsp;name&nbsp;will&nbsp;be&nbsp;pruned&nbsp;until&nbsp;either&nbsp;the<br>
+whole&nbsp;path&nbsp;is&nbsp;consumed&nbsp;or&nbsp;a&nbsp;nonempty&nbsp;directory&nbsp;is&nbsp;found.<br>
+&nbsp;<br>
+Note:&nbsp;this&nbsp;function&nbsp;can&nbsp;fail&nbsp;with&nbsp;the&nbsp;new&nbsp;directory&nbsp;structure&nbsp;made<br>
+if&nbsp;you&nbsp;lack&nbsp;permissions&nbsp;needed&nbsp;to&nbsp;unlink&nbsp;the&nbsp;leaf&nbsp;directory&nbsp;or<br>
+file.</tt></dd></dl>
+ <dl><dt><a name="-replace"><strong>replace</strong></a>(src, dst, *, src_dir_fd=None, dst_dir_fd=None)</dt><dd><tt>Rename&nbsp;a&nbsp;file&nbsp;or&nbsp;directory,&nbsp;overwriting&nbsp;the&nbsp;destination.<br>
+&nbsp;<br>
+If&nbsp;either&nbsp;src_dir_fd&nbsp;or&nbsp;dst_dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file<br>
+&nbsp;&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,&nbsp;and&nbsp;the&nbsp;respective&nbsp;path&nbsp;string&nbsp;(src&nbsp;or&nbsp;dst)<br>
+&nbsp;&nbsp;should&nbsp;be&nbsp;relative;&nbsp;the&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+src_dir_fd&nbsp;and&nbsp;dst_dir_fd,&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-rmdir"><strong>rmdir</strong></a>(path, *, dir_fd=None)</dt><dd><tt>Remove&nbsp;a&nbsp;directory.<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-scandir"><strong>scandir</strong></a>(path=None)</dt><dd><tt>Return&nbsp;an&nbsp;iterator&nbsp;of&nbsp;<a href="#DirEntry">DirEntry</a>&nbsp;objects&nbsp;for&nbsp;given&nbsp;path.<br>
+&nbsp;<br>
+path&nbsp;can&nbsp;be&nbsp;specified&nbsp;as&nbsp;either&nbsp;str,&nbsp;bytes,&nbsp;or&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;If&nbsp;path<br>
+is&nbsp;bytes,&nbsp;the&nbsp;names&nbsp;of&nbsp;yielded&nbsp;<a href="#DirEntry">DirEntry</a>&nbsp;objects&nbsp;will&nbsp;also&nbsp;be&nbsp;bytes;&nbsp;in<br>
+all&nbsp;other&nbsp;circumstances&nbsp;they&nbsp;will&nbsp;be&nbsp;str.<br>
+&nbsp;<br>
+If&nbsp;path&nbsp;is&nbsp;None,&nbsp;uses&nbsp;the&nbsp;path='.'.</tt></dd></dl>
+ <dl><dt><a name="-sched_get_priority_max"><strong>sched_get_priority_max</strong></a>(policy)</dt><dd><tt>Get&nbsp;the&nbsp;maximum&nbsp;scheduling&nbsp;priority&nbsp;for&nbsp;policy.</tt></dd></dl>
+ <dl><dt><a name="-sched_get_priority_min"><strong>sched_get_priority_min</strong></a>(policy)</dt><dd><tt>Get&nbsp;the&nbsp;minimum&nbsp;scheduling&nbsp;priority&nbsp;for&nbsp;policy.</tt></dd></dl>
+ <dl><dt><a name="-sched_getaffinity"><strong>sched_getaffinity</strong></a>(pid, /)</dt><dd><tt>Return&nbsp;the&nbsp;affinity&nbsp;of&nbsp;the&nbsp;process&nbsp;identified&nbsp;by&nbsp;pid&nbsp;(or&nbsp;the&nbsp;current&nbsp;process&nbsp;if&nbsp;zero).<br>
+&nbsp;<br>
+The&nbsp;affinity&nbsp;is&nbsp;returned&nbsp;as&nbsp;a&nbsp;set&nbsp;of&nbsp;CPU&nbsp;identifiers.</tt></dd></dl>
+ <dl><dt><a name="-sched_getparam"><strong>sched_getparam</strong></a>(pid, /)</dt><dd><tt>Returns&nbsp;scheduling&nbsp;parameters&nbsp;for&nbsp;the&nbsp;process&nbsp;identified&nbsp;by&nbsp;pid.<br>
+&nbsp;<br>
+If&nbsp;pid&nbsp;is&nbsp;0,&nbsp;returns&nbsp;parameters&nbsp;for&nbsp;the&nbsp;calling&nbsp;process.<br>
+Return&nbsp;value&nbsp;is&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#sched_param">sched_param</a>.</tt></dd></dl>
+ <dl><dt><a name="-sched_getscheduler"><strong>sched_getscheduler</strong></a>(pid, /)</dt><dd><tt>Get&nbsp;the&nbsp;scheduling&nbsp;policy&nbsp;for&nbsp;the&nbsp;process&nbsp;identified&nbsp;by&nbsp;pid.<br>
+&nbsp;<br>
+Passing&nbsp;0&nbsp;for&nbsp;pid&nbsp;returns&nbsp;the&nbsp;scheduling&nbsp;policy&nbsp;for&nbsp;the&nbsp;calling&nbsp;process.</tt></dd></dl>
+ <dl><dt><a name="-sched_rr_get_interval"><strong>sched_rr_get_interval</strong></a>(pid, /)</dt><dd><tt>Return&nbsp;the&nbsp;round-robin&nbsp;quantum&nbsp;for&nbsp;the&nbsp;process&nbsp;identified&nbsp;by&nbsp;pid,&nbsp;in&nbsp;seconds.<br>
+&nbsp;<br>
+Value&nbsp;returned&nbsp;is&nbsp;a&nbsp;float.</tt></dd></dl>
+ <dl><dt><a name="-sched_setaffinity"><strong>sched_setaffinity</strong></a>(pid, mask, /)</dt><dd><tt>Set&nbsp;the&nbsp;CPU&nbsp;affinity&nbsp;of&nbsp;the&nbsp;process&nbsp;identified&nbsp;by&nbsp;pid&nbsp;to&nbsp;mask.<br>
+&nbsp;<br>
+mask&nbsp;should&nbsp;be&nbsp;an&nbsp;iterable&nbsp;of&nbsp;integers&nbsp;identifying&nbsp;CPUs.</tt></dd></dl>
+ <dl><dt><a name="-sched_setparam"><strong>sched_setparam</strong></a>(pid, param, /)</dt><dd><tt>Set&nbsp;scheduling&nbsp;parameters&nbsp;for&nbsp;the&nbsp;process&nbsp;identified&nbsp;by&nbsp;pid.<br>
+&nbsp;<br>
+If&nbsp;pid&nbsp;is&nbsp;0,&nbsp;sets&nbsp;parameters&nbsp;for&nbsp;the&nbsp;calling&nbsp;process.<br>
+param&nbsp;should&nbsp;be&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#sched_param">sched_param</a>.</tt></dd></dl>
+ <dl><dt><a name="-sched_setscheduler"><strong>sched_setscheduler</strong></a>(pid, policy, param, /)</dt><dd><tt>Set&nbsp;the&nbsp;scheduling&nbsp;policy&nbsp;for&nbsp;the&nbsp;process&nbsp;identified&nbsp;by&nbsp;pid.<br>
+&nbsp;<br>
+If&nbsp;pid&nbsp;is&nbsp;0,&nbsp;the&nbsp;calling&nbsp;process&nbsp;is&nbsp;changed.<br>
+param&nbsp;is&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#sched_param">sched_param</a>.</tt></dd></dl>
+ <dl><dt><a name="-sched_yield"><strong>sched_yield</strong></a>()</dt><dd><tt>Voluntarily&nbsp;relinquish&nbsp;the&nbsp;CPU.</tt></dd></dl>
+ <dl><dt><a name="-sendfile"><strong>sendfile</strong></a>(out_fd, in_fd, offset, count)</dt><dd><tt>Copy&nbsp;count&nbsp;bytes&nbsp;from&nbsp;file&nbsp;descriptor&nbsp;in_fd&nbsp;to&nbsp;file&nbsp;descriptor&nbsp;out_fd.</tt></dd></dl>
+ <dl><dt><a name="-set_blocking"><strong>set_blocking</strong></a>(fd, blocking, /)</dt><dd><tt>Set&nbsp;the&nbsp;blocking&nbsp;mode&nbsp;of&nbsp;the&nbsp;specified&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+Set&nbsp;the&nbsp;O_NONBLOCK&nbsp;flag&nbsp;if&nbsp;blocking&nbsp;is&nbsp;False,<br>
+clear&nbsp;the&nbsp;O_NONBLOCK&nbsp;flag&nbsp;otherwise.</tt></dd></dl>
+ <dl><dt><a name="-set_inheritable"><strong>set_inheritable</strong></a>(fd, inheritable, /)</dt><dd><tt>Set&nbsp;the&nbsp;inheritable&nbsp;flag&nbsp;of&nbsp;the&nbsp;specified&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+ <dl><dt><a name="-setegid"><strong>setegid</strong></a>(egid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;effective&nbsp;group&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-seteuid"><strong>seteuid</strong></a>(euid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;effective&nbsp;user&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-setgid"><strong>setgid</strong></a>(gid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;group&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-setgroups"><strong>setgroups</strong></a>(groups, /)</dt><dd><tt>Set&nbsp;the&nbsp;groups&nbsp;of&nbsp;the&nbsp;current&nbsp;process&nbsp;to&nbsp;list.</tt></dd></dl>
+ <dl><dt><a name="-setpgid"><strong>setpgid</strong></a>(pid, pgrp, /)</dt><dd><tt>Call&nbsp;the&nbsp;system&nbsp;call&nbsp;<a href="#-setpgid">setpgid</a>(pid,&nbsp;pgrp).</tt></dd></dl>
+ <dl><dt><a name="-setpgrp"><strong>setpgrp</strong></a>()</dt><dd><tt>Make&nbsp;the&nbsp;current&nbsp;process&nbsp;the&nbsp;leader&nbsp;of&nbsp;its&nbsp;process&nbsp;group.</tt></dd></dl>
+ <dl><dt><a name="-setpriority"><strong>setpriority</strong></a>(which, who, priority)</dt><dd><tt>Set&nbsp;program&nbsp;scheduling&nbsp;priority.</tt></dd></dl>
+ <dl><dt><a name="-setregid"><strong>setregid</strong></a>(rgid, egid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;real&nbsp;and&nbsp;effective&nbsp;group&nbsp;ids.</tt></dd></dl>
+ <dl><dt><a name="-setresgid"><strong>setresgid</strong></a>(rgid, egid, sgid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;real,&nbsp;effective,&nbsp;and&nbsp;saved&nbsp;group&nbsp;ids.</tt></dd></dl>
+ <dl><dt><a name="-setresuid"><strong>setresuid</strong></a>(ruid, euid, suid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;real,&nbsp;effective,&nbsp;and&nbsp;saved&nbsp;user&nbsp;ids.</tt></dd></dl>
+ <dl><dt><a name="-setreuid"><strong>setreuid</strong></a>(ruid, euid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;real&nbsp;and&nbsp;effective&nbsp;user&nbsp;ids.</tt></dd></dl>
+ <dl><dt><a name="-setsid"><strong>setsid</strong></a>()</dt><dd><tt>Call&nbsp;the&nbsp;system&nbsp;call&nbsp;<a href="#-setsid">setsid</a>().</tt></dd></dl>
+ <dl><dt><a name="-setuid"><strong>setuid</strong></a>(uid, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;process's&nbsp;user&nbsp;id.</tt></dd></dl>
+ <dl><dt><a name="-setxattr"><strong>setxattr</strong></a>(path, attribute, value, flags=0, *, follow_symlinks=True)</dt><dd><tt>Set&nbsp;extended&nbsp;attribute&nbsp;attribute&nbsp;on&nbsp;path&nbsp;to&nbsp;value.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;be&nbsp;either&nbsp;a&nbsp;string,&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>,&nbsp;&nbsp;or&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+If&nbsp;follow_symlinks&nbsp;is&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic<br>
+&nbsp;&nbsp;link,&nbsp;setxattr&nbsp;will&nbsp;modify&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.</tt></dd></dl>
+ <dl><dt><a name="-spawnl"><strong>spawnl</strong></a>(mode, file, *args)</dt><dd><tt><a href="#-spawnl">spawnl</a>(mode,&nbsp;file,&nbsp;*args)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;with&nbsp;arguments&nbsp;from&nbsp;args&nbsp;in&nbsp;a&nbsp;subprocess.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-spawnle"><strong>spawnle</strong></a>(mode, file, *args)</dt><dd><tt><a href="#-spawnle">spawnle</a>(mode,&nbsp;file,&nbsp;*args,&nbsp;env)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;with&nbsp;arguments&nbsp;from&nbsp;args&nbsp;in&nbsp;a&nbsp;subprocess&nbsp;with&nbsp;the<br>
+supplied&nbsp;environment.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-spawnlp"><strong>spawnlp</strong></a>(mode, file, *args)</dt><dd><tt><a href="#-spawnlp">spawnlp</a>(mode,&nbsp;file,&nbsp;*args)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;(which&nbsp;is&nbsp;looked&nbsp;for&nbsp;along&nbsp;$PATH)&nbsp;with&nbsp;arguments&nbsp;from<br>
+args&nbsp;in&nbsp;a&nbsp;subprocess&nbsp;with&nbsp;the&nbsp;supplied&nbsp;environment.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-spawnlpe"><strong>spawnlpe</strong></a>(mode, file, *args)</dt><dd><tt><a href="#-spawnlpe">spawnlpe</a>(mode,&nbsp;file,&nbsp;*args,&nbsp;env)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;(which&nbsp;is&nbsp;looked&nbsp;for&nbsp;along&nbsp;$PATH)&nbsp;with&nbsp;arguments&nbsp;from<br>
+args&nbsp;in&nbsp;a&nbsp;subprocess&nbsp;with&nbsp;the&nbsp;supplied&nbsp;environment.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-spawnv"><strong>spawnv</strong></a>(mode, file, args)</dt><dd><tt><a href="#-spawnv">spawnv</a>(mode,&nbsp;file,&nbsp;args)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;with&nbsp;arguments&nbsp;from&nbsp;args&nbsp;in&nbsp;a&nbsp;subprocess.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-spawnve"><strong>spawnve</strong></a>(mode, file, args, env)</dt><dd><tt><a href="#-spawnve">spawnve</a>(mode,&nbsp;file,&nbsp;args,&nbsp;env)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;with&nbsp;arguments&nbsp;from&nbsp;args&nbsp;in&nbsp;a&nbsp;subprocess&nbsp;with&nbsp;the<br>
+specified&nbsp;environment.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-spawnvp"><strong>spawnvp</strong></a>(mode, file, args)</dt><dd><tt><a href="#-spawnvp">spawnvp</a>(mode,&nbsp;file,&nbsp;args)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;(which&nbsp;is&nbsp;looked&nbsp;for&nbsp;along&nbsp;$PATH)&nbsp;with&nbsp;arguments&nbsp;from<br>
+args&nbsp;in&nbsp;a&nbsp;subprocess.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-spawnvpe"><strong>spawnvpe</strong></a>(mode, file, args, env)</dt><dd><tt><a href="#-spawnvpe">spawnvpe</a>(mode,&nbsp;file,&nbsp;args,&nbsp;env)&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Execute&nbsp;file&nbsp;(which&nbsp;is&nbsp;looked&nbsp;for&nbsp;along&nbsp;$PATH)&nbsp;with&nbsp;arguments&nbsp;from<br>
+args&nbsp;in&nbsp;a&nbsp;subprocess&nbsp;with&nbsp;the&nbsp;supplied&nbsp;environment.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_NOWAIT&nbsp;return&nbsp;the&nbsp;pid&nbsp;of&nbsp;the&nbsp;process.<br>
+If&nbsp;mode&nbsp;==&nbsp;P_WAIT&nbsp;return&nbsp;the&nbsp;process's&nbsp;exit&nbsp;code&nbsp;if&nbsp;it&nbsp;exits&nbsp;normally;<br>
+otherwise&nbsp;return&nbsp;-SIG,&nbsp;where&nbsp;SIG&nbsp;is&nbsp;the&nbsp;signal&nbsp;that&nbsp;killed&nbsp;it.</tt></dd></dl>
+ <dl><dt><a name="-stat"><strong>stat</strong></a>(path, *, dir_fd=None, follow_symlinks=True)</dt><dd><tt>Perform&nbsp;a&nbsp;stat&nbsp;system&nbsp;call&nbsp;on&nbsp;the&nbsp;given&nbsp;path.<br>
+&nbsp;<br>
+&nbsp;&nbsp;path<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Path&nbsp;to&nbsp;be&nbsp;examined;&nbsp;can&nbsp;be&nbsp;string,&nbsp;bytes,&nbsp;a&nbsp;path-like&nbsp;<a href="builtins.html#object">object</a>&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;open-file-descriptor&nbsp;int.<br>
+&nbsp;&nbsp;dir_fd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;a&nbsp;relative&nbsp;string;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;directory.<br>
+&nbsp;&nbsp;follow_symlinks<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic&nbsp;link,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stat&nbsp;will&nbsp;examine&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;link&nbsp;points&nbsp;to.<br>
+&nbsp;<br>
+dir_fd&nbsp;and&nbsp;follow_symlinks&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented<br>
+&nbsp;&nbsp;on&nbsp;your&nbsp;platform.&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a<br>
+&nbsp;&nbsp;NotImplementedError.<br>
+&nbsp;<br>
+It's&nbsp;an&nbsp;<a href="#error">error</a>&nbsp;to&nbsp;use&nbsp;dir_fd&nbsp;or&nbsp;follow_symlinks&nbsp;when&nbsp;specifying&nbsp;path&nbsp;as<br>
+&nbsp;&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+ <dl><dt><a name="-statvfs"><strong>statvfs</strong></a>(path)</dt><dd><tt>Perform&nbsp;a&nbsp;statvfs&nbsp;system&nbsp;call&nbsp;on&nbsp;the&nbsp;given&nbsp;path.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;always&nbsp;be&nbsp;specified&nbsp;as&nbsp;a&nbsp;string.<br>
+On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+ <dl><dt><a name="-strerror"><strong>strerror</strong></a>(code, /)</dt><dd><tt>Translate&nbsp;an&nbsp;<a href="#error">error</a>&nbsp;code&nbsp;to&nbsp;a&nbsp;message&nbsp;string.</tt></dd></dl>
+ <dl><dt><a name="-symlink"><strong>symlink</strong></a>(src, dst, target_is_directory=False, *, dir_fd=None)</dt><dd><tt>Create&nbsp;a&nbsp;symbolic&nbsp;link&nbsp;pointing&nbsp;to&nbsp;src&nbsp;named&nbsp;dst.<br>
+&nbsp;<br>
+target_is_directory&nbsp;is&nbsp;required&nbsp;on&nbsp;Windows&nbsp;if&nbsp;the&nbsp;target&nbsp;is&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;interpreted&nbsp;as&nbsp;a&nbsp;directory.&nbsp;&nbsp;(On&nbsp;Windows,&nbsp;symlink&nbsp;requires<br>
+&nbsp;&nbsp;Windows&nbsp;6.0&nbsp;or&nbsp;greater,&nbsp;and&nbsp;raises&nbsp;a&nbsp;NotImplementedError&nbsp;otherwise.)<br>
+&nbsp;&nbsp;target_is_directory&nbsp;is&nbsp;ignored&nbsp;on&nbsp;non-Windows&nbsp;platforms.<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-sync"><strong>sync</strong></a>()</dt><dd><tt>Force&nbsp;write&nbsp;of&nbsp;everything&nbsp;to&nbsp;disk.</tt></dd></dl>
+ <dl><dt><a name="-sysconf"><strong>sysconf</strong></a>(name, /)</dt><dd><tt>Return&nbsp;an&nbsp;integer-valued&nbsp;system&nbsp;configuration&nbsp;variable.</tt></dd></dl>
+ <dl><dt><a name="-system"><strong>system</strong></a>(command)</dt><dd><tt>Execute&nbsp;the&nbsp;command&nbsp;in&nbsp;a&nbsp;subshell.</tt></dd></dl>
+ <dl><dt><a name="-tcgetpgrp"><strong>tcgetpgrp</strong></a>(fd, /)</dt><dd><tt>Return&nbsp;the&nbsp;process&nbsp;group&nbsp;associated&nbsp;with&nbsp;the&nbsp;terminal&nbsp;specified&nbsp;by&nbsp;fd.</tt></dd></dl>
+ <dl><dt><a name="-tcsetpgrp"><strong>tcsetpgrp</strong></a>(fd, pgid, /)</dt><dd><tt>Set&nbsp;the&nbsp;process&nbsp;group&nbsp;associated&nbsp;with&nbsp;the&nbsp;terminal&nbsp;specified&nbsp;by&nbsp;fd.</tt></dd></dl>
+ <dl><dt><a name="-times"><strong>times</strong></a>()</dt><dd><tt>Return&nbsp;a&nbsp;collection&nbsp;containing&nbsp;process&nbsp;timing&nbsp;information.<br>
+&nbsp;<br>
+The&nbsp;<a href="builtins.html#object">object</a>&nbsp;returned&nbsp;behaves&nbsp;like&nbsp;a&nbsp;named&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;with&nbsp;these&nbsp;fields:<br>
+&nbsp;&nbsp;(utime,&nbsp;stime,&nbsp;cutime,&nbsp;cstime,&nbsp;elapsed_time)<br>
+All&nbsp;fields&nbsp;are&nbsp;floating&nbsp;point&nbsp;numbers.</tt></dd></dl>
+ <dl><dt><a name="-truncate"><strong>truncate</strong></a>(path, length)</dt><dd><tt>Truncate&nbsp;a&nbsp;file,&nbsp;specified&nbsp;by&nbsp;path,&nbsp;to&nbsp;a&nbsp;specific&nbsp;length.<br>
+&nbsp;<br>
+On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+ <dl><dt><a name="-ttyname"><strong>ttyname</strong></a>(fd, /)</dt><dd><tt>Return&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;terminal&nbsp;device&nbsp;connected&nbsp;to&nbsp;'fd'.<br>
+&nbsp;<br>
+fd<br>
+&nbsp;&nbsp;Integer&nbsp;file&nbsp;descriptor&nbsp;handle.</tt></dd></dl>
+ <dl><dt><a name="-umask"><strong>umask</strong></a>(mask, /)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;numeric&nbsp;umask&nbsp;and&nbsp;return&nbsp;the&nbsp;previous&nbsp;umask.</tt></dd></dl>
+ <dl><dt><a name="-uname"><strong>uname</strong></a>()</dt><dd><tt>Return&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;identifying&nbsp;the&nbsp;current&nbsp;operating&nbsp;system.<br>
+&nbsp;<br>
+The&nbsp;<a href="builtins.html#object">object</a>&nbsp;behaves&nbsp;like&nbsp;a&nbsp;named&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;with&nbsp;the&nbsp;following&nbsp;fields:<br>
+&nbsp;&nbsp;(sysname,&nbsp;nodename,&nbsp;release,&nbsp;version,&nbsp;machine)</tt></dd></dl>
+ <dl><dt><a name="-unlink"><strong>unlink</strong></a>(path, *, dir_fd=None)</dt><dd><tt>Remove&nbsp;a&nbsp;file&nbsp;(same&nbsp;as&nbsp;<a href="#-remove">remove</a>()).<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+dir_fd&nbsp;may&nbsp;not&nbsp;be&nbsp;implemented&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-unsetenv"><strong>unsetenv</strong></a>(name, /)</dt><dd><tt>Delete&nbsp;an&nbsp;environment&nbsp;variable.</tt></dd></dl>
+ <dl><dt><a name="-urandom"><strong>urandom</strong></a>(size, /)</dt><dd><tt>Return&nbsp;a&nbsp;bytes&nbsp;<a href="builtins.html#object">object</a>&nbsp;containing&nbsp;random&nbsp;bytes&nbsp;suitable&nbsp;for&nbsp;cryptographic&nbsp;use.</tt></dd></dl>
+ <dl><dt><a name="-utime"><strong>utime</strong></a>(...)</dt><dd><tt>Set&nbsp;the&nbsp;access&nbsp;and&nbsp;modified&nbsp;time&nbsp;of&nbsp;path.<br>
+&nbsp;<br>
+path&nbsp;may&nbsp;always&nbsp;be&nbsp;specified&nbsp;as&nbsp;a&nbsp;string.<br>
+On&nbsp;some&nbsp;platforms,&nbsp;path&nbsp;may&nbsp;also&nbsp;be&nbsp;specified&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+&nbsp;&nbsp;If&nbsp;this&nbsp;functionality&nbsp;is&nbsp;unavailable,&nbsp;using&nbsp;it&nbsp;raises&nbsp;an&nbsp;exception.<br>
+&nbsp;<br>
+If&nbsp;times&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;must&nbsp;be&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;(atime,&nbsp;mtime);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;atime&nbsp;and&nbsp;mtime&nbsp;should&nbsp;be&nbsp;expressed&nbsp;as&nbsp;float&nbsp;seconds&nbsp;since&nbsp;the&nbsp;epoch.<br>
+If&nbsp;ns&nbsp;is&nbsp;specified,&nbsp;it&nbsp;must&nbsp;be&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;(atime_ns,&nbsp;mtime_ns);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;atime_ns&nbsp;and&nbsp;mtime_ns&nbsp;should&nbsp;be&nbsp;expressed&nbsp;as&nbsp;integer&nbsp;nanoseconds<br>
+&nbsp;&nbsp;&nbsp;&nbsp;since&nbsp;the&nbsp;epoch.<br>
+If&nbsp;times&nbsp;is&nbsp;None&nbsp;and&nbsp;ns&nbsp;is&nbsp;unspecified,&nbsp;utime&nbsp;uses&nbsp;the&nbsp;current&nbsp;time.<br>
+Specifying&nbsp;tuples&nbsp;for&nbsp;both&nbsp;times&nbsp;and&nbsp;ns&nbsp;is&nbsp;an&nbsp;<a href="#error">error</a>.<br>
+&nbsp;<br>
+If&nbsp;dir_fd&nbsp;is&nbsp;not&nbsp;None,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;open&nbsp;to&nbsp;a&nbsp;directory,<br>
+&nbsp;&nbsp;and&nbsp;path&nbsp;should&nbsp;be&nbsp;relative;&nbsp;path&nbsp;will&nbsp;then&nbsp;be&nbsp;relative&nbsp;to&nbsp;that&nbsp;directory.<br>
+If&nbsp;follow_symlinks&nbsp;is&nbsp;False,&nbsp;and&nbsp;the&nbsp;last&nbsp;element&nbsp;of&nbsp;the&nbsp;path&nbsp;is&nbsp;a&nbsp;symbolic<br>
+&nbsp;&nbsp;link,&nbsp;utime&nbsp;will&nbsp;modify&nbsp;the&nbsp;symbolic&nbsp;link&nbsp;itself&nbsp;instead&nbsp;of&nbsp;the&nbsp;file&nbsp;the<br>
+&nbsp;&nbsp;link&nbsp;points&nbsp;to.<br>
+It&nbsp;is&nbsp;an&nbsp;<a href="#error">error</a>&nbsp;to&nbsp;use&nbsp;dir_fd&nbsp;or&nbsp;follow_symlinks&nbsp;when&nbsp;specifying&nbsp;path<br>
+&nbsp;&nbsp;as&nbsp;an&nbsp;open&nbsp;file&nbsp;descriptor.<br>
+dir_fd&nbsp;and&nbsp;follow_symlinks&nbsp;may&nbsp;not&nbsp;be&nbsp;available&nbsp;on&nbsp;your&nbsp;platform.<br>
+&nbsp;&nbsp;If&nbsp;they&nbsp;are&nbsp;unavailable,&nbsp;using&nbsp;them&nbsp;will&nbsp;raise&nbsp;a&nbsp;NotImplementedError.</tt></dd></dl>
+ <dl><dt><a name="-wait"><strong>wait</strong></a>()</dt><dd><tt>Wait&nbsp;for&nbsp;completion&nbsp;of&nbsp;a&nbsp;child&nbsp;process.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;information&nbsp;about&nbsp;the&nbsp;child&nbsp;process:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(pid,&nbsp;status)</tt></dd></dl>
+ <dl><dt><a name="-wait3"><strong>wait3</strong></a>(options)</dt><dd><tt>Wait&nbsp;for&nbsp;completion&nbsp;of&nbsp;a&nbsp;child&nbsp;process.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;information&nbsp;about&nbsp;the&nbsp;child&nbsp;process:<br>
+&nbsp;&nbsp;(pid,&nbsp;status,&nbsp;rusage)</tt></dd></dl>
+ <dl><dt><a name="-wait4"><strong>wait4</strong></a>(pid, options)</dt><dd><tt>Wait&nbsp;for&nbsp;completion&nbsp;of&nbsp;a&nbsp;specific&nbsp;child&nbsp;process.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;information&nbsp;about&nbsp;the&nbsp;child&nbsp;process:<br>
+&nbsp;&nbsp;(pid,&nbsp;status,&nbsp;rusage)</tt></dd></dl>
+ <dl><dt><a name="-waitid"><strong>waitid</strong></a>(idtype, id, options, /)</dt><dd><tt>Returns&nbsp;the&nbsp;result&nbsp;of&nbsp;waiting&nbsp;for&nbsp;a&nbsp;process&nbsp;or&nbsp;processes.<br>
+&nbsp;<br>
+&nbsp;&nbsp;idtype<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Must&nbsp;be&nbsp;one&nbsp;of&nbsp;be&nbsp;P_PID,&nbsp;P_PGID&nbsp;or&nbsp;P_ALL.<br>
+&nbsp;&nbsp;id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;id&nbsp;to&nbsp;wait&nbsp;on.<br>
+&nbsp;&nbsp;options<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Constructed&nbsp;from&nbsp;the&nbsp;ORing&nbsp;of&nbsp;one&nbsp;or&nbsp;more&nbsp;of&nbsp;WEXITED,&nbsp;WSTOPPED<br>
+&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;WCONTINUED&nbsp;and&nbsp;additionally&nbsp;may&nbsp;be&nbsp;ORed&nbsp;with&nbsp;WNOHANG&nbsp;or&nbsp;WNOWAIT.<br>
+&nbsp;<br>
+Returns&nbsp;either&nbsp;<a href="#waitid_result">waitid_result</a>&nbsp;or&nbsp;None&nbsp;if&nbsp;WNOHANG&nbsp;is&nbsp;specified&nbsp;and&nbsp;there&nbsp;are<br>
+no&nbsp;children&nbsp;in&nbsp;a&nbsp;waitable&nbsp;state.</tt></dd></dl>
+ <dl><dt><a name="-waitpid"><strong>waitpid</strong></a>(pid, options, /)</dt><dd><tt>Wait&nbsp;for&nbsp;completion&nbsp;of&nbsp;a&nbsp;given&nbsp;child&nbsp;process.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;of&nbsp;information&nbsp;regarding&nbsp;the&nbsp;child&nbsp;process:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(pid,&nbsp;status)<br>
+&nbsp;<br>
+The&nbsp;options&nbsp;argument&nbsp;is&nbsp;ignored&nbsp;on&nbsp;Windows.</tt></dd></dl>
+ <dl><dt><a name="-waitstatus_to_exitcode"><strong>waitstatus_to_exitcode</strong></a>(status)</dt><dd><tt>Convert&nbsp;a&nbsp;wait&nbsp;status&nbsp;to&nbsp;an&nbsp;exit&nbsp;code.<br>
+&nbsp;<br>
+On&nbsp;Unix:<br>
+&nbsp;<br>
+*&nbsp;If&nbsp;<a href="#-WIFEXITED">WIFEXITED</a>(status)&nbsp;is&nbsp;true,&nbsp;return&nbsp;<a href="#-WEXITSTATUS">WEXITSTATUS</a>(status).<br>
+*&nbsp;If&nbsp;<a href="#-WIFSIGNALED">WIFSIGNALED</a>(status)&nbsp;is&nbsp;true,&nbsp;return&nbsp;-<a href="#-WTERMSIG">WTERMSIG</a>(status).<br>
+*&nbsp;Otherwise,&nbsp;raise&nbsp;a&nbsp;ValueError.<br>
+&nbsp;<br>
+On&nbsp;Windows,&nbsp;return&nbsp;status&nbsp;shifted&nbsp;right&nbsp;by&nbsp;8&nbsp;bits.<br>
+&nbsp;<br>
+On&nbsp;Unix,&nbsp;if&nbsp;the&nbsp;process&nbsp;is&nbsp;being&nbsp;traced&nbsp;or&nbsp;if&nbsp;<a href="#-waitpid">waitpid</a>()&nbsp;was&nbsp;called&nbsp;with<br>
+WUNTRACED&nbsp;option,&nbsp;the&nbsp;caller&nbsp;must&nbsp;first&nbsp;check&nbsp;if&nbsp;<a href="#-WIFSTOPPED">WIFSTOPPED</a>(status)&nbsp;is&nbsp;true.<br>
+This&nbsp;function&nbsp;must&nbsp;not&nbsp;be&nbsp;called&nbsp;if&nbsp;<a href="#-WIFSTOPPED">WIFSTOPPED</a>(status)&nbsp;is&nbsp;true.</tt></dd></dl>
+ <dl><dt><a name="-walk"><strong>walk</strong></a>(top, topdown=True, onerror=None, followlinks=False)</dt><dd><tt>Directory&nbsp;tree&nbsp;generator.<br>
+&nbsp;<br>
+For&nbsp;each&nbsp;directory&nbsp;in&nbsp;the&nbsp;directory&nbsp;tree&nbsp;rooted&nbsp;at&nbsp;top&nbsp;(including&nbsp;top<br>
+itself,&nbsp;but&nbsp;excluding&nbsp;'.'&nbsp;and&nbsp;'..'),&nbsp;yields&nbsp;a&nbsp;3-<a href="builtins.html#tuple">tuple</a><br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dirpath,&nbsp;dirnames,&nbsp;filenames<br>
+&nbsp;<br>
+dirpath&nbsp;is&nbsp;a&nbsp;string,&nbsp;the&nbsp;path&nbsp;to&nbsp;the&nbsp;directory.&nbsp;&nbsp;dirnames&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
+the&nbsp;names&nbsp;of&nbsp;the&nbsp;subdirectories&nbsp;in&nbsp;dirpath&nbsp;(excluding&nbsp;'.'&nbsp;and&nbsp;'..').<br>
+filenames&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;non-directory&nbsp;files&nbsp;in&nbsp;dirpath.<br>
+Note&nbsp;that&nbsp;the&nbsp;names&nbsp;in&nbsp;the&nbsp;lists&nbsp;are&nbsp;just&nbsp;names,&nbsp;with&nbsp;no&nbsp;path&nbsp;components.<br>
+To&nbsp;get&nbsp;a&nbsp;full&nbsp;path&nbsp;(which&nbsp;begins&nbsp;with&nbsp;top)&nbsp;to&nbsp;a&nbsp;file&nbsp;or&nbsp;directory&nbsp;in<br>
+dirpath,&nbsp;do&nbsp;os.path.join(dirpath,&nbsp;name).<br>
+&nbsp;<br>
+If&nbsp;optional&nbsp;arg&nbsp;'topdown'&nbsp;is&nbsp;true&nbsp;or&nbsp;not&nbsp;specified,&nbsp;the&nbsp;triple&nbsp;for&nbsp;a<br>
+directory&nbsp;is&nbsp;generated&nbsp;before&nbsp;the&nbsp;triples&nbsp;for&nbsp;any&nbsp;of&nbsp;its&nbsp;subdirectories<br>
+(directories&nbsp;are&nbsp;generated&nbsp;top&nbsp;down).&nbsp;&nbsp;If&nbsp;topdown&nbsp;is&nbsp;false,&nbsp;the&nbsp;triple<br>
+for&nbsp;a&nbsp;directory&nbsp;is&nbsp;generated&nbsp;after&nbsp;the&nbsp;triples&nbsp;for&nbsp;all&nbsp;of&nbsp;its<br>
+subdirectories&nbsp;(directories&nbsp;are&nbsp;generated&nbsp;bottom&nbsp;up).<br>
+&nbsp;<br>
+When&nbsp;topdown&nbsp;is&nbsp;true,&nbsp;the&nbsp;caller&nbsp;can&nbsp;modify&nbsp;the&nbsp;dirnames&nbsp;list&nbsp;in-place<br>
+(e.g.,&nbsp;via&nbsp;del&nbsp;or&nbsp;slice&nbsp;assignment),&nbsp;and&nbsp;walk&nbsp;will&nbsp;only&nbsp;recurse&nbsp;into&nbsp;the<br>
+subdirectories&nbsp;whose&nbsp;names&nbsp;remain&nbsp;in&nbsp;dirnames;&nbsp;this&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;prune&nbsp;the<br>
+search,&nbsp;or&nbsp;to&nbsp;impose&nbsp;a&nbsp;specific&nbsp;order&nbsp;of&nbsp;visiting.&nbsp;&nbsp;Modifying&nbsp;dirnames&nbsp;when<br>
+topdown&nbsp;is&nbsp;false&nbsp;has&nbsp;no&nbsp;effect&nbsp;on&nbsp;the&nbsp;behavior&nbsp;of&nbsp;os.<a href="#-walk">walk</a>(),&nbsp;since&nbsp;the<br>
+directories&nbsp;in&nbsp;dirnames&nbsp;have&nbsp;already&nbsp;been&nbsp;generated&nbsp;by&nbsp;the&nbsp;time&nbsp;dirnames<br>
+itself&nbsp;is&nbsp;generated.&nbsp;No&nbsp;matter&nbsp;the&nbsp;value&nbsp;of&nbsp;topdown,&nbsp;the&nbsp;list&nbsp;of<br>
+subdirectories&nbsp;is&nbsp;retrieved&nbsp;before&nbsp;the&nbsp;tuples&nbsp;for&nbsp;the&nbsp;directory&nbsp;and&nbsp;its<br>
+subdirectories&nbsp;are&nbsp;generated.<br>
+&nbsp;<br>
+By&nbsp;default&nbsp;errors&nbsp;from&nbsp;the&nbsp;os.<a href="#-scandir">scandir</a>()&nbsp;call&nbsp;are&nbsp;ignored.&nbsp;&nbsp;If<br>
+optional&nbsp;arg&nbsp;'onerror'&nbsp;is&nbsp;specified,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;function;&nbsp;it<br>
+will&nbsp;be&nbsp;called&nbsp;with&nbsp;one&nbsp;argument,&nbsp;an&nbsp;OSError&nbsp;instance.&nbsp;&nbsp;It&nbsp;can<br>
+report&nbsp;the&nbsp;<a href="#error">error</a>&nbsp;to&nbsp;continue&nbsp;with&nbsp;the&nbsp;walk,&nbsp;or&nbsp;raise&nbsp;the&nbsp;exception<br>
+to&nbsp;abort&nbsp;the&nbsp;walk.&nbsp;&nbsp;Note&nbsp;that&nbsp;the&nbsp;filename&nbsp;is&nbsp;available&nbsp;as&nbsp;the<br>
+filename&nbsp;attribute&nbsp;of&nbsp;the&nbsp;exception&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;os.walk&nbsp;does&nbsp;not&nbsp;follow&nbsp;symbolic&nbsp;links&nbsp;to&nbsp;subdirectories&nbsp;on<br>
+systems&nbsp;that&nbsp;support&nbsp;them.&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;get&nbsp;this&nbsp;functionality,&nbsp;set&nbsp;the<br>
+optional&nbsp;argument&nbsp;'followlinks'&nbsp;to&nbsp;true.<br>
+&nbsp;<br>
+Caution:&nbsp;&nbsp;if&nbsp;you&nbsp;pass&nbsp;a&nbsp;relative&nbsp;pathname&nbsp;for&nbsp;top,&nbsp;don't&nbsp;change&nbsp;the<br>
+current&nbsp;working&nbsp;directory&nbsp;between&nbsp;resumptions&nbsp;of&nbsp;walk.&nbsp;&nbsp;walk&nbsp;never<br>
+changes&nbsp;the&nbsp;current&nbsp;directory,&nbsp;and&nbsp;assumes&nbsp;that&nbsp;the&nbsp;client&nbsp;doesn't<br>
+either.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+import&nbsp;os<br>
+from&nbsp;os.path&nbsp;import&nbsp;join,&nbsp;getsize<br>
+for&nbsp;root,&nbsp;dirs,&nbsp;files&nbsp;in&nbsp;os.<a href="#-walk">walk</a>('python/Lib/email'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(root,&nbsp;"consumes",&nbsp;end="")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(sum(getsize(join(root,&nbsp;name))&nbsp;for&nbsp;name&nbsp;in&nbsp;files),&nbsp;end="")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print("bytes&nbsp;in",&nbsp;len(files),&nbsp;"non-directory&nbsp;files")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;'CVS'&nbsp;in&nbsp;dirs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dirs.<a href="#-remove">remove</a>('CVS')&nbsp;&nbsp;#&nbsp;don't&nbsp;visit&nbsp;CVS&nbsp;directories</tt></dd></dl>
+ <dl><dt><a name="-write"><strong>write</strong></a>(fd, data, /)</dt><dd><tt>Write&nbsp;a&nbsp;bytes&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+ <dl><dt><a name="-writev"><strong>writev</strong></a>(fd, buffers, /)</dt><dd><tt>Iterate&nbsp;over&nbsp;buffers,&nbsp;and&nbsp;write&nbsp;the&nbsp;contents&nbsp;of&nbsp;each&nbsp;to&nbsp;a&nbsp;file&nbsp;descriptor.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written.<br>
+buffers&nbsp;must&nbsp;be&nbsp;a&nbsp;sequence&nbsp;of&nbsp;bytes-like&nbsp;objects.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CLD_CONTINUED</strong> = 6<br>
+<strong>CLD_DUMPED</strong> = 3<br>
+<strong>CLD_EXITED</strong> = 1<br>
+<strong>CLD_KILLED</strong> = 2<br>
+<strong>CLD_STOPPED</strong> = 5<br>
+<strong>CLD_TRAPPED</strong> = 4<br>
+<strong>EX_CANTCREAT</strong> = 73<br>
+<strong>EX_CONFIG</strong> = 78<br>
+<strong>EX_DATAERR</strong> = 65<br>
+<strong>EX_IOERR</strong> = 74<br>
+<strong>EX_NOHOST</strong> = 68<br>
+<strong>EX_NOINPUT</strong> = 66<br>
+<strong>EX_NOPERM</strong> = 77<br>
+<strong>EX_NOUSER</strong> = 67<br>
+<strong>EX_OK</strong> = 0<br>
+<strong>EX_OSERR</strong> = 71<br>
+<strong>EX_OSFILE</strong> = 72<br>
+<strong>EX_PROTOCOL</strong> = 76<br>
+<strong>EX_SOFTWARE</strong> = 70<br>
+<strong>EX_TEMPFAIL</strong> = 75<br>
+<strong>EX_UNAVAILABLE</strong> = 69<br>
+<strong>EX_USAGE</strong> = 64<br>
+<strong>F_LOCK</strong> = 1<br>
+<strong>F_OK</strong> = 0<br>
+<strong>F_TEST</strong> = 3<br>
+<strong>F_TLOCK</strong> = 2<br>
+<strong>F_ULOCK</strong> = 0<br>
+<strong>GRND_NONBLOCK</strong> = 1<br>
+<strong>GRND_RANDOM</strong> = 2<br>
+<strong>MFD_ALLOW_SEALING</strong> = 2<br>
+<strong>MFD_CLOEXEC</strong> = 1<br>
+<strong>MFD_HUGETLB</strong> = 4<br>
+<strong>MFD_HUGE_16GB</strong> = -2013265920<br>
+<strong>MFD_HUGE_16MB</strong> = 1610612736<br>
+<strong>MFD_HUGE_1GB</strong> = 2013265920<br>
+<strong>MFD_HUGE_1MB</strong> = 1342177280<br>
+<strong>MFD_HUGE_256MB</strong> = 1879048192<br>
+<strong>MFD_HUGE_2GB</strong> = 2080374784<br>
+<strong>MFD_HUGE_2MB</strong> = 1409286144<br>
+<strong>MFD_HUGE_32MB</strong> = 1677721600<br>
+<strong>MFD_HUGE_512KB</strong> = 1275068416<br>
+<strong>MFD_HUGE_512MB</strong> = 1946157056<br>
+<strong>MFD_HUGE_64KB</strong> = 1073741824<br>
+<strong>MFD_HUGE_8MB</strong> = 1543503872<br>
+<strong>MFD_HUGE_MASK</strong> = 63<br>
+<strong>MFD_HUGE_SHIFT</strong> = 26<br>
+<strong>NGROUPS_MAX</strong> = 65536<br>
+<strong>O_ACCMODE</strong> = 3<br>
+<strong>O_APPEND</strong> = 1024<br>
+<strong>O_ASYNC</strong> = 8192<br>
+<strong>O_CLOEXEC</strong> = 524288<br>
+<strong>O_CREAT</strong> = 64<br>
+<strong>O_DIRECT</strong> = 16384<br>
+<strong>O_DIRECTORY</strong> = 65536<br>
+<strong>O_DSYNC</strong> = 4096<br>
+<strong>O_EXCL</strong> = 128<br>
+<strong>O_LARGEFILE</strong> = 0<br>
+<strong>O_NDELAY</strong> = 2048<br>
+<strong>O_NOATIME</strong> = 262144<br>
+<strong>O_NOCTTY</strong> = 256<br>
+<strong>O_NOFOLLOW</strong> = 131072<br>
+<strong>O_NONBLOCK</strong> = 2048<br>
+<strong>O_PATH</strong> = 2097152<br>
+<strong>O_RDONLY</strong> = 0<br>
+<strong>O_RDWR</strong> = 2<br>
+<strong>O_RSYNC</strong> = 1052672<br>
+<strong>O_SYNC</strong> = 1052672<br>
+<strong>O_TMPFILE</strong> = 4259840<br>
+<strong>O_TRUNC</strong> = 512<br>
+<strong>O_WRONLY</strong> = 1<br>
+<strong>POSIX_FADV_DONTNEED</strong> = 4<br>
+<strong>POSIX_FADV_NOREUSE</strong> = 5<br>
+<strong>POSIX_FADV_NORMAL</strong> = 0<br>
+<strong>POSIX_FADV_RANDOM</strong> = 1<br>
+<strong>POSIX_FADV_SEQUENTIAL</strong> = 2<br>
+<strong>POSIX_FADV_WILLNEED</strong> = 3<br>
+<strong>POSIX_SPAWN_CLOSE</strong> = 1<br>
+<strong>POSIX_SPAWN_DUP2</strong> = 2<br>
+<strong>POSIX_SPAWN_OPEN</strong> = 0<br>
+<strong>PRIO_PGRP</strong> = 1<br>
+<strong>PRIO_PROCESS</strong> = 0<br>
+<strong>PRIO_USER</strong> = 2<br>
+<strong>P_ALL</strong> = 0<br>
+<strong>P_NOWAIT</strong> = 1<br>
+<strong>P_NOWAITO</strong> = 1<br>
+<strong>P_PGID</strong> = 2<br>
+<strong>P_PID</strong> = 1<br>
+<strong>P_PIDFD</strong> = 3<br>
+<strong>P_WAIT</strong> = 0<br>
+<strong>RTLD_DEEPBIND</strong> = 8<br>
+<strong>RTLD_GLOBAL</strong> = 256<br>
+<strong>RTLD_LAZY</strong> = 1<br>
+<strong>RTLD_LOCAL</strong> = 0<br>
+<strong>RTLD_NODELETE</strong> = 4096<br>
+<strong>RTLD_NOLOAD</strong> = 4<br>
+<strong>RTLD_NOW</strong> = 2<br>
+<strong>RWF_DSYNC</strong> = 2<br>
+<strong>RWF_HIPRI</strong> = 1<br>
+<strong>RWF_NOWAIT</strong> = 8<br>
+<strong>RWF_SYNC</strong> = 4<br>
+<strong>R_OK</strong> = 4<br>
+<strong>SCHED_BATCH</strong> = 3<br>
+<strong>SCHED_FIFO</strong> = 1<br>
+<strong>SCHED_IDLE</strong> = 5<br>
+<strong>SCHED_OTHER</strong> = 0<br>
+<strong>SCHED_RESET_ON_FORK</strong> = 1073741824<br>
+<strong>SCHED_RR</strong> = 2<br>
+<strong>SEEK_CUR</strong> = 1<br>
+<strong>SEEK_DATA</strong> = 3<br>
+<strong>SEEK_END</strong> = 2<br>
+<strong>SEEK_HOLE</strong> = 4<br>
+<strong>SEEK_SET</strong> = 0<br>
+<strong>ST_APPEND</strong> = 256<br>
+<strong>ST_MANDLOCK</strong> = 64<br>
+<strong>ST_NOATIME</strong> = 1024<br>
+<strong>ST_NODEV</strong> = 4<br>
+<strong>ST_NODIRATIME</strong> = 2048<br>
+<strong>ST_NOEXEC</strong> = 8<br>
+<strong>ST_NOSUID</strong> = 2<br>
+<strong>ST_RDONLY</strong> = 1<br>
+<strong>ST_RELATIME</strong> = 4096<br>
+<strong>ST_SYNCHRONOUS</strong> = 16<br>
+<strong>ST_WRITE</strong> = 128<br>
+<strong>TMP_MAX</strong> = 238328<br>
+<strong>WCONTINUED</strong> = 8<br>
+<strong>WEXITED</strong> = 4<br>
+<strong>WNOHANG</strong> = 1<br>
+<strong>WNOWAIT</strong> = 16777216<br>
+<strong>WSTOPPED</strong> = 2<br>
+<strong>WUNTRACED</strong> = 2<br>
+<strong>W_OK</strong> = 2<br>
+<strong>XATTR_CREATE</strong> = 1<br>
+<strong>XATTR_REPLACE</strong> = 2<br>
+<strong>XATTR_SIZE_MAX</strong> = 65536<br>
+<strong>X_OK</strong> = 1<br>
+<strong>__all__</strong> = ['altsep', 'curdir', 'pardir', 'sep', 'pathsep', 'linesep', 'defpath', 'name', 'path', 'devnull', 'SEEK_SET', 'SEEK_CUR', 'SEEK_END', 'fsencode', 'fsdecode', 'get_exec_path', 'fdopen', 'popen', 'extsep', '_exit', ...]<br>
+<strong>altsep</strong> = None<br>
+<strong>confstr_names</strong> = {'CS_GNU_LIBC_VERSION': 2, 'CS_GNU_LIBPTHREAD_VERSION': 3, 'CS_LFS64_CFLAGS': 1004, 'CS_LFS64_LDFLAGS': 1005, 'CS_LFS64_LIBS': 1006, 'CS_LFS64_LINTFLAGS': 1007, 'CS_LFS_CFLAGS': 1000, 'CS_LFS_LDFLAGS': 1001, 'CS_LFS_LIBS': 1002, 'CS_LFS_LINTFLAGS': 1003, ...}<br>
+<strong>curdir</strong> = '.'<br>
+<strong>defpath</strong> = '/bin:/usr/bin'<br>
+<strong>devnull</strong> = '/dev/null'<br>
+<strong>environ</strong> = environ({'SHELL': '/bin/bash', 'SESSION_MANAGER'...ERM_PROGRAM': 'vscode', '_': '/usr/bin/python3'})<br>
+<strong>environb</strong> = environ({b'SHELL': b'/bin/bash', b'SESSION_MANAG..._PROGRAM': b'vscode', b'_': b'/usr/bin/python3'})<br>
+<strong>extsep</strong> = '.'<br>
+<strong>linesep</strong> = '<font color="#c040c0">\n</font>'<br>
+<strong>name</strong> = 'posix'<br>
+<strong>pardir</strong> = '..'<br>
+<strong>pathconf_names</strong> = {'PC_ALLOC_SIZE_MIN': 18, 'PC_ASYNC_IO': 10, 'PC_CHOWN_RESTRICTED': 6, 'PC_FILESIZEBITS': 13, 'PC_LINK_MAX': 0, 'PC_MAX_CANON': 1, 'PC_MAX_INPUT': 2, 'PC_NAME_MAX': 3, 'PC_NO_TRUNC': 7, 'PC_PATH_MAX': 4, ...}<br>
+<strong>pathsep</strong> = ':'<br>
+<strong>sep</strong> = '/'<br>
+<strong>supports_bytes_environ</strong> = True<br>
+<strong>sysconf_names</strong> = {'SC_2_CHAR_TERM': 95, 'SC_2_C_BIND': 47, 'SC_2_C_DEV': 48, 'SC_2_C_VERSION': 96, 'SC_2_FORT_DEV': 49, 'SC_2_FORT_RUN': 50, 'SC_2_LOCALEDEF': 52, 'SC_2_SW_DEV': 51, 'SC_2_UPE': 97, 'SC_2_VERSION': 46, ...}</td></tr></table>
+</body></html>
