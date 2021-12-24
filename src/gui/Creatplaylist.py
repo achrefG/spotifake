@@ -1,5 +1,4 @@
 import os
-#from genericpath import exists
 import mimetypes
 
 from metadata import metadata
